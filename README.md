@@ -26,7 +26,7 @@ Mỗi học kỳ mở một đợt (cohort) lấy đề tài từ kho chung này
 | **Hiểu bản chất từng nhóm đề tài** — mỗi nhóm dạy gì, mỗi đề tài làm ra sản phẩm gì | [`Ban_do_de_tai.md`](Ban_do_de_tai.md) |
 | **Danh mục đồ án tốt nghiệp kỳ hiện tại** (bản in được) | [`Danh_muc_de_tai_DATN_HK1_2026_2027.pdf`](Danh_muc_de_tai_DATN_HK1_2026_2027.pdf) |
 | **Nên đọc gì trước khi bắt đầu** — tài liệu nền tảng theo từng hướng | [`09_References/READING-LIST.md`](09_References/READING-LIST.md) |
-| **Toàn bộ catalog theo loại** (P / I / T / R) | [`02_Project_Portfolio/`](02_Project_Portfolio/) |
+| **Toàn bộ catalog theo loại** (P / I / T / R) | [`02_Project_Portfolio/`](https://github.com/Lucero6886/lucero-mentoring/tree/main/02_Project_Portfolio) — 5 file Word tải về |
 
 ### Bước 2 · Hiểu chương trình chạy thế nào trước khi chọn
 
@@ -108,8 +108,8 @@ lịch từng tuần và hạn từng gate được suy ra tự động bằng [
 | Chính sách gốc: triết lý, thang đánh giá, mức tham gia | [`01_Governance/Master_Mentoring_Handbook.md`](01_Governance/Master_Mentoring_Handbook.md) |
 | Quy tắc dùng AI và liêm chính học thuật | [`01_Governance/AI_and_Academic_Integrity_Policy.md`](01_Governance/AI_and_Academic_Integrity_Policy.md) |
 | Thỏa thuận làm việc mentor–sinh viên | [`01_Governance/Mentor_Student_Working_Agreement.md`](01_Governance/Mentor_Student_Working_Agreement.md) |
-| Quy trình vận hành (SOP) và mẫu báo cáo tuần | [`03_Operations/`](03_Operations/) |
-| Biểu mẫu hồ sơ từng sinh viên | [`04_Project_Template/`](04_Project_Template/) |
+| Quy trình vận hành (SOP) và mẫu báo cáo tuần | [`03_Operations/`](https://github.com/Lucero6886/lucero-mentoring/tree/main/03_Operations) |
+| Biểu mẫu hồ sơ từng sinh viên | [`04_Project_Template/`](https://github.com/Lucero6886/lucero-mentoring/tree/main/04_Project_Template) |
 
 ---
 

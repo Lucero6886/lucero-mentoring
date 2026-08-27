@@ -60,6 +60,8 @@ docs/       ghi chú kỹ thuật, tài liệu đọc
 
 ## 6. Hồ sơ quá trình
 
+> *Bốn file dưới đây bạn copy từ `04_Project_Template/` của repo chương trình vào repo của mình. Khi xem mẫu này trên repo chương trình, các liên kết sẽ báo không tìm thấy — đúng như vậy, vì chúng chỉ tồn tại trong repo của bạn.*
+
 - [`PROJECT_CHARTER.md`](PROJECT_CHARTER.md) — MVT và Extension đã chốt
 - [`EVIDENCE_LEDGER.md`](EVIDENCE_LEDGER.md) — mỗi kết quả dựa trên bằng chứng nào
 - [`DECISION_LOG.md`](DECISION_LOG.md) — đã quyết định gì, vì sao
