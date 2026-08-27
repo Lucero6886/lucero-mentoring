@@ -28,3 +28,6 @@ Thumbs.db
 desktop.ini
 __pycache__/
 *.pyc
+
+# Bản clone của chính repo này nếu lỡ tải về bên trong dự án — không bao giờ commit
+/lucero-mentoring/
