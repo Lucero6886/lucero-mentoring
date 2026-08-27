@@ -7,6 +7,7 @@ Exit 0 = PASS; exit 1 = FAIL (in danh sách lỗi).
 Chỉ dùng stdlib. Nguồn chuẩn: 06_Data/*.json.
 """
 import json, re, sys, pathlib, datetime
+import cohort_schedule
 
 BASE = pathlib.Path(__file__).resolve().parents[1]
 DATA = BASE / "06_Data"
@@ -160,42 +161,39 @@ for cpath in cohorts:
                 ref0 = ref.split(" ")[0]
                 if CODE_RE.match(ref0) and ref0 not in codeset:
                     err(f"{name}: career_guide tham chiếu mã lạ: {ref}")
-    wk = co.get("week_calendar", [])
-    if [w.get("week") for w in wk] != list(range(1, co.get("duration_weeks",15)+1)):
-        err(f"{name}: week_calendar không đủ/không liên tục")
-    if len(co.get("gate_deadlines",{})) != 6: err(f"{name}: gate_deadlines phải đủ 6 gate")
+    # --- khung tuần là TƯƠNG ĐỐI: cohort chỉ khai start_date, mọi ngày đều suy ra ---
+    frame_weeks = (mg.get("frame", {}) or {}).get("duration_weeks") or max(
+        (g.get("week_end", 0) for g in mg.get("gates", [])), default=0)
+    dw = co.get("duration_weeks")
+    if dw != frame_weeks:
+        err(f"{name}: duration_weeks={dw} nhưng khung gate dài {frame_weeks} tuần")
 
-    # --- lịch tuần phải liền mạch và khớp start_date/end_date của cohort ---
-    def day(s):
-        try: return datetime.date.fromisoformat(s or "")
-        except ValueError: return None
-    weeks, prev = {}, None
-    for w in wk:
-        s, e = day(w.get("start")), day(w.get("end"))
-        if not s or not e:
-            err(f"{name}: week {w.get('week')} có start/end không phải ngày ISO"); continue
-        weeks[w["week"]] = (s, e)
-        if e < s: err(f"{name}: week {w['week']} có end sớm hơn start")
-        if prev and s != prev + datetime.timedelta(days=1):
-            err(f"{name}: week {w['week']} bắt đầu {s}, không nối tiếp ngay sau {prev}")
-        prev = e
-    if weeks:
-        if str(weeks[min(weeks)][0]) != co.get("start_date"):
-            err(f"{name}: week_calendar bắt đầu {weeks[min(weeks)][0]} nhưng start_date={co.get('start_date')}")
-        if str(weeks[max(weeks)][1]) != co.get("end_date"):
-            err(f"{name}: week_calendar kết thúc {weeks[max(weeks)][1]} nhưng end_date={co.get('end_date')}")
+    for legacy in ("week_calendar", "gate_deadlines", "end_date"):
+        if legacy in co:
+            err(f"{name}: không được lưu '{legacy}' trong cohort — ngày phải suy ra từ start_date "
+                f"bằng scripts/cohort_schedule.py. Xóa trường này để tránh hai nguồn ngày lệch nhau.")
 
-    # --- mỗi gate deadline phải trùng ngày cuối của tuần mà gate đó kết thúc ---
-    if mg and weeks:
-        for g in mg.get("gates", []):
-            gid, we = str(g.get("gate")), g.get("week_end")
-            dl = co.get("gate_deadlines", {}).get(gid)
-            if dl is None:
-                err(f"{name}: thiếu gate_deadlines['{gid}']")
-            elif we not in weeks:
-                err(f"{name}: Gate {gid} kết ở tuần {we} nhưng week_calendar không có tuần này")
-            elif dl != str(weeks[we][1]):
-                err(f"{name}: Gate {gid} deadline={dl} nhưng hết tuần {we} là {weeks[we][1]}")
+    sd = co.get("start_date")
+    if sd:
+        try:
+            datetime.date.fromisoformat(sd)
+        except ValueError:
+            err(f"{name}: start_date '{sd}' không phải ngày ISO dạng YYYY-MM-DD")
+
+    for b in (co.get("breaks") or []):
+        if not isinstance(b, dict) or "after_week" not in b:
+            err(f"{name}: mỗi mục trong breaks phải có 'after_week' (kèm tùy chọn 'weeks', 'reason')")
+            continue
+        aw = b.get("after_week")
+        if not isinstance(aw, int) or not (1 <= aw < (dw or 1)):
+            err(f"{name}: breaks.after_week={aw} phải nằm trong khoảng 1..{(dw or 1) - 1}")
+
+    cal = cohort_schedule.build_calendar(sd, dw or 0, co.get("breaks"))
+    if sd and len(cal) != dw:
+        err(f"{name}: lịch suy ra được {len(cal)} tuần nhưng khóa dài {dw} tuần")
+    for g in mg.get("gates", []):
+        if g.get("week_end", 0) > (dw or 0):
+            err(f"{name}: Gate {g.get('gate')} kết ở tuần {g.get('week_end')} — vượt quá {dw} tuần của khóa")
 
 print("=" * 56)
 if errors:

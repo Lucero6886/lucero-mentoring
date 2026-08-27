@@ -10,7 +10,7 @@
 
 **Khung quản trị Project - Thực tập - Đồ án tốt nghiệp - Nghiên cứu khoa học**
 
-Engineering & Research Mentoring Program | Version 1.5.1 | 23/08/2026
+Engineering & Research Mentoring Program | Version 1.6.0 | 23/08/2026
 
 > 
 | **Mục tiêu của hệ thống không phải là “có thật nhiều đề tài”, mà là xây các dòng năng lực để sinh viên có thể đi từ làm thật → hiểu thật → tự học → sở hữu project → nghiên cứu khi đủ readiness.** |

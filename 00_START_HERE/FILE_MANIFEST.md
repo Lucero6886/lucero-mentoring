@@ -37,6 +37,8 @@ Tác giả: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện t�
 - `MASTER_PROMPT_CLAUDE.md`, `CLAUDE_PROJECT_CONTEXT.md`, `ACCEPTANCE_CHECKLIST.md`, `QUICK_LAUNCH_PROMPT.txt`.
 
 ## 06_Data — NGUỒN CHUẨN DỮ LIỆU (v1.1)
+- `milestone_gates.json` — **khung tiến độ tương đối**: 6 gate theo số tuần kể từ ngày nhận đề tài, kèm khối `frame` (độ dài khung, mốc đếm từ đâu). Không chứa ngày.
+- `cohort_*.json` — dữ liệu riêng một khóa: chỉ `start_date` (có thể để trống) + `breaks` tùy chọn; lịch tuần và hạn gate **suy ra**, không lưu.
 - `project_portfolio.json` — 105 đề tài (16 nhóm; A6/A7 + AB co-design mở từ v1.5.0); schema gồm mvt/tools/status/prereq_codes/career_relevance/cohort_alias/checkpoints_15w/eligibility.
 - `readiness_rubrics.json` — TR (0-5, 16 năng lực) + WR (0-4, /20, ngưỡng) + RR (0-4) + lựa chọn kết luận.
 - `milestone_gates.json` — Gate 1–6 dạng keyed object.
@@ -48,6 +50,7 @@ Tác giả: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện t�
 - `generate_site.py` — sinh trang web công khai `docs/index.html` từ 06_Data (chỉ dữ liệu public).
 - `generate_ban_do.py` — sinh `Ban_do_de_tai.md/.html` (bản đồ trực quan toàn bộ đề tài) từ `06_Data/`.
 - `export_governance_md.py` — sinh bản `.md` đọc-trên-web từ 6 tài liệu chính sách `.docx` (cần pandoc).
+- `cohort_schedule.py` — **module dùng chung**: suy lịch tuần, hạn từng gate và ngày kết thúc của một khóa từ `start_date`. Không script nào tự tính ngày; không file dữ liệu nào lưu ngày suy ra được.
 - `release_cohort.py` — công cụ xuất 5 tài liệu cohort sang thư mục đích tự chọn (bắt buộc truyền đường dẫn đích, ví dụ USB/thư mục chia sẻ; không còn đích mặc định — `DATN_mentor` đã xóa 23/08/2026).
 - `build_release.py` — đóng gói `dist/` + ZIP + MANIFEST theo `VERSION`.
 

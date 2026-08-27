@@ -18,6 +18,7 @@ Cờ dòng lệnh:
 Chạy validate trước khi generate. Chỉ dùng stdlib + pandoc (+ trình duyệt cho --pdf).
 """
 import json, os, pathlib, subprocess, sys, html
+import cohort_schedule as cs
 
 BASE = pathlib.Path(__file__).resolve().parents[1]
 DATA, BUILD = BASE/"06_Data", BASE/"build"
@@ -168,6 +169,9 @@ def gen_catalog(typ):
 def gen_cohort(co):
     cid = co["cohort_id"]
     label = cid.replace("HK1_", "HK1 ").replace("_", "-")
+    CAL = cs.build_calendar(co.get("start_date"), co.get("duration_weeks"), co.get("breaks"))
+    DL  = cs.gate_deadlines(mg["gates"], CAL)
+    NW  = co.get("duration_weeks")
     out = header("Danh mục đề tài Đồ án tốt nghiệp",
                  f"Nhóm A - Digital IC / FPGA / ASIC · Nhóm B - Polar Code / Hardware-Aware Decoding · {label}")
     out += [
@@ -181,11 +185,12 @@ def gen_cohort(co):
             "(3) chọn 3 nguyện vọng theo thứ tự (ghi mã chuẩn) → (4) hoàn thành readiness test → (5) làm việc theo milestone "
             "và evidence hằng tuần.", ""]
     # 15-week process from gates + cohort deadlines
-    out += ["## 2. Quy trình 15 tuần và deadline gate", "",
-            "| Gate | Tuần | Hạn chót | Điều kiện qua | Nếu không đạt |", "|---|---|---|---|---|"]
+    out += [f"## 2. Khung {NW} tuần và các cửa kiểm soát tiến độ", "",
+            cs.frame_note(co, CAL), "",
+            "| Gate | Tuần | Hạn nộp | Điều kiện qua | Nếu không đạt |", "|---|---|---|---|---|"]
     for g in mg["gates"]:
-        dl = co["gate_deadlines"][str(g["gate"])]
-        out.append(f"| {g['name']} | {g['weeks_label']} | {dl} | {esc(g['pass_criteria'])} | {esc(g['fail_rule'])} |")
+        out.append(f"| {g['name']} | {cs.week_label(g)} | {cs.due_label(g, DL)} | "
+                   f"{esc(g['pass_criteria'])} | {esc(g['fail_rule'])} |")
     out += ["", "**Nguyên tắc evidence:** không coi “đã đọc/tìm hiểu” là tiến độ nếu chưa có sản phẩm "
             "quan sát được (code, waveform, log, figure, bảng kết quả, technical note, demo).", ""]
     # quick tables

@@ -6,7 +6,7 @@ trong lĩnh vực **thiết kế vi mạch số (Digital IC/FPGA/ASIC) · hệ n
 **Tác giả & mentor:** ThS. Đinh Văn Nam (Mr. Lucero Dinh)
 Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 
-`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `phiên bản 1.5.1`
+`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `phiên bản 1.6.0`
 
 > **📚 Danh mục đề tài — bản web tra cứu nhanh (lọc theo nhóm, mức độ, loại hoạt động):**
 > **https://lucero6886.github.io/lucero-mentoring/**
@@ -90,7 +90,9 @@ Mọi sinh viên đi qua cùng một khuôn — nhờ vậy mentor theo dõi đ�
 | **5** · Analysis & Draft | 12–13 | Phân tích + bản thảo đầy đủ | Không dùng viết lách che lỗ hổng |
 | **6** · Reproducibility & Defense | 14–15 | Chạy lại sạch, slides, demo, gói bàn giao | Chỉ xác nhận hoàn thành khi đủ **technical + reproducibility + ownership** |
 
-Ngày cụ thể của từng đợt nằm trong [`06_Data/cohort_HK1_2026_2027.json`](06_Data/cohort_HK1_2026_2027.json).
+Khung này **tính theo số tuần kể từ ngày sinh viên nhận đề tài**, dùng chung cho mọi khóa — không gắn với một học kỳ cụ thể.
+Mỗi khóa chỉ khai một ngày bắt đầu trong [`06_Data/cohort_HK1_2026_2027.json`](06_Data/cohort_HK1_2026_2027.json);
+lịch từng tuần và hạn từng gate được suy ra tự động bằng [`scripts/cohort_schedule.py`](scripts/cohort_schedule.py).
 
 ---
 

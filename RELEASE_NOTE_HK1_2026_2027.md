@@ -1,4 +1,4 @@
-# THÔNG BÁO PHÁT HÀNH — Danh mục đề tài DATN (bản 23/08/2026 · hệ thống v1.5.1)
+# THÔNG BÁO PHÁT HÀNH — Danh mục đề tài DATN (bản 23/08/2026 · hệ thống v1.6.0)
 
 **Đồ án tốt nghiệp HK1 2026-2027 · Nhóm A (Digital IC/FPGA/ASIC) · Nhóm B (Polar Code)**
 
@@ -10,7 +10,7 @@ Giảng viên hướng dẫn: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Đi
 Gửi các bạn sinh viên,
 
 Danh mục đề tài và phiếu đăng ký DATN phát hành kèm thông báo này là **bản chính thức duy nhất**
-(header tài liệu ghi "Phiên bản 1.5.1 · 2026-08-23"). Bản này **thay thế mọi bản** các bạn có thể đã nhận trước đó.
+(header tài liệu ghi "Phiên bản 1.6.0 · 2026-08-23"). Bản này **thay thế mọi bản** các bạn có thể đã nhận trước đó.
 Ba điều cần biết:
 
 **1. Mã đề tài chuẩn.** Mỗi đề tài có **mã chuẩn** dạng `Family-TypeNN` (ví dụ `A4-T01`) dùng thống nhất
@@ -44,7 +44,7 @@ trong mọi phiếu và hồ sơ. Mã ngắn (A1…A9, B1…B12) chỉ để đ�
 phát kèm thông báo này (Phiếu 1–4 sinh viên điền; Phiếu 5 dành cho giảng viên). Không dùng bất kỳ mẫu phiếu nào khác.
 
 **3. Mỗi đề tài ghi rõ "Sản phẩm bắt buộc (MVT)"** — phần lõi phải hoàn thành để đồ án đạt.
-Phần *Research extension* là tùy chọn, chỉ mở khi qua Gate 2 (baseline, hạn 11/10/2026) đúng tiến độ.
+Phần *Research extension* là tùy chọn, chỉ mở khi qua Gate 2 (baseline — hết tuần 5 kể từ ngày nhận đề tài) đúng tiến độ.
 
 **Các mốc gần nhất:** đăng ký học phần đến 24:00 **28/08** · học phí + phiếu giao đồ án trước **30/08**
 · danh sách giao đề tài chốt **03/09** · đồ án bắt đầu **07/09/2026**.

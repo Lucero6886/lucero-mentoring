@@ -21,7 +21,7 @@ kế hoạch phục hồi khi trễ · override một gate · override ngưỡng
 
 **Cách viết đúng:**
 
-> D004 · 01/11/2026 · *Thu nhỏ scope: bỏ kiến trúc thứ hai, giữ một kiến trúc + sweep bit-width.*
+> D004 · tuần 8 · *Thu nhỏ scope: bỏ kiến trúc thứ hai, giữ một kiến trúc + sweep bit-width.*
 > Lý do: Gate 3 chỉ có RTL kiến trúc 1 chạy đúng (E012 `VERIFIED`), kiến trúc 2 mới ở mức skeleton (E014 `PARTIAL`);
 > còn 5 tuần tới Gate 4. · Evidence: E012, E014 · Người quyết: mentor ·
 > Ảnh hưởng: MVT trong charter và cột MVT sheet Students cập nhật; extension giữ `CLOSED`.

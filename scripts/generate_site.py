@@ -9,6 +9,7 @@ Outputs:
 Không nhúng bất kỳ dữ liệu sinh viên/riêng tư nào. Chạy validate trước khi sinh.
 """
 import json, pathlib, html, sys
+import cohort_schedule as cs
 
 BASE = pathlib.Path(__file__).resolve().parents[1]
 DATA, DOCS, BUILD = BASE/"06_Data", BASE/"docs", BASE/"build"
@@ -245,13 +246,18 @@ Bấm vào đề tài để xem chi tiết. Level là <em>mức tối thiểu</e
 {''.join(blocks)}
 </div></section>"""
 
+CAL = cs.build_calendar(co.get("start_date"), co.get("duration_weeks"), co.get("breaks"))
+DL  = cs.gate_deadlines(mg["gates"], CAL)
+
 def cohort_section():
     gates = ""
     for g in mg["gates"]:
-        dl = dmy(co["gate_deadlines"][str(g["gate"])])
+        iso = DL.get(str(g["gate"]))
+        due = (f'hết tuần {g["week_end"]}<br><span class="muted">{dmy(iso)}</span>'
+               if iso else f'hết tuần {g["week_end"]}')
         hard = ' class="hard"' if g["gate"] in (2, 3, 4) else ""
         gates += (f'<tr><td><strong>{g["gate"]}</strong> · {esc(g["name"].split(" - ")[1])}</td>'
-                  f'<td class="date">{esc(g["weeks_label"])}</td><td class="date"><b>{dl}</b></td>'
+                  f'<td class="date">{esc(cs.week_label(g))}</td><td class="date">{due}</td>'
                   f'<td>{esc(g["pass_criteria"])}</td><td{hard}>{esc(g["fail_rule"])}</td></tr>')
     def qrows(group):
         rows = sorted((x for x in co["topics"] if x["alias"].startswith(group)),

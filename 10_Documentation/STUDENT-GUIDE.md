@@ -1,7 +1,9 @@
-# Hướng dẫn cho sinh viên — Đồ án tốt nghiệp HK1 2026-2027
+# Hướng dẫn cho sinh viên
 
 **Engineering & Research Mentoring Program (Lucero)** · GVHD: ThS. Đinh Văn Nam (Mr. Lucero Dinh)
 Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
+
+Trang này dùng cho **mọi khóa** của chương trình — mọi mốc dưới đây tính theo **số tuần kể từ ngày em chính thức nhận đề tài**, không gắn với một học kỳ cụ thể. Ngày dương lịch tương ứng của khóa em do mentor công bố khi giao đề tài.
 
 Đọc hết trang này một lần trước tuần 1. Nó trả lời: cái gì được tính là tiến độ, nộp gì mỗi tuần, và điều gì khiến một đồ án được xác nhận hoàn thành.
 
@@ -46,18 +48,20 @@ Quy tắc trung tâm: **Correctness → Baseline → Measurement → Analysis �
 
 Baseline là phiên bản đơn giản, đúng, chạy được, đo được. Chưa có nó thì mọi "cải tiến" đều vô nghĩa — em không có gì để so, và không biết con số mới là tốt hơn hay chỉ là lỗi khác.
 
-**Chưa qua Gate 2 (hạn 11/10/2026) thì phần mở rộng nghiên cứu đóng.** Không thương lượng. Đây là cơ chế bảo vệ em khỏi việc tiêu hết học kỳ vào phần hào nhoáng rồi không có lõi để nộp.
+**Chưa qua Gate 2 (hết tuần 5) thì phần mở rộng nghiên cứu đóng.** Không thương lượng. Đây là cơ chế bảo vệ em khỏi việc tiêu hết học kỳ vào phần hào nhoáng rồi không có lõi để nộp.
 
 ## 5. Sáu gate — và điều gì xảy ra nếu trễ
 
-| Gate | Tuần | Hạn | Cần có |
+| Gate | Tuần | Hạn nộp | Cần có |
 |---|---|---|---|
-| 1 · Problem & Foundation | 1–2 | 20/09 | Hiểu bài toán, I/O, baseline, metric, lỗ hổng kiến thức |
-| 2 · Baseline | 3–5 | 11/10 | Baseline chạy được + tái lập được |
-| 3 · Core Implementation | 6–8 | 01/11 | Phần lõi + kết quả định lượng trung gian |
-| 4 · Experiments | 9–11 | 22/11 | Thực nghiệm chính, bảng/hình chính |
-| 5 · Analysis & Draft | 12–13 | 06/12 | Phân tích + bản thảo đầy đủ |
-| 6 · Reproducibility & Defense | 14–15 | 19/12 | Chạy lại sạch, slides, demo, gói bàn giao |
+| 1 · Problem & Foundation | 1–2 | hết tuần 2 | Hiểu bài toán, I/O, baseline, metric, lỗ hổng kiến thức |
+| 2 · Baseline | 3–5 | hết tuần 5 | Baseline chạy được + tái lập được |
+| 3 · Core Implementation | 6–8 | hết tuần 8 | Phần lõi + kết quả định lượng trung gian |
+| 4 · Experiments | 9–11 | hết tuần 11 | Thực nghiệm chính, bảng/hình chính |
+| 5 · Analysis & Draft | 12–13 | hết tuần 13 | Phân tích + bản thảo đầy đủ |
+| 6 · Reproducibility & Defense | 14–15 | hết tuần 15 | Chạy lại sạch, slides, demo, gói bàn giao |
+
+*Ngày dương lịch tương ứng của khóa em nằm trong danh mục đề tài được phát và trong trang catalog.*
 
 Trễ Gate 3 → **thu nhỏ đề tài**. Đây là cơ chế bảo vệ chất lượng, **không phải hình phạt** và không làm giảm điểm một cách tự động. Cái bị cắt là phần mở rộng, sweep tham số, số kiến trúc. Cái **không bao giờ** bị cắt: phần lõi, kiểm chứng, khả năng tái lập, và việc em phải hiểu sản phẩm của mình.
 

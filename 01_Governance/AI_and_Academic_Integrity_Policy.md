@@ -10,7 +10,7 @@
 
 **Quy định sử dụng ChatGPT / Claude / Copilot và các công cụ AI trong mentoring**
 
-Engineering & Research Mentoring Program | Version 1.5.1 | 23/08/2026
+Engineering & Research Mentoring Program | Version 1.6.0 | 23/08/2026
 
 > 
 | **Nguyên tắc trung tâm: AI use is allowed. AI dependency is not. Người học chịu trách nhiệm cuối cùng về mọi nội dung, code, dữ liệu, kết quả và claim được nộp.** |

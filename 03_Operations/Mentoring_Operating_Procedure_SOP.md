@@ -10,7 +10,7 @@
 
 **Quy trình vận hành từ tuyển/ghép đề tài đến closeout**
 
-Engineering & Research Mentoring Program | Version 1.5.1 | 23/08/2026
+Engineering & Research Mentoring Program | Version 1.6.0 | 23/08/2026
 
 > 
 | **Mục tiêu của SOP là giảm phụ thuộc vào trí nhớ cá nhân, phát hiện rủi ro sớm và bảo đảm mentor không trở thành “external executive function” của sinh viên.** |

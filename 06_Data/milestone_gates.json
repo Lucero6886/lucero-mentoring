@@ -1,10 +1,15 @@
 {
  "meta": {
-  "version": "1.5.1",
+  "version": "1.6.0",
   "updated": "2026-08-23",
   "program": "Engineering & Research Mentoring Program (Lucero)",
   "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
-  "notes": "Nguồn chuẩn Gate 1-6. Ngày cụ thể theo cohort nằm trong file cohort_*.json."
+  "notes": "Nguồn chuẩn Gate 1-6. Khung tiến độ là TƯƠNG ĐỐI: mọi mốc tính theo số tuần kể từ ngày sinh viên chính thức nhận đề tài, dùng chung cho mọi khóa. Ngày cụ thể của một khóa được suy ra từ start_date trong cohort_*.json bằng scripts/cohort_schedule.py — không lưu ngày ở file này."
+ },
+ "frame": {
+  "duration_weeks": 15,
+  "counted_from": "Ngày sinh viên chính thức nhận đề tài được tính là ngày đầu của tuần 1.",
+  "note": "Khung dùng chung cho mọi khóa và mọi loại hoạt động. Học kỳ dài/ngắn khác thì đổi week_start/week_end ở đây và duration_weeks trong cohort tương ứng; không sửa ngày trong tài liệu."
  },
  "gates": [
   {

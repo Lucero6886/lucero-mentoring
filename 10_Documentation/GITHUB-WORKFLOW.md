@@ -117,15 +117,15 @@ và tiến độ tan vào lịch sử trò chuyện. GitHub sửa cả ba mà kh
 
 ## 6. Sáu gate trên GitHub
 
-Trong repo của mỗi sinh viên, tạo **6 Milestone** đúng tên và hạn của cohort (lấy từ `06_Data/cohort_*.json`):
+Khung tiến độ của chương trình là **tương đối** — đếm theo số tuần kể từ ngày sinh viên nhận đề tài, nên dùng lại được cho mọi khóa. Trong repo của mỗi sinh viên, tạo **6 Milestone** theo khung này; ngày dương lịch của milestone thì quy đổi từ ngày khóa đó bắt đầu (`start_date` trong `06_Data/cohort_*.json`):
 
 ```
-Gate 1 · Problem & Foundation    hạn 20/09
-Gate 2 · Baseline                hạn 11/10
-Gate 3 · Core Implementation     hạn 01/11
-Gate 4 · Experiments             hạn 22/11
-Gate 5 · Analysis & Draft        hạn 06/12
-Gate 6 · Reproducibility & Defense  hạn 19/12
+Gate 1 · Problem & Foundation        hết tuần 2
+Gate 2 · Baseline                    hết tuần 5
+Gate 3 · Core Implementation         hết tuần 8
+Gate 4 · Experiments                 hết tuần 11
+Gate 5 · Analysis & Draft            hết tuần 13
+Gate 6 · Reproducibility & Defense   hết tuần 15
 ```
 
 Mọi issue (báo cáo tuần, việc cần làm, lỗi) gán vào milestone tương ứng → thanh tiến độ của milestone chính là

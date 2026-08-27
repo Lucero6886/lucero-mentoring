@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.6.0 — Khung tiến độ chuyển sang tương đối theo tuần · 2026-08-27
+
+Quyết định chủ dự án: khung 15 tuần là **khung cho khóa luận nói chung**, không phải lịch cố định của một học kỳ. Hệ thống phục vụ nhiều khóa khác nhau, nên mọi mốc phải đếm theo **số tuần kể từ ngày sinh viên chính thức nhận đề tài**; ngày dương lịch chỉ là lớp phủ của từng khóa.
+
+**Kiến trúc dữ liệu — bỏ mọi ngày lưu trùng lặp:**
+- `06_Data/milestone_gates.json` thêm khối `frame` (`duration_weeks`, `counted_from`, ghi chú dùng chung mọi khóa). File này **không chứa ngày** — chỉ `week_start`/`week_end`.
+- `06_Data/cohort_HK1_2026_2027.json`: **xóa `end_date`, `gate_deadlines`, `week_calendar`**; chỉ còn `start_date` (được phép để trống) và `breaks` tùy chọn cho kỳ nghỉ giữa kỳ. Trước đây 15 dòng lịch tuần và 6 hạn gate được lưu tay — đúng loại dữ liệu trùng lặp có thể lệch nhau.
+- Mới: **`scripts/cohort_schedule.py`** — module dùng chung suy ra lịch tuần, hạn gate, ngày kết thúc và các nhãn hiển thị. Bốn script còn lại đều gọi nó, không script nào tự tính ngày.
+
+**Validator:** thay các kiểm tra lịch-lưu-tay bằng kiểm tra khung: `duration_weeks` phải khớp độ dài khung gate · **báo lỗi nếu cohort còn lưu `week_calendar`/`gate_deadlines`/`end_date`** · `start_date` đúng ISO nếu có · `breaks` hợp lệ · mọi gate phải nằm trong số tuần của khóa. PASS 105 đề tài.
+
+**Hiển thị — mốc tuần đứng trước, ngày là phụ:**
+- Danh mục đề tài (docx/pdf): mục 2 đổi thành *"Khung 15 tuần và các cửa kiểm soát tiến độ"*, mở đầu bằng câu nói rõ khung dùng chung cho mọi khóa; cột hạn ghi *"hết tuần 5 · 11/10/2026"*. Khóa chưa công bố ngày thì chỉ hiện *"hết tuần 5"*.
+- Trang catalog web: cột hạn hiện mốc tuần, ngày xuống dòng dưới dạng phụ.
+- `Ban_do_de_tai`: bảng 6 trạm nay sinh từ dữ liệu (trước đây ngày ghi cứng trong script).
+- `10_Documentation/STUDENT-GUIDE.md`: bỏ tên học kỳ khỏi tiêu đề — trang này dùng cho mọi khóa; bảng gate chuyển sang *"hết tuần N"*.
+- `10_Documentation/GITHUB-WORKFLOW.md`: danh sách 6 milestone theo tuần; `README.md` và `implementation-notes` (tài liệu 2.4) nêu rõ nguyên tắc.
+
+**Lưu ý một ngày:** lịch suy ra dùng tuần tròn 7 ngày, nên tuần 15 của khóa HK1 kết thúc **20/12/2026** thay vì 19/12 như bảng lưu tay cũ (tuần 15 trước đây bị cắt còn 6 ngày). Nếu Khoa ấn định ngày bảo vệ khác, đó là mốc hành chính do mentor công bố — hệ thống không mã hóa mốc hành chính (đã gỡ từ v1.5.1).
+
+`VERSION` và `meta.version` của cả 4 file dữ liệu → **1.6.0**; toàn bộ view sinh lại.
+
 ## v1.5.1 (bổ sung) — Nâng chuẩn học thuật cho bản công khai · 2026-08-27
 
 Repo đã lên GitHub (`Lucero6886/lucero-mentoring`, public). Đợt này bổ sung ba thứ khiến kho đạt chuẩn học thuật và dễ dùng hơn cho người đọc bên ngoài:

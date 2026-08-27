@@ -5,6 +5,7 @@ Cách dùng (từ gốc repo):  python3 scripts/generate_ban_do.py
 Đây là VIEW sinh tự động — không sửa tay file đầu ra; sửa 06_Data/ rồi chạy lại.
 """
 import json, html, io, sys, pathlib
+import cohort_schedule as cs
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
@@ -22,6 +23,26 @@ META = P["meta"]; VER = META["version"]; UPD = META["updated"]
 from collections import Counter as _Counter
 NTYPE = _Counter(t["type"] for t in TOPICS)
 NTOP = len(TOPICS); NFAM = len(FAM); NOPEN = len(ALIAS)
+CAL = cs.build_calendar(C.get("start_date"), C.get("duration_weeks"), C.get("breaks"))
+DL  = cs.gate_deadlines(G["gates"], CAL)
+NW  = C.get("duration_weeks")
+GEND = cs.end_date(CAL)
+# Nội dung sư phạm của từng trạm (không phải dữ liệu lịch) — ghép với khung tuần suy ra
+GATE_TEXT = {
+ 1: ("Nói được input/output; chọn IP cụ thể (vd bộ lọc FIR nhỏ); toolchain cài chạy được",
+     "Ký thỏa thuận làm việc; chốt **MVT** (phần bắt buộc) tách khỏi *extension* (phần mơ ước); chép 6 trạm vào hồ sơ"),
+ 2: ("RTL + testbench **chạy đúng**, có bằng chứng tái lập",
+     "Luật cứng: không có baseline ở đây → **đóng cửa extension**, chỉ còn phần lõi"),
+ 3: ("Qua synthesis + kiểm tra timing sạch; số liệu trung gian",
+     "Trượt → **thu hẹp phạm vi** ngay (bỏ extension → bớt quét tham số → thu nhỏ khối); tuyệt đối không làm thay"),
+ 4: ("Chạy trọn physical flow ra GDSII; bảng PPA chính",
+     "Sau trạm này **cấm thêm thuật toán mới** — chỉ hoàn thiện"),
+ 5: ("Bản thảo khóa luận; mỗi con số trỏ về một bằng chứng đã kiểm",
+     "Soát bằng sổ bằng chứng: claim không có evidence → bỏ khỏi báo cáo"),
+ 6: ("Người khác chạy lại được từ README; slide + demo; gói bàn giao",
+     "Hỏi theo `DEFENSE_QUESTIONS.md`; nguyên tắc chốt: **không giải thích được = chưa hoàn thành**"),
+}
+GATE_SHORT = {1:"Hiểu bài toán",2:"Baseline",3:"Lõi",4:"Thực nghiệm",5:"Phân tích & bản thảo",6:"Tái lập & bảo vệ"}
 
 # ---------- lời dẫn từng nhóm (ngôn ngữ đời thường) ----------
 BLURB = {
@@ -104,14 +125,14 @@ w("### 3.2 Thực tập — loại I, cửa bắt buộc trước đồ án\n\n"
 w("Đề tài I là nơi sinh viên tập *tác phong*: Git đúng cách, báo cáo tuần, làm theo quy trình — sản phẩm kỹ thuật chỉ là phương tiện. ")
 w("Mỗi trục có đề tài I ở mọi tầng (A0-I01 làm phần cứng thật, A5-I01 dựng Git workflow, B0-I01 xây bộ mô phỏng tái lập…), nên em nào cũng chọn được một kỳ thực tập vừa sức mà vẫn nằm đúng hướng nghề định theo.\n\n")
 w("### 3.3 Mentor đồ án tốt nghiệp — loại T, 15 tuần, 6 trạm kiểm soát\n\n")
-w(f"Mỗi học kỳ chương trình chạy một cohort DATN theo đúng khuôn 15 tuần – 6 trạm này; cohort hiện tại là HK1 2026-2027 (07/09 → 19/12, {NOPEN} đề tài mở — các hạn dưới đây là của cohort này). Kể bằng một ví dụ giả định — bạn **Minh** chọn `A4-T01` *(mã HK1: A1 — Thiết kế một Digital IP từ RTL đến GDSII)*:\n\n")
+w(f"Khuôn {NW} tuần – 6 trạm này **dùng chung cho mọi khóa**: các mốc đếm theo số tuần kể từ ngày sinh viên chính thức nhận đề tài, không gắn với một học kỳ cụ thể. Khóa đang chạy ({NOPEN} đề tài mở) "
+  + (f"bắt đầu {cs.dmy(CAL[0][chr(39)+'start'+chr(39)]) if False else cs.dmy(CAL[0]['start'])} nên có thêm ngày tương ứng ở cột hạn. " if CAL else "chưa công bố ngày bắt đầu, nên chỉ hiện mốc tuần. ")
+  + "Kể bằng một ví dụ giả định — bạn **Minh** chọn `A4-T01` *(mã HK1: A1 — Thiết kế một Digital IP từ RTL đến GDSII)*:\n\n")
 w("| Trạm | Tuần · hạn chót | Minh phải cho xem | Anh làm gì |\n|---|---|---|---|\n")
-w("| Gate 1 — Hiểu bài toán | T1–2 · **20/09** | Nói được input/output, chọn IP cụ thể (vd bộ lọc FIR nhỏ), toolchain cài chạy được | Ký thỏa thuận làm việc, chốt **MVT** (phần bắt buộc) tách khỏi *extension* (phần mơ ước), chép 6 trạm vào hồ sơ |\n")
-w("| Gate 2 — Baseline | T3–5 · **11/10** | RTL + testbench **chạy đúng**, có bằng chứng tái lập | Luật cứng: không có baseline ở đây → **đóng cửa extension**, chỉ còn làm phần lõi |\n")
-w("| Gate 3 — Lõi | T6–8 · **01/11** | Qua synthesis + kiểm tra timing sạch, số liệu trung gian | Trượt → **thu hẹp phạm vi** ngay (bỏ extension → bớt quét tham số → thu nhỏ khối), tuyệt đối không làm thay |\n")
-w("| Gate 4 — Thực nghiệm | T9–11 · **22/11** | Chạy trọn physical flow ra GDSII, bảng PPA chính | Sau trạm này **cấm thêm thuật toán mới** — chỉ hoàn thiện |\n")
-w("| Gate 5 — Phân tích & bản thảo | T12–13 · **06/12** | Bản thảo khóa luận, mỗi con số trỏ về một bằng chứng đã kiểm | Soát bằng sổ bằng chứng: claim không có evidence → bỏ khỏi báo cáo |\n")
-w("| Gate 6 — Tái lập & bảo vệ | T14–15 · **19/12** | Người khác chạy lại được từ README; slide + demo; gói bàn giao | Hỏi theo `DEFENSE_QUESTIONS.md`; nguyên tắc chốt: **không giải thích được = chưa hoàn thành** |\n\n")
+for _g in G["gates"]:
+    _n = _g["gate"]; _sv, _me = GATE_TEXT[_n]
+    w(f"| Gate {_n} — {GATE_SHORT[_n]} | {cs.week_label(_g)} · **{cs.due_compact(_g, DL)}** | {_sv} | {_me} |\n")
+w("\n")
 w("Giữa các trạm là **nhịp tuần** ~30 phút/sinh viên: đọc báo cáo tuần trước buổi gặp → trong buổi em trình theo khung *Mục tiêu → Bằng chứng → Cái gì hỏng → Chẩn đoán → Bước tiếp* → chốt 1–3 việc có hạn → ghi vào workbook. Thao tác chi tiết từng buổi: `10_Documentation/MENTOR-GUIDE.md`.\n\n")
 w("Sức mạnh của cách chạy này: **mọi sinh viên cùng đi qua 6 trạm giống nhau**, nên anh mentor 10 em cùng lúc vẫn nhìn được toàn cảnh trong một sheet — ai xanh ai đỏ, ai sắp đến trạm nào.\n\n")
 w("### 3.4 Nghiên cứu — loại R và con đường lên bài báo\n\n")
@@ -309,16 +330,21 @@ w('<p><em>Ví dụ:</em> giao <code>A1-P04</code> (UART) cho môn Thiết kế s
 w('<h3>3.2 · Thực tập — loại I, cửa bắt buộc trước đồ án</h3>')
 w('<p>Đề tài I là nơi sinh viên tập <em>tác phong</em>: Git đúng cách, báo cáo tuần, làm theo quy trình — sản phẩm kỹ thuật chỉ là phương tiện. Mỗi trục có đề tài I ở mọi tầng (<code>A0-I01</code> làm phần cứng thật, <code>A5-I01</code> dựng Git workflow, <code>B0-I01</code> xây bộ mô phỏng tái lập…), nên em nào cũng chọn được kỳ thực tập vừa sức mà vẫn nằm đúng hướng nghề định theo.</p>')
 w('<h3>3.3 · Mentor đồ án tốt nghiệp — loại T, 15 tuần, 6 trạm kiểm soát</h3>')
-w(f'<p>Mỗi học kỳ chương trình chạy một cohort DATN theo đúng khuôn 15 tuần – 6 trạm này; cohort hiện tại là HK1 2026-2027 (07/09 → 19/12, {NOPEN} đề tài mở — các hạn dưới đây là của cohort này). Kể bằng một ví dụ giả định — bạn <strong>Minh</strong> chọn <code>A4-T01</code> <em>(mã HK1: A1 — Thiết kế một Digital IP từ RTL đến GDSII)</em>:</p>')
+w(f'<p>Khuôn {NW} tuần – 6 trạm này <strong>dùng chung cho mọi khóa</strong>: các mốc đếm theo số tuần kể từ ngày sinh viên chính thức nhận đề tài, không gắn với một học kỳ cụ thể. '
+  + (f'Khóa đang chạy ({NOPEN} đề tài mở) bắt đầu {cs.dmy(CAL[0]["start"])}, nên cột hạn có kèm ngày tương ứng. ' if CAL else f'Khóa đang chạy ({NOPEN} đề tài mở) chưa công bố ngày bắt đầu, nên chỉ hiện mốc tuần. ')
+  + 'Kể bằng một ví dụ giả định — bạn <strong>Minh</strong> chọn <code>A4-T01</code> <em>(mã HK1: A1 — Thiết kế một Digital IP từ RTL đến GDSII)</em>:</p>')
 w('<div class="tw"><table><thead><tr><th>Trạm</th><th>Tuần · hạn</th><th>Minh phải cho xem</th><th>Anh làm gì</th></tr></thead><tbody>')
-GATE_ROWS = [
- ("Gate 1 · Hiểu bài toán","T1–2 · <b>20/09</b>","Nói được input/output; chọn IP cụ thể (vd bộ lọc FIR nhỏ); toolchain cài chạy được","Ký thỏa thuận làm việc; chốt <strong>MVT</strong> (phần bắt buộc) tách khỏi <em>extension</em> (phần mơ ước); chép 6 trạm vào hồ sơ"),
- ("Gate 2 · Baseline","T3–5 · <b>11/10</b>","RTL + testbench <strong>chạy đúng</strong>, có bằng chứng tái lập","Luật cứng: không có baseline ở đây → <strong>đóng cửa extension</strong>, chỉ còn phần lõi"),
- ("Gate 3 · Lõi","T6–8 · <b>01/11</b>","Qua synthesis + kiểm tra timing sạch; số liệu trung gian","Trượt → <strong>thu hẹp phạm vi</strong> ngay (bỏ extension → bớt quét tham số → thu nhỏ khối); tuyệt đối không làm thay"),
- ("Gate 4 · Thực nghiệm","T9–11 · <b>22/11</b>","Chạy trọn physical flow ra GDSII; bảng PPA chính","Sau trạm này <strong>cấm thêm thuật toán mới</strong> — chỉ hoàn thiện"),
- ("Gate 5 · Phân tích &amp; bản thảo","T12–13 · <b>06/12</b>","Bản thảo khóa luận; mỗi con số trỏ về một bằng chứng đã kiểm","Soát bằng sổ bằng chứng: claim không có evidence → bỏ khỏi báo cáo"),
- ("Gate 6 · Tái lập &amp; bảo vệ","T14–15 · <b>19/12</b>","Người khác chạy lại được từ README; slide + demo; gói bàn giao","Hỏi theo <code>DEFENSE_QUESTIONS.md</code>; nguyên tắc chốt: <strong>không giải thích được = chưa hoàn thành</strong>"),
-]
+import html as _h, re as _re
+def _md2html(t):
+    t = _h.escape(t)
+    t = _re.sub(r"\*\*(.+?)\*\*", r"<strong>\\1</strong>", t)
+    t = _re.sub(r"\*(.+?)\*", r"<em>\\1</em>", t)
+    t = _re.sub(r"`(.+?)`", r"<code>\\1</code>", t)
+    return t
+GATE_ROWS = [(f"Gate {g['gate']} · {GATE_SHORT[g['gate']]}",
+              f"{_h.escape(cs.week_label(g))} · <b>{_h.escape(cs.due_compact(g, DL))}</b>",
+              _md2html(GATE_TEXT[g["gate"]][0]), _md2html(GATE_TEXT[g["gate"]][1]))
+             for g in G["gates"]]
 for r in GATE_ROWS:
     w(f'<tr><td><strong>{r[0]}</strong></td><td class="mono">{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td></tr>')
 w('</tbody></table></div>')

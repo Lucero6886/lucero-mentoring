@@ -10,7 +10,7 @@
 
 **Thỏa thuận nguyên tắc làm việc cho Project / Internship / DATN / Research**
 
-Engineering & Research Mentoring Program | Version 1.5.1 | 23/08/2026
+Engineering & Research Mentoring Program | Version 1.6.0 | 23/08/2026
 
 > 
 | **Tài liệu này không thay thế quy định chính thức của Nhà trường/Khoa. Mục tiêu là làm rõ kỳ vọng, ownership và cách phối hợp để tránh “vâng dạ rồi để đó” hoặc mentor phải cứu ở phút cuối.** |

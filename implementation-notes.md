@@ -1,7 +1,7 @@
 # IMPLEMENTATION NOTES — Tài liệu hệ thống Mentoring
 
 **Engineering & Research Mentoring Program (Lucero)**
-Phiên bản tài liệu: **2.3** · Phiên bản hệ thống: **v1.5.1** · Cập nhật: **23/08/2026**
+Phiên bản tài liệu: **2.4** · Phiên bản hệ thống: **v1.6.0** · Cập nhật: **23/08/2026**
 Tác giả & mentor chương trình: **ThS. Đinh Văn Nam (Mr. Lucero Dinh)** — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 
 > **Tài liệu này để làm gì.** Đây là tài liệu hệ thống đầy đủ: đọc hết một lượt là nắm được *cái gì là nguồn chuẩn, cái gì là dẫn xuất, mỗi script làm gì, dữ liệu có cấu trúc ra sao, đã quyết định gì và vì sao, còn hạn chế gì*, và **9 quy trình vận hành** viết dưới dạng làm-theo-được. Bản HTML tương đương: `implementation-notes.html`.
@@ -42,7 +42,7 @@ Một giảng viên hướng dẫn nhiều sinh viên làm project / thực tậ
 | **Readiness (TR/WR/RR)** | 3 thước đo trước khi giao đề tài: **TR** kỹ thuật (16 kỹ năng, thang 0–5) · **WR** thái độ làm việc (5 phẩm chất, 0–4, tổng /20, có ngưỡng: vd đồ án cần ≥14) · **RR** tư chất nghiên cứu (5 tiêu chí, 0–4, đánh giá định tính). |
 | **Readiness test 2 tuần** | "Thử việc" trước khi chốt: đọc 1 tài liệu + làm 1 bài kỹ thuật nhỏ 4–10 giờ + trình bày 5–10 phút. Giao đề tài dựa trên kết quả này, không dựa trên lời hứa. |
 | **MVT vs Extension** | **MVT** = phần LÕI bắt buộc, đủ để tốt nghiệp chuẩn kỹ thuật. **Extension** = phần mở rộng nghiên cứu, KHÔNG bắt buộc, chỉ mở khi phần lõi chạy tốt đúng hạn. |
-| **Gate 1–6** | 6 trạm kiểm soát rải trong 15 tuần. Hai luật cứng: trượt **Gate 2** (baseline, hạn 11/10) → đóng phần mở rộng; trượt **Gate 3** (hạn 01/11) → thu nhỏ đề tài — thu nhỏ là cơ chế bảo vệ chất lượng, không phải hình phạt. |
+| **Gate 1–6** | 6 trạm kiểm soát rải trong 15 tuần. Hai luật cứng: trượt **Gate 2** (baseline, hết tuần 5) → đóng phần mở rộng; trượt **Gate 3** (hạn 01/11) → thu nhỏ đề tài — thu nhỏ là cơ chế bảo vệ chất lượng, không phải hình phạt. |
 | **Evidence** | Bằng chứng công việc nhìn thấy được: code, kết quả đo, waveform, bảng số liệu, demo… "Em đã đọc / đã tìm hiểu" không được tính là tiến độ. |
 | **Legacy Package** | Gói bàn giao cuối kỳ (code + hướng dẫn chạy lại + lỗi đã biết + việc kế tiếp) để khóa sau làm tiếp, không phải làm lại từ đầu. |
 | **Nguồn chuẩn vs View** | `06_Data/` là **bản gốc**; danh mục, phiếu, workbook, trang web là **bản in tự động**. Muốn sửa → sửa bản gốc rồi chạy script in lại (§20). Không bao giờ sửa bản in. |
@@ -54,7 +54,7 @@ Một giảng viên hướng dẫn nhiều sinh viên làm project / thực tậ
 2. **Tuần 1 (từ 07/09):** gặp từng SV: ký thỏa thuận làm việc, tạo thư mục làm việc từ bộ template, chốt bằng văn bản phần lõi (MVT) và phần mở rộng.
 3. **Hằng tuần (15 lần):** SV nộp báo cáo *trước* buổi gặp kèm bằng chứng; buổi gặp chỉ bàn vướng mắc và chốt việc tuần sau; sau buổi gặp anh ghi vài dòng vào workbook. Sáng thứ Hai liếc cột Risk 1 phút để biết ai đang ổn/không ổn.
 4. **Mỗi 2–3 tuần một trạm gate:** đối chiếu SV với điều kiện qua trạm. Ai trễ thì áp thang cảnh báo (nhắc → cảnh báo chính thức + kế hoạch phục hồi → thu nhỏ đề tài). Anh không bao giờ phải "làm hộ" — hệ thống được thiết kế để điều đó không xảy ra.
-5. **Cuối kỳ (đến 19/12):** kiểm tra người khác chạy lại được không + SV giải thích được không → tick 11 mục checklist bàn giao → xong. Ai có tư chất thì mời làm tiếp NCKH kỳ sau.
+5. **Cuối kỳ (tuần 14–15):** kiểm tra người khác chạy lại được không + SV giải thích được không → tick 11 mục checklist bàn giao → xong. Ai có tư chất thì mời làm tiếp NCKH kỳ sau.
 
 ### Việc của anh gói lại chỉ có 4 nhịp
 
@@ -111,11 +111,11 @@ Bối cảnh: sinh viên đang trong cửa sổ đăng ký học phần của Kh
 |---|---|
 | Giai đoạn hiện tại | **Vận hành** — hệ thống đã xây và nghiệm thu xong; việc còn lại là chạy cohort |
 | Trạng thái tổng thể | `COMPLETE WITH DOCUMENTED LIMITATIONS` (§11) — 1 tồn đọng cần mentor quyết (§12) |
-| Phiên bản hệ thống | **v1.5.1** (23/08/2026 — gỡ mốc hành chính + điều kiện đăng ký khỏi mọi tài liệu; v1.5.0 mở nhánh Nhúng & IoT A6/A7 + co-design AB, 105 đề tài) |
+| Phiên bản hệ thống | **v1.6.0** (khung tiến độ chuyển sang **tương đối theo tuần**, dùng chung mọi khóa; v1.5.1 gỡ mốc hành chính; v1.5.0 mở nhánh Nhúng & IoT A6/A7 + co-design AB, 105 đề tài) |
 | Validation | `validate_portfolio.py` **PASS** — 105 topics · rubrics · gates · 1 cohort file · 0 lỗi |
 | Nghiệm thu | `ACCEPTANCE_CHECKLIST.md` **36/36** (2 mục "đạt có điều kiện vận hành") |
 | Dry-run | 2 luồng A/B **PASS** (`tests/`) |
-| Cohort đang chạy | HK1 2026–2027 · DATN (type T) · 21 đề tài mở · 07/09 → 19/12/2026 |
+| Cohort đang chạy | HK1 2026–2027 · DATN (type T) · 21 đề tài mở · bắt đầu 07/09/2026, khung 15 tuần |
 | Đã phát cho SV | **Chưa** — nên bản v1.5.0 thay thế trực tiếp; RELEASE_NOTE_HK1_2026_2027 dùng khi phát |
 | Thư mục dự án | `C:\Users\admin\Downloads\EEE Projects` — **thư mục DUY NHẤT** cho toàn bộ chương trình (NCKH · luận án · hướng dẫn nghiên cứu · thực tập tốt nghiệp · mentor cộng đồng IC design · cohort DATN HK1 2026-2027). Thư mục `DATN_mentor` cũ **đã được chủ dự án xóa** (23/08/2026) |
 
@@ -389,14 +389,16 @@ EEE Projects/
 
 | Gate | Tuần | Hạn (HK1 26–27) | Điều kiện qua | Hard rule nếu trượt |
 |---|---|---|---|---|
-| 1 · Problem & Foundation | 1–2 | 20/09/2026 | Hiểu problem, I/O, baseline, metric, prerequisite gaps | Điều chỉnh đề tài hoặc learning plan |
-| 2 · Baseline | 3–5 | 11/10/2026 | Baseline/chức năng cơ sở **chạy được** + evidence tái lập | **Không baseline ở tuần 5 → không mở research extension** |
-| 3 · Core Implementation | 6–8 | 01/11/2026 | Core implementation + kết quả định lượng trung gian | **Reduce scope** — không cứu bằng cách mentor làm thay |
-| 4 · Experiments | 9–11 | 22/11/2026 | Thực nghiệm chính xong; table/figure chính hình thành | **Sau tuần 11 không thêm thuật toán lớn mới** |
-| 5 · Analysis & Draft | 12–13 | 06/12/2026 | Phân tích kết quả + bản thảo đầy đủ | Ưu tiên hoàn thiện core, **không polish che lỗ hổng** |
-| 6 · Reproducibility & Defense | 14–15 | 19/12/2026 | Người khác chạy lại được; slides/demo; legacy package | Chỉ xác nhận hoàn thành khi **ownership và reproducibility** đạt |
+| 1 · Problem & Foundation | 1–2 | hết tuần 2 | Hiểu problem, I/O, baseline, metric, prerequisite gaps | Điều chỉnh đề tài hoặc learning plan |
+| 2 · Baseline | 3–5 | hết tuần 5 | Baseline/chức năng cơ sở **chạy được** + evidence tái lập | **Không baseline ở tuần 5 → không mở research extension** |
+| 3 · Core Implementation | 6–8 | hết tuần 8 | Core implementation + kết quả định lượng trung gian | **Reduce scope** — không cứu bằng cách mentor làm thay |
+| 4 · Experiments | 9–11 | hết tuần 11 | Thực nghiệm chính xong; table/figure chính hình thành | **Sau tuần 11 không thêm thuật toán lớn mới** |
+| 5 · Analysis & Draft | 12–13 | hết tuần 13 | Phân tích kết quả + bản thảo đầy đủ | Ưu tiên hoàn thiện core, **không polish che lỗ hổng** |
+| 6 · Reproducibility & Defense | 14–15 | hết tuần 15 | Người khác chạy lại được; slides/demo; legacy package | Chỉ xác nhận hoàn thành khi **ownership và reproducibility** đạt |
 
-> Tuần 15 chỉ có 6 ngày (14–19/12) để kết đúng `end_date` — cố ý, không phải lỗi.
+> **Khung này là tương đối** — cột hạn đếm theo tuần kể từ ngày sinh viên nhận đề tài, dùng chung cho mọi khóa.
+> Ngày dương lịch của một khóa suy ra từ `start_date` trong `06_Data/cohort_*.json` bằng `scripts/cohort_schedule.py`;
+> không lưu ngày ở bất kỳ đâu khác nên không thể có hai lịch lệch nhau.
 > Từ v1.2.1 validator bắt buộc mỗi `gate_deadlines[g]` trùng ngày cuối của tuần kết thúc gate đó.
 
 ### 5.6 Dữ liệu cohort

@@ -1,6 +1,6 @@
 # Bản đồ 105 đề tài & cách sử dụng hệ thống
 
-**Engineering & Research Mentoring Program (Lucero)** · Phiên bản hệ thống 1.5.1 · 2026-08-23
+**Engineering & Research Mentoring Program (Lucero)** · Phiên bản hệ thống 1.6.0 · 2026-08-23
 Tác giả & mentor: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 Bản web (mở từ điện thoại, chia sẻ được): https://claude.ai/code/artifact/68a2de47-bc1e-41cc-b588-cd34ffd90c90
 
@@ -314,16 +314,16 @@ Lấy một thuật toán — giải mã Polar của trục B, hay suy luận AI
 
 ### 3.3 Mentor đồ án tốt nghiệp — loại T, 15 tuần, 6 trạm kiểm soát
 
-Mỗi học kỳ chương trình chạy một cohort DATN theo đúng khuôn 15 tuần – 6 trạm này; cohort hiện tại là HK1 2026-2027 (07/09 → 19/12, 21 đề tài mở — các hạn dưới đây là của cohort này). Kể bằng một ví dụ giả định — bạn **Minh** chọn `A4-T01` *(mã HK1: A1 — Thiết kế một Digital IP từ RTL đến GDSII)*:
+Khuôn 15 tuần – 6 trạm này **dùng chung cho mọi khóa**: các mốc đếm theo số tuần kể từ ngày sinh viên chính thức nhận đề tài, không gắn với một học kỳ cụ thể. Khóa đang chạy (21 đề tài mở) bắt đầu 07/09/2026 nên có thêm ngày tương ứng ở cột hạn. Kể bằng một ví dụ giả định — bạn **Minh** chọn `A4-T01` *(mã HK1: A1 — Thiết kế một Digital IP từ RTL đến GDSII)*:
 
 | Trạm | Tuần · hạn chót | Minh phải cho xem | Anh làm gì |
 |---|---|---|---|
-| Gate 1 — Hiểu bài toán | T1–2 · **20/09** | Nói được input/output, chọn IP cụ thể (vd bộ lọc FIR nhỏ), toolchain cài chạy được | Ký thỏa thuận làm việc, chốt **MVT** (phần bắt buộc) tách khỏi *extension* (phần mơ ước), chép 6 trạm vào hồ sơ |
-| Gate 2 — Baseline | T3–5 · **11/10** | RTL + testbench **chạy đúng**, có bằng chứng tái lập | Luật cứng: không có baseline ở đây → **đóng cửa extension**, chỉ còn làm phần lõi |
-| Gate 3 — Lõi | T6–8 · **01/11** | Qua synthesis + kiểm tra timing sạch, số liệu trung gian | Trượt → **thu hẹp phạm vi** ngay (bỏ extension → bớt quét tham số → thu nhỏ khối), tuyệt đối không làm thay |
-| Gate 4 — Thực nghiệm | T9–11 · **22/11** | Chạy trọn physical flow ra GDSII, bảng PPA chính | Sau trạm này **cấm thêm thuật toán mới** — chỉ hoàn thiện |
-| Gate 5 — Phân tích & bản thảo | T12–13 · **06/12** | Bản thảo khóa luận, mỗi con số trỏ về một bằng chứng đã kiểm | Soát bằng sổ bằng chứng: claim không có evidence → bỏ khỏi báo cáo |
-| Gate 6 — Tái lập & bảo vệ | T14–15 · **19/12** | Người khác chạy lại được từ README; slide + demo; gói bàn giao | Hỏi theo `DEFENSE_QUESTIONS.md`; nguyên tắc chốt: **không giải thích được = chưa hoàn thành** |
+| Gate 1 — Hiểu bài toán | Tuần 1–2 · **20/09/2026** | Nói được input/output; chọn IP cụ thể (vd bộ lọc FIR nhỏ); toolchain cài chạy được | Ký thỏa thuận làm việc; chốt **MVT** (phần bắt buộc) tách khỏi *extension* (phần mơ ước); chép 6 trạm vào hồ sơ |
+| Gate 2 — Baseline | Tuần 3–5 · **11/10/2026** | RTL + testbench **chạy đúng**, có bằng chứng tái lập | Luật cứng: không có baseline ở đây → **đóng cửa extension**, chỉ còn phần lõi |
+| Gate 3 — Lõi | Tuần 6–8 · **01/11/2026** | Qua synthesis + kiểm tra timing sạch; số liệu trung gian | Trượt → **thu hẹp phạm vi** ngay (bỏ extension → bớt quét tham số → thu nhỏ khối); tuyệt đối không làm thay |
+| Gate 4 — Thực nghiệm | Tuần 9–11 · **22/11/2026** | Chạy trọn physical flow ra GDSII; bảng PPA chính | Sau trạm này **cấm thêm thuật toán mới** — chỉ hoàn thiện |
+| Gate 5 — Phân tích & bản thảo | Tuần 12–13 · **06/12/2026** | Bản thảo khóa luận; mỗi con số trỏ về một bằng chứng đã kiểm | Soát bằng sổ bằng chứng: claim không có evidence → bỏ khỏi báo cáo |
+| Gate 6 — Tái lập & bảo vệ | Tuần 14–15 · **20/12/2026** | Người khác chạy lại được từ README; slide + demo; gói bàn giao | Hỏi theo `DEFENSE_QUESTIONS.md`; nguyên tắc chốt: **không giải thích được = chưa hoàn thành** |
 
 Giữa các trạm là **nhịp tuần** ~30 phút/sinh viên: đọc báo cáo tuần trước buổi gặp → trong buổi em trình theo khung *Mục tiêu → Bằng chứng → Cái gì hỏng → Chẩn đoán → Bước tiếp* → chốt 1–3 việc có hạn → ghi vào workbook. Thao tác chi tiết từng buổi: `10_Documentation/MENTOR-GUIDE.md`.
 
@@ -374,4 +374,4 @@ Nhìn xa hơn một học kỳ, trục B chính là **một chương trình nghi
 | Hiểu kiến trúc & quyết định thiết kế của hệ thống | `implementation-notes.md` / `.html` |
 | Triết lý giáo dục gốc | `01_Governance/Master_Mentoring_Handbook.docx` |
 
-*Tài liệu sinh từ nguồn chuẩn v1.5.1 (2026-08-23) — dữ liệu đổi thì chạy lại `python3 scripts/generate_ban_do.py`.*
+*Tài liệu sinh từ nguồn chuẩn v1.6.0 (2026-08-23) — dữ liệu đổi thì chạy lại `python3 scripts/generate_ban_do.py`.*
