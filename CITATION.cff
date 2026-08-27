@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+title: "Engineering & Research Mentoring Program (Lucero)"
+message: "Nếu bạn dùng lại chương trình, danh mục đề tài hoặc quy trình trong kho này, xin trích dẫn theo thông tin dưới đây."
+type: software
+abstract: >-
+  Hệ thống vận hành mentoring học thuật cho sinh viên kỹ thuật điện tử: danh mục
+  105 đề tài chuẩn hóa trải bốn mức tham gia (Project môn học, Thực tập, Đồ án
+  tốt nghiệp, Nghiên cứu khoa học) trên 16 nhóm chuyên môn thuộc ba hướng —
+  thiết kế vi mạch số (RTL/FPGA/ASIC), hệ nhúng và IoT, giải mã Polar — cùng vùng
+  giao thoa co-design thuật toán–phần cứng. Kho gồm nguồn dữ liệu máy-đọc-được
+  làm chuẩn duy nhất, script kiểm tra tính nhất quán và sinh toàn bộ tài liệu
+  dẫn xuất, thang đánh giá mức sẵn sàng của sinh viên, sáu cửa kiểm soát tiến độ
+  cho một học kỳ 15 tuần, và bộ biểu mẫu hồ sơ dự án.
+authors:
+  - family-names: "Đinh"
+    given-names: "Văn Nam"
+    alias: "Lucero Dinh"
+    email: "nam.dinhvan@phenikaa-uni.edu.vn"
+    affiliation: "Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa"
+version: "1.5.1"
+date-released: "2026-08-23"
+license:
+  - CC-BY-NC-SA-4.0
+  - MIT
+license-url: "https://github.com/Lucero6886/lucero-mentoring/blob/main/LICENSE"
+repository-code: "https://github.com/Lucero6886/lucero-mentoring"
+url: "https://lucero6886.github.io/lucero-mentoring/"
+keywords:
+  - engineering education
+  - research mentoring
+  - undergraduate research
+  - digital IC design
+  - FPGA
+  - ASIC design flow
+  - embedded systems
+  - Internet of Things
+  - edge AI
+  - polar codes
+  - hardware-algorithm co-design
+  - capstone project
+  - reproducible research

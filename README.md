@@ -25,6 +25,7 @@ Mỗi học kỳ mở một đợt (cohort) lấy đề tài từ kho chung này
 | **Nhanh nhất** — lọc, tìm kiếm trên web | [Trang danh mục](https://lucero6886.github.io/lucero-mentoring/) |
 | **Hiểu bản chất từng nhóm đề tài** — mỗi nhóm dạy gì, mỗi đề tài làm ra sản phẩm gì | [`Ban_do_de_tai.md`](Ban_do_de_tai.md) |
 | **Danh mục đồ án tốt nghiệp kỳ hiện tại** (bản in được) | [`Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.pdf`](Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.pdf) |
+| **Nên đọc gì trước khi bắt đầu** — tài liệu nền tảng theo từng hướng | [`09_References/READING-LIST.md`](09_References/READING-LIST.md) |
 | **Toàn bộ catalog theo loại** (P / I / T / R) | [`02_Project_Portfolio/`](02_Project_Portfolio/) |
 
 ### Bước 2 · Hiểu chương trình chạy thế nào trước khi chọn
@@ -102,7 +103,10 @@ Ngày cụ thể của từng đợt nằm trong [`06_Data/cohort_HK1_2026_2027.
 | **Vận hành trên GitHub**: cái gì công khai/riêng tư, nhịp tuần, gate review, phân quyền | [`10_Documentation/GITHUB-WORKFLOW.md`](10_Documentation/GITHUB-WORKFLOW.md) |
 | Sửa đề tài / thang điểm / lịch rồi sinh lại tài liệu | [`10_Documentation/WORKFLOW.md`](10_Documentation/WORKFLOW.md) |
 | Tra nhanh toàn bộ | [`10_Documentation/USER-GUIDE.md`](10_Documentation/USER-GUIDE.md) |
-| Chính sách gốc, thang đánh giá, quy tắc AI | [`01_Governance/`](01_Governance/) |
+| Chính sách gốc: triết lý, thang đánh giá, mức tham gia | [`01_Governance/Master_Mentoring_Handbook.md`](01_Governance/Master_Mentoring_Handbook.md) |
+| Quy tắc dùng AI và liêm chính học thuật | [`01_Governance/AI_and_Academic_Integrity_Policy.md`](01_Governance/AI_and_Academic_Integrity_Policy.md) |
+| Thỏa thuận làm việc mentor–sinh viên | [`01_Governance/Mentor_Student_Working_Agreement.md`](01_Governance/Mentor_Student_Working_Agreement.md) |
+| Quy trình vận hành (SOP) và mẫu báo cáo tuần | [`03_Operations/`](03_Operations/) |
 | Biểu mẫu hồ sơ từng sinh viên | [`04_Project_Template/`](04_Project_Template/) |
 
 ---
@@ -116,7 +120,8 @@ scripts/              ← Sinh mọi tài liệu từ nguồn chuẩn + kiểm t
 01_Governance/        ← Chính sách: sổ tay, thỏa thuận làm việc, quy tắc dùng AI
 03_Operations/        ← Quy trình vận hành + workbook theo dõi
 04_Project_Template/  ← 15 biểu mẫu hồ sơ dự án của từng sinh viên
-10_Documentation/     ← 4 hướng dẫn theo vai trò (sinh viên / mentor / vận hành / quy trình)
+09_References/        ← Tài liệu nền tảng nên đọc, phân theo hướng nghiên cứu
+10_Documentation/     ← Hướng dẫn theo vai trò (sinh viên / mentor / vận hành / GitHub)
 docs/                 ← Trang web danh mục (GitHub Pages)
 tests/                ← Hai bài chạy thử toàn quy trình (A-track và B-track)
 ```
@@ -130,6 +135,7 @@ python3 scripts/validate_portfolio.py              # phải PASS trước
 python3 scripts/generate_catalogs.py --docx --pdf  # sinh catalog + danh mục + phiếu
 python3 scripts/generate_site.py                   # sinh docs/index.html
 python3 scripts/generate_ban_do.py                 # sinh Ban_do_de_tai.md/.html
+python3 scripts/export_governance_md.py            # sinh bản .md đọc-trên-web từ .docx chính sách
 ```
 
 ---
@@ -152,7 +158,8 @@ Cách cả chương trình vận hành trên GitHub — repo riêng của em, b�
 Tài liệu (mọi file `.md`, `.docx`, `.pdf`, `.html`, dữ liệu trong `06_Data/`) phát hành theo
 **CC BY-NC-SA 4.0**; mã nguồn trong `scripts/` theo **MIT**. Chi tiết: [`LICENSE`](LICENSE).
 
-Nếu bạn dùng lại chương trình này cho lớp hoặc đơn vị của mình, xin ghi nguồn:
+Repo có sẵn file [`CITATION.cff`](CITATION.cff) — bấm **Cite this repository** ở cột phải trang GitHub
+để lấy trích dẫn dạng APA hoặc BibTeX. Cách ghi nguồn đề xuất:
 
 > Đinh Văn Nam (Lucero Dinh), *Engineering & Research Mentoring Program (Lucero)*,
 > Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa, 2026.

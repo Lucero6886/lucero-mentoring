@@ -47,6 +47,7 @@ Tác giả: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện t�
 - `generate_catalogs.py` — sinh Master + 4 catalog + danh mục cohort + phiếu từ 06_Data (`--docx` để xuất docx).
 - `generate_site.py` — sinh trang web công khai `docs/index.html` từ 06_Data (chỉ dữ liệu public).
 - `generate_ban_do.py` — sinh `Ban_do_de_tai.md/.html` (bản đồ trực quan toàn bộ đề tài) từ `06_Data/`.
+- `export_governance_md.py` — sinh bản `.md` đọc-trên-web từ 6 tài liệu chính sách `.docx` (cần pandoc).
 - `release_cohort.py` — công cụ xuất 5 tài liệu cohort sang thư mục đích tự chọn (bắt buộc truyền đường dẫn đích, ví dụ USB/thư mục chia sẻ; không còn đích mặc định — `DATN_mentor` đã xóa 23/08/2026).
 - `build_release.py` — đóng gói `dist/` + ZIP + MANIFEST theo `VERSION`.
 
@@ -77,6 +78,9 @@ Tác giả: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện t�
 ## Gốc repo — bổ sung v1.4.0/v1.5.0
 - `README.md` — điểm vào, trả lời 13 câu của MASTER_PROMPT §26.
 - `CLAUDE.md` — chỉ dẫn vận hành cho các phiên Claude sau (§0 cảnh báo về prompt master trong DATN_mentor).
+- `09_References/READING-LIST.md` — **tài liệu nền tảng theo từng hướng nghiên cứu**: nền chung về tái lập và viết khoa học, trục A (RTL/ASIC/EDA mã nguồn mở), nhánh nhúng & TinyML, trục B (Polar), vùng AB (co-design), kèm hướng dẫn đọc ba vòng và quy tắc kiểm chứng trích dẫn.
+- `CITATION.cff` — thông tin trích dẫn chuẩn; GitHub hiển thị nút *Cite this repository*.
+- `01_Governance/*.md` · `03_Operations/*.md` — **bản Markdown đọc-trên-web** của các tài liệu chính sách, sinh tự động từ `.docx` bằng `scripts/export_governance_md.py`. Bản `.docx` vẫn là bản gốc để in/ký.
 - `10_Documentation/GITHUB-WORKFLOW.md` — **vận hành chương trình trên GitHub**: 3 tầng riêng tư, repo riêng của sinh viên, nhịp tuần + gate review bằng Issue/Milestone, phân quyền, lộ trình 3 giai đoạn.
 - `04_Project_Template/student_repo_starter/` — bộ khởi tạo repo cho sinh viên: README mẫu, `.gitignore` cho HDL/FPGA/Python, mẫu Issue báo cáo tuần và gate review.
 - `CONTRIBUTING.md` · `LICENSE` · `.github/ISSUE_TEMPLATE/` — bộ file cho repo GitHub công khai.

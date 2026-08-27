@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.5.1 (bổ sung) — Nâng chuẩn học thuật cho bản công khai · 2026-08-27
+
+Repo đã lên GitHub (`Lucero6886/lucero-mentoring`, public). Đợt này bổ sung ba thứ khiến kho đạt chuẩn học thuật và dễ dùng hơn cho người đọc bên ngoài:
+
+**Tài liệu chính sách đọc được ngay trên web.** GitHub không hiển thị nội dung `.docx` — người đọc phải tải về. Thêm `scripts/export_governance_md.py` sinh bản `.md` từ 6 tài liệu (`Master_Mentoring_Handbook`, `Mentor_Student_Working_Agreement`, `AI_and_Academic_Integrity_Policy`, `Cohort_HK1_2026_2027_Implementation_Guide`, `Mentoring_Operating_Procedure_SOP`, `Weekly_Report_and_Meeting_Template`). Giữ đúng kiến trúc hệ thống: `.docx` là **bản gốc** để in/ký, `.md` là **view sinh tự động** — mỗi file mang ghi chú cấm sửa tay. Script tự dọn mũi tên, hạ bậc tiêu đề và đổi hộp nhấn mạnh của Word thành trích dẫn.
+
+**`CITATION.cff`.** Thông tin trích dẫn chuẩn (CFF 1.2.0) — GitHub hiển thị nút *Cite this repository*, xuất APA/BibTeX. Ghi rõ tác giả, đơn vị, phiên bản, hai giấy phép và 13 từ khóa chuyên ngành.
+
+**`09_References/READING-LIST.md`.** Danh mục tài liệu nền tảng theo từng hướng: nền chung (tái lập nghiên cứu, viết khoa học), trục A (RTL coding style, STA, OpenROAD/LibreLane/SKY130), nhánh nhúng & IoT (RTOS, TinyML, MLPerf Tiny), trục B (Arıkan 2009, Tal–Vardy, SC-Flip, SCL theo LLR, kiến trúc SC bán song song, 3GPP TS 38.212), vùng AB (Sze và cộng sự, Horowitz ISSCC 2014). Mỗi mục kèm một dòng *đọc để làm gì, đọc lúc nào*; thêm phương pháp đọc ba vòng và quy tắc bắt buộc kiểm chứng trích dẫn từ nguồn gốc.
+
+`README.md` và `00_START_HERE/FILE_MANIFEST.md` cập nhật theo; chuỗi lệnh sinh tài liệu nay có thêm bước `export_governance_md.py`. Nguồn chuẩn `06_Data/` không đổi (105 đề tài, v1.5.1) nên không regenerate các view khác.
+
 ## v1.5.1 (bổ sung) — Đưa chương trình lên GitHub · 2026-08-23
 
 Chuẩn bị publish repo công khai để sinh viên đọc, chọn đề tài và thảo luận.
