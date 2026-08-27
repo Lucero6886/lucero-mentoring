@@ -1000,7 +1000,11 @@
    "status": "active",
    "career_relevance": "Embedded systems engineer.",
    "tools": "C; MCU + RTOS; logic analyzer; thiết bị đo phù hợp; Git.",
-   "mvt": "Specification + kiến trúc phần mềm; firmware đầy đủ chức năng lõi; driver >=2 ngoại vi tự viết hoặc hiểu sâu; kế hoạch + kết quả kiểm thử hệ thống; số liệu hiệu năng (đáp ứng, độ tin cậy); repository có README và hướng dẫn tái lập."
+   "mvt": "Specification + kiến trúc phần mềm; firmware đầy đủ chức năng lõi; driver >=2 ngoại vi tự viết hoặc hiểu sâu; kế hoạch + kết quả kiểm thử hệ thống; số liệu hiệu năng (đáp ứng, độ tin cậy); repository có README và hướng dẫn tái lập.",
+   "cohort_alias": {
+    "HK1_2026_2027": "C1"
+   },
+   "checkpoints_15w": "W2: spec + kiến trúc phần mềm, chốt ngoại vi. W5: firmware chạy đúng ≥2 ngoại vi + unit test. W8: hệ tích hợp chạy liên tục, có kịch bản kiểm thử. W11: số liệu đáp ứng và độ tin cậy. W15: khóa luận + demo + repo tái lập."
   },
   {
    "code": "A6-T02",
@@ -1020,7 +1024,11 @@
    "status": "active",
    "career_relevance": "SoC/FPGA engineer; nền tảng cho hướng luận án co-design.",
    "tools": "Verilog; Zynq/PYNQ; C/Python; profiler; Git.",
-   "mvt": "Baseline phần mềm + số liệu profile; RTL accelerator + testbench; tích hợp bus + driver chạy đúng; bảng speedup và tài nguyên so với baseline; phân tích điểm nghẽn; repository tái lập."
+   "mvt": "Baseline phần mềm + số liệu profile; RTL accelerator + testbench; tích hợp bus + driver chạy đúng; bảng speedup và tài nguyên so với baseline; phân tích điểm nghẽn; repository tái lập.",
+   "cohort_alias": {
+    "HK1_2026_2027": "C3"
+   },
+   "checkpoints_15w": "W2: chọn hàm nặng, baseline phần mềm có số liệu profile. W5: RTL accelerator + testbench đúng. W8: tích hợp bus + driver chạy đúng end-to-end. W11: bảng speedup và tài nguyên so với baseline. W15: khóa luận + demo + repo."
   },
   {
    "code": "A6-R01",
@@ -1149,7 +1157,11 @@
    "status": "active",
    "career_relevance": "IoT solution engineer.",
    "tools": "ESP32/STM32; MQTT/LoRa tùy bài; thiết bị đo dòng; backend + dashboard; Git.",
-   "mvt": "Kiến trúc hệ thống + spec; >=3 node chạy pin hoạt động; gateway + lưu trữ + dashboard; số liệu vận hành >=7 ngày (uptime, mất gói, năng lượng); phân tích điểm yếu; repository và tài liệu triển khai tái lập."
+   "mvt": "Kiến trúc hệ thống + spec; >=3 node chạy pin hoạt động; gateway + lưu trữ + dashboard; số liệu vận hành >=7 ngày (uptime, mất gói, năng lượng); phân tích điểm yếu; repository và tài liệu triển khai tái lập.",
+   "cohort_alias": {
+    "HK1_2026_2027": "C2"
+   },
+   "checkpoints_15w": "W2: kiến trúc hệ, chốt cảm biến và giao thức. W5: một node chạy ổn định + dashboard. W8: ≥3 node + gateway vận hành liên tục. W11: số liệu ≥7 ngày (uptime, mất gói, năng lượng). W15: khóa luận + tài liệu triển khai."
   },
   {
    "code": "A7-T02",
@@ -1168,7 +1180,11 @@
    "status": "active",
    "career_relevance": "Edge AI/embedded ML engineer.",
    "tools": "Python/TensorFlow; TFLite Micro/CMSIS-NN; MCU hoặc Zynq; thiết bị đo dòng; Git.",
-   "mvt": "Baseline float trên máy + trên thiết bị; bản INT8 chạy trên thiết bị; bảng accuracy/latency/bộ nhớ/năng lượng cho từng bản; phân tích trade-off; pipeline tái lập một lệnh; repository có README."
+   "mvt": "Baseline float trên máy + trên thiết bị; bản INT8 chạy trên thiết bị; bảng accuracy/latency/bộ nhớ/năng lượng cho từng bản; phân tích trade-off; pipeline tái lập một lệnh; repository có README.",
+   "cohort_alias": {
+    "HK1_2026_2027": "C4"
+   },
+   "checkpoints_15w": "W2: chốt bài toán, baseline float trên máy. W5: pipeline train→quantize chạy lại được. W8: bản INT8 chạy trên thiết bị thật. W11: bảng accuracy/latency/bộ nhớ/năng lượng. W15: khóa luận + pipeline tái lập một lệnh."
   },
   {
    "code": "A7-R01",
@@ -2067,7 +2083,11 @@
    "status": "active",
    "career_relevance": "Edge-AI hardware engineer; đúng mạch nghiên cứu accelerator hiện nay.",
    "tools": "Zynq/PYNQ; Verilog/HLS được duyệt; TFLite; profiler; thiết bị đo dòng; Git.",
-   "mvt": "Baseline CPU-only có số liệu; accelerator RTL + testbench; tích hợp driver chạy đúng mô hình thật; bảng latency/năng lượng/tài nguyên so với baseline; phân tích điểm nghẽn; repository tái lập."
+   "mvt": "Baseline CPU-only có số liệu; accelerator RTL + testbench; tích hợp driver chạy đúng mô hình thật; bảng latency/năng lượng/tài nguyên so với baseline; phân tích điểm nghẽn; repository tái lập.",
+   "cohort_alias": {
+    "HK1_2026_2027": "C5"
+   },
+   "checkpoints_15w": "W2: chốt mô hình, baseline CPU-only có số liệu. W5: profile tìm lớp nặng nhất + thiết kế accelerator. W8: RTL + testbench đúng. W11: tích hợp và bảng latency/năng lượng/tài nguyên. W15: khóa luận + demo."
   },
   {
    "code": "AB-T06",
@@ -2087,7 +2107,11 @@
    "status": "active",
    "career_relevance": "Baseband/hardware engineer cho truyền thông IoT; trực tiếp phục vụ hướng luận án.",
    "tools": "Python/MATLAB golden model; Verilog; FPGA; thiết bị đo/ước lượng năng lượng; Git.",
-   "mvt": "Golden model đối chiếu; decoder fixed-point trên FPGA khớp golden; đường BLER; bảng năng lượng/bit + độ trễ cho >=2 cấu hình; phân tích trade-off; repository tái lập."
+   "mvt": "Golden model đối chiếu; decoder fixed-point trên FPGA khớp golden; đường BLER; bảng năng lượng/bit + độ trễ cho >=2 cấu hình; phân tích trade-off; repository tái lập.",
+   "cohort_alias": {
+    "HK1_2026_2027": "C6"
+   },
+   "checkpoints_15w": "W2: golden model + chốt tham số (block length, dải SNR). W5: fixed-point khớp golden model. W8: decoder chạy đúng trên FPGA. W11: đường BLER + bảng năng lượng/bit cho ≥2 cấu hình. W15: khóa luận + repo tái lập."
   },
   {
    "code": "AB-R02",
@@ -2127,7 +2151,7 @@
   }
  ],
  "meta": {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "updated": "2026-08-23",
   "program": "Engineering & Research Mentoring Program (Lucero)",
   "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",

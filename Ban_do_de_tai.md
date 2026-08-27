@@ -1,6 +1,6 @@
 # Bản đồ 105 đề tài & cách sử dụng hệ thống
 
-**Engineering & Research Mentoring Program (Lucero)** · Phiên bản hệ thống 1.6.0 · 2026-08-23
+**Engineering & Research Mentoring Program (Lucero)** · Phiên bản hệ thống 1.7.0 · 2026-08-23
 Tác giả & mentor: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 Bản web (mở từ điện thoại, chia sẻ được): https://claude.ai/code/artifact/68a2de47-bc1e-41cc-b588-cd34ffd90c90
 
@@ -152,8 +152,8 @@ Nhóm mở đầu nhánh Nhúng & IoT của trục A (mở từ v1.5.0): viết 
 | `A6-P03` | P | L2 | — | Giao tiếp phần cứng-phần mềm trên SoC FPGA | IP memory-mapped đơn giản (thanh ghi điều khiển/trạng thái); driver C phía processor; test đọc-ghi qua bus; README |
 | `A6-P04` | P | L2 | — | Dựng Linux nhúng trên SoC FPGA và viết driver đơn giản | Ảnh Linux boot được trên board; driver ký tự hoặc UIO nói chuyện với một IP; log kiểm chứng; hướng dẫn dựng lại từ đầu |
 | `A6-I01` | I | L2 | — | Thực tập phát triển sản phẩm nhúng theo quy trình kỹ sư | Sản phẩm nhúng nhỏ đi trọn quy trình: yêu cầu -> thiết kế -> firmware -> kiểm thử -> tài liệu; nhật ký tuần; repo Git kỷ luật |
-| `A6-T01` | T | L2 | — | Thiết kế hệ thống nhúng điều khiển và thu thập dữ liệu hoàn chỉnh | Hệ thống nhúng chạy thật (>=2 ngoại vi, RTOS hoặc kiến trúc phần mềm rõ); kiểm thử hệ thống; đo hiệu năng/độ tin cậy; khóa luận;… |
-| `A6-T02` | T | L3 | — | Tích hợp bộ tăng tốc phần cứng tùy biến vào SoC FPGA | Baseline phần mềm có profile; IP accelerator RTL; driver + tích hợp; benchmark speedup; phân tích trade-off tài nguyên/độ trễ;… |
+| `A6-T01` | T | L2 | **C1** | Thiết kế hệ thống nhúng điều khiển và thu thập dữ liệu hoàn chỉnh | Hệ thống nhúng chạy thật (>=2 ngoại vi, RTOS hoặc kiến trúc phần mềm rõ); kiểm thử hệ thống; đo hiệu năng/độ tin cậy; khóa luận;… |
+| `A6-T02` | T | L3 | **C3** | Tích hợp bộ tăng tốc phần cứng tùy biến vào SoC FPGA | Baseline phần mềm có profile; IP accelerator RTL; driver + tích hợp; benchmark speedup; phân tích trade-off tài nguyên/độ trễ;… |
 | `A6-R01` | R | L4 | — | Nghiên cứu phân hoạch phần cứng/phần mềm cho ứng dụng nhúng | Research question rõ; phương pháp phân hoạch + tiêu chí; >=2 phương án phân hoạch đo trên cùng benchmark; phân tích… |
 
 ### A7 · IoT Systems & Edge Intelligence — IoT và trí tuệ tại biên
@@ -169,8 +169,8 @@ Nối các thiết bị nhúng thành hệ thống hoàn chỉnh: cảm biến, 
 | `A7-P03` | P | L2 | — | Suy luận TinyML trên vi điều khiển | Mô hình nhỏ (keyword spotting/gesture) huấn luyện + quantize INT8; chạy trên MCU; bảng accuracy/latency/RAM-Flash; demo; README |
 | `A7-P04` | P | L1 | — | Đánh giá kết nối không dây tầm ngắn/tầm xa cho IoT | Thí nghiệm BLE và LoRa (hoặc 2 công nghệ được duyệt): tầm phủ, tỉ lệ mất gói, năng lượng/gói theo khoảng cách; báo cáo so sánh có… |
 | `A7-I01` | I | L2 | — | Thực tập xây dựng hệ thống IoT đầu-cuối | Hệ thống node -> gateway -> lưu trữ -> dashboard vận hành liên tục >=2 tuần; số liệu uptime/mất gói; nhật ký sự cố và cách xử lý;… |
-| `A7-T01` | T | L2 | — | Thiết kế và đánh giá hệ thống giám sát IoT đa nút hoàn chỉnh | Hệ thống >=3 node chạy pin + gateway + dashboard; đánh giá định lượng: uptime, mất gói, thời gian sống pin; khóa luận; repo + tài… |
-| `A7-T02` | T | L3 | — | Triển khai và tối ưu mô hình AI gọn nhẹ trên thiết bị biên | Pipeline train->quantize->deploy tái lập; so sánh có hệ thống float/INT8 (accuracy, latency, RAM/Flash, năng lượng/suy luận);… |
+| `A7-T01` | T | L2 | **C2** | Thiết kế và đánh giá hệ thống giám sát IoT đa nút hoàn chỉnh | Hệ thống >=3 node chạy pin + gateway + dashboard; đánh giá định lượng: uptime, mất gói, thời gian sống pin; khóa luận; repo + tài… |
+| `A7-T02` | T | L3 | **C4** | Triển khai và tối ưu mô hình AI gọn nhẹ trên thiết bị biên | Pipeline train->quantize->deploy tái lập; so sánh có hệ thống float/INT8 (accuracy, latency, RAM/Flash, năng lượng/suy luận);… |
 | `A7-R01` | R | L4 | — | Nghiên cứu đánh đổi độ chính xác – năng lượng – độ trễ cho suy luận tại biên | Research question + giả thuyết; ma trận thí nghiệm (mô hình × mức quantize × tần số/điện áp nếu có); đường cong trade-off; phân… |
 
 ### B0 · Polar Fundamentals & Software Baseline — Polar trên máy tính, chưa đụng phần cứng
@@ -288,8 +288,8 @@ Lấy một thuật toán — giải mã Polar của trục B, hay suy luận AI
 | `AB-T03` | T | L4 | — | FPGA-to-ASIC evaluation của SC Polar Decoder | Selected decoder/core; FPGA and ASIC evidence; trade-off analysis |
 | `AB-T04` | T | L4 | — | PPA optimization cho fixed-point Polar Processing Element | Bit-width/pipeline configurations; BLER or numerical impact; ASIC PPA; Pareto analysis |
 | `AB-R01` | R | L5 | — | Hardware-aware design-space exploration cho Polar Decoder | Reproducible multi-objective experiments; BLER-area-latency-throughput-energy analysis; research manuscript assets |
-| `AB-T05` | T | L3 | — | Tăng tốc phần cứng cho suy luận AI biên trên SoC FPGA | Baseline suy luận CPU-only trên SoC; accelerator cho lớp/khối nặng nhất; đo end-to-end: latency, năng lượng/suy luận, tài nguyên;… |
-| `AB-T06` | T | L3 | — | Bộ giải mã SC Polar tiết kiệm năng lượng cho liên kết IoT | SC decoder fixed-point đặt trong ngữ cảnh IoT (block length/ném SNR do mentor chốt); đánh giá BLER kèm năng lượng/bit và độ trễ… |
+| `AB-T05` | T | L3 | **C5** | Tăng tốc phần cứng cho suy luận AI biên trên SoC FPGA | Baseline suy luận CPU-only trên SoC; accelerator cho lớp/khối nặng nhất; đo end-to-end: latency, năng lượng/suy luận, tài nguyên;… |
+| `AB-T06` | T | L3 | **C6** | Bộ giải mã SC Polar tiết kiệm năng lượng cho liên kết IoT | SC decoder fixed-point đặt trong ngữ cảnh IoT (block length/ném SNR do mentor chốt); đánh giá BLER kèm năng lượng/bit và độ trễ… |
 | `AB-R02` | R | L4 | — | Co-design thuật toán – phần cứng cho truyền thông tin cậy ở thiết bị biên | Research question về điểm gặp giữa adaptive Polar decoding và ngân sách năng lượng biên; framework thí nghiệm; >=2 chiến lược so… |
 | `AB-R03` | R | L5 | — | Nền tảng biên tích hợp: truyền thông và suy luận chia sẻ tài nguyên phần cứng | Feasibility study có số liệu: decoder Polar + suy luận edge AI trên cùng SoC/FPGA — chia sẻ tài nguyên, lập lịch, ngân sách năng… |
 
@@ -314,7 +314,7 @@ Lấy một thuật toán — giải mã Polar của trục B, hay suy luận AI
 
 ### 3.3 Mentor đồ án tốt nghiệp — loại T, 15 tuần, 6 trạm kiểm soát
 
-Khuôn 15 tuần – 6 trạm này **dùng chung cho mọi khóa**: các mốc đếm theo số tuần kể từ ngày sinh viên chính thức nhận đề tài, không gắn với một học kỳ cụ thể. Khóa đang chạy (21 đề tài mở) bắt đầu 07/09/2026 nên có thêm ngày tương ứng ở cột hạn. Kể bằng một ví dụ giả định — bạn **Minh** chọn `A4-T01` *(mã HK1: A1 — Thiết kế một Digital IP từ RTL đến GDSII)*:
+Khuôn 15 tuần – 6 trạm này **dùng chung cho mọi khóa**: các mốc đếm theo số tuần kể từ ngày sinh viên chính thức nhận đề tài, không gắn với một học kỳ cụ thể. Khóa đang chạy (27 đề tài mở) bắt đầu 07/09/2026 nên có thêm ngày tương ứng ở cột hạn. Kể bằng một ví dụ giả định — bạn **Minh** chọn `A4-T01` *(mã HK1: A1 — Thiết kế một Digital IP từ RTL đến GDSII)*:
 
 | Trạm | Tuần · hạn chót | Minh phải cho xem | Anh làm gì |
 |---|---|---|---|
@@ -368,10 +368,10 @@ Nhìn xa hơn một học kỳ, trục B chính là **một chương trình nghi
 | Tình huống | Mở |
 |---|---|
 | Cần thao tác từng buổi gặp / gate / xử lý SV chậm | `10_Documentation/MENTOR-GUIDE.md` |
-| Phát tài liệu cho sinh viên | `Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.docx/.pdf` + `Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx` (thư mục gốc) |
+| Phát tài liệu cho sinh viên | `Danh_muc_de_tai_DATN_HK1_2026_2027.docx/.pdf` + `Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx` (thư mục gốc) |
 | Theo dõi cả lớp hằng tuần | `03_Operations/Mentoring_Management_Workbook.xlsx` |
 | Sửa đề tài / thang điểm / lịch | `06_Data/*.json` rồi chạy 3 lệnh trong `10_Documentation/WORKFLOW.md` |
 | Hiểu kiến trúc & quyết định thiết kế của hệ thống | `implementation-notes.md` / `.html` |
 | Triết lý giáo dục gốc | `01_Governance/Master_Mentoring_Handbook.docx` |
 
-*Tài liệu sinh từ nguồn chuẩn v1.6.0 (2026-08-23) — dữ liệu đổi thì chạy lại `python3 scripts/generate_ban_do.py`.*
+*Tài liệu sinh từ nguồn chuẩn v1.7.0 (2026-08-23) — dữ liệu đổi thì chạy lại `python3 scripts/generate_ban_do.py`.*

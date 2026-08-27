@@ -38,7 +38,7 @@ Tác giả: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện t�
 
 ## 06_Data — NGUỒN CHUẨN DỮ LIỆU (v1.1)
 - `milestone_gates.json` — **khung tiến độ tương đối**: 6 gate theo số tuần kể từ ngày nhận đề tài, kèm khối `frame` (độ dài khung, mốc đếm từ đâu). Không chứa ngày.
-- `cohort_*.json` — dữ liệu riêng một khóa: chỉ `start_date` (có thể để trống) + `breaks` tùy chọn; lịch tuần và hạn gate **suy ra**, không lưu.
+- `cohort_*.json` — dữ liệu riêng một khóa: `start_date` (có thể để trống) + `breaks` tùy chọn (lịch tuần và hạn gate **suy ra**, không lưu) · `alias_groups` định nghĩa các nhóm hiển thị trong danh mục · `remaining_topics_policy` quyết định cách ghi nhận đề tài cùng loại còn trong kho nhưng không mở đại trà (`on_request`).
 - `project_portfolio.json` — 105 đề tài (16 nhóm; A6/A7 + AB co-design mở từ v1.5.0); schema gồm mvt/tools/status/prereq_codes/career_relevance/cohort_alias/checkpoints_15w/eligibility.
 - `readiness_rubrics.json` — TR (0-5, 16 năng lực) + WR (0-4, /20, ngưỡng) + RR (0-4) + lựa chọn kết luận.
 - `milestone_gates.json` — Gate 1–6 dạng keyed object.
@@ -58,7 +58,7 @@ Tác giả: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện t�
 - `index.html` — catalog sinh viên: 105 đề tài có bộ lọc, lịch gate cohort, hướng dẫn chọn đề tài, quy tắc. Deploy GitHub Pages: Settings → Pages → main /docs. Bản online (artifact riêng tư, share được): https://claude.ai/code/artifact/c5d77e76-9f17-4ecb-961f-780daaee8ec3
 
 ## File gốc (root)
-- `Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.docx/.pdf` — danh mục cohort (VIEW sinh tự động; mã chuẩn + alias).
+- `Danh_muc_de_tai_DATN_HK1_2026_2027.docx/.pdf` — danh mục cohort (VIEW sinh tự động; mã chuẩn + alias).
 - `Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx` — phiếu cohort (VIEW sinh tự động; thang chuẩn).
 - `AUDIT_REPORT.md` — kiểm toán v1.0 (23/08/2026) + annex trạng thái xử lý.
 - `FINAL_SYSTEM_AUDIT.md` — nghiệm thu v1.1.1: 36/36 tiêu chí + hạn chế còn lại.

@@ -250,6 +250,7 @@ CAL = cs.build_calendar(co.get("start_date"), co.get("duration_weeks"), co.get("
 DL  = cs.gate_deadlines(mg["gates"], CAL)
 
 def cohort_section():
+    GROUPS = co.get("alias_groups") or [{"prefix": "A", "name": "Nhóm A"}, {"prefix": "B", "name": "Nhóm B"}]
     gates = ""
     for g in mg["gates"]:
         iso = DL.get(str(g["gate"]))
@@ -269,6 +270,24 @@ def cohort_section():
                     f'<td class="date"><b>{t["code"]}</b></td><td>{esc(t["title_vi"])}</td>'
                     f'<td>{esc(DIFF[t["min_level"]])}</td></tr>')
         return out
+    group_tables = ""
+    for _g in GROUPS:
+        _rows = qrows(_g["prefix"])
+        if not _rows:
+            continue
+        _n = len([x for x in co["topics"] if x["alias"].startswith(_g["prefix"])])
+        group_tables += (f'<h3>{esc(_g["name"])} — {_n} đề tài mở</h3>'
+                         '<div class="tw"><table><thead><tr><th>Mã ngắn</th><th>Mã chuẩn</th>'
+                         f'<th>Đề tài</th><th>Độ khó</th></tr></thead><tbody>{_rows}</tbody></table></div>')
+    _opened = {x["code"] for x in co["topics"]}
+    _rest = [t for t in TOPICS if t["type"] == co.get("activity_type", "T")
+             and t.get("status") == "active" and t["code"] not in _opened]
+    if _rest and co.get("remaining_topics_policy", "on_request") == "on_request":
+        _li = " · ".join(f'<code>{esc(t["code"])}</code>' for t in sorted(_rest, key=lambda x: x["code"]))
+        group_tables += (f'<p class="muted"><b>Mở theo yêu cầu:</b> kho còn {len(_rest)} đề tài '
+                         f'{esc(co.get("activity_type","T"))} không phát đại trà kỳ này ({_li}). '
+                         'Nếu bạn chứng minh được nền tương ứng qua bài kiểm tra năng lực, hãy trao đổi trực tiếp '
+                         'với mentor — quyết định theo từng trường hợp.</p>')
     career = "".join(
         f'<tr><td>{esc(g["goal"])}{(" <span class=muted>(" + esc(g["note"]) + ")</span>") if g.get("note") else ""}</td>'
         f'<td class="date">{esc(", ".join(g["primary"]))}</td><td class="date">{esc(", ".join(g["next"]))}</td></tr>'
@@ -278,10 +297,7 @@ def cohort_section():
 <h2>Đồ án tốt nghiệp HK1 2026–2027</h2>
 <h3>6 cửa kiểm soát tiến độ (gate) và hạn chót</h3>
 <div class="tw"><table><thead><tr><th>Gate</th><th>Tuần</th><th>Hạn chót</th><th>Điều kiện qua</th><th>Nếu không đạt</th></tr></thead><tbody>{gates}</tbody></table></div>
-<h3>21 đề tài mở kỳ này — Nhóm A</h3>
-<div class="tw"><table><thead><tr><th>Mã ngắn</th><th>Mã chuẩn</th><th>Đề tài</th><th>Độ khó</th></tr></thead><tbody>{qrows("A")}</tbody></table></div>
-<h3>21 đề tài mở kỳ này — Nhóm B</h3>
-<div class="tw"><table><thead><tr><th>Mã ngắn</th><th>Mã chuẩn</th><th>Đề tài</th><th>Độ khó</th></tr></thead><tbody>{qrows("B")}</tbody></table></div>
+{group_tables}
 <p class="muted">Khi điền phiếu nguyện vọng, ghi <b>mã chuẩn</b> (vd <code>A4-T01</code>); mã ngắn chỉ để đọc nhanh.
 Chi tiết từng đề tài: xem mục Danh mục bên dưới (có gắn nhãn "HK1").</p>
 <h3>Chọn theo mục tiêu nghề nghiệp</h3>
@@ -295,7 +311,7 @@ def howto_section():
 <section id="howto"><div class="wrap">
 <h2>Cách chọn đề tài và readiness test</h2>
 <ol class="steps">
-<li><b>Xác định hướng:</b> Nhóm A (Digital IC/FPGA/ASIC) hay Nhóm B (Polar Code/Decoder), hoặc giao thoa AB.</li>
+<li><b>Xác định hướng:</b> vi mạch số (RTL/FPGA/ASIC) · Polar coding · hệ nhúng, IoT và co-design.</li>
 <li><b>Đối chiếu năng lực:</b> dùng bộ lọc "Level của tôi" ở Danh mục; đọc kỹ "Điều kiện đầu vào" từng đề tài.</li>
 <li><b>Chọn Top-3 nguyện vọng</b> theo thứ tự ưu tiên, ghi <b>mã chuẩn</b> vào phiếu được phát. Nguyện vọng là input — <em>readiness mới quyết định scope</em>.</li>
 <li><b>Readiness test 2 tuần:</b> literature task (problem–input–output–method–metric–điểm chưa hiểu) · technical mini-task 4–10 giờ · oral check 5–10 phút bằng lời của chính mình.</li>

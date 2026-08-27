@@ -169,11 +169,13 @@ def gen_catalog(typ):
 def gen_cohort(co):
     cid = co["cohort_id"]
     label = cid.replace("HK1_", "HK1 ").replace("_", "-")
+    GROUPS = co.get("alias_groups") or [{"prefix": "A", "name": "Nhóm A"}, {"prefix": "B", "name": "Nhóm B"}]
     CAL = cs.build_calendar(co.get("start_date"), co.get("duration_weeks"), co.get("breaks"))
     DL  = cs.gate_deadlines(mg["gates"], CAL)
     NW  = co.get("duration_weeks")
     out = header("Danh mục đề tài Đồ án tốt nghiệp",
-                 f"Nhóm A - Digital IC / FPGA / ASIC · Nhóm B - Polar Code / Hardware-Aware Decoding · {label}")
+                 " · ".join([g["name"] for g in (co.get("alias_groups") or [])] + [label])
+                 or f"Đồ án tốt nghiệp {label}")
     out += [
             "> **Mục tiêu tài liệu:** giúp sinh viên quan sát nhanh các hướng đề tài, hiểu yêu cầu đầu vào, "
             "sản phẩm bắt buộc (MVT) và lựa chọn phù hợp năng lực, sở thích, định hướng nghề nghiệp.", "",
@@ -203,14 +205,19 @@ def gen_cohort(co):
             tb.append(f"| {x['alias']} | **{t['code']}** | {esc(t['title_vi'])} | {difficulty(t['min_level'])} | "
                       f"{esc(t['prerequisites'])} | {esc(t['tools'])} |")
         return tb + [""]
-    out += ["## 3. Bảng lựa chọn nhanh", "", "### Nhóm A - Digital IC / FPGA / ASIC", ""]
-    out += quick_table("A")
-    out += ["### Nhóm B - Polar Code / Hardware-Aware Decoding", ""]
-    out += quick_table("B")
+    out += ["## 3. Bảng lựa chọn nhanh", ""]
+    for g in GROUPS:
+        rows_n = len([x for x in co["topics"] if x["alias"].startswith(g["prefix"])])
+        if not rows_n:
+            continue
+        out += [f"### {g['name']} ({rows_n} đề tài)", ""]
+        out += quick_table(g["prefix"])
     # details
-    for group, gname in [("A","4. NHÓM A - DIGITAL IC / FPGA / ASIC"),
-                         ("B","5. NHÓM B - POLAR CODE / HARDWARE-AWARE DECODING")]:
-        out += [f"## {gname}", ""]
+    for _i, g in enumerate(GROUPS, start=4):
+        group = g["prefix"]
+        if not [x for x in co["topics"] if x["alias"].startswith(group)]:
+            continue
+        out += [f"## {_i}. {g['name'].upper()}", ""]
         rows = [x for x in co["topics"] if x["alias"].startswith(group)]
         rows.sort(key=lambda x: int(x["alias"][1:]))
         for x in rows:
@@ -226,13 +233,38 @@ def gen_cohort(co):
                 out += [f"**Checkpoint 15 tuần:** {star(t['checkpoints_15w'])}", ""]
             out += [f"**Research extension (không bắt buộc):** {star(t['extension'])}", "",
                     f"**Định hướng nghề nghiệp:** {star(t['career_relevance'])}", ""]
+    # đề tài cùng loại còn trong kho nhưng không phát đại trà kỳ này
+    _n = 3 + len([g for g in GROUPS if [x for x in co["topics"] if x["alias"].startswith(g["prefix"])]])
+    opened = {x["code"] for x in co["topics"]}
+    rest = [t for t in TOPICS
+            if t["type"] == co.get("activity_type", "T") and t.get("status") == "active"
+            and t["code"] not in opened]
+    if rest and co.get("remaining_topics_policy", "on_request") == "on_request":
+        _n += 1
+        out += [f"## {_n}. Đề tài mở theo yêu cầu", "",
+                f"Kho đề tài của chương trình có **{len(rest) + len(opened)} đề tài {co.get('activity_type','T')}**; "
+                f"kỳ này phát rộng rãi **{len(opened)}** đề tài ở các mục trên. "
+                f"**{len(rest)} đề tài** dưới đây vẫn nằm trong kho nhưng không phát đại trà — thường vì cần nền "
+                "chuyên sâu hơn, hoặc để dành làm bước tiếp theo cho sinh viên đã có nền từ kỳ trước.", "",
+                "**Vẫn đăng ký được:** nếu bạn thấy đề tài phù hợp và chứng minh được nền tương ứng qua bài kiểm tra "
+                "năng lực, hãy nêu trong phiếu nguyện vọng (mục *nguyện vọng khác*) hoặc trao đổi trực tiếp với mentor. "
+                "Mentor quyết định theo từng trường hợp — không có suất cố định.", "",
+                "| Mã chuẩn | Đề tài | Độ khó | Vì sao cần cân nhắc kỹ |", "|---|---|---|---|"]
+        for t in sorted(rest, key=lambda x: (x["min_level"], x["code"])):
+            why = ("Bậc cao — cần nền nghiên cứu vững" if t["min_level"] >= 4
+                   else "Cần nền chuyên sâu hoặc đề tài nối tiếp từ kỳ trước")
+            out.append(f"| **{t['code']}** | {star(t['title_vi'])} | {difficulty(t['min_level'])} | {why} |")
+        out += [""]
+
     # career guide
-    out += ["## 6. Gợi ý chọn đề tài theo mục tiêu nghề nghiệp", "",
+    _n += 1
+    out += [f"## {_n}. Gợi ý chọn đề tài theo mục tiêu nghề nghiệp", "",
             "| Mục tiêu | Đề tài ưu tiên | Lộ trình tiếp theo |", "|---|---|---|"]
     for g in co["career_guide"]:
         note = f" *({star(g['note'])})*" if g.get("note") else ""
         out.append(f"| {g['goal']}{note} | {', '.join(g['primary'])} | {', '.join(g['next'])} |")
-    out += ["", "## 7. Readiness test và nguyên tắc làm việc", "",
+    _n += 1
+    out += ["", f"## {_n}. Readiness test và nguyên tắc làm việc", "",
             "- **Literature task:** đọc một tài liệu ngắn; trình bày problem - input - output - method - metric - điểm chưa hiểu.",
             "- **Technical mini-task (4-10 giờ):** simulation nhỏ, module RTL, tái tạo figure hoặc xử lý dataset tùy đề tài.",
             "- **Oral check (5-10 phút):** trình bày bằng lời của chính mình; sản phẩm không giải thích được coi là chưa hoàn thành.",
@@ -241,7 +273,7 @@ def gen_cohort(co):
             "đọc, học, code, debug, experiment, deadline, báo cáo. Baseline chưa xong thì không mở research extension. "
             "Tiến độ không phù hợp giữa kỳ → ưu tiên giảm scope, giữ chuẩn kỹ thuật. AI được dùng để hỗ trợ nhưng "
             "**cannot explain = not completed**.", "",
-            f"## 8. Phiếu đăng ký", "",
+            f"## {_n + 1}. Phiếu đăng ký", "",
             f"Sử dụng file **Phieu_lua_chon_va_danh_gia_de_tai_DATN_{cid}.docx** (bản duy nhất, thang điểm chuẩn). "
             "Không dùng các bản phiếu cũ.", ""]
     return "\n".join(out)
@@ -252,7 +284,7 @@ def gen_phieu(co):
     tr, wr, rz = rr["technical_readiness"], rr["working_readiness"], rr["research_readiness"]
     tr_max = max(int(k) for k in tr["scale"])
     out = header("Phiếu lựa chọn nguyện vọng & đánh giá readiness",
-                 f"Đồ án tốt nghiệp {label} · Nhóm A - Digital IC/FPGA/ASIC · Nhóm B - Polar Code")
+                 " · ".join([f"Đồ án tốt nghiệp {label}"] + [g["name"] for g in (co.get("alias_groups") or [])]))
     out += ["> Sinh viên điền Phiếu 1-4 trước buổi trao đổi; mentor dùng Phiếu 5. "
             "Chọn đề tài dựa trên năng lực, định hướng và mức cam kết thực tế — không chỉ dựa trên tên đề tài. "
             "**Ghi mã chuẩn của đề tài (vd `A4-T01`).**", ""]
@@ -334,7 +366,7 @@ outputs = {
 for co_path in COHORT_FILES:
     co = json.loads(co_path.read_text(encoding="utf-8"))
     cid = co["cohort_id"]
-    outputs[f"Danh_muc_de_tai_DATN_Nhom_A_B_{cid}.md"] = gen_cohort(co)
+    outputs[f"Danh_muc_de_tai_DATN_{cid}.md"] = gen_cohort(co)
     outputs[f"Phieu_lua_chon_va_danh_gia_de_tai_DATN_{cid}.md"] = gen_phieu(co)
 
 for name, content in outputs.items():
@@ -351,7 +383,7 @@ if "--docx" in sys.argv:
     }
     for co_path in COHORT_FILES:
         cid = json.loads(co_path.read_text(encoding="utf-8"))["cohort_id"]
-        TARGETS[f"Danh_muc_de_tai_DATN_Nhom_A_B_{cid}.md"] = BASE/f"Danh_muc_de_tai_DATN_Nhom_A_B_{cid}.docx"
+        TARGETS[f"Danh_muc_de_tai_DATN_{cid}.md"] = BASE/f"Danh_muc_de_tai_DATN_{cid}.docx"
         TARGETS[f"Phieu_lua_chon_va_danh_gia_de_tai_DATN_{cid}.md"] = BASE/f"Phieu_lua_chon_va_danh_gia_de_tai_DATN_{cid}.docx"
     for src, dst in TARGETS.items():
         subprocess.run(["pandoc", str(BUILD/src), "-f", "markdown", "-t", "docx",
@@ -410,8 +442,8 @@ if "--pdf" in sys.argv:
                  "Đặt biến môi trường CHROME_BIN trỏ tới trình duyệt rồi chạy lại.")
     for co_path in COHORT_FILES:
         cid = json.loads(co_path.read_text(encoding="utf-8"))["cohort_id"]
-        src = BUILD / f"Danh_muc_de_tai_DATN_Nhom_A_B_{cid}.md"
-        htm = BUILD / f"Danh_muc_de_tai_DATN_Nhom_A_B_{cid}.html"
+        src = BUILD / f"Danh_muc_de_tai_DATN_{cid}.md"
+        htm = BUILD / f"Danh_muc_de_tai_DATN_{cid}.html"
         css = BUILD / "print.css"
         css.write_text(PRINT_CSS, encoding="utf-8")
         # pagetitle (không phải title) — chỉ đặt <title> của trang, không chèn thêm
@@ -421,7 +453,7 @@ if "--pdf" in sys.argv:
                         "--standalone", "--metadata", "charset=utf-8",
                         "--metadata", f"pagetitle={title}",
                         "--css", css.name, "-o", str(htm)], check=True)
-        dst = BASE / f"Danh_muc_de_tai_DATN_Nhom_A_B_{cid}.pdf"
+        dst = BASE / f"Danh_muc_de_tai_DATN_{cid}.pdf"
         subprocess.run([browser, "--headless", "--disable-gpu", "--no-sandbox",
                         "--no-pdf-header-footer", f"--print-to-pdf={dst}",
                         htm.as_uri()], check=True,

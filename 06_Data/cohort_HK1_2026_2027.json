@@ -1,6 +1,6 @@
 {
  "meta": {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "updated": "2026-08-23",
   "program": "Engineering & Research Mentoring Program (Lucero)",
   "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
@@ -11,6 +11,21 @@
  "duration_weeks": 15,
  "start_date": "2026-09-07",
  "breaks": [],
+ "alias_groups": [
+  {
+   "prefix": "A",
+   "name": "Nhóm A — Vi mạch số: RTL · FPGA · ASIC"
+  },
+  {
+   "prefix": "B",
+   "name": "Nhóm B — Polar coding: từ thuật toán tới phần cứng"
+  },
+  {
+   "prefix": "C",
+   "name": "Nhóm C — Hệ nhúng, IoT và co-design thuật toán–phần cứng"
+  }
+ ],
+ "remaining_topics_policy": "on_request",
  "topics": [
   {
    "alias": "A1",
@@ -95,6 +110,30 @@
   {
    "alias": "B12",
    "code": "AB-T01"
+  },
+  {
+   "alias": "C1",
+   "code": "A6-T01"
+  },
+  {
+   "alias": "C2",
+   "code": "A7-T01"
+  },
+  {
+   "alias": "C3",
+   "code": "A6-T02"
+  },
+  {
+   "alias": "C4",
+   "code": "A7-T02"
+  },
+  {
+   "alias": "C5",
+   "code": "AB-T05"
+  },
+  {
+   "alias": "C6",
+   "code": "AB-T06"
   }
  ],
  "career_guide": [

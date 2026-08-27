@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.7.0 — Làm rõ quan hệ kho đề tài ↔ đề tài mở từng khóa · 2026-08-27
+
+Chủ dự án phát hiện một khoảng trống thật trong tài liệu: danh mục ghi kho có **34 đề tài T** nhưng chỉ **21** được mở, mà không chỗ nào giải thích 13 đề tài còn lại là gì. Người đọc chỉ có thể đoán — đúng loại mập mờ hệ thống này sinh ra để chống.
+
+**Nguyên nhân:** 6 trong 13 đề tài đó (`A6-T01`, `A6-T02`, `A7-T01`, `A7-T02`, `AB-T05`, `AB-T06`) mới được bổ sung ở v1.5.0 — *sau* khi danh sách 21 đề tài của khóa được chốt, nên chưa kịp gắn mã ngắn. 7 đề tài còn lại là các đề tài nối tiếp hoặc bậc L4 chưa phát đại trà.
+
+**Quyết định và thay đổi:**
+- **Mở thêm 6 đề tài** nhúng/IoT/co-design cho khóa HK1 → **27 đề tài mở**. Mỗi đề tài được gắn mã ngắn `C1`–`C6` và bổ sung `checkpoints_15w` như 21 đề tài trước.
+- **Nhóm hiển thị nay lấy từ dữ liệu** (`alias_groups` trong cohort), thay vì hai nhóm A/B ghi cứng trong script. Khóa hiện tại có ba nhóm: **A — Vi mạch số** (9) · **B — Polar coding** (12) · **C — Hệ nhúng, IoT và co-design** (6). Mở nhóm mới cho khóa sau chỉ là thêm một dòng dữ liệu.
+- **Mục mới "Đề tài mở theo yêu cầu"** trong danh mục và một đoạn trên trang catalog: liệt kê đúng những đề tài cùng loại còn trong kho nhưng không phát đại trà, kèm lý do và cách đăng ký. Danh sách này **suy ra tự động** (kho trừ đi danh sách mở) nên không bao giờ lệch — thêm hay bớt đề tài mở là mục này tự cập nhật. Chính sách khai trong `remaining_topics_policy`.
+- **Đổi tên tài liệu phát hành**: `Danh_muc_de_tai_DATN_Nhom_A_B_<cohort>` → **`Danh_muc_de_tai_DATN_<cohort>`**. Tên cũ ghi cứng hai nhóm A/B, sai ngay khi có nhóm C — cùng loại hard-coding đã gỡ ở v1.6.0. Tên mới đúng cho mọi khóa; các script và tài liệu tham chiếu đã cập nhật, hai file tên cũ chuyển vào `_to_delete/`.
+- Danh mục PDF nay 17 trang (trước 13). `VERSION` và `meta.version` cả 4 file dữ liệu → **1.7.0**; toàn bộ view sinh lại; validator PASS 105 đề tài.
+
 ## v1.6.0 — Khung tiến độ chuyển sang tương đối theo tuần · 2026-08-27
 
 Quyết định chủ dự án: khung 15 tuần là **khung cho khóa luận nói chung**, không phải lịch cố định của một học kỳ. Hệ thống phục vụ nhiều khóa khác nhau, nên mọi mốc phải đếm theo **số tuần kể từ ngày sinh viên chính thức nhận đề tài**; ngày dương lịch chỉ là lớp phủ của từng khóa.

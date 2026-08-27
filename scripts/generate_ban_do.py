@@ -158,7 +158,7 @@ w("\n---\n\n")
 w("## 5. Mở gì, khi nào\n\n")
 w("| Tình huống | Mở |\n|---|---|\n")
 w("| Cần thao tác từng buổi gặp / gate / xử lý SV chậm | `10_Documentation/MENTOR-GUIDE.md` |\n")
-w("| Phát tài liệu cho sinh viên | `Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.docx/.pdf` + `Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx` (thư mục gốc) |\n")
+w("| Phát tài liệu cho sinh viên | `Danh_muc_de_tai_DATN_HK1_2026_2027.docx/.pdf` + `Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx` (thư mục gốc) |\n")
 w("| Theo dõi cả lớp hằng tuần | `03_Operations/Mentoring_Management_Workbook.xlsx` |\n")
 w("| Sửa đề tài / thang điểm / lịch | `06_Data/*.json` rồi chạy 3 lệnh trong `10_Documentation/WORKFLOW.md` |\n")
 w("| Hiểu kiến trúc & quyết định thiết kế của hệ thống | `implementation-notes.md` / `.html` |\n")
@@ -379,7 +379,7 @@ w('<h2 id="s5">5 · Mở gì, khi nào</h2>')
 w('<div class="tw"><table><thead><tr><th>Tình huống</th><th>Mở</th></tr></thead><tbody>')
 for a,b in [
  ("Cần thao tác từng buổi gặp / gate / xử lý SV chậm","<code>10_Documentation/MENTOR-GUIDE.md</code>"),
- ("Phát tài liệu cho sinh viên","<code>Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.docx/.pdf</code> + <code>Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx</code> (thư mục gốc)"),
+ ("Phát tài liệu cho sinh viên","<code>Danh_muc_de_tai_DATN_HK1_2026_2027.docx/.pdf</code> + <code>Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx</code> (thư mục gốc)"),
  ("Theo dõi cả lớp hằng tuần","<code>03_Operations/Mentoring_Management_Workbook.xlsx</code>"),
  ("Sửa đề tài / thang điểm / lịch","<code>06_Data/*.json</code> rồi chạy 3 lệnh trong <code>10_Documentation/WORKFLOW.md</code>"),
  ("Hiểu kiến trúc &amp; quyết định thiết kế","<code>implementation-notes.md</code> / <code>.html</code>"),

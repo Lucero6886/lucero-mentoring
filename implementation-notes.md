@@ -1,7 +1,7 @@
 # IMPLEMENTATION NOTES — Tài liệu hệ thống Mentoring
 
 **Engineering & Research Mentoring Program (Lucero)**
-Phiên bản tài liệu: **2.4** · Phiên bản hệ thống: **v1.6.0** · Cập nhật: **23/08/2026**
+Phiên bản tài liệu: **2.5** · Phiên bản hệ thống: **v1.7.0** · Cập nhật: **23/08/2026**
 Tác giả & mentor chương trình: **ThS. Đinh Văn Nam (Mr. Lucero Dinh)** — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 
 > **Tài liệu này để làm gì.** Đây là tài liệu hệ thống đầy đủ: đọc hết một lượt là nắm được *cái gì là nguồn chuẩn, cái gì là dẫn xuất, mỗi script làm gì, dữ liệu có cấu trúc ra sao, đã quyết định gì và vì sao, còn hạn chế gì*, và **9 quy trình vận hành** viết dưới dạng làm-theo-được. Bản HTML tương đương: `implementation-notes.html`.
@@ -115,7 +115,7 @@ Bối cảnh: sinh viên đang trong cửa sổ đăng ký học phần của Kh
 | Validation | `validate_portfolio.py` **PASS** — 105 topics · rubrics · gates · 1 cohort file · 0 lỗi |
 | Nghiệm thu | `ACCEPTANCE_CHECKLIST.md` **36/36** (2 mục "đạt có điều kiện vận hành") |
 | Dry-run | 2 luồng A/B **PASS** (`tests/`) |
-| Cohort đang chạy | HK1 2026–2027 · DATN (type T) · 21 đề tài mở · bắt đầu 07/09/2026, khung 15 tuần |
+| Cohort đang chạy | HK1 2026–2027 · DATN (type T) · **27 đề tài mở** (A 9 · B 12 · C 6) + 7 đề tài mở theo yêu cầu · bắt đầu 07/09/2026, khung 15 tuần |
 | Đã phát cho SV | **Chưa** — nên bản v1.5.0 thay thế trực tiếp; RELEASE_NOTE_HK1_2026_2027 dùng khi phát |
 | Thư mục dự án | `C:\Users\admin\Downloads\EEE Projects` — **thư mục DUY NHẤT** cho toàn bộ chương trình (NCKH · luận án · hướng dẫn nghiên cứu · thực tập tốt nghiệp · mentor cộng đồng IC design · cohort DATN HK1 2026-2027). Thư mục `DATN_mentor` cũ **đã được chủ dự án xóa** (23/08/2026) |
 
@@ -511,7 +511,7 @@ Cả ba script **chỉ dùng thư viện chuẩn Python** (+ `pandoc` và một 
 | `Internship_Catalog.md` | `02_Project_Portfolio/Internship_Catalog.docx` |
 | `Graduation_Thesis_Catalog.md` | `02_Project_Portfolio/Graduation_Thesis_Catalog.docx` |
 | `Research_Opportunities_Catalog.md` | `02_Project_Portfolio/Research_Opportunities_Catalog.docx` |
-| `Danh_muc_de_tai_DATN_Nhom_A_B_<cohort>.md` | `<root>/Danh_muc_de_tai_DATN_Nhom_A_B_<cohort>.docx` |
+| `Danh_muc_de_tai_DATN_<cohort>.md` | `<root>/Danh_muc_de_tai_DATN_<cohort>.docx` |
 | `Phieu_lua_chon_va_danh_gia_de_tai_DATN_<cohort>.md` | `<root>/Phieu_lua_chon_va_danh_gia_de_tai_DATN_<cohort>.docx` |
 
 **Hàm cần biết khi sửa script:**
@@ -590,8 +590,8 @@ Mọi file dưới đây bị **ghi đè hoàn toàn** ở lần generate kế t
 | `02_Project_Portfolio/Internship_Catalog.docx` | nt | nt |
 | `02_Project_Portfolio/Graduation_Thesis_Catalog.docx` | nt | nt |
 | `02_Project_Portfolio/Research_Opportunities_Catalog.docx` | nt | nt |
-| `Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.docx` | nt | portfolio + cohort JSON |
-| `Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.pdf` | `generate_catalogs.py --pdf` | nt |
+| `Danh_muc_de_tai_DATN_HK1_2026_2027.docx` | nt | portfolio + cohort JSON |
+| `Danh_muc_de_tai_DATN_HK1_2026_2027.pdf` | `generate_catalogs.py --pdf` | nt |
 | `Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx` | `generate_catalogs.py --docx` | `readiness_rubrics.json` + cohort JSON |
 | `docs/index.html` | `generate_site.py` | 4 file JSON |
 | `build/*.md`, `build/*.html`, `build/print.css` | cả hai generator | — (trung gian, xóa được) |
@@ -987,7 +987,7 @@ export CHROME_BIN=/usr/bin/chromium
 
 **Phát cho sinh viên — chỉ 3 thứ:**
 
-1. `Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.pdf` — dễ đọc trên điện thoại
+1. `Danh_muc_de_tai_DATN_HK1_2026_2027.pdf` — dễ đọc trên điện thoại
 2. `Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx` — SV điền Phiếu 1–4
 3. Link `docs/index.html` (GitHub Pages hoặc artifact) — tra cứu có bộ lọc
 

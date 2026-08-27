@@ -1,4 +1,4 @@
-# Engineering & Research Mentoring Program (Lucero) — v1.6.0
+# Engineering & Research Mentoring Program (Lucero) — v1.7.0
 
 Tác giả: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa.
 

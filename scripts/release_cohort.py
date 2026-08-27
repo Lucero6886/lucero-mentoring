@@ -20,8 +20,8 @@ if len(sys.argv) < 2:
 TARGET = pathlib.Path(sys.argv[1])
 
 RELEASE_FILES = [
-    "Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.docx",
-    "Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.pdf",
+    "Danh_muc_de_tai_DATN_HK1_2026_2027.docx",
+    "Danh_muc_de_tai_DATN_HK1_2026_2027.pdf",
     "Phieu_lua_chon_va_danh_gia_de_tai_DATN_HK1_2026_2027.docx",
     "RELEASE_NOTE_HK1_2026_2027.md",
     "RELEASE_NOTE_HK1_2026_2027.docx",

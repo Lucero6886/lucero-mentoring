@@ -6,7 +6,7 @@ trong lĩnh vực **thiết kế vi mạch số (Digital IC/FPGA/ASIC) · hệ n
 **Tác giả & mentor:** ThS. Đinh Văn Nam (Mr. Lucero Dinh)
 Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 
-`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `phiên bản 1.6.0`
+`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `phiên bản 1.7.0`
 
 > **📚 Danh mục đề tài — bản web tra cứu nhanh (lọc theo nhóm, mức độ, loại hoạt động):**
 > **https://lucero6886.github.io/lucero-mentoring/**
@@ -24,7 +24,7 @@ Mỗi học kỳ mở một đợt (cohort) lấy đề tài từ kho chung này
 |---|---|
 | **Nhanh nhất** — lọc, tìm kiếm trên web | [Trang danh mục](https://lucero6886.github.io/lucero-mentoring/) |
 | **Hiểu bản chất từng nhóm đề tài** — mỗi nhóm dạy gì, mỗi đề tài làm ra sản phẩm gì | [`Ban_do_de_tai.md`](Ban_do_de_tai.md) |
-| **Danh mục đồ án tốt nghiệp kỳ hiện tại** (bản in được) | [`Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.pdf`](Danh_muc_de_tai_DATN_Nhom_A_B_HK1_2026_2027.pdf) |
+| **Danh mục đồ án tốt nghiệp kỳ hiện tại** (bản in được) | [`Danh_muc_de_tai_DATN_HK1_2026_2027.pdf`](Danh_muc_de_tai_DATN_HK1_2026_2027.pdf) |
 | **Nên đọc gì trước khi bắt đầu** — tài liệu nền tảng theo từng hướng | [`09_References/READING-LIST.md`](09_References/READING-LIST.md) |
 | **Toàn bộ catalog theo loại** (P / I / T / R) | [`02_Project_Portfolio/`](02_Project_Portfolio/) |
 
