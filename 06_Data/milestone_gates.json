@@ -1,0 +1,65 @@
+{
+ "meta": {
+  "version": "1.5.1",
+  "updated": "2026-08-23",
+  "program": "Engineering & Research Mentoring Program (Lucero)",
+  "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
+  "notes": "Nguồn chuẩn Gate 1-6. Ngày cụ thể theo cohort nằm trong file cohort_*.json."
+ },
+ "gates": [
+  {
+   "gate": 1,
+   "name": "Gate 1 - Problem & Foundation",
+   "weeks_label": "Tuần 1-2",
+   "week_start": 1,
+   "week_end": 2,
+   "pass_criteria": "Hiểu problem, input/output, baseline, metric, prerequisite gaps.",
+   "fail_rule": "Không đạt: điều chỉnh đề tài hoặc learning plan."
+  },
+  {
+   "gate": 2,
+   "name": "Gate 2 - Baseline",
+   "weeks_label": "Tuần 3-5",
+   "week_start": 3,
+   "week_end": 5,
+   "pass_criteria": "Baseline/chức năng cơ sở phải chạy và có evidence tái lập.",
+   "fail_rule": "Không baseline ở tuần 5: không mở research extension."
+  },
+  {
+   "gate": 3,
+   "name": "Gate 3 - Core Implementation",
+   "weeks_label": "Tuần 6-8",
+   "week_start": 6,
+   "week_end": 8,
+   "pass_criteria": "Có core implementation và kết quả định lượng trung gian.",
+   "fail_rule": "Không đạt tuần 8: reduce scope; không cứu bằng cách mentor làm thay."
+  },
+  {
+   "gate": 4,
+   "name": "Gate 4 - Experiments",
+   "weeks_label": "Tuần 9-11",
+   "week_start": 9,
+   "week_end": 11,
+   "pass_criteria": "Thực nghiệm chính hoàn tất; table/figure chính hình thành.",
+   "fail_rule": "Sau tuần 11: không thêm thuật toán lớn mới."
+  },
+  {
+   "gate": 5,
+   "name": "Gate 5 - Analysis & Draft",
+   "weeks_label": "Tuần 12-13",
+   "week_start": 12,
+   "week_end": 13,
+   "pass_criteria": "Phân tích kết quả và bản thảo báo cáo/khóa luận đầy đủ.",
+   "fail_rule": "Thiếu evidence: ưu tiên hoàn thiện core, không polish che lỗ hổng."
+  },
+  {
+   "gate": 6,
+   "name": "Gate 6 - Reproducibility & Defense",
+   "weeks_label": "Tuần 14-15",
+   "week_start": 14,
+   "week_end": 15,
+   "pass_criteria": "Người khác có thể chạy lại; slides/demo; legacy package; defense readiness.",
+   "fail_rule": "Chỉ xác nhận hoàn thành khi ownership và reproducibility đạt."
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+name: "🐞 Báo lỗi tài liệu"
+description: "Sai chính tả, link hỏng, số liệu lệch nhau giữa hai tài liệu, mô tả khó hiểu"
+title: "[Lỗi] "
+labels: ["lỗi tài liệu"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Báo lỗi là đóng góp có giá trị — tài liệu lệch nhau chính là loại lỗi hệ thống này sinh ra để chống.
+  - type: input
+    id: file
+    attributes:
+      label: File hoặc trang gặp lỗi
+      placeholder: "Ban_do_de_tai.md, mục A6 — hoặc: trang web danh mục, thẻ B3-T01"
+    validations:
+      required: true
+  - type: textarea
+    id: mo-ta
+    attributes:
+      label: Lỗi là gì
+      description: "Nội dung đang hiển thị so với nội dung đúng"
+      placeholder: |
+        Đang ghi: ...
+        Đúng ra phải là: ...
+    validations:
+      required: true
+  - type: dropdown
+    id: muc-do
+    attributes:
+      label: Mức độ
+      options:
+        - "Nhỏ — chính tả, trình bày"
+        - "Vừa — link hỏng, mô tả gây hiểu nhầm"
+        - "Nặng — số liệu/mã đề tài/thang điểm lệch giữa các tài liệu"
+    validations:
+      required: true

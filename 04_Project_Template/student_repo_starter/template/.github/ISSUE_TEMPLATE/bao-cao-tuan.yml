@@ -1,0 +1,74 @@
+name: "📋 Báo cáo tuần"
+description: "Sinh viên mở mỗi tuần, chậm nhất 24h trước buổi gặp"
+title: "Tuần <N> — "
+labels: ["báo cáo tuần"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Mỗi mục bằng chứng phải là một link** tới commit, file, hình hoặc log trong repo này.
+        Câu "em đã đọc / em đã tìm hiểu / gần xong" không tính là bằng chứng — hãy biến nó thành một
+        ghi chú kỹ thuật nêu được *bài toán – đầu vào – đầu ra – phương pháp – chỗ chưa hiểu*.
+  - type: input
+    id: tuan
+    attributes:
+      label: Tuần số / Gate đang hướng tới
+      placeholder: "Tuần 4 · đang hướng tới Gate 2 (hạn 11/10)"
+    validations:
+      required: true
+  - type: textarea
+    id: muc-tieu
+    attributes:
+      label: Mục tiêu tuần trước đã chốt
+      placeholder: "1. Viết testbench cho FIFO · 2. Chạy pass 3 case biên"
+    validations:
+      required: true
+  - type: textarea
+    id: bang-chung
+    attributes:
+      label: Đã làm được — kèm bằng chứng (link)
+      description: "Mỗi dòng: đã làm gì → link tới commit/file/hình chứng minh"
+      placeholder: |
+        - Testbench FIFO đầy đủ 3 case biên → commit a1b2c3d
+        - Waveform chứng minh không mất dữ liệu khi full → sim/wave_fifo_full.png
+    validations:
+      required: true
+  - type: textarea
+    id: cai-gi-hong
+    attributes:
+      label: Cái gì chưa chạy / đang hỏng
+      description: "Không có gì hỏng nhiều tuần liền là một tín hiệu đáng ngờ, không phải điều tốt"
+      placeholder: "Case ghi và đọc đồng thời ở cùng chu kỳ cho kết quả sai 1 phần tử"
+    validations:
+      required: true
+  - type: textarea
+    id: chan-doan
+    attributes:
+      label: Chẩn đoán của em và đã thử gì để kiểm chứng
+      description: "Em định làm gì → kỳ vọng gì → thực tế ra gì → đã kiểm những gì → em nghĩ nguyên nhân là gì"
+      placeholder: |
+        Em nghĩ do con trỏ đọc cập nhật sớm một chu kỳ.
+        Đã thử: in giá trị con trỏ mỗi chu kỳ (sim/log_ptr.txt) → thấy lệch đúng ở chu kỳ 7.
+    validations:
+      required: true
+  - type: textarea
+    id: de-xuat
+    attributes:
+      label: Đề xuất bước tiếp theo của em
+      description: "Đến buổi gặp với đề xuất của chính mình, thay vì hỏi 'em làm gì tiếp ạ'"
+    validations:
+      required: true
+  - type: textarea
+    id: cau-hoi
+    attributes:
+      label: Câu hỏi cho mentor
+    validations:
+      required: false
+  - type: textarea
+    id: ai
+    attributes:
+      label: Đã dùng AI thế nào tuần này
+      description: "Dùng công cụ gì, để làm gì, và em đã kiểm chứng phần đó bằng cách nào"
+      placeholder: "Hỏi Claude giải thích cơ chế gray-code pointer; em tự viết lại và kiểm bằng testbench riêng."
+    validations:
+      required: true

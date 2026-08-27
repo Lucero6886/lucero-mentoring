@@ -1,0 +1,30 @@
+# ══════════════════════════════════════════════════════════════════
+#  Repo CÔNG KHAI — mọi thứ không bị chặn ở đây đều ai cũng đọc được.
+#  Kiểm tra `git status` trước mỗi lần commit.
+# ══════════════════════════════════════════════════════════════════
+
+# ── Dữ liệu cá nhân sinh viên: TUYỆT ĐỐI không publish ──
+07_Private/
+*_REAL.*
+*_thuc_te.*
+
+# ── Tài liệu điều hành nội bộ (không dành cho sinh viên) ──
+05_Claude/
+CLAUDE.md
+AUDIT_REPORT.md
+FINAL_SYSTEM_AUDIT.md
+
+# ── Bản lưu trữ, bản trung gian, gói phát hành (sinh lại được) ──
+99_Archive/
+build/
+dist/
+_to_delete/
+
+# ── Rác hệ điều hành và Office ──
+~$*
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini
+__pycache__/
+*.pyc

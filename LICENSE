@@ -1,0 +1,73 @@
+Engineering & Research Mentoring Program (Lucero)
+Copyright (c) 2026 Đinh Văn Nam (Mr. Lucero Dinh)
+Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
+
+Kho này dùng hai giấy phép cho hai loại nội dung.
+
+================================================================================
+1. TÀI LIỆU VÀ DỮ LIỆU — CC BY-NC-SA 4.0
+================================================================================
+
+Áp dụng cho: toàn bộ tài liệu (.md, .docx, .pdf, .html, .xlsx) và dữ liệu
+danh mục đề tài trong 06_Data/.
+
+Licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+International License (CC BY-NC-SA 4.0).
+
+Bạn được tự do:
+  - Chia sẻ: sao chép và phân phối lại tài liệu ở bất kỳ định dạng nào
+  - Chỉnh sửa: pha trộn, biến đổi và xây dựng dựa trên tài liệu
+
+Theo các điều kiện:
+  - Ghi công (BY): ghi nguồn tác giả, kèm liên kết tới giấy phép và nêu rõ
+    nếu bạn đã thay đổi nội dung.
+  - Phi thương mại (NC): không dùng cho mục đích thương mại.
+  - Chia sẻ tương tự (SA): nếu bạn chỉnh sửa và phân phối lại, phải dùng cùng
+    giấy phép này.
+
+Toàn văn giấy phép: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+Bản tóm tắt dễ đọc:  https://creativecommons.org/licenses/by-nc-sa/4.0/deed.vi
+
+Cách ghi nguồn đề xuất:
+  Đinh Văn Nam (Lucero Dinh), "Engineering & Research Mentoring Program
+  (Lucero)", Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa, 2026.
+
+Dùng cho mục đích thương mại (đào tạo có thu phí, xuất bản thương mại...):
+xin liên hệ tác giả để thỏa thuận riêng.
+
+================================================================================
+2. MÃ NGUỒN — MIT
+================================================================================
+
+Áp dụng cho: toàn bộ mã nguồn trong scripts/.
+
+MIT License
+
+Copyright (c) 2026 Đinh Văn Nam (Lucero Dinh)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+3. SẢN PHẨM CỦA SINH VIÊN
+================================================================================
+
+Giấy phép này áp dụng cho tài liệu và mã nguồn của chương trình mentoring.
+Sản phẩm do sinh viên tạo ra trong quá trình thực hiện đề tài (code, báo cáo,
+kết quả thí nghiệm) thuộc về sinh viên và được thỏa thuận riêng theo quy định
+của đơn vị đào tạo, không nằm trong phạm vi giấy phép này.

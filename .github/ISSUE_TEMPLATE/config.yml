@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📚 Danh mục đề tài (bản web, lọc và tìm kiếm được)
+    url: https://lucero6886.github.io/lucero-mentoring/
+    about: Xem toàn bộ đề tài theo nhóm, mức độ và loại hoạt động trước khi hỏi.
+  - name: 💬 Thảo luận mở (Discussions)
+    url: https://github.com/Lucero6886/lucero-mentoring/discussions
+    about: Trao đổi tự do, chia sẻ tài liệu, tìm bạn cùng hướng nghiên cứu.
+  - name: 🎓 Hướng dẫn cho sinh viên
+    url: https://github.com/Lucero6886/lucero-mentoring/blob/main/10_Documentation/STUDENT-GUIDE.md
+    about: Cách chương trình đánh giá, nộp gì mỗi tuần, dùng AI thế nào cho đúng.
+  - name: 🔒 Việc riêng — nguyện vọng, hồ sơ, điểm
+    url: https://github.com/Lucero6886/lucero-mentoring/blob/main/CONTRIBUTING.md
+    about: KHÔNG đăng công khai. Gửi riêng cho mentor theo kênh đã thông báo.

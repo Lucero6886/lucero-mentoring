@@ -1,0 +1,89 @@
+# ══════════════════════════════════════════════════════════════
+#  Repo đồ án — chặn rác sinh ra khi chạy, giữ repo nhẹ và sạch
+#  Quy tắc: thứ gì sinh lại được bằng một lệnh thì KHÔNG commit
+# ══════════════════════════════════════════════════════════════
+
+# ── Mô phỏng ──
+*.vcd
+*.fst
+*.ghw
+*.lxt
+*.shm/
+*.vvp
+a.out
+sim/work/
+sim/*.log
+transcript
+vsim.wlf
+modelsim.ini
+
+# ── Tổng hợp và triển khai ──
+syn/output/
+syn/runs/
+*.edif
+*.blif
+*.json.gz
+*.sdf
+
+# ── Vivado / Vitis ──
+*.jou
+*.str
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+*.gen/
+*.xpr
+*.bit
+*.ltx
+vivado*.log
+vivado*.backup*
+
+# ── Quartus ──
+db/
+incremental_db/
+output_files/
+*.qws
+*.sof
+*.rpt
+
+# ── OpenLane / LibreLane / OpenROAD ──
+runs/
+results/tmp/
+*.gds.gz
+*.def
+*.lef.bak
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+*.egg-info/
+
+# ── Dữ liệu lớn: dùng Release đính kèm hoặc Git LFS, KHÔNG commit thẳng ──
+*.zip
+*.tar.gz
+*.mat
+*.npz
+data/raw/
+*.csv.large
+
+# ── Hệ điều hành và trình soạn thảo ──
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# ── Tuyệt đối không commit ──
+# Bài báo PDF có bản quyền — chỉ lưu link và ghi chú của mình trong docs/
+docs/papers/*.pdf
+# Thông tin cá nhân, bảng điểm, phiếu đã điền
+*_ca_nhan.*
+*_diem.*

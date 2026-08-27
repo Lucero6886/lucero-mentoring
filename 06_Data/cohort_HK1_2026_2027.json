@@ -1,0 +1,267 @@
+{
+ "meta": {
+  "version": "1.5.1",
+  "updated": "2026-08-23",
+  "program": "Engineering & Research Mentoring Program (Lucero)",
+  "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
+  "notes": "Nguồn chuẩn dữ liệu cohort DATN HK1 2026-2027: mốc hành chính, lịch tuần, deadline gate, danh sách đề tài mở và alias hiển thị."
+ },
+ "cohort_id": "HK1_2026_2027",
+ "activity_type": "T",
+ "duration_weeks": 15,
+ "start_date": "2026-09-07",
+ "end_date": "2026-12-19",
+ "gate_deadlines": {
+  "1": "2026-09-20",
+  "2": "2026-10-11",
+  "3": "2026-11-01",
+  "4": "2026-11-22",
+  "5": "2026-12-06",
+  "6": "2026-12-19"
+ },
+ "week_calendar": [
+  {
+   "week": 1,
+   "start": "2026-09-07",
+   "end": "2026-09-13"
+  },
+  {
+   "week": 2,
+   "start": "2026-09-14",
+   "end": "2026-09-20"
+  },
+  {
+   "week": 3,
+   "start": "2026-09-21",
+   "end": "2026-09-27"
+  },
+  {
+   "week": 4,
+   "start": "2026-09-28",
+   "end": "2026-10-04"
+  },
+  {
+   "week": 5,
+   "start": "2026-10-05",
+   "end": "2026-10-11"
+  },
+  {
+   "week": 6,
+   "start": "2026-10-12",
+   "end": "2026-10-18"
+  },
+  {
+   "week": 7,
+   "start": "2026-10-19",
+   "end": "2026-10-25"
+  },
+  {
+   "week": 8,
+   "start": "2026-10-26",
+   "end": "2026-11-01"
+  },
+  {
+   "week": 9,
+   "start": "2026-11-02",
+   "end": "2026-11-08"
+  },
+  {
+   "week": 10,
+   "start": "2026-11-09",
+   "end": "2026-11-15"
+  },
+  {
+   "week": 11,
+   "start": "2026-11-16",
+   "end": "2026-11-22"
+  },
+  {
+   "week": 12,
+   "start": "2026-11-23",
+   "end": "2026-11-29"
+  },
+  {
+   "week": 13,
+   "start": "2026-11-30",
+   "end": "2026-12-06"
+  },
+  {
+   "week": 14,
+   "start": "2026-12-07",
+   "end": "2026-12-13"
+  },
+  {
+   "week": 15,
+   "start": "2026-12-14",
+   "end": "2026-12-19"
+  }
+ ],
+ "topics": [
+  {
+   "alias": "A1",
+   "code": "A4-T01"
+  },
+  {
+   "alias": "A2",
+   "code": "A4-T02"
+  },
+  {
+   "alias": "A3",
+   "code": "A2-T01"
+  },
+  {
+   "alias": "A4",
+   "code": "A1-T01"
+  },
+  {
+   "alias": "A5",
+   "code": "A3-T01"
+  },
+  {
+   "alias": "A6",
+   "code": "A5-T01"
+  },
+  {
+   "alias": "A7",
+   "code": "A5-T02"
+  },
+  {
+   "alias": "A8",
+   "code": "A2-T03"
+  },
+  {
+   "alias": "A9",
+   "code": "A2-T02"
+  },
+  {
+   "alias": "B1",
+   "code": "B0-T01"
+  },
+  {
+   "alias": "B2",
+   "code": "B1-T01"
+  },
+  {
+   "alias": "B3",
+   "code": "B2-T01"
+  },
+  {
+   "alias": "B4",
+   "code": "B3-T01"
+  },
+  {
+   "alias": "B5",
+   "code": "B1-T02"
+  },
+  {
+   "alias": "B6",
+   "code": "B4-T01"
+  },
+  {
+   "alias": "B7",
+   "code": "B5-T01"
+  },
+  {
+   "alias": "B8",
+   "code": "B4-T02"
+  },
+  {
+   "alias": "B9",
+   "code": "B5-T02"
+  },
+  {
+   "alias": "B10",
+   "code": "B6-T02"
+  },
+  {
+   "alias": "B11",
+   "code": "B5-T03"
+  },
+  {
+   "alias": "B12",
+   "code": "AB-T01"
+  }
+ ],
+ "career_guide": [
+  {
+   "goal": "Digital IC / RTL Verification",
+   "primary": [
+    "A1-T01",
+    "A4-T01",
+    "A4-T02"
+   ],
+   "next": [
+    "B1-T01",
+    "B2-T01"
+   ]
+  },
+  {
+   "goal": "FPGA / DSP Hardware",
+   "primary": [
+    "A2-T01",
+    "A3-T01",
+    "A2-T02"
+   ],
+   "next": [
+    "B1-T01",
+    "B2-T01"
+   ]
+  },
+  {
+   "goal": "ASIC Physical Flow / PPA",
+   "primary": [
+    "A4-T01",
+    "A4-T02",
+    "A2-T03",
+    "A2-T02"
+   ],
+   "next": [
+    "AB-T01"
+   ]
+  },
+  {
+   "goal": "EDA infrastructure / DevOps cho hardware",
+   "primary": [
+    "A5-T01",
+    "A5-T02"
+   ],
+   "next": [
+    "AB-T01 (hỗ trợ CI)"
+   ]
+  },
+  {
+   "goal": "Nghiên cứu Polar algorithm",
+   "primary": [
+    "B0-T01",
+    "B3-T01",
+    "B4-T01"
+   ],
+   "next": [
+    "B5-T01",
+    "B4-T02",
+    "B5-T02"
+   ]
+  },
+  {
+   "goal": "AI hỗ trợ decoder",
+   "primary": [
+    "B5-T01",
+    "B4-T02"
+   ],
+   "next": [
+    "B6-T02"
+   ],
+   "note": "Không bắt đầu trực tiếp bằng NN — cần baseline trước."
+  },
+  {
+   "goal": "Algorithm-hardware co-design",
+   "primary": [
+    "A2-T02"
+   ],
+   "next": [
+    "B5-T03",
+    "AB-T01"
+   ]
+  }
+ ]
+}

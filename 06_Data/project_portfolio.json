@@ -1,0 +1,2142 @@
+{
+ "families": {
+  "A0": {
+   "name_vi": "Hands-on Electronics & PCB",
+   "name_en": "Hands-on Electronics & PCB Prototyping",
+   "purpose": "Hình thành trực giác phần cứng, kỹ năng đọc datasheet, schematic, layout, tự chế tạo, hàn, đo và debug mạch thật.",
+   "min_skills": "Điện tử cơ bản; cẩn thận; sẵn sàng làm hands-on.",
+   "default_tools": "KiCad/EDA PCB tương đương; dụng cụ làm PCB thủ công; đồng hồ số; oscilloscope/logic analyzer khi phù hợp."
+  },
+  "A1": {
+   "name_vi": "Digital Logic & RTL Design",
+   "name_en": "Digital Logic & RTL Design",
+   "purpose": "Chuyển specification thành RTL đúng chức năng, kiểm chứng có hệ thống và tài liệu hóa để tái sử dụng.",
+   "min_skills": "Logic số; tư duy trạng thái; Verilog/SystemVerilog cơ bản cho các đề tài từ Internship trở lên.",
+   "default_tools": "Verilog/SystemVerilog; Icarus Verilog/Verilator; GTKWave; Git."
+  },
+  "A2": {
+   "name_vi": "Digital Arithmetic & DSP Hardware",
+   "name_en": "Digital Arithmetic & DSP Hardware",
+   "purpose": "Hiểu fixed-point, datapath, pipeline và trade-off giữa độ chính xác số học với tài nguyên, timing, latency và throughput.",
+   "min_skills": "Logic số; số học nhị phân; RTL; Python/MATLAB ở các đề tài phân tích định lượng.",
+   "default_tools": "Verilog/SystemVerilog; Python/MATLAB; FPGA toolchain; Yosys/ASIC flow khi mở rộng."
+  },
+  "A3": {
+   "name_vi": "FPGA System Design",
+   "name_en": "FPGA System Design",
+   "purpose": "Đưa RTL lên phần cứng lập trình được, tích hợp nhiều IP/peripheral và đánh giá bằng tài nguyên, Fmax, latency, throughput.",
+   "min_skills": "RTL + simulation; biết đọc datasheet board; debugging waveform và hardware.",
+   "default_tools": "FPGA vendor tools; Verilog/SystemVerilog; ModelSim/Questa/Icarus/Verilator tùy nền tảng; logic analyzer khi có."
+  },
+  "A4": {
+   "name_vi": "ASIC Design & Physical Implementation",
+   "name_en": "ASIC Design & Physical Implementation",
+   "purpose": "Đi từ RTL qua synthesis, STA và physical implementation để hiểu RTL trở thành phần cứng silicon như thế nào.",
+   "min_skills": "RTL vững; simulation; Linux/WSL; synthesis awareness.",
+   "default_tools": "WSL/Linux; Yosys; LibreLane/OpenROAD; KLayout; PDK phù hợp (ví dụ Sky130 khi dùng open-source flow)."
+  },
+  "A5": {
+   "name_vi": "Verification, EDA & Reproducible Hardware Development",
+   "name_en": "Verification, EDA & Reproducible Hardware Development",
+   "purpose": "Xây dựng tư duy verification, regression, Git/CI và môi trường EDA tái lập để dự án có thể duy trì qua nhiều cohort.",
+   "min_skills": "RTL; Linux; Git; scripting cơ bản; tư duy kiểm thử.",
+   "default_tools": "Git/GitHub; shell/Python; Icarus/Verilator; Yosys; LibreLane/Nix; CI phù hợp."
+  },
+  "A6": {
+   "name_vi": "Embedded Systems & SoC Integration",
+   "name_en": "Embedded Systems & SoC Integration",
+   "purpose": "Xây dựng hệ thống nhúng chắc tay — firmware, RTOS, driver — và tích hợp phần cứng-phần mềm trên SoC FPGA để hiểu ranh giới HW/SW: việc gì nên nằm ở phần mềm, việc gì đáng đưa xuống phần cứng.",
+   "min_skills": "C cơ bản; vi điều khiển nhập môn; Linux cơ bản. Đề tài SoC cần thêm nền RTL (A1).",
+   "default_tools": "C/C++; STM32/ESP32 hoặc MCU tương đương; FreeRTOS/Zephyr; Zynq/PYNQ hoặc SoC FPGA tương đương; logic analyzer; Git."
+  },
+  "A7": {
+   "name_vi": "IoT Systems & Edge Intelligence",
+   "name_en": "IoT Systems & Edge Intelligence",
+   "purpose": "Kết nối thiết bị nhúng thành hệ thống IoT hoàn chỉnh — cảm biến, giao thức, ngân sách năng lượng — và chạy suy luận AI gọn nhẹ ngay tại thiết bị biên dưới ràng buộc tài nguyên thật.",
+   "min_skills": "Firmware cơ bản (A6 hoặc tương đương); Python; mạng cơ bản. Đề tài edge AI cần thêm ML nhập môn.",
+   "default_tools": "ESP32/STM32; MQTT/CoAP/BLE/LoRa; broker + dashboard nhẹ; TensorFlow Lite Micro/CMSIS-NN; thiết bị đo dòng; Git."
+  },
+  "B0": {
+   "name_vi": "Polar Fundamentals & Software Baseline",
+   "name_en": "Polar Fundamentals & Software Baseline",
+   "purpose": "Xây mô hình tham chiếu đúng và tái lập cho Polar coding trước khi làm hardware hoặc nghiên cứu nâng cao.",
+   "min_skills": "Python/MATLAB; truyền thông số cơ bản; xác suất cơ bản.",
+   "default_tools": "Python hoặc MATLAB; NumPy/SciPy tương đương; plotting; Git."
+  },
+  "B1": {
+   "name_vi": "Polar Hardware Building Blocks",
+   "name_en": "Polar Hardware Building Blocks",
+   "purpose": "Chuyển các phép toán và cấu trúc Polar thành module RTL nhỏ có thể kiểm chứng độc lập.",
+   "min_skills": "B0 ở mức hiểu; logic số; RTL.",
+   "default_tools": "Python/MATLAB golden model; Verilog/SystemVerilog; simulator; FPGA toolchain."
+  },
+  "B2": {
+   "name_vi": "SC Polar Decoder Hardware",
+   "name_en": "SC Polar Decoder Hardware",
+   "purpose": "Tích hợp golden model, fixed-point, processing element, partial sum và control thành SC decoder hướng FPGA.",
+   "min_skills": "B0 + B1; RTL khá; debugging; fixed-point cơ bản.",
+   "default_tools": "Python/MATLAB; Verilog/SystemVerilog; simulator; FPGA tools; Git."
+  },
+  "B3": {
+   "name_vi": "Hardware-Aware Quantization & Optimization",
+   "name_en": "Hardware-Aware Quantization & Optimization",
+   "purpose": "Nghiên cứu trade-off BLER/BER với bit width, saturation, clipping, area/resource và latency.",
+   "min_skills": "B0; numerical analysis; Python/MATLAB; hardware awareness cho đề tài T/R.",
+   "default_tools": "Python/MATLAB; RTL/FPGA tools khi cần; scripts sweep và plotting."
+  },
+  "B4": {
+   "name_vi": "SC-Flip & Reliability-Aware Decoding",
+   "name_en": "SC-Flip & Reliability-Aware Decoding",
+   "purpose": "Phân tích failure của SC, xây reliability metric/candidate ranking và đánh giá BLER-complexity trade-off.",
+   "min_skills": "SC decoder chạy đúng; Python/MATLAB; experimental design.",
+   "default_tools": "Python/MATLAB; Git; plotting; RTL/FPGA tùy scope."
+  },
+  "B5": {
+   "name_vi": "Adaptive Polar Decoding",
+   "name_en": "Adaptive Polar Decoding",
+   "purpose": "Chỉ kích hoạt xử lý tăng cường khi frame khó nhằm cân bằng BLER với average complexity/latency/hardware cost.",
+   "min_skills": "SC/SCF baseline ổn định; reliability analysis; research readiness khá.",
+   "default_tools": "Python/MATLAB; experiment scripts; RTL/FPGA model tùy scope."
+  },
+  "B6": {
+   "name_vi": "Neural-Assisted Polar Decoding",
+   "name_en": "Neural-Assisted Polar Decoding",
+   "purpose": "Dùng ML/NN gọn nhẹ để hỗ trợ một tác vụ cụ thể (detection/ranking), không thay toàn bộ decoder, và đánh giá theo ràng buộc hardware.",
+   "min_skills": "B5 hoặc baseline tương đương; ML cơ bản; experimental discipline; strong working readiness.",
+   "default_tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp."
+  },
+  "AB": {
+   "name_vi": "Digital IC x Polar",
+   "name_en": "Digital IC x Polar Co-Design",
+   "purpose": "Kết nối thuật toán (Polar, edge AI) với FPGA/ASIC implementation và PPA để tạo hardware-aware research thật sự; mở rộng sang ràng buộc hệ thống nhúng/IoT — năng lượng, độ trễ, tài nguyên biên — theo định hướng nghiên cứu algorithm-hardware co-design.",
+   "min_skills": "Nền A (RTL/FPGA/ASIC) + nền B (Polar baseline) tương ứng với scope.",
+   "default_tools": "Python/MATLAB; RTL; FPGA/SoC FPGA; Yosys; LibreLane/OpenROAD; KLayout; TFLite Micro khi có edge AI; thiết bị đo dòng."
+  }
+ },
+ "levels": {
+  "0": "Explorer",
+  "1": "Beginner Engineer",
+  "2": "Independent Engineering Student",
+  "3": "Research-Ready Undergraduate",
+  "4": "Undergraduate Researcher",
+  "5": "Advanced Research Student"
+ },
+ "types": {
+  "P": [
+   "Project môn học",
+   "Học và chứng minh một kỹ năng cụ thể; novelty không bắt buộc."
+  ],
+  "I": [
+   "Thực tập",
+   "Thực hành engineering workflow và tác phong làm việc kỹ thuật."
+  ],
+  "T": [
+   "Đồ án tốt nghiệp",
+   "Sở hữu một project hoàn chỉnh: correct + complete + reproducible + quantitatively evaluated."
+  ],
+  "R": [
+   "Nghiên cứu khoa học",
+   "Trả lời một research question với baseline, evidence và phân tích; hypothesis có thể không được xác nhận."
+  ]
+ },
+ "topics": [
+  {
+   "code": "A0-P01",
+   "family": "A0",
+   "type": "P",
+   "title_vi": "Thiết kế và tự chế tạo thủ công mạch nguồn DC cơ bản",
+   "title_en": "Design and Manual Fabrication of a Basic DC Power Supply PCB",
+   "min_level": 0,
+   "prerequisites": "Điện tử cơ bản; an toàn điện; cẩn thận.",
+   "outputs": "Schematic; PCB layout; PCB tự chế tạo; board lắp ráp; kết quả đo tải/ripple; debugging log.",
+   "scope": "Requirement -> component selection -> schematic -> PCB layout -> manual fabrication -> assembly -> measurement -> debug.",
+   "extension": "So sánh hai phương án nguồn hoặc cải thiện ripple/thermal trong phạm vi an toàn.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Hardware/PCB engineer; nền tảng thực hành cho mọi hướng phần cứng.",
+   "tools": "KiCad/EDA PCB tương đương; dụng cụ làm PCB thủ công; đồng hồ số; oscilloscope/logic analyzer khi phù hợp.",
+   "eligibility": "Khi fabrication là learning outcome, PCB phải do sinh viên tự chế tạo thủ công; outsourcing chỉ được phép nếu quy định môn học/đề tài cho phép và learning outcome là system design. Tuân thủ an toàn điện; nộp evidence đo đạc thật."
+  },
+  {
+   "code": "A0-P02",
+   "family": "A0",
+   "type": "P",
+   "title_vi": "Thiết kế và chế tạo mạch logic tổ hợp trên PCB",
+   "title_en": "Design and Manual PCB Implementation of a Combinational Logic Circuit",
+   "min_level": 0,
+   "prerequisites": "Logic tổ hợp + điện tử cơ bản.",
+   "outputs": "Truth table; schematic; PCB; board thật; measurement; failure-fix evidence.",
+   "scope": "Boolean -> gates/ICs -> schematic -> PCB -> fabrication -> test.",
+   "extension": "Đánh giá fan-out/noise margin ở mức minh họa nếu thiết bị cho phép.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Hardware/PCB engineer; nền tảng thực hành cho mọi hướng phần cứng.",
+   "tools": "KiCad/EDA PCB tương đương; dụng cụ làm PCB thủ công; đồng hồ số; oscilloscope/logic analyzer khi phù hợp.",
+   "eligibility": "Khi fabrication là learning outcome, PCB phải do sinh viên tự chế tạo thủ công; outsourcing chỉ được phép nếu quy định môn học/đề tài cho phép và learning outcome là system design. Tuân thủ an toàn điện; nộp evidence đo đạc thật."
+  },
+  {
+   "code": "A0-P03",
+   "family": "A0",
+   "type": "P",
+   "title_vi": "Thiết kế và chế tạo bộ đếm số trên PCB",
+   "title_en": "Design and Manual Implementation of a Digital Counter PCB",
+   "min_level": 0,
+   "prerequisites": "Logic tuần tự cơ bản.",
+   "outputs": "Schematic; PCB; counter + display hoạt động; test reset/clock; debugging report.",
+   "scope": "Clock, counter, reset, display/7-segment và tín hiệu điều khiển.",
+   "extension": "Bổ sung debounce hoặc nhiều mode đếm.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Hardware/PCB engineer; nền tảng thực hành cho mọi hướng phần cứng.",
+   "tools": "KiCad/EDA PCB tương đương; dụng cụ làm PCB thủ công; đồng hồ số; oscilloscope/logic analyzer khi phù hợp.",
+   "eligibility": "Khi fabrication là learning outcome, PCB phải do sinh viên tự chế tạo thủ công; outsourcing chỉ được phép nếu quy định môn học/đề tài cho phép và learning outcome là system design. Tuân thủ an toàn điện; nộp evidence đo đạc thật."
+  },
+  {
+   "code": "A0-P04",
+   "family": "A0",
+   "type": "P",
+   "title_vi": "Thiết kế board giao tiếp cảm biến",
+   "title_en": "Design and Manual Fabrication of a Sensor Interface Board",
+   "min_level": 0,
+   "prerequisites": "Điện tử cơ bản; biết đọc datasheet.",
+   "outputs": "Requirement; datasheet note; schematic; PCB; board; measurement.",
+   "scope": "Sensor -> signal conditioning/interface -> connector/ADC/MCU tùy mức.",
+   "extension": "Calibration hoặc đánh giá noise.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Hardware/PCB engineer; nền tảng thực hành cho mọi hướng phần cứng.",
+   "tools": "KiCad/EDA PCB tương đương; dụng cụ làm PCB thủ công; đồng hồ số; oscilloscope/logic analyzer khi phù hợp.",
+   "eligibility": "Khi fabrication là learning outcome, PCB phải do sinh viên tự chế tạo thủ công; outsourcing chỉ được phép nếu quy định môn học/đề tài cho phép và learning outcome là system design. Tuân thủ an toàn điện; nộp evidence đo đạc thật."
+  },
+  {
+   "code": "A0-P05",
+   "family": "A0",
+   "type": "P",
+   "title_vi": "Thiết kế embedded controller board cơ bản",
+   "title_en": "Design of a Basic Microcontroller-Based Embedded Board",
+   "min_level": 1,
+   "prerequisites": "Điện tử; MCU cơ bản; datasheet.",
+   "outputs": "Schematic; PCB; power/reset/clock/I/O; firmware test; board demo.",
+   "scope": "MCU + power + reset + clock + LED/button + UART/sensor connector.",
+   "extension": "Bổ sung một peripheral hoặc low-power mode.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Hardware/PCB engineer; nền tảng thực hành cho mọi hướng phần cứng.",
+   "tools": "KiCad/EDA PCB tương đương; dụng cụ làm PCB thủ công; đồng hồ số; oscilloscope/logic analyzer khi phù hợp.",
+   "eligibility": "Khi fabrication là learning outcome, PCB phải do sinh viên tự chế tạo thủ công; outsourcing chỉ được phép nếu quy định môn học/đề tài cho phép và learning outcome là system design. Tuân thủ an toàn điện; nộp evidence đo đạc thật."
+  },
+  {
+   "code": "A0-P06",
+   "family": "A0",
+   "type": "P",
+   "title_vi": "Thiết kế PCB mở rộng I/O cho FPGA",
+   "title_en": "Design of a Custom FPGA I/O Expansion Board",
+   "min_level": 1,
+   "prerequisites": "Điện tử + hiểu I/O FPGA ở mức cơ bản.",
+   "outputs": "PCB extension; interface test; FPGA demo; documentation.",
+   "scope": "FPGA development board -> GPIO/SPI/UART -> custom PCB -> sensor/LED/DAC/actuator.",
+   "extension": "Thêm protocol hoặc đo timing I/O.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Hardware/PCB engineer; nền tảng thực hành cho mọi hướng phần cứng.",
+   "tools": "KiCad/EDA PCB tương đương; dụng cụ làm PCB thủ công; đồng hồ số; oscilloscope/logic analyzer khi phù hợp.",
+   "eligibility": "Khi fabrication là learning outcome, PCB phải do sinh viên tự chế tạo thủ công; outsourcing chỉ được phép nếu quy định môn học/đề tài cho phép và learning outcome là system design. Tuân thủ an toàn điện; nộp evidence đo đạc thật."
+  },
+  {
+   "code": "A0-I01",
+   "family": "A0",
+   "type": "I",
+   "title_vi": "Thực tập thiết kế, chế tạo và kiểm thử phần cứng điện tử",
+   "title_en": "Electronic Hardware Design, Fabrication and Testing Internship",
+   "min_level": 1,
+   "prerequisites": "Hoàn thành ít nhất một project A0-P hoặc năng lực tương đương.",
+   "outputs": "Working board; design files; BOM; measurement; debug log; technical report; legacy package.",
+   "scope": "Một board hoàn chỉnh qua requirement-design-build-test-debug-document.",
+   "extension": "Tối ưu revision 2 dựa trên lỗi revision 1.",
+   "status": "active",
+   "prereq_codes": [
+    "A0-P*"
+   ],
+   "career_relevance": "Hardware/PCB engineer; nền tảng thực hành cho mọi hướng phần cứng.",
+   "tools": "KiCad/EDA PCB tương đương; dụng cụ làm PCB thủ công; đồng hồ số; oscilloscope/logic analyzer khi phù hợp.",
+   "eligibility": "Khi fabrication là learning outcome, PCB phải do sinh viên tự chế tạo thủ công; outsourcing chỉ được phép nếu quy định môn học/đề tài cho phép và learning outcome là system design. Tuân thủ an toàn điện; nộp evidence đo đạc thật."
+  },
+  {
+   "code": "A1-P01",
+   "family": "A1",
+   "type": "P",
+   "title_vi": "Thiết kế các mạch logic tổ hợp bằng Verilog",
+   "title_en": "Combinational Logic Design in Verilog",
+   "min_level": 0,
+   "prerequisites": "Logic tổ hợp.",
+   "outputs": "RTL; testbench; waveform; short report.",
+   "scope": "MUX/decoder/comparator/ALU nhỏ với exhaustive hoặc directed tests.",
+   "extension": "So sánh coding style và synthesis.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "RTL design & verification engineer.",
+   "tools": "Verilog/SystemVerilog; Icarus Verilog/Verilator; GTKWave; Git."
+  },
+  {
+   "code": "A1-P02",
+   "family": "A1",
+   "type": "P",
+   "title_vi": "Thiết kế các mạch tuần tự bằng Verilog",
+   "title_en": "Sequential Logic Design in Verilog",
+   "min_level": 0,
+   "prerequisites": "Flip-flop/counter/register.",
+   "outputs": "RTL; reset tests; waveform; report.",
+   "scope": "Counter/shift register/clock divider/sequence detector.",
+   "extension": "Thêm parameterization hoặc corner cases.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "RTL design & verification engineer.",
+   "tools": "Verilog/SystemVerilog; Icarus Verilog/Verilator; GTKWave; Git."
+  },
+  {
+   "code": "A1-P03",
+   "family": "A1",
+   "type": "P",
+   "title_vi": "Thiết kế FSM cho một bộ điều khiển số",
+   "title_en": "FSM Design for a Digital Controller",
+   "min_level": 1,
+   "prerequisites": "Logic tuần tự + state diagram.",
+   "outputs": "Specification; state diagram; RTL; tests; waveform.",
+   "scope": "Traffic/vending/simple controller.",
+   "extension": "Moore vs Mealy comparison nếu phù hợp.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "RTL design & verification engineer.",
+   "tools": "Verilog/SystemVerilog; Icarus Verilog/Verilator; GTKWave; Git."
+  },
+  {
+   "code": "A1-P04",
+   "family": "A1",
+   "type": "P",
+   "title_vi": "Thiết kế UART transmitter/receiver bằng RTL",
+   "title_en": "RTL Design of a UART Transmitter/Receiver",
+   "min_level": 1,
+   "prerequisites": "RTL cơ bản; timing counter.",
+   "outputs": "UART RTL; loopback testbench; waveform; README.",
+   "scope": "TX/RX với baud generator và corner tests.",
+   "extension": "Parameterized baud/data format.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "RTL design & verification engineer.",
+   "tools": "Verilog/SystemVerilog; Icarus Verilog/Verilator; GTKWave; Git."
+  },
+  {
+   "code": "A1-P05",
+   "family": "A1",
+   "type": "P",
+   "title_vi": "Thiết kế synchronous FIFO bằng RTL",
+   "title_en": "RTL Design of a Synchronous FIFO",
+   "min_level": 1,
+   "prerequisites": "RTL; pointer/counter.",
+   "outputs": "FIFO RTL; full/empty/overflow/underflow tests; waveform.",
+   "scope": "Parameterized FIFO và verification.",
+   "extension": "Thêm assertions hoặc coverage-like checklist.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "RTL design & verification engineer.",
+   "tools": "Verilog/SystemVerilog; Icarus Verilog/Verilator; GTKWave; Git."
+  },
+  {
+   "code": "A1-I01",
+   "family": "A1",
+   "type": "I",
+   "title_vi": "Thiết kế và kiểm chứng reusable Digital IP Core",
+   "title_en": "Design and Verification of a Reusable Digital IP Core",
+   "min_level": 1,
+   "prerequisites": "A1-P tương đương; Git cơ bản.",
+   "outputs": "Specification; reusable RTL; testbench; regression; documentation; repo.",
+   "scope": "UART/SPI/FIFO/PWM/Timer theo engineering workflow.",
+   "extension": "Thêm parameterization và CI.",
+   "status": "active",
+   "prereq_codes": [
+    "A1-P*"
+   ],
+   "career_relevance": "RTL design & verification engineer.",
+   "tools": "Verilog/SystemVerilog; Icarus Verilog/Verilator; GTKWave; Git."
+  },
+  {
+   "code": "A1-T01",
+   "family": "A1",
+   "type": "T",
+   "title_vi": "Thiết kế và kiểm chứng một IP số có khả năng tái sử dụng",
+   "title_en": "Design and Verification of a Reusable Digital IP",
+   "min_level": 2,
+   "prerequisites": "RTL khá; simulation/debug; Git.",
+   "outputs": "Complete IP; systematic verification; synthesis report; documentation; legacy package.",
+   "scope": "Tập trung correctness, corner cases, portability và reuse.",
+   "extension": "FPGA/ASIC implementation hoặc stronger verification.",
+   "status": "active",
+   "prereq_codes": [
+    "A1-P*"
+   ],
+   "career_relevance": "RTL design & verification engineer.",
+   "tools": "Verilog/SystemVerilog, Icarus/Verilator/ModelSim, GTKWave, FPGA tool, Git.",
+   "cohort_alias": {
+    "HK1_2026_2027": "A4"
+   },
+   "checkpoints_15w": "W2: protocol/spec. W5: basic RTL pass. W8: corner-case regression. W11: FPGA demo. W15: hoàn thiện reusable package.",
+   "mvt": "Specification; Reusable RTL IP; Testbench + regression; Waveform/checklist verification; FPGA demo; User guide cho IP."
+  },
+  {
+   "code": "A2-P01",
+   "family": "A2",
+   "type": "P",
+   "title_vi": "Thiết kế và so sánh các kiến trúc bộ cộng số",
+   "title_en": "Design and Comparison of Digital Adder Architectures",
+   "min_level": 1,
+   "prerequisites": "Binary arithmetic + RTL.",
+   "outputs": "RTL nhiều architecture; functional tests; synthesis comparison.",
+   "scope": "Ripple-carry / carry-lookahead / carry-select theo bit-width phù hợp.",
+   "extension": "Thêm parallel-prefix nếu đủ năng lực.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
+   "tools": "Verilog/SystemVerilog; Python/MATLAB; FPGA toolchain; Yosys/ASIC flow khi mở rộng."
+  },
+  {
+   "code": "A2-P02",
+   "family": "A2",
+   "type": "P",
+   "title_vi": "Thiết kế multiplier fixed-point",
+   "title_en": "Fixed-Point Multiplier Design",
+   "min_level": 1,
+   "prerequisites": "Signed arithmetic; RTL.",
+   "outputs": "Reference model; RTL; overflow/truncation tests; synthesis.",
+   "scope": "Signed fixed-point multiply với scaling và overflow handling.",
+   "extension": "Rounding/saturation comparison.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
+   "tools": "Verilog/SystemVerilog; Python/MATLAB; FPGA toolchain; Yosys/ASIC flow khi mở rộng."
+  },
+  {
+   "code": "A2-P03",
+   "family": "A2",
+   "type": "P",
+   "title_vi": "Thiết kế Multiply-Accumulate datapath",
+   "title_en": "Multiply-Accumulate Datapath Design",
+   "min_level": 1,
+   "prerequisites": "Multiplier + accumulator concepts.",
+   "outputs": "MAC RTL; pipeline tests; resource/timing report.",
+   "scope": "Multiplier -> accumulator -> registers/pipeline.",
+   "extension": "Resource sharing vs parallel.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
+   "tools": "Verilog/SystemVerilog; Python/MATLAB; FPGA toolchain; Yosys/ASIC flow khi mở rộng."
+  },
+  {
+   "code": "A2-P04",
+   "family": "A2",
+   "type": "P",
+   "title_vi": "Thiết kế bộ lọc FIR bằng RTL",
+   "title_en": "RTL Design of an FIR Filter",
+   "min_level": 1,
+   "prerequisites": "DSP cơ bản; RTL.",
+   "outputs": "Floating reference; RTL; fixed-point test; waveform.",
+   "scope": "Delay line + coefficients + multiply/add.",
+   "extension": "Direct vs transposed architecture.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
+   "tools": "Verilog/SystemVerilog; Python/MATLAB; FPGA toolchain; Yosys/ASIC flow khi mở rộng."
+  },
+  {
+   "code": "A2-I01",
+   "family": "A2",
+   "type": "I",
+   "title_vi": "Thiết kế và triển khai datapath DSP fixed-point trên FPGA",
+   "title_en": "Fixed-Point DSP Datapath Design and FPGA Implementation",
+   "min_level": 2,
+   "prerequisites": "A2-P hoặc tương đương; FPGA cơ bản.",
+   "outputs": "Golden model; RTL; FPGA synthesis; resource/Fmax/latency; report.",
+   "scope": "Một datapath DSP hoàn chỉnh và co-verification.",
+   "extension": "Bit-width sweep.",
+   "status": "active",
+   "prereq_codes": [
+    "A2-P*"
+   ],
+   "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
+   "tools": "Verilog/SystemVerilog; Python/MATLAB; FPGA toolchain; Yosys/ASIC flow khi mở rộng."
+  },
+  {
+   "code": "A2-T01",
+   "family": "A2",
+   "type": "T",
+   "title_vi": "Thiết kế bộ lọc FIR fixed-point trên FPGA và khảo sát ASIC",
+   "title_en": "Fixed-Point FIR Filter Design on FPGA with ASIC Implementation Analysis",
+   "min_level": 2,
+   "prerequisites": "DSP + RTL + FPGA; Python/MATLAB.",
+   "outputs": "Reference; quantization; RTL; FPGA results; ASIC synthesis/physical evidence phù hợp; analysis.",
+   "scope": "Floating -> fixed -> RTL -> FPGA -> ASIC feasibility.",
+   "extension": "Architecture comparison hoặc coefficient quantization study.",
+   "status": "active",
+   "prereq_codes": [
+    "A2-P04"
+   ],
+   "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
+   "tools": "MATLAB/Python, Verilog, FPGA toolchain, Yosys/LibreLane tùy phạm vi.",
+   "cohort_alias": {
+    "HK1_2026_2027": "A3"
+   },
+   "checkpoints_15w": "W2: FIR spec + reference. W5: fixed-point model. W8: RTL verified. W11: FPGA/ASIC metrics. W15: trade-off analysis.",
+   "mvt": "Golden model + test vectors; Fixed-point error analysis; RTL + testbench; FPGA resource/Fmax/latency; ASIC area/timing estimate; Bảng trade-off accuracy - hardware cost."
+  },
+  {
+   "code": "A2-T02",
+   "family": "A2",
+   "type": "T",
+   "title_vi": "Thiết kế và tối ưu MAC datapath cho FPGA/ASIC",
+   "title_en": "Design and Optimization of a Fixed-Point MAC Datapath for FPGA/ASIC",
+   "min_level": 2,
+   "prerequisites": "RTL; fixed-point; synthesis.",
+   "outputs": "Multiple configurations; PPA/resource/timing; accuracy; report.",
+   "scope": "Bit width + pipeline + rounding/saturation + resource sharing.",
+   "extension": "Pareto/design-space analysis.",
+   "status": "active",
+   "prereq_codes": [
+    "A2-P03"
+   ],
+   "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
+   "tools": "Python/MATLAB, Verilog, FPGA tool, synthesis/STA.",
+   "cohort_alias": {
+    "HK1_2026_2027": "A9"
+   },
+   "checkpoints_15w": "W2: numeric spec. W5: MAC baseline. W8: parameter sweep. W11: FPGA/ASIC metrics. W15: optimization recommendation.",
+   "mvt": "Golden model; Parameterized RTL MAC; Verification vectors; PPA/Fmax/latency table; Numerical error analysis."
+  },
+  {
+   "code": "A2-T03",
+   "family": "A2",
+   "type": "T",
+   "title_vi": "Thiết kế và đánh giá PPA của các kiến trúc bộ cộng số học",
+   "title_en": "Design and PPA Evaluation of Digital Adder Architectures",
+   "min_level": 2,
+   "prerequisites": "Logic tổ hợp; binary arithmetic; RTL; synthesis/STA cơ bản.",
+   "outputs": "RTL các kiến trúc RCA/CLA/carry-select (tùy chọn parallel-prefix); functional-equivalence tests; synthesis/STA cùng constraint; phân tích logic depth/carry propagation; bảng PPA theo bit-width 8/16/32/64.",
+   "scope": "Triển khai và so sánh các kiến trúc adder theo delay/area trên nhiều bit-width trong cùng điều kiện synthesis/implementation.",
+   "extension": "Thêm parallel-prefix (Kogge-Stone/Brent-Kung) hoặc Pareto analysis theo bit-width.",
+   "status": "active",
+   "prereq_codes": [
+    "A2-P01"
+   ],
+   "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
+   "tools": "Verilog, simulator, Yosys/synthesis, OpenSTA/ASIC flow.",
+   "cohort_alias": {
+    "HK1_2026_2027": "A8"
+   },
+   "checkpoints_15w": "W2: architecture study. W5: all RTL verified. W8: synthesis sweep. W11: analysis. W15: report/demo.",
+   "mvt": "RTL các adder; Common testbench; Timing/area table theo bit-width; Critical path analysis; Design recommendation."
+  },
+  {
+   "code": "A2-R01",
+   "family": "A2",
+   "type": "R",
+   "title_vi": "Hardware design-space exploration cho fixed-point datapath",
+   "title_en": "Hardware Design-Space Exploration for Fixed-Point Datapaths",
+   "min_level": 4,
+   "prerequisites": "A2-T-level baseline; scripting; controlled experiments.",
+   "outputs": "Reproducible sweep; Pareto analysis; research report/paper-ready figures.",
+   "scope": "Quantify accuracy-area-timing-throughput trade-off across architecture/precision.",
+   "extension": "Optimization/search method nếu baseline sweep đã chắc.",
+   "status": "active",
+   "prereq_codes": [
+    "A2-T*"
+   ],
+   "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
+   "tools": "Verilog/SystemVerilog; Python/MATLAB; FPGA toolchain; Yosys/ASIC flow khi mở rộng."
+  },
+  {
+   "code": "A3-P01",
+   "family": "A3",
+   "type": "P",
+   "title_vi": "Triển khai một Digital IP trên FPGA",
+   "title_en": "FPGA Implementation of a Digital IP",
+   "min_level": 1,
+   "prerequisites": "RTL + simulation.",
+   "outputs": "Bitstream/project; hardware demo; resource/Fmax; README.",
+   "scope": "Take a verified IP to FPGA and test physical I/O.",
+   "extension": "Add self-test or measurement.",
+   "status": "active",
+   "prereq_codes": [
+    "A1-P*"
+   ],
+   "career_relevance": "FPGA system engineer.",
+   "tools": "FPGA vendor tools; Verilog/SystemVerilog; ModelSim/Questa/Icarus/Verilator tùy nền tảng; logic analyzer khi có."
+  },
+  {
+   "code": "A3-P02",
+   "family": "A3",
+   "type": "P",
+   "title_vi": "FPGA interfacing với peripheral",
+   "title_en": "FPGA Interfacing with a Peripheral",
+   "min_level": 1,
+   "prerequisites": "RTL; basic protocol.",
+   "outputs": "Interface RTL; board demo; tests; documentation.",
+   "scope": "UART/SPI/ADC/sensor/7-segment interface.",
+   "extension": "Higher-rate mode or error handling.",
+   "status": "active",
+   "prereq_codes": [
+    "A1-P*"
+   ],
+   "career_relevance": "FPGA system engineer.",
+   "tools": "FPGA vendor tools; Verilog/SystemVerilog; ModelSim/Questa/Icarus/Verilator tùy nền tảng; logic analyzer khi có."
+  },
+  {
+   "code": "A3-P03",
+   "family": "A3",
+   "type": "P",
+   "title_vi": "Hệ thống xử lý tín hiệu số trên FPGA",
+   "title_en": "FPGA-Based Digital Signal Processing System",
+   "min_level": 2,
+   "prerequisites": "A2 basics + FPGA.",
+   "outputs": "Working DSP pipeline; resource/timing; hardware test.",
+   "scope": "FIR/moving average/simple convolution.",
+   "extension": "Streaming/pipelining optimization.",
+   "status": "active",
+   "prereq_codes": [
+    "A2-P*"
+   ],
+   "career_relevance": "FPGA system engineer.",
+   "tools": "FPGA vendor tools; Verilog/SystemVerilog; ModelSim/Questa/Icarus/Verilator tùy nền tảng; logic analyzer khi có."
+  },
+  {
+   "code": "A3-I01",
+   "family": "A3",
+   "type": "I",
+   "title_vi": "Xây dựng hệ thống FPGA tích hợp nhiều IP",
+   "title_en": "Integration of Multiple IP Cores on FPGA",
+   "min_level": 2,
+   "prerequisites": "A1 + basic FPGA.",
+   "outputs": "Integrated system; interface tests; demo; documentation.",
+   "scope": "UART -> FIFO -> processing core -> output, hoặc hệ tương đương.",
+   "extension": "Add monitoring or CI.",
+   "status": "active",
+   "prereq_codes": [
+    "A1-P*"
+   ],
+   "career_relevance": "FPGA system engineer.",
+   "tools": "FPGA vendor tools; Verilog/SystemVerilog; ModelSim/Questa/Icarus/Verilator tùy nền tảng; logic analyzer khi có."
+  },
+  {
+   "code": "A3-T01",
+   "family": "A3",
+   "type": "T",
+   "title_vi": "Thiết kế hệ thống xử lý dữ liệu số pipelined trên FPGA",
+   "title_en": "Design of a Pipelined Digital Processing System on FPGA",
+   "min_level": 2,
+   "prerequisites": "Strong RTL + FPGA + measurement discipline.",
+   "outputs": "Architecture; RTL; verification; FPGA; LUT/FF/DSP/Fmax/latency/throughput analysis.",
+   "scope": "Optimize pipeline and explain performance trade-offs.",
+   "extension": "Compare two pipeline depths/architectures.",
+   "status": "active",
+   "prereq_codes": [
+    "A3-P*"
+   ],
+   "career_relevance": "FPGA system engineer.",
+   "tools": "Python/MATLAB, Verilog, simulator, FPGA tool.",
+   "cohort_alias": {
+    "HK1_2026_2027": "A5"
+   },
+   "checkpoints_15w": "W2: workload + reference. W5: architecture 1. W8: architecture 2. W11: FPGA metrics. W15: comparison.",
+   "mvt": "Reference model; 2+ pipeline configurations; RTL + verification; Fmax/resource/latency/throughput table; Kết luận về pipeline trade-off."
+  },
+  {
+   "code": "A3-T02",
+   "family": "A3",
+   "type": "T",
+   "title_vi": "Hardware/software co-verification cho hệ thống FPGA",
+   "title_en": "Hardware/Software Co-Verification for an FPGA System",
+   "min_level": 2,
+   "prerequisites": "Python/MATLAB + RTL + FPGA.",
+   "outputs": "Golden model; vector generation; RTL/FPGA agreement; automated comparison; report.",
+   "scope": "Build repeatable software-vs-hardware validation.",
+   "extension": "Regression automation.",
+   "status": "active",
+   "prereq_codes": [
+    "A3-P*"
+   ],
+   "career_relevance": "FPGA system engineer.",
+   "tools": "FPGA vendor tools; Verilog/SystemVerilog; ModelSim/Questa/Icarus/Verilator tùy nền tảng; logic analyzer khi có.",
+   "mvt": "Golden model + sinh vector tự động + so khớp RTL/FPGA tự động trên tối thiểu một IP, kèm báo cáo mismatch tái lập được."
+  },
+  {
+   "code": "A4-P01",
+   "family": "A4",
+   "type": "P",
+   "title_vi": "Làm quen RTL-to-Gates bằng Yosys",
+   "title_en": "RTL-to-Gates Exploration with Yosys",
+   "min_level": 1,
+   "prerequisites": "RTL cơ bản; Linux cơ bản.",
+   "outputs": "RTL; synthesis script; netlist/report; explanation.",
+   "scope": "Observe how RTL becomes logic cells/netlist.",
+   "extension": "Coding-style comparison.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "ASIC physical design; RTL-to-GDSII engineer.",
+   "tools": "WSL/Linux; Yosys; LibreLane/OpenROAD; KLayout; PDK phù hợp (ví dụ Sky130 khi dùng open-source flow)."
+  },
+  {
+   "code": "A4-P02",
+   "family": "A4",
+   "type": "P",
+   "title_vi": "Khảo sát ảnh hưởng của RTL coding style tới synthesis",
+   "title_en": "Effect of RTL Coding Style on Synthesis Results",
+   "min_level": 2,
+   "prerequisites": "RTL + Yosys basics.",
+   "outputs": "Equivalent RTL variants; synthesis evidence; comparison.",
+   "scope": "Control one variable at a time and compare mapping/timing/area proxy.",
+   "extension": "Add STA/technology mapping.",
+   "status": "active",
+   "prereq_codes": [
+    "A4-P01"
+   ],
+   "career_relevance": "ASIC physical design; RTL-to-GDSII engineer.",
+   "tools": "WSL/Linux; Yosys; LibreLane/OpenROAD; KLayout; PDK phù hợp (ví dụ Sky130 khi dùng open-source flow)."
+  },
+  {
+   "code": "A4-I01",
+   "family": "A4",
+   "type": "I",
+   "title_vi": "Xây dựng môi trường RTL-to-GDSII mã nguồn mở",
+   "title_en": "Build an Open-Source RTL-to-GDSII Environment",
+   "min_level": 2,
+   "prerequisites": "Linux/WSL; Git; RTL basics.",
+   "outputs": "Reproducible setup; sample designs; documented commands; troubleshooting notes.",
+   "scope": "WSL/Linux -> Nix/managed environment -> LibreLane/OpenROAD -> KLayout.",
+   "extension": "CI smoke test; version pinning.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "ASIC physical design; RTL-to-GDSII engineer.",
+   "tools": "WSL/Linux; Yosys; LibreLane/OpenROAD; KLayout; PDK phù hợp (ví dụ Sky130 khi dùng open-source flow)."
+  },
+  {
+   "code": "A4-T01",
+   "family": "A4",
+   "type": "T",
+   "title_vi": "Thiết kế một Digital IP từ RTL đến GDSII",
+   "title_en": "Design and Evaluation of a Digital IP from RTL to GDSII",
+   "min_level": 2,
+   "prerequisites": "Verified RTL + Linux + synthesis basics.",
+   "outputs": "Spec; RTL; testbench; synthesis; STA; physical implementation; DRC/LVS evidence; GDSII; PPA report.",
+   "scope": "End-to-end digital ASIC flow on a manageable IP.",
+   "extension": "Compare constraints or architectures only after baseline sign-off.",
+   "status": "active",
+   "prereq_codes": [
+    "A4-P01"
+   ],
+   "career_relevance": "ASIC physical design; RTL-to-GDSII engineer.",
+   "tools": "Verilog/SystemVerilog, Icarus/Verilator, GTKWave, Yosys, LibreLane/OpenROAD, KLayout, Git.",
+   "cohort_alias": {
+    "HK1_2026_2027": "A1"
+   },
+   "checkpoints_15w": "W2: spec + test plan. W5: RTL verified. W8: synthesis/STA ổn. W11: physical flow/PPA. W15: thesis + demo + repo.",
+   "mvt": "Specification + block diagram; RTL + testbench + regression; Waveform/log verification; Synthesis/STA/PPA report; Layout/GDSII hoặc physical implementation report; Repository có README và hướng dẫn tái lập."
+  },
+  {
+   "code": "A4-T02",
+   "family": "A4",
+   "type": "T",
+   "title_vi": "Khảo sát ảnh hưởng kiến trúc RTL đến PPA",
+   "title_en": "RTL Architecture Exploration for PPA",
+   "min_level": 3,
+   "prerequisites": "A4-T01-level flow on at least one design.",
+   "outputs": "2+ functionally equivalent architectures; controlled PPA comparison; analysis.",
+   "scope": "Measure power/performance/area proxies and explain architectural causes.",
+   "extension": "Pareto optimization.",
+   "status": "active",
+   "prereq_codes": [
+    "A4-T01"
+   ],
+   "career_relevance": "ASIC physical design; RTL-to-GDSII engineer.",
+   "tools": "Verilog/SystemVerilog, simulator, Yosys/EDA synthesis, OpenSTA/ASIC flow, Python/Excel để phân tích.",
+   "cohort_alias": {
+    "HK1_2026_2027": "A2"
+   },
+   "checkpoints_15w": "W2: chọn function + architecture hypotheses. W5: equivalence verified. W8: synthesis/STA. W11: PPA experiment. W15: kết luận thiết kế.",
+   "mvt": "Hai hoặc nhiều RTL architecture; Testbench dùng chung; Bảng PPA + latency/throughput; Giải thích nguyên nhân vật lý/kiến trúc của khác biệt; Khuyến nghị architecture theo mục tiêu thiết kế."
+  },
+  {
+   "code": "A4-R01",
+   "family": "A4",
+   "type": "R",
+   "title_vi": "Design-space exploration cho một Digital IP",
+   "title_en": "Design-Space Exploration for a Digital IP",
+   "min_level": 4,
+   "prerequisites": "Reproducible ASIC flow + scripting + research readiness.",
+   "outputs": "Automated experiments; statistical/controlled analysis; research report.",
+   "scope": "Search architecture/constraint space for PPA trade-offs.",
+   "extension": "Optimization algorithm if justified.",
+   "status": "active",
+   "prereq_codes": [
+    "A4-T01"
+   ],
+   "career_relevance": "ASIC physical design; RTL-to-GDSII engineer.",
+   "tools": "WSL/Linux; Yosys; LibreLane/OpenROAD; KLayout; PDK phù hợp (ví dụ Sky130 khi dùng open-source flow)."
+  },
+  {
+   "code": "A5-P01",
+   "family": "A5",
+   "type": "P",
+   "title_vi": "Xây dựng testbench có hệ thống cho một RTL module",
+   "title_en": "Systematic Testbench Development for an RTL Module",
+   "min_level": 1,
+   "prerequisites": "RTL + simulation.",
+   "outputs": "Test plan; testbench; pass/fail evidence; bug log.",
+   "scope": "Normal/boundary/invalid/reset tests.",
+   "extension": "Assertions/checkers.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Verification/EDA infrastructure; DevOps cho phần cứng.",
+   "tools": "Git/GitHub; shell/Python; Icarus/Verilator; Yosys; LibreLane/Nix; CI phù hợp."
+  },
+  {
+   "code": "A5-P02",
+   "family": "A5",
+   "type": "P",
+   "title_vi": "Regression testing cho Digital IP",
+   "title_en": "Regression Testing for a Digital IP",
+   "min_level": 2,
+   "prerequisites": "A5-P01 + scripting.",
+   "outputs": "Regression script; test set; summary report; reproducible run.",
+   "scope": "Automate repeated simulation and failure reporting.",
+   "extension": "CI integration.",
+   "status": "active",
+   "prereq_codes": [
+    "A5-P01"
+   ],
+   "career_relevance": "Verification/EDA infrastructure; DevOps cho phần cứng.",
+   "tools": "Git/GitHub; shell/Python; Icarus/Verilator; Yosys; LibreLane/Nix; CI phù hợp."
+  },
+  {
+   "code": "A5-I01",
+   "family": "A5",
+   "type": "I",
+   "title_vi": "Xây dựng Git workflow cho dự án RTL",
+   "title_en": "Git Workflow for RTL Projects",
+   "min_level": 1,
+   "prerequisites": "Git basics desirable.",
+   "outputs": "Repo structure; branches/issues; README; test scripts; contribution guide.",
+   "scope": "Practice reproducible collaboration on a small RTL project.",
+   "extension": "Pull-request checks.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Verification/EDA infrastructure; DevOps cho phần cứng.",
+   "tools": "Git/GitHub; shell/Python; Icarus/Verilator; Yosys; LibreLane/Nix; CI phù hợp."
+  },
+  {
+   "code": "A5-T01",
+   "family": "A5",
+   "type": "T",
+   "title_vi": "Xây dựng quy trình ASIC tái lập sử dụng LibreLane + Nix",
+   "title_en": "Reproducible ASIC Workflow Using LibreLane and Nix",
+   "min_level": 3,
+   "prerequisites": "Linux + Git + A4 basics.",
+   "outputs": "Pinned environment; 3 reference designs; repeatability evidence; docs; troubleshooting.",
+   "scope": "Reproducibility is the thesis object, not software installation alone.",
+   "extension": "Docker fallback/CI comparison if needed.",
+   "status": "active",
+   "prereq_codes": [
+    "A4-P01"
+   ],
+   "career_relevance": "Verification/EDA infrastructure; DevOps cho phần cứng.",
+   "tools": "WSL/Linux, Git, Nix, LibreLane/OpenROAD, Yosys, simulators.",
+   "cohort_alias": {
+    "HK1_2026_2027": "A6"
+   },
+   "checkpoints_15w": "W2: environment spec. W5: one design end-to-end. W8: 3 benchmarks. W11: reproduce trên clean environment. W15: documentation + demo.",
+   "mvt": "Repository môi trường; Automated scripts; 3 benchmark designs; Reproducibility checklist; Installation/use guide; Báo cáo đánh giá workflow."
+  },
+  {
+   "code": "A5-T02",
+   "family": "A5",
+   "type": "T",
+   "title_vi": "Continuous Integration cho dự án RTL/ASIC",
+   "title_en": "Continuous Integration for RTL/ASIC Projects",
+   "min_level": 3,
+   "prerequisites": "Git/GitHub; scripting; simulation; synthesis basics.",
+   "outputs": "CI pipeline; lint/sim/regression/synthesis reports; failure examples; docs.",
+   "scope": "Automated quality gates for hardware repository.",
+   "extension": "ASIC smoke/PPA regression.",
+   "status": "active",
+   "prereq_codes": [
+    "A5-P02"
+   ],
+   "career_relevance": "Verification/EDA infrastructure; DevOps cho phần cứng.",
+   "tools": "GitHub Actions, shell/Python, Verilator/Icarus, Yosys, tùy chọn LibreLane/Nix/Docker.",
+   "cohort_alias": {
+    "HK1_2026_2027": "A7"
+   },
+   "checkpoints_15w": "W2: CI spec. W5: simulation CI. W8: synthesis/report CI. W11: regression case. W15: documented workflow.",
+   "mvt": "CI-enabled repository; Automated test pipeline; Artifacts/reports; Regression demonstration; Developer guide."
+  },
+  {
+   "code": "A5-R01",
+   "family": "A5",
+   "type": "R",
+   "title_vi": "Automated PPA regression cho Digital IC",
+   "title_en": "Automated PPA Regression for Digital IC Development",
+   "min_level": 4,
+   "prerequisites": "A5-T02 + stable ASIC flow.",
+   "outputs": "Dataset of commits/configurations; regression thresholds; analysis; research report.",
+   "scope": "Detect timing/area/power degradation and relate to source changes.",
+   "extension": "Statistical anomaly detection if justified.",
+   "status": "active",
+   "prereq_codes": [
+    "A5-T02"
+   ],
+   "career_relevance": "Verification/EDA infrastructure; DevOps cho phần cứng.",
+   "tools": "Git/GitHub; shell/Python; Icarus/Verilator; Yosys; LibreLane/Nix; CI phù hợp."
+  },
+  {
+   "code": "A6-P01",
+   "family": "A6",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Lập trình firmware bare-metal điều khiển ngoại vi vi điều khiển",
+   "title_en": "Bare-Metal Peripheral Firmware for a Microcontroller",
+   "prerequisites": "C cơ bản; đọc datasheet; Git nhập môn.",
+   "prereq_codes": [],
+   "outputs": "Driver UART/I2C/SPI tự viết (không dùng HAL sinh sẵn cho phần lõi); firmware demo; đo kiểm bằng logic analyzer; README.",
+   "scope": "Datasheet -> cấu hình thanh ghi -> driver -> kiểm chứng tín hiệu thật -> tài liệu hóa.",
+   "extension": "Thêm DMA hoặc chế độ tiết kiệm năng lượng, đo chênh lệch dòng tiêu thụ.",
+   "status": "active",
+   "career_relevance": "Embedded firmware engineer; nền cho mọi đề tài A6/A7.",
+   "tools": "C; STM32/ESP32; logic analyzer; đồng hồ số; Git."
+  },
+  {
+   "code": "A6-P02",
+   "family": "A6",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Ứng dụng đa nhiệm thời gian thực với RTOS",
+   "title_en": "Real-Time Multitasking Application with an RTOS",
+   "prerequisites": "A6-P01 hoặc firmware tương đương có evidence.",
+   "prereq_codes": [
+    "A6-P01"
+   ],
+   "outputs": "Ứng dụng FreeRTOS/Zephyr >=3 task; phân tích ưu tiên/deadline; đo jitter/latency; báo cáo so sánh với bản super-loop.",
+   "scope": "Task design -> queue/semaphore -> đo đáp ứng thời gian thực -> phân tích.",
+   "extension": "Thêm watchdog + xử lý lỗi phục hồi được; stress test.",
+   "status": "active",
+   "career_relevance": "Embedded/RTOS engineer; automotive & industrial firmware.",
+   "tools": "C; FreeRTOS hoặc Zephyr; MCU bất kỳ; logic analyzer; Git."
+  },
+  {
+   "code": "A6-P03",
+   "family": "A6",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Giao tiếp phần cứng-phần mềm trên SoC FPGA",
+   "title_en": "Memory-Mapped Hardware-Software Communication on a SoC FPGA",
+   "prerequisites": "RTL cơ bản (A1) + firmware cơ bản (A6-P01).",
+   "prereq_codes": [
+    "A1-P*",
+    "A6-P01"
+   ],
+   "outputs": "IP memory-mapped đơn giản (thanh ghi điều khiển/trạng thái); driver C phía processor; test đọc-ghi qua bus; README.",
+   "scope": "IP RTL -> kết nối bus (AXI-lite hoặc tương đương) -> driver -> kiểm chứng end-to-end.",
+   "extension": "Thêm interrupt thay vì polling, đo chênh lệch độ trễ.",
+   "status": "active",
+   "career_relevance": "SoC integration; bước đệm bắt buộc cho HW/SW co-design.",
+   "tools": "Verilog; Vivado/Quartus hoặc toolchain SoC FPGA tương đương; Zynq/PYNQ; C/Python; Git."
+  },
+  {
+   "code": "A6-P04",
+   "family": "A6",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Dựng Linux nhúng trên SoC FPGA và viết driver đơn giản",
+   "title_en": "Embedded Linux Bring-Up on a SoC FPGA with a Simple Driver",
+   "prerequisites": "Linux cơ bản; A6-P01; biết khái niệm kernel/user space.",
+   "prereq_codes": [
+    "A6-P01"
+   ],
+   "outputs": "Ảnh Linux boot được trên board; driver ký tự hoặc UIO nói chuyện với một IP; log kiểm chứng; hướng dẫn dựng lại từ đầu.",
+   "scope": "Toolchain/BSP -> boot -> device tree -> driver tối giản -> kiểm chứng.",
+   "extension": "Đóng gói bằng Buildroot/Yocto để build tái lập một lệnh.",
+   "status": "active",
+   "career_relevance": "Embedded Linux/BSP engineer — mảng tuyển dụng lớn của nghề nhúng.",
+   "tools": "Linux; Buildroot hoặc PetaLinux/Yocto; Zynq/PYNQ; C; Git."
+  },
+  {
+   "code": "A6-I01",
+   "family": "A6",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Thực tập phát triển sản phẩm nhúng theo quy trình kỹ sư",
+   "title_en": "Embedded Product Development Internship",
+   "prerequisites": "A6-P01 + một trong A6-P02/P03; cam kết giờ/tuần.",
+   "prereq_codes": [
+    "A6-P01"
+   ],
+   "outputs": "Sản phẩm nhúng nhỏ đi trọn quy trình: yêu cầu -> thiết kế -> firmware -> kiểm thử -> tài liệu; nhật ký tuần; repo Git kỷ luật.",
+   "scope": "Trọng tâm là tác phong: issue tracker, code review, test trước khi merge, báo cáo tuần.",
+   "extension": "Thêm CI chạy unit test firmware trên mỗi commit.",
+   "status": "active",
+   "career_relevance": "Chuẩn bị trực tiếp cho vị trí embedded engineer.",
+   "tools": "C; MCU tự chọn; GitHub/GitLab + CI; framework test (Unity/Ceedling hoặc tương đương)."
+  },
+  {
+   "code": "A6-T01",
+   "family": "A6",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế hệ thống nhúng điều khiển và thu thập dữ liệu hoàn chỉnh",
+   "title_en": "Design of a Complete Embedded Control and Data-Acquisition System",
+   "prerequisites": "A6-P01 + A6-P02 hoặc tương đương có evidence.",
+   "prereq_codes": [
+    "A6-P01",
+    "A6-P02"
+   ],
+   "outputs": "Hệ thống nhúng chạy thật (>=2 ngoại vi, RTOS hoặc kiến trúc phần mềm rõ); kiểm thử hệ thống; đo hiệu năng/độ tin cậy; khóa luận; repo tái lập.",
+   "scope": "Bài toán điều khiển-thu thập dữ liệu cụ thể do mentor chốt; đi trọn từ yêu cầu đến đánh giá định lượng.",
+   "extension": "Chỉ mở sau baseline: low-power mode hoặc failsafe + phân tích định lượng.",
+   "status": "active",
+   "career_relevance": "Embedded systems engineer.",
+   "tools": "C; MCU + RTOS; logic analyzer; thiết bị đo phù hợp; Git.",
+   "mvt": "Specification + kiến trúc phần mềm; firmware đầy đủ chức năng lõi; driver >=2 ngoại vi tự viết hoặc hiểu sâu; kế hoạch + kết quả kiểm thử hệ thống; số liệu hiệu năng (đáp ứng, độ tin cậy); repository có README và hướng dẫn tái lập."
+  },
+  {
+   "code": "A6-T02",
+   "family": "A6",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Tích hợp bộ tăng tốc phần cứng tùy biến vào SoC FPGA",
+   "title_en": "Integrating a Custom Hardware Accelerator into a SoC FPGA",
+   "prerequisites": "A6-P03 + nền FPGA (A3-P* hoặc tương đương).",
+   "prereq_codes": [
+    "A6-P03",
+    "A3-P*"
+   ],
+   "outputs": "Baseline phần mềm có profile; IP accelerator RTL; driver + tích hợp; benchmark speedup; phân tích trade-off tài nguyên/độ trễ; khóa luận; repo.",
+   "scope": "HW/SW co-design nhập môn: chọn hàm nặng -> offload xuống phần cứng -> đo bằng cùng một benchmark.",
+   "extension": "So sánh hai kiến trúc accelerator hoặc thêm DMA, chỉ sau baseline sign-off.",
+   "status": "active",
+   "career_relevance": "SoC/FPGA engineer; nền tảng cho hướng luận án co-design.",
+   "tools": "Verilog; Zynq/PYNQ; C/Python; profiler; Git.",
+   "mvt": "Baseline phần mềm + số liệu profile; RTL accelerator + testbench; tích hợp bus + driver chạy đúng; bảng speedup và tài nguyên so với baseline; phân tích điểm nghẽn; repository tái lập."
+  },
+  {
+   "code": "A6-R01",
+   "family": "A6",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Nghiên cứu phân hoạch phần cứng/phần mềm cho ứng dụng nhúng",
+   "title_en": "Hardware/Software Partitioning Study for an Embedded Application",
+   "prerequisites": "A6-T02 hoặc tương đương; tư duy thí nghiệm có kiểm soát.",
+   "prereq_codes": [
+    "A6-T02"
+   ],
+   "outputs": "Research question rõ; phương pháp phân hoạch + tiêu chí; >=2 phương án phân hoạch đo trên cùng benchmark; phân tích PPA/latency/energy; báo cáo nghiên cứu.",
+   "scope": "Trả lời: với một lớp ứng dụng cụ thể, ranh giới HW/SW đặt ở đâu thì tối ưu theo tiêu chí nào?",
+   "extension": "Đề xuất heuristic phân hoạch và kiểm chứng trên ứng dụng thứ hai.",
+   "status": "active",
+   "career_relevance": "Hướng nghiên cứu hệ thống nhúng/co-design; chấp nhận kết quả phủ định.",
+   "tools": "Zynq/PYNQ; profiler; RTL; đo năng lượng; Python phân tích."
+  },
+  {
+   "code": "A7-P01",
+   "family": "A7",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Nút cảm biến IoT truyền dữ liệu qua MQTT",
+   "title_en": "IoT Sensor Node Publishing Data over MQTT",
+   "prerequisites": "A6-P01 hoặc firmware tương đương; mạng cơ bản.",
+   "prereq_codes": [
+    "A6-P01"
+   ],
+   "outputs": "Node ESP32/STM32 đọc cảm biến thật, publish MQTT có xử lý mất kết nối; broker + dashboard tối giản; log chạy >=48h; README.",
+   "scope": "Cảm biến -> firmware -> Wi-Fi/MQTT -> hiển thị; trọng tâm là chạy ổn định, không phải demo một lần.",
+   "extension": "Thêm OTA update hoặc TLS cơ bản.",
+   "status": "active",
+   "career_relevance": "IoT engineer; cửa vào của trục IoT.",
+   "tools": "ESP32 hoặc tương đương; C/MicroPython; Mosquitto; Node-RED/Grafana; Git."
+  },
+  {
+   "code": "A7-P02",
+   "family": "A7",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Đo và tối ưu năng lượng cho nút IoT chạy pin",
+   "title_en": "Energy Measurement and Optimization for a Battery-Powered IoT Node",
+   "prerequisites": "A7-P01; đọc hiểu datasheet phần nguồn.",
+   "prereq_codes": [
+    "A7-P01"
+   ],
+   "outputs": "Current profile từng trạng thái (active/tx/sleep); chiến lược duty-cycle; bảng ước tính thời gian sống pin trước/sau tối ưu; báo cáo đo.",
+   "scope": "Đo thật bằng thiết bị đo dòng, không ước lượng chay từ datasheet.",
+   "extension": "So sánh hai giao thức hoặc hai chế độ sleep về năng lượng/gói tin.",
+   "status": "active",
+   "career_relevance": "Low-power design — kỹ năng đắt giá nhất của nghề IoT.",
+   "tools": "Thiết bị đo dòng (INA219/Power Profiler hoặc tương đương); ESP32/STM32; Python phân tích.",
+   "eligibility": "Dùng pin/nguồn đúng quy tắc an toàn (không sạc LiPo không giám sát, có bảo vệ quá dòng); số liệu năng lượng phải đo thật."
+  },
+  {
+   "code": "A7-P03",
+   "family": "A7",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Suy luận TinyML trên vi điều khiển",
+   "title_en": "TinyML Inference on a Microcontroller",
+   "prerequisites": "A6-P01; Python + ML nhập môn.",
+   "prereq_codes": [
+    "A6-P01"
+   ],
+   "outputs": "Mô hình nhỏ (keyword spotting/gesture) huấn luyện + quantize INT8; chạy trên MCU; bảng accuracy/latency/RAM-Flash; demo; README.",
+   "scope": "Train -> convert (TFLite Micro/CMSIS-NN) -> deploy -> đo trên thiết bị thật.",
+   "extension": "So sánh hai kích thước mô hình về accuracy/latency/bộ nhớ.",
+   "status": "active",
+   "career_relevance": "Edge AI engineer; cửa vào cho hướng AI biên.",
+   "tools": "Python/TensorFlow; TFLite Micro hoặc CMSIS-NN; STM32/ESP32; Git."
+  },
+  {
+   "code": "A7-P04",
+   "family": "A7",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Đánh giá kết nối không dây tầm ngắn/tầm xa cho IoT",
+   "title_en": "Evaluating Short- and Long-Range Wireless Links for IoT",
+   "prerequisites": "A6-P01 hoặc tương đương.",
+   "prereq_codes": [
+    "A6-P01"
+   ],
+   "outputs": "Thí nghiệm BLE và LoRa (hoặc 2 công nghệ được duyệt): tầm phủ, tỉ lệ mất gói, năng lượng/gói theo khoảng cách; báo cáo so sánh có số liệu.",
+   "scope": "Thiết kế thí nghiệm đo sóng thực địa có kiểm soát — học kỷ luật đo đạc.",
+   "extension": "Thêm mô hình suy hao đơn giản khớp với số liệu đo.",
+   "status": "active",
+   "career_relevance": "Wireless/IoT connectivity engineer.",
+   "tools": "Module BLE + LoRa; ESP32/STM32; Python phân tích; GPS/thước đo khoảng cách."
+  },
+  {
+   "code": "A7-I01",
+   "family": "A7",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Thực tập xây dựng hệ thống IoT đầu-cuối",
+   "title_en": "End-to-End IoT System Internship",
+   "prerequisites": "A7-P01; cam kết giờ/tuần.",
+   "prereq_codes": [
+    "A7-P01"
+   ],
+   "outputs": "Hệ thống node -> gateway -> lưu trữ -> dashboard vận hành liên tục >=2 tuần; số liệu uptime/mất gói; nhật ký sự cố và cách xử lý; tài liệu vận hành.",
+   "scope": "Trọng tâm là vận hành tin cậy và tài liệu hóa, đúng tác phong kỹ sư hệ thống.",
+   "extension": "Cảnh báo tự động khi node mất kết nối.",
+   "status": "active",
+   "career_relevance": "IoT/DevOps cho thiết bị.",
+   "tools": "ESP32; MQTT; InfluxDB/SQLite + Grafana hoặc tương đương; Git."
+  },
+  {
+   "code": "A7-T01",
+   "family": "A7",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế và đánh giá hệ thống giám sát IoT đa nút hoàn chỉnh",
+   "title_en": "Design and Evaluation of a Complete Multi-Node IoT Monitoring System",
+   "prerequisites": "A7-P01 + A7-P02 hoặc tương đương.",
+   "prereq_codes": [
+    "A7-P01",
+    "A7-P02"
+   ],
+   "outputs": "Hệ thống >=3 node chạy pin + gateway + dashboard; đánh giá định lượng: uptime, mất gói, thời gian sống pin; khóa luận; repo + tài liệu triển khai.",
+   "scope": "Bài toán giám sát cụ thể do mentor chốt (môi trường/năng lượng/nông nghiệp...); chạy thật nhiều ngày, số liệu thật.",
+   "extension": "Chỉ mở sau baseline: tối ưu năng lượng có so sánh, hoặc dự đoán bất thường đơn giản tại gateway.",
+   "status": "active",
+   "career_relevance": "IoT solution engineer.",
+   "tools": "ESP32/STM32; MQTT/LoRa tùy bài; thiết bị đo dòng; backend + dashboard; Git.",
+   "mvt": "Kiến trúc hệ thống + spec; >=3 node chạy pin hoạt động; gateway + lưu trữ + dashboard; số liệu vận hành >=7 ngày (uptime, mất gói, năng lượng); phân tích điểm yếu; repository và tài liệu triển khai tái lập."
+  },
+  {
+   "code": "A7-T02",
+   "family": "A7",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Triển khai và tối ưu mô hình AI gọn nhẹ trên thiết bị biên",
+   "title_en": "Deploying and Optimizing a Lightweight AI Model on an Edge Device",
+   "prerequisites": "A7-P03 hoặc tương đương.",
+   "prereq_codes": [
+    "A7-P03"
+   ],
+   "outputs": "Pipeline train->quantize->deploy tái lập; so sánh có hệ thống float/INT8 (accuracy, latency, RAM/Flash, năng lượng/suy luận); khóa luận; repo.",
+   "scope": "Một bài toán suy luận cụ thể trên MCU hoặc SoC FPGA; đánh giá trên thiết bị thật, không chỉ trên máy tính.",
+   "extension": "Chỉ mở sau baseline: pruning/kiến trúc thay thế, hoặc chuyển một lớp nặng xuống phần cứng (nối sang AB-T05).",
+   "status": "active",
+   "career_relevance": "Edge AI/embedded ML engineer.",
+   "tools": "Python/TensorFlow; TFLite Micro/CMSIS-NN; MCU hoặc Zynq; thiết bị đo dòng; Git.",
+   "mvt": "Baseline float trên máy + trên thiết bị; bản INT8 chạy trên thiết bị; bảng accuracy/latency/bộ nhớ/năng lượng cho từng bản; phân tích trade-off; pipeline tái lập một lệnh; repository có README."
+  },
+  {
+   "code": "A7-R01",
+   "family": "A7",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Nghiên cứu đánh đổi độ chính xác – năng lượng – độ trễ cho suy luận tại biên",
+   "title_en": "Accuracy-Energy-Latency Trade-offs for On-Device Inference",
+   "prerequisites": "A7-T02 hoặc tương đương; kỷ luật thí nghiệm.",
+   "prereq_codes": [
+    "A7-T02"
+   ],
+   "outputs": "Research question + giả thuyết; ma trận thí nghiệm (mô hình × mức quantize × tần số/điện áp nếu có); đường cong trade-off; phân tích và khuyến nghị thiết kế; báo cáo nghiên cứu.",
+   "scope": "Trả lời: với ngân sách năng lượng cho trước của thiết bị biên, cấu hình suy luận nào tối ưu và vì sao?",
+   "extension": "Kiểm chứng khuyến nghị trên bài toán thứ hai khác phân phối dữ liệu.",
+   "status": "active",
+   "career_relevance": "Hướng nghiên cứu edge AI hardware-aware; chấp nhận kết quả phủ định.",
+   "tools": "TFLite Micro; MCU/SoC FPGA; thiết bị đo dòng; Python phân tích."
+  },
+  {
+   "code": "B0-P01",
+   "family": "B0",
+   "type": "P",
+   "title_vi": "Mô phỏng Polar Encoder",
+   "title_en": "Simulation of a Polar Encoder",
+   "min_level": 0,
+   "prerequisites": "Python/MATLAB basics; binary operations.",
+   "outputs": "Encoder implementation; known-vector validation; report.",
+   "scope": "Implement polar transform and validate on small N.",
+   "extension": "Parameterize N/K.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Thuật toán truyền thông; nền nghiên cứu coding theory.",
+   "tools": "Python hoặc MATLAB; NumPy/SciPy tương đương; plotting; Git."
+  },
+  {
+   "code": "B0-P02",
+   "family": "B0",
+   "type": "P",
+   "title_vi": "Mô phỏng BPSK/AWGN và tính LLR",
+   "title_en": "BPSK/AWGN Simulation and LLR Computation",
+   "min_level": 0,
+   "prerequisites": "Digital comm basics.",
+   "outputs": "Channel simulation; LLR sanity checks; plots.",
+   "scope": "Build verified channel/LLR block for later decoder work.",
+   "extension": "Compare exact/approximate LLR when relevant.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Thuật toán truyền thông; nền nghiên cứu coding theory.",
+   "tools": "Python hoặc MATLAB; NumPy/SciPy tương đương; plotting; Git."
+  },
+  {
+   "code": "B0-P03",
+   "family": "B0",
+   "type": "P",
+   "title_vi": "Xây dựng SC decoder cơ bản bằng MATLAB/Python",
+   "title_en": "Basic SC Decoder in MATLAB/Python",
+   "min_level": 1,
+   "prerequisites": "B0-P01/P02 or equivalent.",
+   "outputs": "SC decoder; unit tests; small BER/BLER result.",
+   "scope": "Correct recursive/iterative SC baseline.",
+   "extension": "Complexity profiling.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P01",
+    "B0-P02"
+   ],
+   "career_relevance": "Thuật toán truyền thông; nền nghiên cứu coding theory.",
+   "tools": "Python hoặc MATLAB; NumPy/SciPy tương đương; plotting; Git."
+  },
+  {
+   "code": "B0-I01",
+   "family": "B0",
+   "type": "I",
+   "title_vi": "Xây dựng bộ mô phỏng Polar Code có khả năng tái lập",
+   "title_en": "Reproducible Polar Code Simulation Framework",
+   "min_level": 2,
+   "prerequisites": "Python/MATLAB; SC basics; Git.",
+   "outputs": "Configurable N/K/EbN0; seeded runs; BER/BLER; README; scripts.",
+   "scope": "One-command repeatable baseline framework.",
+   "extension": "Automated sweeps and result archival.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Thuật toán truyền thông; nền nghiên cứu coding theory.",
+   "tools": "Python hoặc MATLAB; NumPy/SciPy tương đương; plotting; Git."
+  },
+  {
+   "code": "B0-T01",
+   "family": "B0",
+   "type": "T",
+   "title_vi": "Xây dựng và đánh giá hệ thống Polar Code sử dụng SC decoding",
+   "title_en": "Software Modeling and Performance Evaluation of Polar Codes with SC Decoding",
+   "min_level": 2,
+   "prerequisites": "Digital comm + Python/MATLAB.",
+   "outputs": "Full encode-channel-decode chain; validation; BER/BLER sweeps; complexity discussion; legacy package.",
+   "scope": "Foundation thesis for students not yet ready for RTL.",
+   "extension": "Add quantization or controlled SC improvement.",
+   "status": "active",
+   "prereq_codes": [],
+   "career_relevance": "Thuật toán truyền thông; nền nghiên cứu coding theory.",
+   "tools": "Python hoặc MATLAB, Git.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B1"
+   },
+   "checkpoints_15w": "W2: chain spec. W5: noiseless + AWGN verified. W8: BER/BLER curves. W11: parameter study. W15: clean golden model.",
+   "mvt": "Reusable simulator; BER/BLER curves; Unit tests/golden vectors; Technical note về SC flow; Dataset/test vectors cho hardware track."
+  },
+  {
+   "code": "B1-P01",
+   "family": "B1",
+   "type": "P",
+   "title_vi": "Thiết kế Polar Encoder RTL",
+   "title_en": "RTL Design of a Polar Encoder",
+   "min_level": 1,
+   "prerequisites": "B0 encoder + RTL.",
+   "outputs": "RTL encoder; golden vectors; testbench; synthesis.",
+   "scope": "Translate polar transform to hardware.",
+   "extension": "Pipeline/resource sharing.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P01"
+   ],
+   "career_relevance": "Hardware architecture cho coding; RTL cho khối giải mã.",
+   "tools": "Python/MATLAB golden model; Verilog/SystemVerilog; simulator; FPGA toolchain."
+  },
+  {
+   "code": "B1-P02",
+   "family": "B1",
+   "type": "P",
+   "title_vi": "Thiết kế f Processing Element",
+   "title_en": "RTL Design of the Polar f Processing Element",
+   "min_level": 1,
+   "prerequisites": "SC f-function understanding + fixed-point basics.",
+   "outputs": "Reference f; RTL; exhaustive/random tests; synthesis.",
+   "scope": "Implement exact/min-sum form appropriate to scope.",
+   "extension": "Pipeline/precision variants.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Hardware architecture cho coding; RTL cho khối giải mã.",
+   "tools": "Python/MATLAB golden model; Verilog/SystemVerilog; simulator; FPGA toolchain."
+  },
+  {
+   "code": "B1-P03",
+   "family": "B1",
+   "type": "P",
+   "title_vi": "Thiết kế g Processing Element",
+   "title_en": "RTL Design of the Polar g Processing Element",
+   "min_level": 1,
+   "prerequisites": "SC g-function + fixed-point.",
+   "outputs": "Reference g; RTL; tests; synthesis.",
+   "scope": "Handle partial sum/control input correctly.",
+   "extension": "Precision variants.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Hardware architecture cho coding; RTL cho khối giải mã.",
+   "tools": "Python/MATLAB golden model; Verilog/SystemVerilog; simulator; FPGA toolchain."
+  },
+  {
+   "code": "B1-P04",
+   "family": "B1",
+   "type": "P",
+   "title_vi": "Thiết kế Partial-Sum Unit",
+   "title_en": "RTL Design of a Partial-Sum Unit",
+   "min_level": 2,
+   "prerequisites": "SC graph/partial sums + RTL.",
+   "outputs": "Architecture; RTL; tests; synthesis.",
+   "scope": "Create correct partial-sum update module.",
+   "extension": "Memory/control optimization.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Hardware architecture cho coding; RTL cho khối giải mã.",
+   "tools": "Python/MATLAB golden model; Verilog/SystemVerilog; simulator; FPGA toolchain."
+  },
+  {
+   "code": "B1-I01",
+   "family": "B1",
+   "type": "I",
+   "title_vi": "Thiết kế và kiểm chứng f/g Processing Elements trên FPGA",
+   "title_en": "Design and Verification of Polar f/g Processing Elements on FPGA",
+   "min_level": 2,
+   "prerequisites": "B1-P + FPGA.",
+   "outputs": "Golden co-verification; FPGA synthesis; resource/Fmax; report.",
+   "scope": "Implement and validate hardware PEs.",
+   "extension": "Compare exact vs min-sum or precisions.",
+   "status": "active",
+   "prereq_codes": [
+    "B1-P*"
+   ],
+   "career_relevance": "Hardware architecture cho coding; RTL cho khối giải mã.",
+   "tools": "Python/MATLAB golden model; Verilog/SystemVerilog; simulator; FPGA toolchain."
+  },
+  {
+   "code": "B1-T01",
+   "family": "B1",
+   "type": "T",
+   "title_vi": "Thiết kế Polar Encoder trên FPGA",
+   "title_en": "FPGA Design and Verification of a Polar Encoder",
+   "min_level": 2,
+   "prerequisites": "B0 + RTL + FPGA.",
+   "outputs": "Architecture; RTL; verification; FPGA; resource/Fmax/latency/throughput.",
+   "scope": "Compare at least one architectural decision where feasible.",
+   "extension": "ASIC feasibility or pipelining.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P01"
+   ],
+   "career_relevance": "Hardware architecture cho coding; RTL cho khối giải mã.",
+   "tools": "Python/MATLAB, Verilog, simulator, FPGA tool.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B2"
+   },
+   "checkpoints_15w": "W2: encoder mapping. W5: RTL pass. W8: second architecture/optimization. W11: FPGA result. W15: report.",
+   "mvt": "Golden encoder; RTL + testbench; FPGA resource/Fmax/latency; Architecture explanation; Demo hoặc co-simulation."
+  },
+  {
+   "code": "B1-T02",
+   "family": "B1",
+   "type": "T",
+   "title_vi": "Thiết kế và đánh giá f/g Processing Elements cho Polar Decoder",
+   "title_en": "Design and Evaluation of Processing Elements for Polar Decoders",
+   "min_level": 2,
+   "prerequisites": "B0 SC + fixed-point + RTL.",
+   "outputs": "Exact/min-sum/reference; fixed-point RTL; timing/area/resource; BLER impact via model.",
+   "scope": "Connect numerical approximation to hardware cost.",
+   "extension": "ASIC PPA or broader bit-width sweep.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Hardware architecture cho coding; RTL cho khối giải mã.",
+   "tools": "Python/MATLAB, Verilog, simulator, synthesis/STA.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B5"
+   },
+   "checkpoints_15w": "W2: math/reference. W5: RTL exact/min-sum. W8: synthesis. W11: BLER impact. W15: design recommendation.",
+   "mvt": "PE RTL; Verification suite; Error statistics; PPA/timing comparison; BLER impact analysis."
+  },
+  {
+   "code": "B2-I01",
+   "family": "B2",
+   "type": "I",
+   "title_vi": "Xây dựng kiến trúc SC decoder theo từng module",
+   "title_en": "Modular Construction of an SC Polar Decoder Architecture",
+   "min_level": 2,
+   "prerequisites": "B0 + B1.",
+   "outputs": "Module interfaces; f/g/partial-sum/control integration tests; documentation.",
+   "scope": "Assemble decoder incrementally, not monolithically.",
+   "extension": "Automation of vector tests.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03",
+    "B1-P*"
+   ],
+   "career_relevance": "Decoder hardware architecture trên FPGA.",
+   "tools": "Python/MATLAB; Verilog/SystemVerilog; simulator; FPGA tools; Git."
+  },
+  {
+   "code": "B2-T01",
+   "family": "B2",
+   "type": "T",
+   "title_vi": "Thiết kế bộ giải mã SC Polar trên FPGA",
+   "title_en": "FPGA Architecture and Implementation of an SC Polar Decoder",
+   "min_level": 3,
+   "prerequisites": "Correct SC software baseline; B1; strong RTL.",
+   "outputs": "Golden model; fixed-point; RTL decoder; co-verification; FPGA; BER/BLER + resource/Fmax/latency/throughput.",
+   "scope": "Complete hardware-oriented SC decoder at manageable N/K.",
+   "extension": "Optimization only after correctness.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03",
+    "B1-P*"
+   ],
+   "career_relevance": "Decoder hardware architecture trên FPGA.",
+   "tools": "Python/MATLAB, Verilog/SystemVerilog, simulator, FPGA tool.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B3"
+   },
+   "checkpoints_15w": "W2: architecture plan. W5: f/g + control unit tests. W8: integrated decoder/subsystem. W11: FPGA metrics. W15: reproducible demo.",
+   "mvt": "SC golden model; RTL decoder hoặc subsystem đủ lớn; Test vectors + co-verification; Resource/Fmax/latency/throughput; Architecture report."
+  },
+  {
+   "code": "B2-T02",
+   "family": "B2",
+   "type": "T",
+   "title_vi": "Software-RTL co-verification cho SC Polar decoder",
+   "title_en": "Software-RTL Co-Verification for an SC Polar Decoder",
+   "min_level": 3,
+   "prerequisites": "SC model + RTL modules + scripting.",
+   "outputs": "Automated vector generation; RTL comparison; regression; mismatch diagnosis; report.",
+   "scope": "Focus on verification methodology and reproducibility.",
+   "extension": "CI regression.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Decoder hardware architecture trên FPGA.",
+   "tools": "Python/MATLAB; Verilog/SystemVerilog; simulator; FPGA tools; Git.",
+   "mvt": "Khung co-verification tự động SC software ↔ RTL với regression cho tối thiểu các module f/g/partial-sum và một cấu hình decoder nhỏ."
+  },
+  {
+   "code": "B2-R01",
+   "family": "B2",
+   "type": "R",
+   "title_vi": "Architecture optimization cho SC decoder",
+   "title_en": "Architecture Optimization for an SC Polar Decoder",
+   "min_level": 4,
+   "prerequisites": "Stable B2-T01-like baseline.",
+   "outputs": "2+ architectures or parallelism/resource-sharing configurations; controlled evaluation.",
+   "scope": "Quantify area-latency-throughput trade-offs.",
+   "extension": "Design-space search.",
+   "status": "active",
+   "prereq_codes": [
+    "B2-T01"
+   ],
+   "career_relevance": "Decoder hardware architecture trên FPGA.",
+   "tools": "Python/MATLAB; Verilog/SystemVerilog; simulator; FPGA tools; Git."
+  },
+  {
+   "code": "B3-P01",
+   "family": "B3",
+   "type": "P",
+   "title_vi": "Khảo sát quantization của LLR",
+   "title_en": "LLR Quantization Study for Polar Decoding",
+   "min_level": 1,
+   "prerequisites": "SC software baseline.",
+   "outputs": "Floating vs 3/4/5/6-bit results; plots; explanation.",
+   "scope": "Sweep precision/saturation and observe BER/BLER.",
+   "extension": "Optimize clipping range.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Hardware-aware algorithm engineering; fixed-point optimization.",
+   "tools": "Python/MATLAB; RTL/FPGA tools khi cần; scripts sweep và plotting."
+  },
+  {
+   "code": "B3-I01",
+   "family": "B3",
+   "type": "I",
+   "title_vi": "Fixed-point implementation của Polar processing elements",
+   "title_en": "Fixed-Point Implementation of Polar Processing Elements",
+   "min_level": 2,
+   "prerequisites": "B1 + numerical analysis.",
+   "outputs": "Fixed-point reference; RTL or synthesizable model; error tests; resource.",
+   "scope": "Translate quantization decisions to implementation.",
+   "extension": "Multiple Q-formats.",
+   "status": "active",
+   "prereq_codes": [
+    "B1-P*"
+   ],
+   "career_relevance": "Hardware-aware algorithm engineering; fixed-point optimization.",
+   "tools": "Python/MATLAB; RTL/FPGA tools khi cần; scripts sweep và plotting."
+  },
+  {
+   "code": "B3-T01",
+   "family": "B3",
+   "type": "T",
+   "title_vi": "Phân tích lượng tử hóa LLR cho hardware-efficient Polar decoding",
+   "title_en": "Fixed-Point LLR Quantization Analysis for Hardware-Efficient Polar Decoding",
+   "min_level": 3,
+   "prerequisites": "Correct SC baseline; scripted experiments.",
+   "outputs": "BLER/BER vs bit-width; complexity/hardware proxy; controlled analysis; thesis.",
+   "scope": "Find minimum practical precision under defined performance loss.",
+   "extension": "RTL/FPGA validation of selected points.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Hardware-aware algorithm engineering; fixed-point optimization.",
+   "tools": "Python/MATLAB, tùy chọn Verilog/Yosys/FPGA.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B4"
+   },
+   "checkpoints_15w": "W2: reference verified. W5: quantizer. W8: BLER sweep. W11: hardware impact. W15: trade-off conclusion.",
+   "mvt": "Quantization framework; BLER curves theo bit-width; Hardware-cost proxy hoặc synthesis; Recommendation bit-width/range."
+  },
+  {
+   "code": "B3-T02",
+   "family": "B3",
+   "type": "T",
+   "title_vi": "Tối ưu fixed-point cho SC Polar decoder",
+   "title_en": "Fixed-Point Optimization of an SC Polar Decoder",
+   "min_level": 3,
+   "prerequisites": "B2 or equivalent decoder + B3 basics.",
+   "outputs": "LLR/intermediate widths; saturation/clipping; BLER; resource/timing estimates.",
+   "scope": "Jointly tune multiple numerical formats without changing decoder logic.",
+   "extension": "Automated search/Pareto analysis.",
+   "status": "active",
+   "prereq_codes": [
+    "B2-T01"
+   ],
+   "career_relevance": "Hardware-aware algorithm engineering; fixed-point optimization.",
+   "tools": "Python/MATLAB; RTL/FPGA tools khi cần; scripts sweep và plotting.",
+   "mvt": "Cấu hình fixed-point (LLR + intermediate) cho SC decoder chạy đúng, kèm bảng BLER và ước lượng resource cho tối thiểu 3 cấu hình."
+  },
+  {
+   "code": "B3-R01",
+   "family": "B3",
+   "type": "R",
+   "title_vi": "Adaptive-precision Polar decoding",
+   "title_en": "Adaptive-Precision Polar Decoding",
+   "min_level": 4,
+   "prerequisites": "Strong B3-T baseline; research readiness.",
+   "outputs": "Baseline fixed precision; adaptation rule; BLER/average-cost analysis; reproducible experiments.",
+   "scope": "Ask whether all frames/channel states need the same precision.",
+   "extension": "Hardware-aware implementation if evidence supports it.",
+   "status": "active",
+   "prereq_codes": [
+    "B3-T*"
+   ],
+   "career_relevance": "Hardware-aware algorithm engineering; fixed-point optimization.",
+   "tools": "Python/MATLAB; RTL/FPGA tools khi cần; scripts sweep và plotting."
+  },
+  {
+   "code": "B4-P01",
+   "family": "B4",
+   "type": "P",
+   "title_vi": "Phân tích các lỗi SC decoding",
+   "title_en": "Failure Analysis of SC Polar Decoding",
+   "min_level": 2,
+   "prerequisites": "Correct SC baseline.",
+   "outputs": "Failure cases; reliability traces; categorized analysis.",
+   "scope": "Identify where/when first decision errors occur.",
+   "extension": "Correlate with channel/reliability features.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Nghiên cứu thuật toán decoding (SC-Flip/reliability).",
+   "tools": "Python/MATLAB; Git; plotting; RTL/FPGA tùy scope."
+  },
+  {
+   "code": "B4-P02",
+   "family": "B4",
+   "type": "P",
+   "title_vi": "Reliability ranking dựa trên trị tuyệt đối LLR",
+   "title_en": "Reliability Ranking Based on LLR Magnitude",
+   "min_level": 2,
+   "prerequisites": "SC baseline + basic statistics.",
+   "outputs": "Candidate ranking; Top-k metrics; plots.",
+   "scope": "Build transparent heuristic baseline.",
+   "extension": "Alternative reliability metrics.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Nghiên cứu thuật toán decoding (SC-Flip/reliability).",
+   "tools": "Python/MATLAB; Git; plotting; RTL/FPGA tùy scope."
+  },
+  {
+   "code": "B4-I01",
+   "family": "B4",
+   "type": "I",
+   "title_vi": "Xây dựng SC-Flip software decoder",
+   "title_en": "Software Implementation of an SC-Flip Polar Decoder",
+   "min_level": 2,
+   "prerequisites": "SC baseline; candidate ranking.",
+   "outputs": "SCF code; validation; BLER/attempts; reproducible scripts.",
+   "scope": "SC -> candidate -> flip -> re-decode.",
+   "extension": "CRC-assisted variant if scope allows.",
+   "status": "active",
+   "prereq_codes": [
+    "B4-P02"
+   ],
+   "career_relevance": "Nghiên cứu thuật toán decoding (SC-Flip/reliability).",
+   "tools": "Python/MATLAB; Git; plotting; RTL/FPGA tùy scope."
+  },
+  {
+   "code": "B4-T01",
+   "family": "B4",
+   "type": "T",
+   "title_vi": "Thiết kế và đánh giá SC-Flip Polar decoder",
+   "title_en": "Design and Performance Evaluation of SC-Flip Polar Decoding",
+   "min_level": 3,
+   "prerequisites": "B4-I01-level baseline; experimental discipline.",
+   "outputs": "SC vs SCF; BLER; attempts; latency/complexity proxy; analysis.",
+   "scope": "Evaluate reliability-based re-decoding under controlled settings.",
+   "extension": "Hardware mapping or improved metric.",
+   "status": "active",
+   "prereq_codes": [
+    "B4-I01"
+   ],
+   "career_relevance": "Nghiên cứu thuật toán decoding (SC-Flip/reliability).",
+   "tools": "Python/MATLAB, Git.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B6"
+   },
+   "checkpoints_15w": "W2: SC verified. W5: basic SCF. W8: candidate metrics. W11: full experiments. W15: analysis.",
+   "mvt": "SCF simulator; Candidate-ranking analysis; BLER/complexity plots; Average attempts/latency proxy; Conclusion về reliability metric."
+  },
+  {
+   "code": "B4-T02",
+   "family": "B4",
+   "type": "T",
+   "title_vi": "Reliability-based candidate ranking cho SC-Flip",
+   "title_en": "Reliability-Based Candidate Ranking for SC-Flip Polar Decoding",
+   "min_level": 3,
+   "prerequisites": "Stable SCF framework.",
+   "outputs": "Top-1/Top-k ranking; BLER; attempts; baselines; thesis.",
+   "scope": "Compare transparent ranking metrics.",
+   "extension": "Lightweight ML only after strong heuristic baselines.",
+   "status": "active",
+   "prereq_codes": [
+    "B4-I01"
+   ],
+   "career_relevance": "Nghiên cứu thuật toán decoding (SC-Flip/reliability).",
+   "tools": "Python/MATLAB.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B8"
+   },
+   "checkpoints_15w": "W2: error definition. W5: baseline ranking. W8: alternative metric. W11: SCF integration. W15: final comparison.",
+   "mvt": "Ranking dataset; Baseline + proposed/simple metrics; Top-k results; BLER vs attempts; Complexity discussion."
+  },
+  {
+   "code": "B4-R01",
+   "family": "B4",
+   "type": "R",
+   "title_vi": "Improved reliability metric cho SCF",
+   "title_en": "Improved Reliability Metrics for SC-Flip Decoding",
+   "min_level": 4,
+   "prerequisites": "B4-T-level baseline + literature skill.",
+   "outputs": "New/combined metric; ablation; statistical evaluation; paper-ready figures.",
+   "scope": "Use LLR/path/CRC/other valid decoder-state information.",
+   "extension": "Hardware-cost-aware metric.",
+   "status": "active",
+   "prereq_codes": [
+    "B4-T*"
+   ],
+   "career_relevance": "Nghiên cứu thuật toán decoding (SC-Flip/reliability).",
+   "tools": "Python/MATLAB; Git; plotting; RTL/FPGA tùy scope."
+  },
+  {
+   "code": "B5-P01",
+   "family": "B5",
+   "type": "P",
+   "title_vi": "Thiết kế unreliable-frame detector dựa trên threshold",
+   "title_en": "Threshold-Based Unreliable-Frame Detection",
+   "min_level": 2,
+   "prerequisites": "SC baseline; reliability features.",
+   "outputs": "Detector; ROC/trigger metrics or suitable classification metrics; plots.",
+   "scope": "Start with transparent threshold baseline.",
+   "extension": "Multi-feature logistic regression.",
+   "status": "active",
+   "prereq_codes": [
+    "B0-P03"
+   ],
+   "career_relevance": "Adaptive decoding research; cân bằng thuật toán-phần cứng.",
+   "tools": "Python/MATLAB; experiment scripts; RTL/FPGA model tùy scope."
+  },
+  {
+   "code": "B5-I01",
+   "family": "B5",
+   "type": "I",
+   "title_vi": "Xây dựng adaptive SC/SCF simulation framework",
+   "title_en": "Adaptive SC/SCF Simulation Framework",
+   "min_level": 3,
+   "prerequisites": "SC + SCF stable.",
+   "outputs": "Reliable/unreliable branch framework; seeded experiments; activation statistics; docs.",
+   "scope": "Infrastructure for selective enhanced decoding.",
+   "extension": "Hardware-cost accounting.",
+   "status": "active",
+   "prereq_codes": [
+    "B4-I01"
+   ],
+   "career_relevance": "Adaptive decoding research; cân bằng thuật toán-phần cứng.",
+   "tools": "Python/MATLAB; experiment scripts; RTL/FPGA model tùy scope."
+  },
+  {
+   "code": "B5-T01",
+   "family": "B5",
+   "type": "T",
+   "title_vi": "Phát hiện frame không tin cậy cho adaptive Polar decoding",
+   "title_en": "Unreliable-Frame Detection for Adaptive Polar Decoding",
+   "min_level": 3,
+   "prerequisites": "B5-P/I baseline; controlled experiments.",
+   "outputs": "Feature study; threshold/logistic baseline; detection/false trigger/missed trigger/activation/BLER.",
+   "scope": "Predict whether stronger decoding is worth invoking.",
+   "extension": "Lightweight NN if justified.",
+   "status": "active",
+   "prereq_codes": [
+    "B5-P01"
+   ],
+   "career_relevance": "Adaptive decoding research; cân bằng thuật toán-phần cứng.",
+   "tools": "Python/MATLAB; scikit-learn hoặc mô hình nhẹ tương đương.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B7"
+   },
+   "checkpoints_15w": "W2: label/feature definition. W5: dataset. W8: detector baseline. W11: adaptive evaluation. W15: trade-off analysis.",
+   "mvt": "Dataset/features; Detector baseline; ROC/F1 hoặc metric phù hợp; Activation rate + BLER + average cost; Adaptive policy report."
+  },
+  {
+   "code": "B5-T02",
+   "family": "B5",
+   "type": "T",
+   "title_vi": "Adaptive decoder chỉ kích hoạt enhanced processing trên frame khó",
+   "title_en": "Adaptive Polar Decoding with Selective Enhanced Processing",
+   "min_level": 3,
+   "prerequisites": "SC/SCF + reliable detector.",
+   "outputs": "End-to-end adaptive framework; BLER; activation rate; avg attempts/latency/complexity.",
+   "scope": "Compare fixed strong decoder vs selective processing.",
+   "extension": "Hardware-aware energy/resource model.",
+   "status": "active",
+   "prereq_codes": [
+    "B5-T01"
+   ],
+   "career_relevance": "Adaptive decoding research; cân bằng thuật toán-phần cứng.",
+   "tools": "Python/MATLAB; tùy chọn RTL cost model.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B9"
+   },
+   "checkpoints_15w": "W2: baselines. W5: detector/trigger. W8: adaptive integration. W11: full evaluation. W15: trade-off conclusion.",
+   "mvt": "Adaptive decoder simulator; Threshold/policy study; BLER/activation/cost curves; Comparison với SC và always-enhanced."
+  },
+  {
+   "code": "B5-T03",
+   "family": "B5",
+   "type": "T",
+   "title_vi": "Đồng thiết kế thuật toán - phần cứng cho bộ giải mã Polar thích ứng",
+   "title_en": "Algorithm-Hardware Co-Design of an Adaptive Polar Decoder",
+   "min_level": 4,
+   "prerequisites": "Adaptive decoder baseline (B5); fixed-point; RTL/synthesis; Python.",
+   "outputs": "Algorithm baseline; operation/memory model; fixed-point/quantization; RTL các critical block; Pareto analysis reliability-cost; co-design recommendations.",
+   "scope": "Đánh giá thuật toán adaptive không chỉ bằng BLER mà đồng thời bằng latency, operations, memory và hardware cost; synthesis các critical block hoặc subsystem.",
+   "extension": "FPGA prototype một subsystem.",
+   "status": "active",
+   "prereq_codes": [
+    "B5-T02"
+   ],
+   "career_relevance": "Adaptive decoding research; cân bằng thuật toán-phần cứng.",
+   "tools": "Python/MATLAB, Verilog, synthesis/FPGA/ASIC tools.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B11"
+   },
+   "checkpoints_15w": "W2: scope freeze. W5: algorithm baseline. W8: hardware model/RTL. W11: Pareto evaluation. W15: co-design conclusion.",
+   "mvt": "Algorithm baseline; Hardware cost model; Critical-block RTL; Pareto results; Co-design recommendations."
+  },
+  {
+   "code": "B5-R01",
+   "family": "B5",
+   "type": "R",
+   "title_vi": "Adaptive Polar decoding dưới ràng buộc hardware",
+   "title_en": "Hardware-Constrained Adaptive Polar Decoding",
+   "min_level": 4,
+   "prerequisites": "Strong B5-T baseline + hardware awareness.",
+   "outputs": "Research hypothesis; reproducible baselines; latency/resource/energy proxy; paper-ready analysis.",
+   "scope": "Improve BLER while controlling average hardware-related cost.",
+   "extension": "FPGA prototype or joint precision/adaptation.",
+   "status": "active",
+   "prereq_codes": [
+    "B5-T*"
+   ],
+   "career_relevance": "Adaptive decoding research; cân bằng thuật toán-phần cứng.",
+   "tools": "Python/MATLAB; experiment scripts; RTL/FPGA model tùy scope."
+  },
+  {
+   "code": "B6-I01",
+   "family": "B6",
+   "type": "I",
+   "title_vi": "Lightweight ML classifier cho unreliable-frame detection",
+   "title_en": "Lightweight ML Classifier for Unreliable-Frame Detection",
+   "min_level": 3,
+   "prerequisites": "B5 threshold baseline + ML basics.",
+   "outputs": "Train/val/test split; logistic/simple ML/MLP comparisons; reproducible model; metrics.",
+   "scope": "ML supports a narrow task; no end-to-end decoder replacement.",
+   "extension": "Quantization/model compression.",
+   "status": "active",
+   "prereq_codes": [
+    "B5-P01"
+   ],
+   "career_relevance": "ML-assisted communications; hardware-aware ML.",
+   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp."
+  },
+  {
+   "code": "B6-T01",
+   "family": "B6",
+   "type": "T",
+   "title_vi": "Lightweight neural-assisted unreliable-frame detector",
+   "title_en": "Lightweight Neural-Assisted Unreliable-Frame Detector",
+   "min_level": 4,
+   "prerequisites": "B5-T-level baseline + ML + data hygiene.",
+   "outputs": "Heuristic + classical ML + lightweight NN; BLER/activation/model size/inference cost.",
+   "scope": "Demonstrate benefit beyond transparent baselines.",
+   "extension": "FPGA inference feasibility.",
+   "status": "active",
+   "prereq_codes": [
+    "B5-T01"
+   ],
+   "career_relevance": "ML-assisted communications; hardware-aware ML.",
+   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp.",
+   "mvt": "Detector heuristic + classical ML baseline hoàn chỉnh, so sánh công bằng trên cùng dữ liệu/seed; NN nhẹ chỉ thêm sau khi baseline chốt."
+  },
+  {
+   "code": "B6-T02",
+   "family": "B6",
+   "type": "T",
+   "title_vi": "Neural-assisted candidate ranking cho SC-Flip Polar decoder",
+   "title_en": "Lightweight Neural-Assisted Candidate Ranking for SC-Flip Polar Decoding",
+   "min_level": 4,
+   "prerequisites": "B4 stable + ML basics + research readiness.",
+   "outputs": "SC/SCF baselines; Top-k; BLER; attempts; model parameters/ops; thesis.",
+   "scope": "NN ranks candidates only.",
+   "extension": "Quantized model/hardware implementation.",
+   "status": "active",
+   "prereq_codes": [
+    "B4-I01"
+   ],
+   "career_relevance": "ML-assisted communications; hardware-aware ML.",
+   "tools": "Python, PyTorch, NumPy; tùy chọn synthesis model.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B10"
+   },
+   "checkpoints_15w": "W2: SCF fixed. W5: dataset + heuristic. W8: model. W11: robust evaluation. W15: hardware-aware comparison.",
+   "mvt": "Reproducible dataset split; Heuristic baseline; Lightweight model; Top-k/BLER/complexity comparison; Hardware-feasibility note."
+  },
+  {
+   "code": "B6-R01",
+   "family": "B6",
+   "type": "R",
+   "title_vi": "Hardware-aware neural-assisted adaptive Polar decoder",
+   "title_en": "Hardware-Aware Neural-Assisted Adaptive Polar Decoder",
+   "min_level": 5,
+   "prerequisites": "B5/B6 baseline; strong research ownership; hardware awareness.",
+   "outputs": "Research-grade ablation; BLER; activation; latency/ops/memory/resource/energy proxy; reproducibility.",
+   "scope": "Selective lightweight neural assistance under hardware constraints.",
+   "extension": "FPGA prototype if feasible.",
+   "status": "active",
+   "prereq_codes": [
+    "B5-T02"
+   ],
+   "career_relevance": "ML-assisted communications; hardware-aware ML.",
+   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp."
+  },
+  {
+   "code": "B6-R02",
+   "family": "B6",
+   "type": "R",
+   "title_vi": "Algorithm-hardware co-design của neural-assisted Polar decoder",
+   "title_en": "Algorithm-Hardware Co-Design of a Neural-Assisted Polar Decoder",
+   "min_level": 5,
+   "prerequisites": "B6-R01-like maturity + RTL/FPGA capability.",
+   "outputs": "Joint algorithm/hardware design space; hardware-aware model selection; implementation evidence.",
+   "scope": "Treat network and decoder architecture as co-designed components.",
+   "extension": "ASIC feasibility.",
+   "status": "active",
+   "prereq_codes": [
+    "B6-R01"
+   ],
+   "career_relevance": "ML-assisted communications; hardware-aware ML.",
+   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp."
+  },
+  {
+   "code": "AB-P01",
+   "family": "AB",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Đo chi phí một thuật toán trên ba nền tảng: MCU, FPGA, ASIC ước lượng",
+   "title_en": "Cost of One Algorithm on Three Platforms: MCU, FPGA, and ASIC Estimate",
+   "prerequisites": "A1-P* + A6-P01; một khối xử lý đã hiểu rõ (FIR hoặc f/g PE).",
+   "prereq_codes": [
+    "A1-P*",
+    "A6-P01"
+   ],
+   "outputs": "Cùng một khối xử lý đo trên MCU (cycle/năng lượng), FPGA (tài nguyên/Fmax) và ASIC ước lượng qua synthesis (area/timing); bảng so sánh ba cột + phân tích.",
+   "scope": "Bài nhập môn co-design: cảm nhận bằng số liệu tại sao cùng một thuật toán có chi phí khác nhau trên từng nền tảng.",
+   "extension": "Thêm một điểm thiết kế thứ hai (bit width khác) và so lại cả ba nền tảng.",
+   "status": "active",
+   "career_relevance": "Tư duy platform-aware — nền của mọi đề tài co-design phía sau.",
+   "tools": "C; MCU; Verilog; FPGA toolchain; Yosys + thư viện chuẩn; Python."
+  },
+  {
+   "code": "AB-T01",
+   "family": "AB",
+   "type": "T",
+   "title_vi": "ASIC feasibility study cho Polar Processing Element",
+   "title_en": "ASIC Feasibility Study of a Polar Processing Element",
+   "min_level": 3,
+   "prerequisites": "B1 PE + A4 flow.",
+   "outputs": "Verified PE; synthesis; STA; physical implementation; PPA; analysis.",
+   "scope": "Take f/g/partial-sum block through ASIC flow.",
+   "extension": "Precision/pipeline comparison.",
+   "status": "active",
+   "prereq_codes": [
+    "B1-P02",
+    "B1-P03",
+    "A4-P01"
+   ],
+   "career_relevance": "Algorithm-hardware co-design; Digital IC x communications research.",
+   "tools": "Python/MATLAB, Verilog, Yosys, LibreLane/OpenROAD, KLayout.",
+   "cohort_alias": {
+    "HK1_2026_2027": "B12"
+   },
+   "checkpoints_15w": "W2: target block freeze. W5: verified RTL. W8: synthesis/STA. W11: physical flow. W15: PPA + feasibility report.",
+   "mvt": "Verified Polar RTL block; Synthesis/STA reports; Physical layout/GDSII nếu đạt; PPA analysis; ASIC feasibility conclusion."
+  },
+  {
+   "code": "AB-T02",
+   "family": "AB",
+   "type": "T",
+   "title_vi": "FPGA-to-ASIC evaluation của Polar Encoder",
+   "title_en": "FPGA-to-ASIC Evaluation of a Polar Encoder",
+   "min_level": 3,
+   "prerequisites": "B1-T01 + A4 basics.",
+   "outputs": "FPGA metrics + ASIC PPA; methodology comparison; report.",
+   "scope": "Same functional design evaluated on FPGA and ASIC flow.",
+   "extension": "Architecture variants.",
+   "status": "active",
+   "prereq_codes": [
+    "B1-T01",
+    "A4-P01"
+   ],
+   "career_relevance": "Algorithm-hardware co-design; Digital IC x communications research.",
+   "tools": "Python/MATLAB; RTL; FPGA; Yosys; LibreLane/OpenROAD; KLayout.",
+   "mvt": "Encoder đã verify + số liệu FPGA + ASIC synthesis/STA cho một cấu hình; bảng so sánh phương pháp đo hai flow."
+  },
+  {
+   "code": "AB-T03",
+   "family": "AB",
+   "type": "T",
+   "title_vi": "FPGA-to-ASIC evaluation của SC Polar Decoder",
+   "title_en": "FPGA-to-ASIC Evaluation of an SC Polar Decoder",
+   "min_level": 4,
+   "prerequisites": "B2-T01 + A4; scope control essential.",
+   "outputs": "Selected decoder/core; FPGA and ASIC evidence; trade-off analysis.",
+   "scope": "May use reduced N or core subsystem to fit 15 weeks.",
+   "extension": "Optimization after reproducible baseline.",
+   "status": "active",
+   "prereq_codes": [
+    "B2-T01",
+    "A4-T01"
+   ],
+   "career_relevance": "Algorithm-hardware co-design; Digital IC x communications research.",
+   "tools": "Python/MATLAB; RTL; FPGA; Yosys; LibreLane/OpenROAD; KLayout.",
+   "mvt": "Một decoder/core subsystem (cho phép N thu gọn) qua cả FPGA và ASIC flow với evidence PPA hai phía."
+  },
+  {
+   "code": "AB-T04",
+   "family": "AB",
+   "type": "T",
+   "title_vi": "PPA optimization cho fixed-point Polar Processing Element",
+   "title_en": "PPA Optimization of a Fixed-Point Polar Processing Element",
+   "min_level": 4,
+   "prerequisites": "B3 + A4.",
+   "outputs": "Bit-width/pipeline configurations; BLER or numerical impact; ASIC PPA; Pareto analysis.",
+   "scope": "Connect numerical precision to physical cost.",
+   "extension": "Automated DSE.",
+   "status": "active",
+   "prereq_codes": [
+    "B3-T01",
+    "A4-P01"
+   ],
+   "career_relevance": "Algorithm-hardware co-design; Digital IC x communications research.",
+   "tools": "Python/MATLAB; RTL; FPGA; Yosys; LibreLane/OpenROAD; KLayout.",
+   "mvt": "Tối thiểu 2 cấu hình bit-width/pipeline của PE qua ASIC flow, kèm bảng PPA và phân tích tác động số học."
+  },
+  {
+   "code": "AB-R01",
+   "family": "AB",
+   "type": "R",
+   "title_vi": "Hardware-aware design-space exploration cho Polar Decoder",
+   "title_en": "Hardware-Aware Design-Space Exploration for Polar Decoding",
+   "min_level": 5,
+   "prerequisites": "Strong B + A4/A5; research ownership.",
+   "outputs": "Reproducible multi-objective experiments; BLER-area-latency-throughput-energy analysis; research manuscript assets.",
+   "scope": "Optimize across algorithmic and hardware parameters.",
+   "extension": "Neural-assisted branch if evidence justifies it.",
+   "status": "active",
+   "prereq_codes": [
+    "AB-T*"
+   ],
+   "career_relevance": "Algorithm-hardware co-design; Digital IC x communications research.",
+   "tools": "Python/MATLAB; RTL; FPGA; Yosys; LibreLane/OpenROAD; KLayout."
+  },
+  {
+   "code": "AB-T05",
+   "family": "AB",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Tăng tốc phần cứng cho suy luận AI biên trên SoC FPGA",
+   "title_en": "Hardware Acceleration of an Edge-AI Workload on a SoC FPGA",
+   "prerequisites": "A6-T02 hoặc (A3-T* + A7-P03).",
+   "prereq_codes": [
+    "A6-P03",
+    "A7-P03"
+   ],
+   "outputs": "Baseline suy luận CPU-only trên SoC; accelerator cho lớp/khối nặng nhất; đo end-to-end: latency, năng lượng/suy luận, tài nguyên; khóa luận; repo.",
+   "scope": "Co-design vi mạch × edge AI: cùng một mô hình, so phần mềm thuần với bản có accelerator trên cùng board.",
+   "extension": "Chỉ mở sau baseline: quét bit width của accelerator và vẽ đường accuracy/PPA.",
+   "status": "active",
+   "career_relevance": "Edge-AI hardware engineer; đúng mạch nghiên cứu accelerator hiện nay.",
+   "tools": "Zynq/PYNQ; Verilog/HLS được duyệt; TFLite; profiler; thiết bị đo dòng; Git.",
+   "mvt": "Baseline CPU-only có số liệu; accelerator RTL + testbench; tích hợp driver chạy đúng mô hình thật; bảng latency/năng lượng/tài nguyên so với baseline; phân tích điểm nghẽn; repository tái lập."
+  },
+  {
+   "code": "AB-T06",
+   "family": "AB",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Bộ giải mã SC Polar tiết kiệm năng lượng cho liên kết IoT",
+   "title_en": "Energy-Efficient SC Polar Decoder for an IoT Link",
+   "prerequisites": "B1-T02 hoặc B2-T01 hoặc B3-T01; hiểu ngân sách năng lượng thiết bị biên.",
+   "prereq_codes": [
+    "B1-T*",
+    "B3-P01"
+   ],
+   "outputs": "SC decoder fixed-point đặt trong ngữ cảnh IoT (block length/ném SNR do mentor chốt); đánh giá BLER kèm năng lượng/bit và độ trễ trên FPGA; so >=2 cấu hình; khóa luận; repo.",
+   "scope": "Co-design Polar × IoT: câu hỏi không phải 'decoder chạy chưa' mà 'tốn bao nhiêu năng lượng cho một bit tin cậy'.",
+   "extension": "Chỉ mở sau baseline: adaptive scheme (nối B5) hoặc ước lượng ASIC (nối AB-T01).",
+   "status": "active",
+   "career_relevance": "Baseband/hardware engineer cho truyền thông IoT; trực tiếp phục vụ hướng luận án.",
+   "tools": "Python/MATLAB golden model; Verilog; FPGA; thiết bị đo/ước lượng năng lượng; Git.",
+   "mvt": "Golden model đối chiếu; decoder fixed-point trên FPGA khớp golden; đường BLER; bảng năng lượng/bit + độ trễ cho >=2 cấu hình; phân tích trade-off; repository tái lập."
+  },
+  {
+   "code": "AB-R02",
+   "family": "AB",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Co-design thuật toán – phần cứng cho truyền thông tin cậy ở thiết bị biên",
+   "title_en": "Algorithm-Hardware Co-Design for Reliable Communication at the Edge",
+   "prerequisites": "AB-T06 hoặc B5-T* hoặc tương đương; nền tảng thí nghiệm vững.",
+   "prereq_codes": [
+    "B5-T*"
+   ],
+   "outputs": "Research question về điểm gặp giữa adaptive Polar decoding và ngân sách năng lượng biên; framework thí nghiệm; >=2 chiến lược so trên cùng ràng buộc; phân tích BLER-năng lượng-độ trễ; báo cáo nghiên cứu.",
+   "scope": "Đúng lõi định hướng luận án: quyết định thuật toán (khi nào giải mạnh) và quyết định phần cứng (đầu tư diện tích vào đâu) được tối ưu cùng nhau, không tách rời.",
+   "extension": "Ánh xạ một chiến lược xuống RTL và kiểm chứng chi phí thật.",
+   "status": "active",
+   "career_relevance": "Hạt nhân bài báo hội nghị/tạp chí; hướng luận án của mentor.",
+   "tools": "Python/MATLAB; Verilog; FPGA; mô hình năng lượng; Git."
+  },
+  {
+   "code": "AB-R03",
+   "family": "AB",
+   "type": "R",
+   "min_level": 5,
+   "title_vi": "Nền tảng biên tích hợp: truyền thông và suy luận chia sẻ tài nguyên phần cứng",
+   "title_en": "Integrated Edge Platform: Communication and Inference Sharing Hardware Resources",
+   "prerequisites": "AB-T05 hoặc AB-T06 + nền nghiên cứu (một đề tài R hoặc extension đã sign-off).",
+   "prereq_codes": [
+    "AB-T05"
+   ],
+   "outputs": "Feasibility study có số liệu: decoder Polar + suy luận edge AI trên cùng SoC/FPGA — chia sẻ tài nguyên, lập lịch, ngân sách năng lượng chung; phân tích kiến trúc; báo cáo nghiên cứu định hướng dài hạn.",
+   "scope": "Câu hỏi mở nhiều học kỳ: thiết bị biên tương lai vừa truyền tin cậy vừa suy luận tại chỗ — kiến trúc chung tối ưu trông như thế nào?",
+   "extension": "Prototype một cấu hình chia sẻ và đo xung đột tài nguyên thật.",
+   "status": "active",
+   "career_relevance": "Chương trình nghiên cứu dài hạn của lab; đề tài cấp luận án.",
+   "tools": "Zynq/SoC FPGA; Verilog; TFLite; golden model Polar; Python phân tích."
+  }
+ ],
+ "meta": {
+  "version": "1.5.1",
+  "updated": "2026-08-23",
+  "program": "Engineering & Research Mentoring Program (Lucero)",
+  "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
+  "prereq_codes_convention": "Mỗi phần tử là mã chính xác (vd 'A5-T02') hoặc pattern family-type 'A1-P*' nghĩa là hoàn thành ít nhất một đề tài P của family A1 hoặc năng lực tương đương có evidence.",
+  "status_values": [
+   "active",
+   "candidate",
+   "archived"
+  ],
+  "notes": "Nguồn chuẩn danh mục. Mọi catalog/danh mục cohort/workbook Portfolio là view sinh ra từ file này (scripts/generate_catalogs.py)."
+ }
+}

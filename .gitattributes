@@ -1,0 +1,33 @@
+# ══════════════════════════════════════════════════════════════════
+#  Chuẩn hóa file cho kho làm việc trên cả Windows và Linux
+# ══════════════════════════════════════════════════════════════════
+
+# Tự nhận diện file văn bản, chuẩn hóa xuống dòng khi lưu vào kho
+* text=auto
+
+# ── File văn bản: luôn dùng LF trong kho ──
+*.md    text
+*.txt   text
+*.json  text
+*.yml   text
+*.yaml  text
+*.html  text
+*.css   text
+*.py    text eol=lf
+*.sh    text eol=lf
+
+# ── File nhị phân: git không được đụng vào nội dung ──
+*.docx  binary
+*.xlsx  binary
+*.pptx  binary
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.zip   binary
+
+# ── Thống kê ngôn ngữ của GitHub: HTML ở đây là tài liệu sinh tự động,
+#    không phải mã nguồn — để repo hiển thị đúng là dự án Python/tài liệu ──
+*.html          linguist-documentation
+docs/*          linguist-documentation
+02_Project_Portfolio/*  linguist-documentation

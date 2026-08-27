@@ -1,0 +1,144 @@
+{
+ "meta": {
+  "version": "1.5.1",
+  "updated": "2026-08-23",
+  "program": "Engineering & Research Mentoring Program (Lucero)",
+  "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
+  "notes": "Nguồn chuẩn duy nhất cho rubric TR/WR/RR và ngưỡng. Handbook §5, các phiếu và workbook Rubrics là view."
+ },
+ "technical_readiness": {
+  "scale": {
+   "0": "chưa biết",
+   "1": "biết tên",
+   "2": "hiểu cơ bản",
+   "3": "làm được có hướng dẫn",
+   "4": "tự làm được",
+   "5": "có thể giải thích/mentor người khác"
+  },
+  "competencies": [
+   "Điện tử cơ bản",
+   "Logic số",
+   "Verilog/SystemVerilog",
+   "Simulation/debug waveform",
+   "FPGA",
+   "Python",
+   "MATLAB",
+   "Linux/WSL",
+   "Git/GitHub",
+   "DSP",
+   "Truyền thông số",
+   "Xác suất",
+   "Coding theory",
+   "Polar Codes",
+   "Đọc tài liệu tiếng Anh",
+   "Technical writing"
+  ],
+  "note": "Self-assessment chỉ là dữ liệu ban đầu; phải kiểm chứng bằng mini-task."
+ },
+ "working_readiness": {
+  "scale": {
+   "min": 0,
+   "max": 4
+  },
+  "max_total": 20,
+  "traits": [
+   {
+    "name": "Cam kết & kỷ luật",
+    "evidence": "Đúng deadline; tham gia/đổi lịch đúng quy ước; cập nhật đều; không để task “vâng dạ rồi để đó”."
+   },
+   {
+    "name": "Kiên trì",
+    "evidence": "Khi gặp lỗi có evidence về các thử nghiệm chẩn đoán, không bỏ cuộc ngay."
+   },
+   {
+    "name": "Trung thực",
+    "evidence": "Phân biệt rõ tự làm, tham khảo, AI hỗ trợ, chưa hiểu, kết quả âm/không như kỳ vọng."
+   },
+   {
+    "name": "Chủ động",
+    "evidence": "Tự tìm từ khóa/tài liệu; đề xuất next step trước khi hỏi mentor “em làm gì tiếp?”."
+   },
+   {
+    "name": "Tư duy phản biện",
+    "evidence": "Hỏi tại sao; so sánh alternatives; chấp nhận/sửa quan điểm theo evidence."
+   }
+  ],
+  "thresholds": {
+   "project": 10,
+   "internship": 12,
+   "datn_engineering": 14,
+   "datn_research_oriented": 15,
+   "nckh": 16,
+   "advanced_b6_ab_r": 17
+  },
+  "note": "Ngưỡng là gợi ý, không phải luật máy móc; mentor có thể override nhưng phải ghi lý do vào hồ sơ."
+ },
+ "research_readiness": {
+  "scale": {
+   "min": 0,
+   "max": 4
+  },
+  "traits": [
+   {
+    "name": "Literature comprehension",
+    "evidence": "Đọc được paper/tài liệu và tách problem, assumptions, method, metrics, limitations."
+   },
+   {
+    "name": "Baseline discipline",
+    "evidence": "Ưu tiên baseline đúng, tái lập trước novelty."
+   },
+   {
+    "name": "Experimental design",
+    "evidence": "Biết control variables, seed/config, metric và so sánh công bằng."
+   },
+   {
+    "name": "Interpretation",
+    "evidence": "Giải thích kết quả, không chỉ báo số/figure."
+   },
+   {
+    "name": "Research ownership",
+    "evidence": "Tự hình thành câu hỏi/giả thuyết nhỏ và biết giới hạn claim."
+   }
+  ],
+  "max_total": 20,
+  "expectations": [
+   {
+    "key": "P",
+    "label": "Project môn học",
+    "expectation": "không bắt buộc"
+   },
+   {
+    "key": "I",
+    "label": "Thực tập",
+    "expectation": "không bắt buộc"
+   },
+   {
+    "key": "T_engineering",
+    "label": "DATN engineering",
+    "expectation": "cơ bản"
+   },
+   {
+    "key": "T_research_oriented",
+    "label": "DATN research-oriented",
+    "expectation": "khá"
+   },
+   {
+    "key": "R",
+    "label": "NCKH",
+    "expectation": "bắt buộc, tốt"
+   },
+   {
+    "key": "advanced_b6_ab_r",
+    "label": "Advanced — đề tài family B6, hoặc đề tài loại R của family AB",
+    "expectation": "rất tốt"
+   }
+  ],
+  "note": "RR chấm định tính theo kỳ vọng trên; tổng /20 chỉ để ghi nhận, KHÔNG có ngưỡng số như WR. Mentor kết luận bằng nhận định + evidence và ghi lý do vào hồ sơ."
+ },
+ "mentor_decision_options": [
+  "Nhận",
+  "Nhận có điều kiện",
+  "Đổi scope/đề tài",
+  "Chưa nhận"
+ ]
+}

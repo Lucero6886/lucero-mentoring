@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vận hành trên GitHub — Lucero Mentoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F7F8F6; --card:#FFFFFF; --ink:#1C2733; --mut:#5A6772; --line:#DCE2DE;
+  --acc:#0E7C6B; --acc-soft:#E3EFEB; --amb:#8F6400; --amb-soft:#F4ECD9;
+  --danger:#A33A2A; --danger-soft:#F7E7E3; --code-bg:#EDF1EE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#12181D; --card:#1A222A; --ink:#E4EAE7; --mut:#98A4AC; --line:#2B353D;
+    --acc:#4CC2AD; --acc-soft:#17352F; --amb:#E3B341; --amb-soft:#332B14;
+    --danger:#E8836F; --danger-soft:#3A211C; --code-bg:#212B33;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12181D; --card:#1A222A; --ink:#E4EAE7; --mut:#98A4AC; --line:#2B353D;
+  --acc:#4CC2AD; --acc-soft:#17352F; --amb:#E3B341; --amb-soft:#332B14;
+  --danger:#E8836F; --danger-soft:#3A211C; --code-bg:#212B33;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:400 16px/1.68 "Be Vietnam Pro",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin:0 auto;padding:40px 22px 80px}
+h1,h2,h3{font-family:"Archivo","Be Vietnam Pro",Arial,sans-serif;line-height:1.24;text-wrap:balance}
+h1{font-size:clamp(27px,4.4vw,40px);font-weight:800;margin:10px 0 6px;letter-spacing:-.015em}
+h2{font-size:clamp(20px,3vw,25px);font-weight:700;margin:54px 0 14px;padding-top:24px;border-top:1px solid var(--line)}
+h3{font-size:17.5px;font-weight:700;margin:30px 0 8px}
+p{margin:11px 0;max-width:72ch}
+ul,ol{max-width:72ch;padding-left:22px}
+li{margin:7px 0}
+.eyebrow{font:600 12px/1.4 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+.meta{color:var(--mut);font-size:14px;margin:4px 0 0}
+code{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.9em;
+  background:var(--code-bg);padding:1px 5px;border-radius:5px}
+pre{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;margin:14px 0}
+pre code{background:none;padding:0;font-size:13.5px;line-height:1.65;white-space:pre;font-family:"IBM Plex Mono",Consolas,"Segoe UI Mono","DejaVu Sans Mono",ui-monospace,monospace}
+.tw{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{font:600 11.5px/1.4 "Be Vietnam Pro",sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);
+  text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);background:var(--code-bg);white-space:nowrap}
+td{padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+blockquote{margin:18px 0;padding:14px 18px;background:var(--card);
+  border-left:3px solid var(--acc);border-radius:0 10px 10px 0}
+blockquote p{margin:6px 0;max-width:none}
+blockquote strong{color:var(--acc)}
+hr{display:none}
+a{color:var(--acc)}
+h2 + p, h2 + .tw{margin-top:12px}
+.lede{font-size:17px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--acc);
+  padding:16px 20px;border-radius:0 12px 12px 0;margin:24px 0}
+.lede p{margin:0;max-width:none}
+input[type=checkbox]{accent-color:var(--acc);margin-right:6px}
+ul.task-list{list-style:none;padding-left:4px}
+footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--mut);font-size:13.5px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="eyebrow">Engineering &amp; Research Mentoring Program · Lucero</div>
+<h1>Vận hành chương trình trên GitHub</h1>
+<p class="meta">ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa · hệ thống v1.5.1</p>
+<div class="lede"><p>Trang này trả lời ba câu: <strong>cái gì công khai, cái gì riêng tư, và mọi người làm việc với nhau thế nào</strong> khi chương trình chạy trên GitHub. Dành cho cả sinh viên, mentor và giảng viên đồng hành.</p></div>
+</header>
+<h2 id="quy-tắc-phân-loại-một-câu-duy-nhất">1. Quy tắc phân loại — một
+câu duy nhất</h2>
+<blockquote>
+<p><strong>Nội dung nói về ĐỀ TÀI thì công khai. Nội dung nói về MỘT CON
+NGƯỜI thì không.</strong></p>
+</blockquote>
+<p>Mô tả đề tài <code>A4-T01</code>, tiêu chí qua Gate 2, cách chấm mức
+sẵn sàng — đều là <em>đề tài</em> → công khai được. Bạn Minh đạt WR
+13/20, bạn Lan bị cảnh báo tuần 6, danh sách điểm — đều là <em>con
+người</em> → không bao giờ lên GitHub công khai.</p>
+<p>Áp dụng quy tắc này thì mọi trường hợp mập mờ đều tự giải quyết.</p>
+<hr />
+<h2 id="ba-tầng-riêng-tư">2. Ba tầng riêng tư</h2>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tầng</th>
+<th>Ở đâu</th>
+<th>Chứa gì</th>
+<th>Ai thấy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>① Công khai</strong></td>
+<td>Repo <code>lucero-mentoring</code> (Public)</td>
+<td>Danh mục 105 đề tài, luật chơi, hướng dẫn, biểu mẫu trống, script,
+trang web</td>
+<td>Cả thế giới</td>
+</tr>
+<tr class="even">
+<td><strong>② Riêng tư</strong></td>
+<td>Một repo riêng cho <strong>mỗi sinh viên</strong> (Private)</td>
+<td>Code, testbench, kết quả, báo cáo tuần, charter, sổ bằng chứng</td>
+<td>Sinh viên đó + mentor</td>
+</tr>
+<tr class="odd">
+<td><strong>③ Không lên GitHub</strong></td>
+<td><code>07_Private/</code> trên máy mentor</td>
+<td>Workbook có tên thật/điểm, Phiếu 5 đã chấm, cảnh báo, dữ liệu cá
+nhân</td>
+<td>Chỉ mentor</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ba tầng này không phải để “giữ bí mật” mà để <strong>mỗi thứ ở đúng
+chỗ có ích nhất</strong>: luật chơi càng công khai càng tốt (ai cũng
+biết mình được đánh giá bằng gì); công việc đang dở càng kín càng tốt
+(không ai bị nhìn khi chưa xong); đánh giá cá nhân thì thuộc về hồ sơ
+đào tạo, không thuộc về một nền tảng thương mại nước ngoài.</p>
+<hr />
+<h2 id="tầng-①-repo-công-khai-chứa-chính-xác-những-gì">3. Tầng ① — Repo
+công khai chứa chính xác những gì</h2>
+<p><strong>Có trên repo:</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Nhóm</th>
+<th>Vì sao công khai</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>06_Data/</code> — nguồn chuẩn 105 đề tài, thang đánh giá, 6
+gate</td>
+<td>Sinh viên tự tra được, người khác tái lập được hệ thống</td>
+</tr>
+<tr class="even">
+<td>Danh mục, phiếu <strong>trống</strong>, bản đồ đề tài, trang web
+catalog</td>
+<td>Đây là thứ sinh viên cần để chọn</td>
+</tr>
+<tr class="odd">
+<td><code>01_Governance/</code> — sổ tay, thỏa thuận, quy tắc AI</td>
+<td>Luật chơi phải minh bạch trước khi ai đó tham gia</td>
+</tr>
+<tr class="even">
+<td><code>10_Documentation/</code> — hướng dẫn theo vai trò</td>
+<td>Ai cũng biết mình phải làm gì</td>
+</tr>
+<tr class="odd">
+<td><code>04_Project_Template/</code> — 15 biểu mẫu
+<strong>trống</strong></td>
+<td>Sinh viên copy về repo riêng để dùng</td>
+</tr>
+<tr class="even">
+<td><code>scripts/</code> + <code>tests/</code></td>
+<td>Chứng minh danh mục sinh tự động, không phải gõ tay</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Không bao giờ có trên repo:</strong> phiếu đã điền · họ tên
+kèm mã số sinh viên · điểm, kết quả đánh giá năng lực · workbook có dữ
+liệu thật · ảnh chụp màn hình chứa các thứ trên · file PDF bài báo có
+bản quyền.</p>
+<p><code>.gitignore</code> đã chặn sẵn <code>07_Private/</code>, nhưng
+<strong><code>.gitignore</code> chỉ chặn thứ nằm đúng chỗ</strong> — kỷ
+luật vẫn là: dữ liệu thật chỉ được lưu trong <code>07_Private/</code>,
+không rải ra ngoài.</p>
+<hr />
+<h2 id="tầng-②-repo-làm-việc-của-từng-sinh-viên">4. Tầng ② — Repo làm
+việc của từng sinh viên</h2>
+<p>Đây là phần thay đổi cách vận hành nhiều nhất, nên làm cho đúng ngay
+từ tuần 1.</p>
+<h3 id="ai-tạo-đặt-tên-thế-nào">Ai tạo, đặt tên thế nào</h3>
+<p><strong>Sinh viên tự tạo trên tài khoản của mình</strong> — không
+phải mentor tạo hộ. Lý do quan trọng: khi tốt nghiệp, đó là <strong>hồ
+sơ năng lực (portfolio)</strong> của em, mang theo đi xin việc. Ngành
+thiết kế vi mạch tuyển người bằng thứ nhìn thấy được; một repo sạch sẽ
+với lịch sử commit đều đặn nói nhiều hơn một dòng trong CV.</p>
+<pre><code>Tên repo:  &lt;mã-đề-tài&gt;-&lt;tên-ngắn&gt;       ví dụ:  a4-t01-minh   ·   b3-t01-lan
+Chế độ:    Private trong suốt học kỳ
+Mời:       mentor làm Collaborator (Settings → Collaborators)</code></pre>
+<h3 id="cấu-trúc-chuẩn-bên-trong">Cấu trúc chuẩn bên trong</h3>
+<pre><code>README.md              ← chạy lại thế nào; cập nhật liên tục, không để cuối kỳ mới viết
+PROJECT_CHARTER.md     ← MVT và Extension tách bạch (copy từ 04_Project_Template/)
+EVIDENCE_LEDGER.md     ← sổ bằng chứng: claim nào dựa trên file/kết quả nào
+DECISION_LOG.md        ← quyết định kỹ thuật và lý do (không sửa đè dòng cũ)
+AI_USAGE_LOG.md        ← dùng AI làm gì, đã kiểm chứng bằng cách nào
+rtl/  tb/  sim/  syn/  scripts/  docs/  results/
+weekly/                ← báo cáo tuần (hoặc dùng Issue, xem §5)</code></pre>
+<p>Bộ khởi tạo có sẵn:
+<strong><code>04_Project_Template/student_repo_starter/</code></strong>
+— copy nguyên vào repo mới là chạy được.</p>
+<h3 id="cuối-kỳ">Cuối kỳ</h3>
+<ol type="1">
+<li>Gắn tag và tạo <strong>Release <code>v1.0-final</code></strong>,
+đính kèm gói bàn giao (Legacy Package).</li>
+<li>Sinh viên <strong>nên</strong> chuyển repo sang Public sau bảo vệ —
+thành portfolio. Không bắt buộc; nếu đề tài có ràng buộc với đơn vị tài
+trợ thì giữ private.</li>
+<li>Mentor được trao quyền lưu một bản (fork hoặc mirror) để khóa sau kế
+thừa — <strong>thỏa thuận trước từ tuần 1</strong>, không phải xin sau
+khi xong.</li>
+</ol>
+<hr />
+<h2 id="nhịp-một-tuần-trên-github">5. Nhịp một tuần trên GitHub</h2>
+<p>Nhịp cũ (chat + file đính kèm) hỏng ở ba chỗ: mentor phải nhớ ai nói
+gì, “em nộp rồi ạ” không kiểm chứng được, và tiến độ tan vào lịch sử trò
+chuyện. GitHub sửa cả ba mà không cần thêm công cụ nào.</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Khi nào</th>
+<th>Sinh viên</th>
+<th>Mentor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Trong tuần</strong></td>
+<td>Commit theo từng bước nhỏ, thông điệp commit nói <em>đã làm
+gì</em></td>
+<td>(không can thiệp)</td>
+</tr>
+<tr class="even">
+<td><strong>Trước buổi gặp 24h</strong></td>
+<td>Mở <strong>Issue</strong> <em>“Báo cáo tuần N”</em> theo mẫu, mỗi
+mục evidence là <strong>một link tới commit/file/hình</strong></td>
+<td>Đọc issue + lướt commit trong tuần</td>
+</tr>
+<tr class="odd">
+<td><strong>Trong buổi gặp</strong></td>
+<td>Trình bày: Mục tiêu → Bằng chứng → Cái gì hỏng → Chẩn đoán → Đề xuất
+bước tiếp</td>
+<td>Gỡ vướng, không giảng lại</td>
+</tr>
+<tr class="even">
+<td><strong>Cuối buổi</strong></td>
+<td>—</td>
+<td>Comment chốt <strong>1–3 việc + hạn</strong> ngay trong issue, rồi
+đóng issue</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Vì sao cách này hiệu quả:</strong> mỗi dòng bằng chứng đã có
+sẵn dấu thời gian và tác giả — không ai phải chứng minh “em có làm”.
+Mentor mở đúng một trang là thấy cả tuần. Và khi cần rà lại tuần 4 vào
+lúc bảo vệ, nó vẫn nằm nguyên đó.</p>
+<blockquote>
+<p><strong>Lịch sử commit chính là bằng chứng về quyền sở hữu.</strong>
+Một repo có commit đều đặn suốt 15 tuần kể một câu chuyện khác hẳn một
+repo chỉ có một commit khổng lồ ở tuần 14. Đây cũng là cách kiểm tra tự
+nhiên cho quy tắc <em>cannot explain = not completed</em>.</p>
+</blockquote>
+<hr />
+<h2 id="sáu-gate-trên-github">6. Sáu gate trên GitHub</h2>
+<p>Trong repo của mỗi sinh viên, tạo <strong>6 Milestone</strong> đúng
+tên và hạn của cohort (lấy từ <code>06_Data/cohort_*.json</code>):</p>
+<pre><code>Gate 1 · Problem &amp; Foundation    hạn 20/09
+Gate 2 · Baseline                hạn 11/10
+Gate 3 · Core Implementation     hạn 01/11
+Gate 4 · Experiments             hạn 22/11
+Gate 5 · Analysis &amp; Draft        hạn 06/12
+Gate 6 · Reproducibility &amp; Defense  hạn 19/12</code></pre>
+<p>Mọi issue (báo cáo tuần, việc cần làm, lỗi) gán vào milestone tương
+ứng → thanh tiến độ của milestone chính là tiến độ thật, tự cập
+nhật.</p>
+<p><strong>Buổi gate review:</strong> mentor mở issue <em>“Gate N —
+review”</em> chứa checklist đúng câu chữ tiêu chí trong nguồn chuẩn,
+tick từng mục, kết luận một trong bốn: <code>PASS</code> ·
+<code>CONDITIONAL_PASS</code> (kèm điều kiện + hạn) · <code>FAIL</code>
+· <code>NOT_ENOUGH_EVIDENCE</code>. Kết luận nằm trong issue → không ai
+nhớ nhầm về sau. Qua gate thì gắn tag <code>gate-2-passed</code>.</p>
+<p>Luật cứng vẫn nguyên: không baseline ở Gate 2 → đóng extension ·
+trượt Gate 3 → thu nhỏ phạm vi · sau Gate 4 → không thêm thuật toán lớn
+mới.</p>
+<hr />
+<h2 id="bảng-điều-khiển-của-mentor-một-phút-mỗi-sáng-thứ-hai">7. Bảng
+điều khiển của mentor — một phút mỗi sáng thứ Hai</h2>
+<p>Tạo <strong>một GitHub Project</strong> (loại bảng) ở cấp tài
+khoản/tổ chức, tên <em>“Cohort HK1 2026-2027”</em>. Project cấp tài
+khoản gom được issue từ <strong>nhiều repo khác nhau</strong> — đó chính
+là điều cần cho việc mentor nhiều em.</p>
+<ul>
+<li>Cột: <code>Tuần này</code> · <code>Đang chờ mentor</code> ·
+<code>Đã chốt</code> — hoặc theo gate.</li>
+<li>Trường tự thêm: <code>Sinh viên</code>, <code>Mã đề tài</code>,
+<code>Risk</code> (🟢🟡🔴), <code>Hạn kế tiếp</code>.</li>
+<li>Mỗi sáng thứ Hai nhìn cột <code>Risk</code> và cột
+<code>Hạn kế tiếp</code>: ai vàng/đỏ, ai quá 7 ngày không có commit → mở
+sâu em đó.</li>
+</ul>
+<p><strong>Workbook
+<code>03_Operations/Mentoring_Management_Workbook.xlsx</code> vẫn giữ
+nguyên vai trò</strong> — nhưng chỉ cho phần GitHub không nên chứa: điểm
+số, đánh giá năng lực, ghi chú cảnh báo. GitHub theo dõi <em>công
+việc</em>; workbook lưu <em>đánh giá</em>. Đừng trộn hai thứ.</p>
+<hr />
+<h2 id="thảo-luận-chung-nơi-cả-lớp-cùng-lợi">8. Thảo luận chung — nơi cả
+lớp cùng lợi</h2>
+<p>Bật <strong>Discussions</strong> trên repo công khai, chia bốn
+mục:</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mục</th>
+<th>Dùng cho</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Hỏi đáp kỹ thuật</strong></td>
+<td>Vướng mắc chung: cài toolchain, hiểu khái niệm, lỗi hay gặp</td>
+</tr>
+<tr class="even">
+<td><strong>Chọn đề tài</strong></td>
+<td>“Nền của em thế này thì nên <code>A6-T01</code> hay
+<code>A7-T02</code>?”</td>
+</tr>
+<tr class="odd">
+<td><strong>Chia sẻ tài liệu</strong></td>
+<td>Bài báo hay, tutorial, ghi chú của các khóa trước</td>
+</tr>
+<tr class="even">
+<td><strong>Thông báo</strong></td>
+<td>Mentor phát tin về cohort, bootcamp, hạn nộp</td>
+</tr>
+</tbody>
+</table></div>
+<p>Nguyên tắc dùng: <strong>hỏi một lần, cả lớp cùng đọc.</strong> Nhiều
+em cùng vướng một chỗ là tín hiệu mở bootcamp chung một buổi thay vì
+giải thích 1-1 mười lần — đúng nguyên tắc phân bổ 50–60% thời gian cho
+việc chung.</p>
+<p>Việc riêng của một em (kết quả của em, lỗi trong code của em) thì
+thảo luận trong repo riêng của em, không đưa ra đây.</p>
+<hr />
+<h2 id="vai-trò-và-quyền">9. Vai trò và quyền</h2>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Vai trò</th>
+<th>Repo công khai</th>
+<th>Repo sinh viên</th>
+<th><code>07_Private/</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Sinh viên</strong></td>
+<td>Đọc · mở Issue · thảo luận · gửi PR sửa tài liệu</td>
+<td><strong>Chủ sở hữu</strong> repo của mình</td>
+<td>Không truy cập</td>
+</tr>
+<tr class="even">
+<td><strong>Mentor</strong></td>
+<td>Admin</td>
+<td>Collaborator ở mọi repo sinh viên</td>
+<td>Toàn quyền</td>
+</tr>
+<tr class="odd">
+<td><strong>Giảng viên đồng hành / đồng hướng dẫn</strong></td>
+<td>Đọc (hoặc Write nếu cùng biên soạn)</td>
+<td>Collaborator ở repo em mình đồng hướng dẫn</td>
+<td>Theo phân công của bộ môn</td>
+</tr>
+<tr class="even">
+<td><strong>Người ngoài, khóa sau</strong></td>
+<td>Đọc · thảo luận · đề xuất đề tài</td>
+<td>Không</td>
+<td>Không</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Khi số lượng lớn dần</strong> (nhiều mentor, nhiều khóa cùng
+lúc), chuyển sang <strong>GitHub Organization</strong>: repo công khai
+và toàn bộ repo sinh viên nằm dưới một tổ chức, phân quyền theo Team
+(<code>mentors</code>, <code>cohort-2026-1</code>). Miễn phí, và giải
+quyết được việc bàn giao khi có người rời đi. Chưa cần làm ngay — chỉ
+cần biết đường đi khi tới lúc.</p>
+<hr />
+<h2 id="điều-tuyệt-đối-không-làm">10. Điều tuyệt đối không làm</h2>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Không</th>
+<th>Vì sao</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Đăng dữ liệu cá nhân của mình hoặc của người khác lên repo công
+khai</td>
+<td>Không thu hồi được; vi phạm quyền riêng tư của người khác</td>
+</tr>
+<tr class="even">
+<td>Commit file PDF bài báo có bản quyền</td>
+<td>Vi phạm bản quyền. Chỉ lưu <strong>link + ghi chú của
+mình</strong></td>
+</tr>
+<tr class="odd">
+<td>Commit file &gt; 100 MB, dataset lớn, file build</td>
+<td>GitHub chặn 100 MB; repo phình ra là không ai clone nổi. Dùng
+Release đính kèm hoặc Git LFS</td>
+</tr>
+<tr class="even">
+<td><code>git push --force</code> xóa lịch sử</td>
+<td>Lịch sử <strong>chính là bằng chứng</strong>. Xóa nó là xóa chứng
+minh quyền sở hữu của em</td>
+</tr>
+<tr class="odd">
+<td>Một commit khổng lồ vào tuần cuối</td>
+<td>Không chứng minh được quá trình; và thường đi kèm việc không giải
+thích được</td>
+</tr>
+<tr class="even">
+<td>Sửa tay các file sinh tự động rồi gửi PR</td>
+<td>Bị ghi đè ở lần phát hành sau — sửa <code>06_Data/</code> rồi chạy
+script</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="lộ-trình-triển-khai-ba-giai-đoạn">11. Lộ trình triển khai — ba
+giai đoạn</h2>
+<p><strong>Giai đoạn 1 — Bây giờ (trước khi phát danh mục)</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Đẩy repo công khai
+<code>lucero-mentoring</code> lên GitHub</label></li>
+<li><label><input type="checkbox" />Bật GitHub Pages (Settings → Pages →
+<code>main</code> / <code>/docs</code>) → có link danh mục gửi sinh
+viên</label></li>
+<li><label><input type="checkbox" />Bật Discussions và tạo 4 mục ở
+§8</label></li>
+<li><label><input type="checkbox" />Gửi cho sinh viên
+<strong>một</strong> link duy nhất: trang danh mục. Mọi thứ khác dẫn từ
+đó</label></li>
+</ul>
+<p><strong>Giai đoạn 2 — Tuần 1 của học kỳ, cùng buổi
+onboarding</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Mỗi em tạo repo riêng theo §4, mời
+mentor làm collaborator</label></li>
+<li><label><input type="checkbox" />Copy
+<code>04_Project_Template/student_repo_starter/</code> vào repo
+mới</label></li>
+<li><label><input type="checkbox" />Tạo 6 milestone theo hạn gate của
+cohort</label></li>
+<li><label><input type="checkbox" />Chốt MVT và Extension trong
+<code>PROJECT_CHARTER.md</code>, commit ngay trong buổi</label></li>
+<li><label><input type="checkbox" />Mentor tạo Project board gom issue
+của cả nhóm</label></li>
+</ul>
+<p><strong>Giai đoạn 3 — Từ tuần 2 đến hết kỳ</strong></p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Nhịp tuần theo §5, gate review theo
+§6</label></li>
+<li><label><input type="checkbox" />Mỗi lần sửa nội dung chương trình:
+sửa <code>06_Data/</code> → chạy script → <code>git push</code> (repo
+công khai tự cập nhật, trang web tự cập nhật theo)</label></li>
+<li><label><input type="checkbox" />Cuối kỳ: release gói bàn giao, quyết
+định công khai hóa repo sinh viên</label></li>
+</ul>
+<hr />
+<h2 id="phụ-lục-bảy-lệnh-git-sinh-viên-cần-biết">Phụ lục · Bảy lệnh git
+sinh viên cần biết</h2>
+<pre class="bash"><code>git clone &lt;url&gt;                  # lấy repo về máy
+git status                       # đang có gì thay đổi
+git add &lt;file&gt;                   # chọn thứ muốn ghi lại
+git commit -m &quot;thêm testbench cho FIFO, chạy pass 3 case&quot;   # ghi lại một bước
+git push                         # đẩy lên GitHub
+git pull                         # lấy thay đổi mới nhất về
+git log --oneline                # xem lại lịch sử</code></pre>
+<p><strong>Thông điệp commit tốt</strong> nói <em>đã làm gì và kết quả
+ra sao</em>:
+<code>sửa lỗi tràn ở stage 3 của MAC, sai số giảm còn 2 LSB</code>.
+<strong>Thông điệp tệ</strong>: <code>update</code>, <code>fix</code>,
+<code>abc</code>. Một tháng sau chính em sẽ là người phải đọc lại
+chúng.</p>
+<hr />
+<footer>Tài liệu này nằm trong repo chương trình tại <code>10_Documentation/GITHUB-WORKFLOW.md</code>. Tài liệu liên quan: <code>STUDENT-GUIDE.md</code> (cách chương trình đánh giá) · <code>MENTOR-GUIDE.md</code> (thao tác từng buổi) · <code>WORKFLOW.md</code> (sửa dữ liệu, sinh lại tài liệu) · <code>CONTRIBUTING.md</code> (quy tắc tham gia repo công khai).</footer>
+</div>
+</body>
+</html>

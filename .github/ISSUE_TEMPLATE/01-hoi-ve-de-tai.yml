@@ -1,0 +1,55 @@
+name: "❓ Hỏi về một đề tài"
+description: "Hỏi về phạm vi, độ khó, kiến thức cần có của một đề tài trong danh mục"
+title: "[Hỏi] <mã đề tài> — "
+labels: ["câu hỏi"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Cảm ơn bạn đã hỏi. **Trước khi gửi, xin kiểm tra nhanh:**
+
+        - Mô tả đề tài trong [danh mục web](https://lucero6886.github.io/lucero-mentoring/)
+          và [`Ban_do_de_tai.md`](https://github.com/Lucero6886/lucero-mentoring/blob/main/Ban_do_de_tai.md) đã trả lời câu này chưa?
+        - Có ai hỏi tương tự trong Issue đã đóng chưa?
+
+        ⚠️ **Không đăng họ tên đầy đủ, mã số sinh viên, email, số điện thoại hay bảng điểm ở đây** —
+        đây là trang công khai. Việc riêng xin gửi thẳng cho mentor.
+  - type: input
+    id: ma-de-tai
+    attributes:
+      label: Mã đề tài
+      description: "Ghi mã chuẩn, ví dụ A4-T01, B3-T01, A7-T02, AB-T05"
+      placeholder: "A4-T01"
+    validations:
+      required: true
+  - type: textarea
+    id: cau-hoi
+    attributes:
+      label: Câu hỏi của bạn
+      description: "Nêu càng cụ thể càng nhận được lời khuyên dùng được ngay"
+      placeholder: "Em chưa rõ phần synthesis trong đề tài này đòi hỏi tới mức nào..."
+    validations:
+      required: true
+  - type: textarea
+    id: nen-tang
+    attributes:
+      label: Bạn đã biết / đã làm được gì liên quan
+      description: "Môn đã học, project đã làm, công cụ đã dùng. Đây là phần giúp trả lời trúng nhất."
+      placeholder: |
+        - Đã viết được vài module Verilog và chạy mô phỏng bằng Icarus
+        - Đã dùng Git cơ bản
+        - Chưa từng chạy synthesis
+    validations:
+      required: true
+  - type: dropdown
+    id: loai-hoat-dong
+    attributes:
+      label: Bạn đang tìm đề tài cho
+      options:
+        - "Project môn học (P)"
+        - "Thực tập (I)"
+        - "Đồ án tốt nghiệp (T)"
+        - "Nghiên cứu khoa học (R)"
+        - "Chưa rõ / chỉ đang tìm hiểu"
+    validations:
+      required: true

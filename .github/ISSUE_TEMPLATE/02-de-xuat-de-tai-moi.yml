@@ -1,0 +1,69 @@
+name: "💡 Đề xuất đề tài mới"
+description: "Đề xuất một đề tài mới, hoặc mở rộng một đề tài đã có"
+title: "[Đề xuất] "
+labels: ["đề xuất đề tài"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Nhiều đề tài tốt xuất phát từ chính sinh viên. Đề xuất được chấp nhận sẽ được chuẩn hóa,
+        cấp một **mã chuẩn** mới và thêm vào nguồn dữ liệu — bạn được ghi nhận trong CHANGELOG.
+
+        Hãy trả lời đủ các mục dưới đây; đó cũng chính là bộ khung của một đề tài dùng được.
+  - type: textarea
+    id: bai-toan
+    attributes:
+      label: Bài toán là gì
+      description: "Nêu rõ đầu vào và đầu ra cụ thể, không nói chung chung"
+      placeholder: "Đầu vào: ... · Đầu ra: ... · Vì sao đáng làm: ..."
+    validations:
+      required: true
+  - type: textarea
+    id: san-pham
+    attributes:
+      label: Sản phẩm nộp được ở cuối kỳ
+      description: "Cái gì chạy được, đo được, người khác cầm về chạy lại được"
+      placeholder: "RTL + testbench · báo cáo tổng hợp tài nguyên · bảng so sánh 2 kiến trúc · repo có README"
+    validations:
+      required: true
+  - type: textarea
+    id: do-bang-gi
+    attributes:
+      label: Đo bằng tiêu chí định lượng nào
+      description: "Con số nào chứng minh nó hoạt động và tốt tới đâu"
+      placeholder: "Fmax, tài nguyên LUT/FF, độ trễ, BLER tại Eb/N0 cho trước, năng lượng mỗi lần suy luận..."
+    validations:
+      required: true
+  - type: textarea
+    id: dau-vao
+    attributes:
+      label: Cần biết trước những gì để bắt đầu
+      placeholder: "Verilog cơ bản; Linux; đã làm ít nhất một project nhóm A1..."
+    validations:
+      required: true
+  - type: dropdown
+    id: nhom
+    attributes:
+      label: Thuộc nhóm nào
+      description: "Chọn nhóm gần nhất, hoặc chọn mục cuối nếu bạn cho rằng cần một nhóm mới"
+      options:
+        - "A0 — Hands-on Electronics & PCB"
+        - "A1 — Digital Logic & RTL Design"
+        - "A2 — Digital Arithmetic & DSP Hardware"
+        - "A3 — FPGA System Design"
+        - "A4 — ASIC Design & Physical Implementation"
+        - "A5 — Verification, EDA & Reproducible Development"
+        - "A6 — Embedded Systems & SoC Integration"
+        - "A7 — IoT Systems & Edge Intelligence"
+        - "B0–B6 — Polar Code (nêu rõ trong phần bài toán)"
+        - "AB — Co-design thuật toán × phần cứng"
+        - "Cần một nhóm mới (giải thích bên dưới)"
+    validations:
+      required: true
+  - type: textarea
+    id: ghi-chu
+    attributes:
+      label: Ghi chú thêm
+      description: "Tài liệu tham khảo, công cụ cần thiết, lý do cần nhóm mới (nếu có)"
+    validations:
+      required: false
