@@ -161,52 +161,126 @@ if mg:
 if rp and pf:
     by_code = {t["code"]: t for t in pf.get("topics", [])}
     packs = rp.get("packs", [])
-    ids, pcodes = [], []
-    REQ = ["code", "pack_id", "track", "title_vi", "title_en", "title_registration_vi",
-           "title_registration_en", "research_question", "paper_potential", "depends_on",
-           "must_read", "must_understand", "must_build", "experiments", "evidence",
-           "paper_threshold", "mentor_questions", "red_flags"]
+    groups = {g.get("group"): g for g in rp.get("groups", [])}
+    types = {m.get("type"): m for m in rp.get("maturity", {}).get("levels", [])}
     tracks = {t.get("track") for t in rp.get("tracks", [])}
+    cohort_ids = {json.loads(c.read_text(encoding="utf-8")).get("cohort_id") for c in cohorts}
+
+    # --- khối dùng chung ---
+    if sorted(types) != ["I", "P", "R", "T"]:
+        err("research_packs: maturity.levels phải có đúng bốn loại P/I/T/R")
+    for t, m in types.items():
+        for k in ("goal", "core_evidence", "research_expectation", "role", "paper_threshold"):
+            if not (m.get(k) or "").strip():
+                err(f"research_packs: maturity {t} thiếu '{k}'")
+    if not rp.get("maturity", {}).get("red_flags"):
+        err("research_packs: maturity.red_flags rỗng")
+    if not (rp.get("maturity", {}).get("anti_fake_research_rule") or "").strip():
+        err("research_packs: thiếu quy tắc chống 'paper hóa' giả")
+    for g, gd in groups.items():
+        for k in ("name_vi", "name_en", "core_reading", "core_understanding",
+                  "core_build", "core_experiments", "mentor_questions", "next_path"):
+            if not gd.get(k):
+                err(f"research_packs: nhóm {g} thiếu '{k}'")
+        if g not in fams:
+            err(f"research_packs: nhóm '{g}' không có trong families của portfolio")
+    if len(groups) != len(fams):
+        err(f"research_packs: khai {len(groups)} nhóm nhưng portfolio có {len(fams)} họ đề tài")
+    if not rp.get("ladders", {}).get("paths"):
+        err("research_packs: ladders.paths rỗng")
+    if len(rp.get("ladders", {}).get("publication_gate", [])) < 5:
+        err("research_packs: ladders.publication_gate phải liệt kê đủ điều kiện mở hướng công bố")
+    if len(rp.get("depth_levels", [])) != 4:
+        err("research_packs: depth_levels phải có đúng 4 mức D0..D3")
+    if len(rp.get("rules", [])) < 4:
+        err("research_packs: thiếu bộ 4 quy tắc không thương lượng")
+    if not rp.get("raw_data_rule"):
+        err("research_packs: thiếu raw_data_rule")
+
+    # --- từng gói ---
+    BASE_REQ = ["code", "group", "type", "min_level", "title_vi", "title_en",
+                "title_v2_proposed_vi", "expected_output", "depth"]
+    FULL_REQ = ["pack_id", "track", "track_name", "title_registration_vi", "title_registration_en",
+                "research_question", "paper_potential", "depends_on", "g0_core_concepts",
+                "must_read", "must_understand", "must_build", "experiments", "evidence",
+                "paper_threshold", "mentor_questions", "red_flags"]
+    pcodes, pids = [], []
     for p in packs:
         c = p.get("code", "?")
-        pcodes.append(c); ids.append(p.get("pack_id"))
-        for k in REQ:
+        pcodes.append(c)
+        for k in BASE_REQ:
             if k not in p:
                 err(f"research_packs {c}: thiếu trường '{k}'")
-            elif k != "depends_on" and not p[k]:
+            elif k != "min_level" and not p[k]:   # min_level = 0 (L0) là hợp lệ
                 err(f"research_packs {c}: trường '{k}' rỗng")
         if c not in by_code:
             err(f"research_packs {c}: mã không có trong project_portfolio.json")
         else:
+            t = by_code[c]
             for k in ("title_vi", "title_en"):
-                if p.get(k) != by_code[c].get(k):
+                if p.get(k) != t.get(k):
                     err(f"research_packs {c}: {k} lệch danh mục — phải lấy nguyên từ project_portfolio.json")
-        if p.get("track") not in tracks:
-            err(f"research_packs {c}: track '{p.get('track')}' không khai báo trong 'tracks'")
-        if len(p.get("mentor_questions") or []) != 4:
-            err(f"research_packs {c}: mentor_questions phải có đúng 4 câu (lộ trình dùng ở tuần 1, 3, 8, 12)")
-    for x in (ids, pcodes):
-        dup = {v for v in x if x.count(v) > 1}
-        if dup: err(f"research_packs: trùng lặp {sorted(dup)}")
-    idset = set(ids)
+            if p.get("min_level") != t.get("min_level"):
+                err(f"research_packs {c}: min_level lệch danh mục")
+            if p.get("group") != t.get("family"):
+                err(f"research_packs {c}: group '{p.get('group')}' lệch family '{t.get('family')}' trong danh mục")
+        if p.get("group") not in groups:
+            err(f"research_packs {c}: nhóm '{p.get('group')}' không khai báo trong 'groups'")
+        if p.get("type") not in types:
+            err(f"research_packs {c}: loại '{p.get('type')}' không khai báo trong maturity.levels")
+        if p.get("depth") not in ("standard", "full"):
+            err(f"research_packs {c}: depth phải là 'standard' hoặc 'full'")
+        al = p.get("cohort_alias")
+        if al and not isinstance(al, dict):
+            err(f"research_packs {c}: cohort_alias phải là dict khóa theo cohort_id")
+        elif isinstance(al, dict):
+            for k in al:
+                if k not in cohort_ids:
+                    err(f"research_packs {c}: cohort_alias trỏ khóa không tồn tại: {k}")
+        if p.get("depth") == "full":
+            pids.append(p.get("pack_id"))
+            for k in FULL_REQ:
+                if k not in p:
+                    err(f"research_packs {c}: gói sâu thiếu trường '{k}'")
+                elif k != "depends_on" and not p[k]:
+                    err(f"research_packs {c}: gói sâu có trường '{k}' rỗng")
+            if p.get("track") not in tracks:
+                err(f"research_packs {c}: track '{p.get('track')}' không khai báo trong 'tracks'")
+            if len(p.get("mentor_questions") or []) != 4:
+                err(f"research_packs {c}: gói sâu phải có đúng 4 câu hỏi mentor (lộ trình dùng ở tuần 1, 3, 8, 12)")
+
+    missing = sorted(set(by_code) - set(pcodes))
+    if missing:
+        err(f"research_packs: thiếu gói cho {len(missing)} đề tài: {', '.join(missing[:5])}…")
+    for name, xs in (("code", pcodes), ("pack_id", pids)):
+        dup = {v for v in xs if xs.count(v) > 1}
+        if dup:
+            err(f"research_packs: trùng {name} {sorted(dup)}")
+    empty = [g for g in groups if not any(p.get("group") == g for p in packs)]
+    if empty:
+        err(f"research_packs: nhóm không có đề tài nào: {', '.join(empty)}")
+
+    idset = set(pids)
+    dep = {}
     for p in packs:
+        if p.get("depth") != "full":
+            continue
         for d in p.get("depends_on", []):
             if d not in idset:
                 err(f"research_packs {p.get('code')}: depends_on trỏ pack_id không tồn tại: {d}")
-    # phát hiện phụ thuộc vòng
-    dep = {p["pack_id"]: list(p.get("depends_on", [])) for p in packs if p.get("pack_id")}
+        dep[p["pack_id"]] = [d for d in p.get("depends_on", []) if d in idset]
     seen_, stack_ = set(), set()
     def walk(n):
-        if n in stack_: err(f"research_packs: phụ thuộc vòng tại {n}"); return
-        if n in seen_: return
+        if n in stack_:
+            err(f"research_packs: phụ thuộc vòng tại {n}"); return
+        if n in seen_:
+            return
         stack_.add(n)
-        for m in dep.get(n, []): walk(m)
+        for m in dep.get(n, []):
+            walk(m)
         stack_.discard(n); seen_.add(n)
-    for n in dep: walk(n)
-    if not (rp.get("depth_levels") and len(rp["depth_levels"]) == 4):
-        err("research_packs: depth_levels phải có đúng 4 mức D0..D3")
-    if len(rp.get("rules", [])) < 4:
-        err("research_packs: thiếu bộ 4 quy tắc không thương lượng")
+    for n in dep:
+        walk(n)
 
 for cpath in cohorts:
     co = json.loads(cpath.read_text(encoding="utf-8"))

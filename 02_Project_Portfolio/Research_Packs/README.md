@@ -4,13 +4,10 @@
 
 > **File sinh tự động** từ `06_Data/research_packs.json` bằng `scripts/generate_research_packs.py`. Sửa tay sẽ bị ghi đè — muốn đổi nội dung thì sửa JSON rồi chạy lại script.
 
-Danh mục đề tài trả lời câu hỏi *"có những đề tài nào"*. Thư mục này trả lời câu tiếp theo:
-*"làm đề tài đó cụ thể ra sao"*. Mỗi đề tài có tám file: phải đọc gì, hiểu gì, dựng gì,
-chạy thí nghiệm nào, nộp bằng chứng gì, điều kiện qua từng cửa, và khi nào mới đủ điều kiện
-nghĩ tới một bài báo.
-
-Đây là **13 đề tài đã được chuẩn bị tới mức thực thi**, chọn từ danh mục
-105 đề tài của chương trình. Các đề tài còn lại vẫn mở, chỉ chưa có lớp hồ sơ này.
+Mọi đề tài trong chương trình đều có một trang hướng dẫn trong
+[`../Topic_Guides/`](../Topic_Guides/README.md). **13 đề tài nghiên cứu** dưới đây có thêm
+lớp sâu: lộ trình từng tuần, điều kiện qua từng cửa G0–G7, kế hoạch thí nghiệm, sản phẩm phải nộp,
+ghi chú mentor và nội dung đăng ký — tám file mỗi đề tài.
 
 ## Bốn quy tắc không thương lượng
 
@@ -46,8 +43,8 @@ _Datapath, fixed-point, pipeline, PPA và IP tái sử dụng — nền kỹ thu
 
 | Mã đề tài | Tên | Mức vào | Phụ thuộc | Tiềm năng công bố | Hồ sơ |
 |---|---|---|---|---|---|
-| `A2-T02` | Thiết kế và tối ưu MAC datapath cho FPGA/ASIC | L2 | — | Cao | [mở](A2-T02/START-HERE.md) |
 | `A1-P04` | Thiết kế UART transmitter/receiver bằng RTL | L1 | — | Thấp, trừ khi làm thêm khảo sát độ bền | [mở](A1-P04/START-HERE.md) |
+| `A2-T02` | Thiết kế và tối ưu MAC datapath cho FPGA/ASIC | L2 | — | Cao | [mở](A2-T02/START-HERE.md) |
 
 ### Track C — Kiến trúc bộ giải mã Polar
 
@@ -76,7 +73,7 @@ _Chỉ tiêu tốn tài nguyên cho frame khó; vùng có tiềm năng công b�
 
 Không cần đợi đề tài trước xong 100%, nhưng **phải tôn trọng phụ thuộc**.
 
-- **Mở được ngay:** `A4-T01`, `A5-T01`, `A2-T02`, `A1-P04`, `B2-T01`
+- **Mở được ngay:** `A1-P04`, `A2-T02`, `A4-T01`, `A5-T01`, `B2-T01`
 - **Sau khi `B2-T01` có baseline chạy được:** `B3-T02`
 - **Sau khi `B3-T02` có baseline chạy được:** `B4-T01`
 - **Sau khi `B4-T01` có baseline chạy được:** `B4-T02`
@@ -88,9 +85,9 @@ Không cần đợi đề tài trước xong 100%, nhưng **phải tôn trọng 
 
 ## Cách mentor vận hành nhóm này
 
-Xem `10_Documentation/RESEARCH-TRACKS.md` — họp theo track chứ không họp riêng từng đề tài,
-điều kiện được escalation, và thang chấm PASS/FAIL.
+Xem [`10_Documentation/RESEARCH-TRACKS.md`](../../10_Documentation/RESEARCH-TRACKS.md) — họp theo track
+chứ không họp riêng từng đề tài, điều kiện được escalation, và thang chấm PASS/FAIL.
 
 ## Bảng trạng thái
 
-`03_Operations/STATUS_BOARD.md` — cập nhật sau mỗi buổi review.
+[`03_Operations/STATUS_BOARD.md`](../../03_Operations/STATUS_BOARD.md) — cập nhật sau mỗi buổi review.

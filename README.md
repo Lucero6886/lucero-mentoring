@@ -6,8 +6,12 @@ trong lĩnh vực **thiết kế vi mạch số (Digital IC/FPGA/ASIC) · hệ n
 **Tác giả & mentor:** ThS. Đinh Văn Nam (Mr. Lucero Dinh)
 Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 
-`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `13 hồ sơ nghiên cứu chiều sâu` · `phiên bản 1.8.0`
+`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `105 trang hướng dẫn` · `13 hồ sơ nghiên cứu chiều sâu` · `phiên bản 1.9.0`
 
+> **🧭 Chưa biết bắt đầu từ đâu? Đọc trang này trước:**
+> **https://lucero6886.github.io/lucero-mentoring/guide.html**
+> — chương trình vận hành ra sao, 16 nhóm khác nhau chỗ nào, phải làm gì trước khi đăng ký.
+>
 > **📚 Danh mục đề tài — bản web tra cứu nhanh (lọc theo nhóm, mức độ, loại hoạt động):**
 > **https://lucero6886.github.io/lucero-mentoring/**
 
@@ -22,12 +26,14 @@ Mỗi học kỳ mở một đợt (cohort) lấy đề tài từ kho chung này
 
 | Cách xem | Mở |
 |---|---|
+| **Bắt đầu ở đây nếu chưa biết chọn gì** | [Trang hướng dẫn chọn đề tài](https://lucero6886.github.io/lucero-mentoring/guide.html) |
 | **Nhanh nhất** — lọc, tìm kiếm trên web | [Trang danh mục](https://lucero6886.github.io/lucero-mentoring/) |
 | **Hiểu bản chất từng nhóm đề tài** — mỗi nhóm dạy gì, mỗi đề tài làm ra sản phẩm gì | [`Ban_do_de_tai.md`](Ban_do_de_tai.md) |
 | **Danh mục đồ án tốt nghiệp kỳ hiện tại** (bản in được) | [`Danh_muc_de_tai_DATN_HK1_2026_2027.pdf`](Danh_muc_de_tai_DATN_HK1_2026_2027.pdf) |
 | **Nên đọc gì trước khi bắt đầu** — tài liệu nền tảng theo từng hướng | [`09_References/READING-LIST.md`](09_References/READING-LIST.md) |
 | **Toàn bộ catalog theo loại** (P / I / T / R) | [`02_Project_Portfolio/`](https://github.com/Lucero6886/lucero-mentoring/tree/main/02_Project_Portfolio) — 5 file Word tải về |
-| **13 đề tài đã chuẩn bị tới mức thực thi** — đọc gì, dựng gì, chạy thí nghiệm nào, nộp bằng chứng gì | [`02_Project_Portfolio/Research_Packs/`](02_Project_Portfolio/Research_Packs/README.md) |
+| **Trang hướng dẫn từng đề tài** — sản phẩm phải làm ra, phải đọc gì, đo kiểm thế nào (cả 105) | [`02_Project_Portfolio/Topic_Guides/`](02_Project_Portfolio/Topic_Guides/README.md) |
+| **13 đề tài đã chuẩn bị tới mức thực thi** — lộ trình 15 tuần, cửa G0–G7, kế hoạch thí nghiệm | [`02_Project_Portfolio/Research_Packs/`](02_Project_Portfolio/Research_Packs/README.md) |
 
 ### Bước 2 · Hiểu chương trình chạy thế nào trước khi chọn
 
@@ -97,14 +103,21 @@ lịch từng tuần và hạn từng gate được suy ra tự động bằng [
 
 ---
 
-## 🔬 Đi sâu tới mức nghiên cứu — 13 hồ sơ thực thi
+## 🔬 Lớp thực thi — làm đề tài đó cụ thể ra sao
 
-Danh mục trả lời câu *"có những đề tài nào"*. Với 13 đề tài đã được chuẩn bị kỹ nhất, có thêm một
-lớp trả lời câu tiếp theo: **"làm đề tài đó cụ thể ra sao"** — phải đọc gì trước khi gõ dòng code
-đầu tiên, phải hiểu gì mà không nhìn tài liệu, dựng cái gì, chạy thí nghiệm nào, nộp bằng chứng gì,
-và khi nào mới đủ điều kiện nghĩ tới một bài báo.
+Danh mục trả lời câu *"có những đề tài nào"*. Lớp này trả lời câu tiếp theo: **"làm đề tài đó cụ thể
+ra sao"** — phải đọc gì trước khi gõ dòng code đầu tiên, phải hiểu gì mà không nhìn tài liệu, dựng
+cái gì, **sản phẩm cuối kỳ phải nộp là gì**, đo kiểm thế nào, và khi nào mới đủ điều kiện nghĩ tới
+một bài báo.
 
-**→ [`02_Project_Portfolio/Research_Packs/`](02_Project_Portfolio/Research_Packs/README.md)** — mỗi đề tài 8 file.
+| Mức | Phạm vi | Nội dung |
+|---|---|---|
+| **Trang hướng dẫn** | **cả 105 đề tài** | Một trang mỗi đề tài: nền chung của nhóm + sản phẩm riêng phải làm ra. → [`Topic_Guides/`](02_Project_Portfolio/Topic_Guides/README.md) |
+| **Hồ sơ sâu** | **13 đề tài nghiên cứu** | Tám file: lộ trình 15 tuần, điều kiện qua từng cửa G0–G7, kế hoạch thí nghiệm, phiếu đăng ký. → [`Research_Packs/`](02_Project_Portfolio/Research_Packs/README.md) |
+
+Bốn mức trưởng thành **P → I → T → R** quyết định kỳ vọng: `P` học một kỹ năng · `I` làm theo quy
+trình kỹ sư · `T` sở hữu sản phẩm hoàn chỉnh · `R` trả lời một câu hỏi nghiên cứu.
+**Một project PCB không trở thành nghiên cứu chỉ vì thêm chữ "nghiên cứu" vào tên.**
 
 | Track | Hướng | Đề tài |
 |---|---|---|
@@ -146,15 +159,15 @@ quy tắc baseline dùng chung: [`10_Documentation/RESEARCH-TRACKS.md`](10_Docum
 
 ```
 06_Data/              ← NGUỒN CHUẨN: 105 đề tài, thang đánh giá, 6 gate + thang G0–G7,
-                        13 hồ sơ nghiên cứu, dữ liệu từng đợt (JSON)
+                        105 gói thực thi, dữ liệu từng đợt (JSON)
 scripts/              ← Sinh mọi tài liệu từ nguồn chuẩn + kiểm tra tính nhất quán
-02_Project_Portfolio/ ← Catalog theo loại hoạt động + Research_Packs/ (sinh tự động)
+02_Project_Portfolio/ ← Catalog theo loại + Topic_Guides/ (105) + Research_Packs/ (13)
 01_Governance/        ← Chính sách: sổ tay, thỏa thuận làm việc, quy tắc dùng AI
 03_Operations/        ← Quy trình vận hành + workbook theo dõi
 04_Project_Template/  ← 20 biểu mẫu hồ sơ dự án của từng sinh viên
 09_References/        ← Tài liệu nền tảng nên đọc, phân theo hướng nghiên cứu
 10_Documentation/     ← Hướng dẫn theo vai trò (sinh viên / mentor / vận hành / GitHub)
-docs/                 ← Trang web danh mục (GitHub Pages)
+docs/                 ← Trang web: danh mục (index.html) + hướng dẫn chọn (guide.html)
 tests/                ← Hai bài chạy thử toàn quy trình (A-track và B-track)
 ```
 
@@ -168,7 +181,8 @@ python3 scripts/generate_catalogs.py --docx --pdf  # sinh catalog + danh mục +
 python3 scripts/generate_site.py                   # sinh docs/index.html
 python3 scripts/generate_ban_do.py                 # sinh Ban_do_de_tai.md/.html
 python3 scripts/export_governance_md.py            # sinh bản .md đọc-trên-web từ .docx chính sách
-python3 scripts/generate_research_packs.py         # sinh 13 hồ sơ nghiên cứu + bảng trạng thái
+python3 scripts/generate_research_packs.py         # sinh 105 trang hướng dẫn + 13 hồ sơ sâu
+python3 scripts/generate_guide.py                  # sinh docs/guide.html — trang hướng dẫn chọn đề tài
 ```
 
 ---

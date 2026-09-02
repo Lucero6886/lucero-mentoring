@@ -33,120 +33,8 @@ def esc(s): return html.escape(str(s or ""), quote=True)
 def dmy(iso):  # 2026-09-20 -> 20/09/2026
     y, m, d = iso.split("-"); return f"{d}/{m}/{y}"
 
-# ---------------- CSS (no f-string braces issues: plain string) ----------------
-CSS = """
-:root{
-  --ground:#F7F8F6; --surface:#FFFFFF; --surface-2:#EEF1EE;
-  --ink:#1C2733; --ink-2:#4A5763; --ink-3:#7A8791;
-  --line:#D8DDD9; --line-soft:#E6EAE6;
-  --accent:#0E7C6B; --accent-soft:#E2F0ED; --accent-ink:#0A5A4E;
-  --warn:#8F6512; --warn-soft:#F6EEDA;
-  --crit:#B3392E; --crit-soft:#F7E7E5;
-  --low:#5B6770; --low-soft:#EAEDEF;
-  --r:#6D4FA0; --r-soft:#EEE8F6;
-  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
-  --display:'Archivo','Be Vietnam Pro',system-ui,sans-serif;
-  --body:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --ground:#12181D; --surface:#1A2229; --surface-2:#212B33;
-    --ink:#E4EAE7; --ink-2:#A9B4B0; --ink-3:#7E8A87;
-    --line:#33403F; --line-soft:#28332F;
-    --accent:#4CC2AD; --accent-soft:#173B35; --accent-ink:#7FD8C8;
-    --warn:#D9A94A; --warn-soft:#382E17;
-    --crit:#E07A6F; --crit-soft:#3C2320;
-    --low:#93A0A6; --low-soft:#26313A;
-    --r:#A98BD6; --r-soft:#2A2138;
-  }
-}
-:root[data-theme="dark"]{
-  --ground:#12181D; --surface:#1A2229; --surface-2:#212B33;
-  --ink:#E4EAE7; --ink-2:#A9B4B0; --ink-3:#7E8A87;
-  --line:#33403F; --line-soft:#28332F;
-  --accent:#4CC2AD; --accent-soft:#173B35; --accent-ink:#7FD8C8;
-  --warn:#D9A94A; --warn-soft:#382E17;
-  --crit:#E07A6F; --crit-soft:#3C2320;
-  --low:#93A0A6; --low-soft:#26313A;
-  --r:#A98BD6; --r-soft:#2A2138;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.6}
-a{color:var(--accent-ink);text-underline-offset:3px}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
-code{font-family:var(--mono);font-size:.88em;background:var(--surface-2);padding:.08em .35em;border-radius:4px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-/* nav */
-.topnav{position:sticky;top:0;z-index:20;background:var(--ground);border-bottom:1px solid var(--line-soft)}
-.topnav .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
-.topnav .logo{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-.01em;margin-right:auto}
-.topnav a{font-size:13.5px;color:var(--ink-2);text-decoration:none;padding:4px 2px}
-.topnav a:hover{color:var(--accent-ink)}
-/* hero */
-.hero{padding:44px 0 26px}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink)}
-h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,4.6vw,38px);letter-spacing:-.015em;line-height:1.12;margin:10px 0 12px;text-wrap:balance}
-.hero .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-3)}
-.golden{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:14px 18px;margin:20px 0 0;color:var(--ink-2)}
-.golden b{color:var(--ink)}
-section{padding:34px 0 6px;scroll-margin-top:64px}
-h2{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:18px}
-h3{font-family:var(--display);font-weight:600;font-size:16.5px;margin:24px 0 10px}
-p{margin:0 0 12px}
-.muted{color:var(--ink-2)}
-/* tables */
-.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface);margin:0 0 20px}
-table{border-collapse:collapse;width:100%;font-size:13.5px}
-th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);background:var(--surface-2)}
-td{padding:9px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
-tr:last-child td{border-bottom:none}
-td.date{font-family:var(--mono);font-size:12.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
-td.hard{color:var(--crit);font-weight:500}
-/* pills */
-.pill{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;padding:2px 9px;border-radius:99px;white-space:nowrap}
-.pill.P{background:var(--low-soft);color:var(--low)}
-.pill.I{background:var(--accent-soft);color:var(--accent-ink)}
-.pill.T{background:var(--warn-soft);color:var(--warn)}
-.pill.R{background:var(--r-soft);color:var(--r)}
-.pill.lv{background:var(--surface-2);color:var(--ink-2)}
-.pill.alias{background:var(--accent-soft);color:var(--accent-ink)}
-/* filter bar */
-.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px;position:sticky;top:46px;z-index:10}
-.filters label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-.filters select,.filters input[type=search]{font-family:var(--body);font-size:14px;color:var(--ink);background:var(--ground);border:1px solid var(--line);border-radius:6px;padding:7px 10px}
-.filters input[type=search]{flex:1;min-width:180px}
-.typechips{display:flex;gap:6px}
-.typechips button{font-family:var(--mono);font-size:12px;padding:5px 12px;border-radius:99px;border:1px solid var(--line);background:var(--ground);color:var(--ink-2);cursor:pointer}
-.typechips button[aria-pressed=true]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
-.count{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:6px 2px 14px}
-/* topic cards */
-.fam-head{font-family:var(--display);font-weight:700;font-size:15px;margin:22px 0 4px;color:var(--accent-ink)}
-.fam-sub{font-size:13px;color:var(--ink-3);margin-bottom:10px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
-.card summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:baseline;padding:13px 16px}
-.card summary::-webkit-details-marker{display:none}
-.card summary:hover{background:var(--surface-2)}
-.card .code{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--accent-ink)}
-.card .title{font-weight:600;flex:1 1 320px}
-.card .title small{display:block;font-weight:400;font-size:12.5px;color:var(--ink-3);font-style:italic}
-.card .body{padding:2px 16px 16px;border-top:1px solid var(--line-soft);font-size:14px}
-.card .body dl{display:grid;grid-template-columns:130px 1fr;gap:7px 14px;margin-top:12px}
-.card .body dt{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);padding-top:2px}
-.card .body dd{margin:0}
-.mvt{background:var(--warn-soft);border-radius:6px;padding:2px 6px}
-/* steps */
-ol.steps{margin:0 0 14px 22px}
-ol.steps li{margin-bottom:8px}
-ul.plain{margin:0 0 14px 20px}
-ul.plain li{margin-bottom:7px}
-footer{margin-top:44px;border-top:1px solid var(--line);padding:18px 0 40px;font-size:12.5px;color:var(--ink-3)}
-@media (max-width:640px){
-  .card .body dl{grid-template-columns:1fr}
-  .filters{position:static}
-}
-"""
+# ---------------- phong cách dùng chung (scripts/site_style.py) ----------------
+from site_style import CSS, FONTS
 
 JS = """
 (function(){
@@ -341,6 +229,7 @@ def rules_section():
 body = f"""
 <nav class="topnav"><div class="wrap">
   <span class="logo">Mentoring Lucero · EEE</span>
+  <a href="guide.html">Hướng dẫn chọn đề tài</a>
   <a href="#cohort">DATN HK1 2026–2027</a>
   <a href="#catalog">Danh mục ({len(TOPICS)})</a>
   <a href="#howto">Cách chọn đề tài</a>
@@ -365,9 +254,6 @@ không có dữ liệu cá nhân sinh viên. · {esc(AUTHOR)} · v{esc(VER)} · 
 <script>{JS}</script>
 """
 
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700'
-         '&family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">')
 
 TITLE = "Danh mục Đề tài Lucero"
 

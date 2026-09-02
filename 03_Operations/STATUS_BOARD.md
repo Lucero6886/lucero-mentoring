@@ -11,10 +11,10 @@ xem `10_Documentation/GITHUB-WORKFLOW.md`.
 
 | Mã | Gói | Track | Sinh viên/Nhóm | Trạng thái | Cửa hiện tại | Bằng chứng gần nhất | Quyết định tiếp theo |
 |---|---|---|---|---|---|---|---|
+| `A1-P04` | T04 | B | — | Kho đề tài | G0 | — | Giao sinh viên |
+| `A2-T02` | T03 | B | — | Kho đề tài | G0 | — | Giao sinh viên |
 | `A4-T01` | T01 | A | — | Kho đề tài | G0 | — | Giao sinh viên |
 | `A5-T01` | T02 | A | — | Kho đề tài | G0 | — | Giao sinh viên |
-| `A2-T02` | T03 | B | — | Kho đề tài | G0 | — | Giao sinh viên |
-| `A1-P04` | T04 | B | — | Kho đề tài | G0 | — | Giao sinh viên |
 | `B2-T01` | T05 | C | — | Kho đề tài | G0 | — | Giao sinh viên |
 | `B3-T02` | T06 | C | — | Kho đề tài | G0 | — | Giao sinh viên |
 | `B4-T01` | T07 | C | — | Kho đề tài | G0 | — | Giao sinh viên |

@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.9.0 — Lớp thực thi phủ đủ 105 đề tài · trang hướng dẫn chọn đề tài · 2026-09-02
+
+Chủ dự án đưa vào gói `Research_Program_Package_v2_105_Topics` (863 file, phủ đủ 105 đề tài theo đúng mã chuẩn của hệ thống) cùng một trang `guidenotes.html` dành cho sinh viên. Lần này **không có xung đột mã**: gói v2 được dựng từ chính `Ban_do_de_tai.md` v1.7.0 và tự khai rằng `project_portfolio.json` là nguồn chuẩn.
+
+**Phát hiện quyết định kiến trúc:** năm trường lớn của gói v2 — phải đọc, phải hiểu, phải dựng, thí nghiệm mặc định, câu hỏi mentor — **giống hệt nhau trong cùng một nhóm**; `role`, `paper_threshold` và `red_flags` thì **giống hệt nhau trong cùng một loại P/I/T/R**. Chép nguyên si sẽ lặp cùng một nội dung 105 lần, đúng loại trùng lặp mà hệ thống này tồn tại để chống. Nên dữ liệu được **chuẩn hóa theo mức**: thuộc tính của nhóm khai một lần ở `groups` (16 mục), của loại khai một lần ở `maturity.levels` (4 mục), mỗi đề tài chỉ giữ phần thật sự riêng — **`expected_output`, thứ duy nhất khác nhau ở cả 105 đề tài**. Kết quả: 110 KB thay vì 261 KB, và sửa một câu hỏi mentor của nhóm B4 chỉ phải sửa một chỗ.
+
+**Quyết định về tên đề tài.** Gói v2 đề xuất chỉnh **101/105** tên để nhấn mạnh đầu ra đo được, và `guidenotes.html` đã dùng sẵn bộ tên đó — nếu giữ nguyên cả hai thì trang guide và danh mục sẽ hiện hai bộ tên khác nhau. Chủ dự án chọn **giữ tên hiện hành**. Vì vậy: `title_vi/title_en` vẫn lấy nguyên từ `project_portfolio.json`; bộ tên v2 lưu ở trường `title_v2_proposed_vi` và bảng đối chiếu đầy đủ ở `09_References/TITLE-REVIEW-v2.md`, **không script nào dùng nó để hiển thị**; và trang guide được **sinh lại từ dữ liệu chuẩn** thay vì dùng bản HTML tải lên — nên nó không thể lệch với danh mục, phiếu đăng ký hay bản PDF.
+
+**Nguồn chuẩn mở rộng — `06_Data/research_packs.json` 13 → 105 gói.** Thêm `groups` (16 nhóm), `maturity` (mô hình P→I→T→R, ngưỡng công bố theo loại, bộ cảnh báo sớm dùng chung, quy tắc chống "paper hóa" giả), `ladders` (5 thang đi từ board thật tới công bố + 7 điều kiện của cửa công bố) và `raw_data_rule`. 13 gói cũ giữ nguyên lớp sâu và được phép **ghi đè** giá trị mặc định của nhóm.
+
+**Trang hướng dẫn cho mọi đề tài.** `scripts/generate_research_packs.py` nay sinh thêm `02_Project_Portfolio/Topic_Guides/<nhóm>/<mã>.md` — 105 trang cộng 16 trang chỉ mục nhóm và một trang tổng. Mỗi trang nói rõ **sản phẩm phải làm ra** (phần riêng), rồi tới nền chung của nhóm, và ghi rõ bốn mục nào là của nhóm chứ không phải của riêng đề tài. 13 đề tài sâu có liên kết chéo sang hồ sơ tám file.
+
+**Trang web thứ hai — `docs/guide.html`.** Script mới `scripts/generate_guide.py` dựng trang *Guide Notes — đọc trước khi chọn đề tài*: chương trình là một thang năng lực chứ không phải 105 đề tài rời rạc · bản đồ 16 nhóm bấm để lọc · P/I/T/R và mức sàn L0–L5 · 8 bước bắt buộc trước khi đăng ký · G0→G7 · bảng tra cứu 105 đề tài có tìm kiếm và lọc, cột "sản phẩm phải làm ra", liên kết thẳng tới trang hướng dẫn từng đề tài · luật nghiên cứu và cách dùng AI · phiếu tự kiểm 12 ô. Trang danh mục và README đều dẫn sang.
+
+**Tách CSS dùng chung — `scripts/site_style.py`.** Trước đây `generate_site.py` giữ bản CSS của riêng nó; thêm một trang web thứ hai sẽ tạo ra bản thứ hai và hai trang sẽ lệch phong cách theo thời gian. CSS, bộ font và địa chỉ kho nay nằm ở một module, cả hai generator cùng dùng. `docs/index.html` sinh lại không đổi một byte nào — refactor thuần.
+
+**Sửa lỗi phát hiện khi kiểm tra hình ảnh trang web:** `cohort_alias` trong danh mục là một dict khóa theo mã khóa (`{"HK1_2026_2027": "A4"}`), nhưng hai generator in thẳng nó ra nên trang guide hiện chuỗi Python thô. Thêm `alias_of()` ở cả hai script để giải mã theo khóa hiện hành — 27 đề tài mở của khóa hiện tại nay hiện đúng mã ngắn.
+
+**Đã kiểm:** validator PASS 105 đề tài · 105 gói · sinh lại hai lần không lệch một byte · 0 link markdown hỏng · trang guide dựng và chụp lại để soi bố cục thật.
+
 ## v1.8.0 — Lớp thực thi chiều sâu cho 13 đề tài nghiên cứu · 2026-09-02
 
 Chủ dự án đưa vào gói `Research_Program_Package_13_Topics v1.0` — 13 đề tài nghiên cứu đã được soạn tới mức thực thi — và yêu cầu hợp nhất vào hệ thống. Gói này lấp đúng khoảng trống lớn nhất còn lại: danh mục nói **có đề tài gì**, nhưng chưa nói **làm đề tài đó cụ thể ra sao**.

@@ -1,19 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Sinh bộ hồ sơ thực thi chiều sâu cho từng đề tài nghiên cứu.
+"""Sinh lớp thực thi cho từng đề tài: trang hướng dẫn (105) và hồ sơ sâu (13).
 
 Vì sao cần: danh mục đề tài trả lời *"có những đề tài nào"*. Nó không trả lời
 *"làm đề tài đó cụ thể ra sao"* — phải đọc gì, hiểu gì trước khi gõ dòng code đầu
-tiên, dựng cái gì, chạy thí nghiệm nào, nộp bằng chứng gì, và khi nào mới đủ điều
-kiện nghĩ tới một bài báo. Đó là khoảng trống mà bộ hồ sơ này lấp.
+tiên, dựng cái gì, sản phẩm phải ra là gì, đo kiểm ra sao, và khi nào mới đủ điều
+kiện nghĩ tới một bài báo. Đó là khoảng trống mà lớp này lấp.
 
-Nguyên tắc: **06_Data/research_packs.json là bản gốc duy nhất**. Toàn bộ file
-trong 02_Project_Portfolio/Research_Packs/ đều sinh tự động — sửa tay sẽ bị ghi
-đè ở lần chạy sau. Muốn đổi nội dung thì sửa JSON rồi chạy lại script này.
+Hai mức chi tiết:
+  · **Trang hướng dẫn** — mọi đề tài (105). Nội dung chung của nhóm cộng phần
+    riêng của đề tài. Đủ để sinh viên chọn đề tài và bắt đầu đúng hướng.
+  · **Hồ sơ sâu** — 13 đề tài nghiên cứu (`depth: "full"`). Tám file: lộ trình
+    từng tuần, điều kiện qua từng cửa, kế hoạch thí nghiệm, phiếu đăng ký…
 
-Lộ trình tuần bám khung tương đối của chương trình (milestone_gates.json):
-mọi mốc đếm theo **số tuần kể từ ngày sinh viên chính thức nhận đề tài**, nên bộ
-hồ sơ dùng được cho mọi khóa mà không phải sửa ngày ở đâu cả.
+Nguyên tắc: **06_Data/research_packs.json là bản gốc duy nhất**, và nó được
+chuẩn hóa — thuộc tính chung của một nhóm khai một lần ở `groups`, của một loại
+khai một lần ở `maturity.levels`. Mọi file sinh ra ở đây sửa tay sẽ bị ghi đè.
+
+Lộ trình tuần bám khung tương đối của chương trình (milestone_gates.json): mọi
+mốc đếm theo **số tuần kể từ ngày sinh viên chính thức nhận đề tài**.
 
 Cách dùng (từ thư mục gốc dự án):
     python3 scripts/generate_research_packs.py
@@ -25,7 +30,9 @@ import cohort_schedule as cs
 
 BASE = pathlib.Path(__file__).resolve().parents[1]
 DATA = BASE / "06_Data"
-OUT = BASE / "02_Project_Portfolio" / "Research_Packs"
+PORT = BASE / "02_Project_Portfolio"
+GUIDES = PORT / "Topic_Guides"
+PACKS = PORT / "Research_Packs"
 
 BANNER = ("> **File sinh tự động** từ `06_Data/research_packs.json` bằng "
           "`scripts/generate_research_packs.py`. Sửa tay sẽ bị ghi đè — "
@@ -33,6 +40,16 @@ BANNER = ("> **File sinh tự động** từ `06_Data/research_packs.json` bằn
 
 SIG = ("**Engineering & Research Mentoring Program (Lucero)** · "
        "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa")
+
+TYPE_NAME = {"P": "Project môn học", "I": "Thực tập", "T": "Đồ án tốt nghiệp", "R": "Nghiên cứu khoa học"}
+
+COHORT = ""  # đặt trong main(): mã khóa hiện hành, dùng để giải mã cohort_alias
+
+
+def alias_of(p):
+    """Mã ngắn của đề tài trong khóa hiện hành, rỗng nếu khóa này không mở đề tài đó."""
+    a = p.get("cohort_alias")
+    return (a or {}).get(COHORT, "") if isinstance(a, dict) else (a or "")
 
 
 def load(name):
@@ -47,9 +64,233 @@ def numbered(items):
     return "\n".join(f"{i}. {x}" for i, x in enumerate(items, 1))
 
 
-# ---------------------------------------------------------------- lộ trình tuần
-# Mỗi dòng: (tuần, mốc, việc sinh viên làm, bằng chứng nộp, câu hỏi mentor chung,
-#            chỉ số câu hỏi riêng của đề tài hoặc None, điều kiện qua)
+def field(pack, group, key, gkey=None):
+    """Giá trị của một trường: gói sâu ghi đè, nếu không thì lấy mặc định của nhóm."""
+    return pack.get(key) or group.get(gkey or ("core_" + key.split("_", 1)[1] if "_" in key else key), [])
+
+
+# =============================== trang hướng dẫn 105 đề tài ===============================
+
+def guide_page(p, g, lv, rp, deep_exists):
+    _al = alias_of(p)
+    alias = f" · **Mã ngắn khóa hiện tại:** `{_al}`" if _al else ""
+    read = p.get("must_read") or g["core_reading"]
+    under = p.get("must_understand") or g["core_understanding"]
+    build = p.get("must_build") or g["core_build"]
+    exps = p.get("experiments") or g["core_experiments"]
+    asks = p.get("mentor_questions") or g["mentor_questions"]
+    thresh = p.get("paper_threshold") or lv["paper_threshold"]
+    shared = "" if p.get("must_read") else (
+        f"\n> Bốn mục dưới đây là **nền chung của cả nhóm {p['group']}** — mọi đề tài trong nhóm "
+        f"đều đi qua. Phần riêng của đề tài này nằm ở mục *Sản phẩm phải làm ra*.\n")
+    deep = (f"\n## Hồ sơ thực thi chi tiết\n\nĐề tài này có **hồ sơ sâu** gồm lộ trình 15 tuần, "
+            f"điều kiện qua từng cửa, kế hoạch thí nghiệm và phiếu đăng ký:\n"
+            f"**→ [`Research_Packs/{p['code']}/START-HERE.md`](../../Research_Packs/{p['code']}/START-HERE.md)**\n"
+            if deep_exists else "")
+    rq = (f"\n**Câu hỏi nghiên cứu:** {p['research_question']}\n" if p.get("research_question") else "")
+    return f"""# {p['code']} — {p['title_vi']}
+
+{SIG}
+
+{BANNER}
+**English:** {p['title_en']}
+
+**Nhóm:** `{p['group']}` — {g['name_vi']} ({g['name_en']})
+**Loại:** `{p['type']}` — {TYPE_NAME[p['type']]} · **Sàn năng lực:** L{p['min_level']}{alias}
+
+> **Vai trò trong chương trình.** {lv['role']}
+{rq}
+## Sản phẩm phải làm ra
+
+{p['expected_output']}
+
+Đây là phần **riêng của đề tài này**. Nếu cuối kỳ không có đủ những thứ trên thì đề tài chưa xong,
+dù đã bỏ bao nhiêu thời gian.
+{shared}
+## Trước khi bắt đầu — phải đọc
+
+{bullets(read)}
+
+Tài liệu cụ thể theo hướng: [`09_References/READING-LIST.md`](../../../09_References/READING-LIST.md)
+
+## Phải hiểu được (không nhìn tài liệu)
+
+{bullets(under)}
+
+## Phải dựng / code / chế tạo
+
+{bullets(build)}
+
+## Thí nghiệm và đo kiểm mặc định
+
+{bullets(exps)}
+
+## Câu hỏi mentor sẽ hỏi đi hỏi lại
+
+{numbered(asks)}
+
+## Khi nào mới nói tới bài báo
+
+{thresh}
+
+> {rp['maturity']['anti_fake_research_rule']}
+
+## Bước đi tiếp sau đề tài này
+
+{g['next_path']}
+{deep}
+## Cảnh báo sớm — mentor dừng đề tài khi thấy
+
+{bullets(rp['maturity']['red_flags'])}
+
+## Quy tắc dữ liệu thô
+
+{bullets(rp['raw_data_rule'])}
+
+---
+
+| Cần gì | Đọc đâu |
+|---|---|
+| Sáu cửa kiểm soát và thang G0–G7 | [`06_Data/milestone_gates.json`](../../../06_Data/milestone_gates.json) |
+| Chuẩn tổ chức repository | [`04_Project_Template/REPRODUCIBILITY_STANDARD.md`](../../../04_Project_Template/REPRODUCIBILITY_STANDARD.md) |
+| Toàn bộ nhóm `{p['group']}` | [`README.md`](README.md) |
+| Bản đồ 16 nhóm | [`../README.md`](../README.md) |
+"""
+
+
+def group_index(g, packs, rp):
+    rows = []
+    for p in packs:
+        d = " · 📘 hồ sơ sâu" if p["depth"] == "full" else ""
+        al = f" `{alias_of(p)}`" if alias_of(p) else ""
+        rows.append(f"| [`{p['code']}`]({p['code']}.md) | {p['title_vi']} | {p['type']} | "
+                    f"L{p['min_level']}{al} | {p['expected_output'][:90]}{'…' if len(p['expected_output'])>90 else ''}{d} |")
+    return f"""# Nhóm {g['group']} — {g['name_vi']}
+
+{SIG}
+
+{BANNER}
+**{g['name_en']}** · {len(packs)} đề tài
+
+## Nền chung của cả nhóm
+
+Mọi đề tài trong nhóm này đều đi qua bốn mục dưới đây. Trang của từng đề tài chỉ thêm
+**sản phẩm riêng** mà đề tài đó phải làm ra.
+
+**Phải đọc**
+
+{bullets(g['core_reading'])}
+
+**Phải hiểu**
+
+{bullets(g['core_understanding'])}
+
+**Phải dựng**
+
+{bullets(g['core_build'])}
+
+**Thí nghiệm mặc định**
+
+{bullets(g['core_experiments'])}
+
+**Câu hỏi mentor**
+
+{numbered(g['mentor_questions'])}
+
+**Bước đi tiếp:** {g['next_path']}
+
+## Danh sách đề tài
+
+| Mã | Tên | Loại | Sàn | Sản phẩm phải làm ra |
+|---|---|---|---|---|
+{chr(10).join(rows)}
+
+---
+
+*[← Bản đồ 16 nhóm](../README.md)*
+"""
+
+
+def guides_master(rp, by_group):
+    grows = []
+    for g in rp["groups"]:
+        ps = by_group.get(g["group"], [])
+        cnt = {}
+        for p in ps:
+            cnt[p["type"]] = cnt.get(p["type"], 0) + 1
+        mix = " · ".join(f"{k}:{cnt[k]}" for k in "PITR" if k in cnt)
+        deep = sum(1 for p in ps if p["depth"] == "full")
+        grows.append(f"| [`{g['group']}`]({g['group']}/README.md) | {g['name_vi']} | {len(ps)} | {mix} | "
+                     f"{deep or '—'} |")
+    mrows = [f"| **{m['type']}** — {m['name_vi']} | {m['goal']} | {m['core_evidence']} | {m['research_expectation']} |"
+             for m in rp["maturity"]["levels"]]
+    lrows = [f"**{i}. {l['name']}**  \n{l['path']}" + (f"  \n_{l['logic']}_" if l["logic"] else "")
+             for i, l in enumerate(rp["ladders"]["paths"], 1)]
+    return f"""# Hướng dẫn thực thi — toàn bộ {sum(len(v) for v in by_group.values())} đề tài
+
+{SIG}
+
+{BANNER}
+Danh mục trả lời câu *"có những đề tài nào"*. Thư mục này trả lời câu tiếp theo:
+**"làm đề tài đó cụ thể ra sao"** — phải đọc gì, hiểu gì, dựng gì, sản phẩm phải ra là gì,
+đo kiểm thế nào, và khi nào mới đủ điều kiện nghĩ tới một bài báo.
+
+Mỗi đề tài có một trang. **{sum(1 for v in by_group.values() for p in v if p['depth']=='full')} đề tài nghiên cứu** có thêm hồ sơ sâu tám file trong [`../Research_Packs/`](../Research_Packs/README.md).
+
+## Đây là một chương trình, không phải 105 đề tài rời rạc
+
+Các đề tài xếp thành những nấc năng lực nối tiếp nhau:
+
+**PCB/board thật → RTL → Số học/DSP → FPGA → ASIC/EDA → Nhúng/IoT → Polar → Thích ứng/Neural → Co-design → Công bố**
+
+Không phải đề tài nào cũng phải thành bài báo. Một project PCB, RTL hay FPGA tốt có giá trị
+riêng nếu tạo ra kỹ năng và bằng chứng thật.
+
+## Bốn mức trưởng thành P → I → T → R
+
+| Loại | Mục tiêu | Bằng chứng lõi | Kỳ vọng nghiên cứu |
+|---|---|---|---|
+{chr(10).join(mrows)}
+
+> {rp['maturity']['anti_fake_research_rule']}
+
+## Bản đồ 16 nhóm
+
+| Nhóm | Tên | Số đề tài | Theo loại | Hồ sơ sâu |
+|---|---|---:|---|---:|
+{chr(10).join(grows)}
+
+## Năm thang đi từ board thật tới công bố
+
+{chr(10).join(chr(10) + x for x in lrows)}
+
+### Cửa công bố
+
+Sản phẩm tốt chưa chắc là bài báo. Chỉ mở hướng công bố khi đủ cả bảy:
+
+{numbered(rp['ladders']['publication_gate'])}
+
+## Bốn quy tắc không thương lượng
+
+{numbered(rp['rules'])}
+
+## Quy tắc dữ liệu thô
+
+{bullets(rp['raw_data_rule'])}
+
+---
+
+| Cần gì | Đọc đâu |
+|---|---|
+| Chọn đề tài thế nào | [`10_Documentation/STUDENT-GUIDE.md`](../../10_Documentation/STUDENT-GUIDE.md) |
+| Vận hành nhóm nghiên cứu theo track | [`10_Documentation/RESEARCH-TRACKS.md`](../../10_Documentation/RESEARCH-TRACKS.md) |
+| Hồ sơ sâu 13 đề tài nghiên cứu | [`../Research_Packs/README.md`](../Research_Packs/README.md) |
+| Đề xuất đổi tên đề tài (chưa áp dụng) | [`09_References/TITLE-REVIEW-v2.md`](../../09_References/TITLE-REVIEW-v2.md) |
+"""
+
+
+# =============================== hồ sơ sâu 13 đề tài ===============================
+
 WEEKS = [
  (1,  "Nhận đề tài · nền khái niệm",
       "Đọc START-HERE, chốt phạm vi, kiểm tra tiên quyết, dựng môi trường; tự viết glossary.",
@@ -145,17 +386,16 @@ READING_QUESTIONS = [
 ]
 
 
-def head(title, pack, extra=""):
-    return (f"# {title} — {pack['code']}\n\n{SIG}\n\n{BANNER}\n"
-            f"**Đề tài:** {pack['title_vi']}  \n"
-            f"**English:** {pack['title_en']}  \n"
-            f"**Tên đầy đủ khi đăng ký:** {pack['title_registration_vi']}  \n"
-            f"**Mã đối chiếu gói gốc:** {pack['pack_id']} · "
-            f"**Track {pack['track']}** — {pack['track_name']}{extra}\n\n---\n\n")
+def head(title, p):
+    return (f"# {title} — {p['code']}\n\n{SIG}\n\n{BANNER}\n"
+            f"**Đề tài:** {p['title_vi']}  \n"
+            f"**English:** {p['title_en']}  \n"
+            f"**Tên đầy đủ khi đăng ký:** {p['title_registration_vi']}  \n"
+            f"**Mã đối chiếu gói gốc:** {p['pack_id']} · "
+            f"**Track {p['track']}** — {p['track_name']}\n\n---\n\n")
 
 
-def f_start_here(p, gates, ladder):
-    q = p["mentor_questions"]
+def f_start_here(p, RULES):
     return head("START HERE", p) + f"""## Câu hỏi nghiên cứu
 
 > {p['research_question']}
@@ -166,7 +406,7 @@ def f_start_here(p, gates, ladder):
 
 {bullets(p['must_read'])}
 
-Tài liệu cụ thể xem `09_References/READING-LIST.md`. Sau mỗi tài liệu, trả lời {len(READING_QUESTIONS)} câu trong `READING-QUESTIONS` ở cuối file này.
+Tài liệu cụ thể xem `09_References/READING-LIST.md`. Sau mỗi tài liệu, trả lời {len(READING_QUESTIONS)} câu ở cuối file này.
 
 ## Phải hiểu được (không nhìn tài liệu)
 
@@ -192,7 +432,7 @@ Tiềm năng công bố mentor đánh giá cho đề tài này: **{p['paper_pote
 
 ## Bốn câu mentor sẽ hỏi đi hỏi lại
 
-{numbered(q)}
+{numbered(p['mentor_questions'])}
 
 Nếu tuần nào em cũng trả lời được bốn câu này bằng bằng chứng của chính mình, đề tài đang đi đúng.
 
@@ -206,7 +446,7 @@ Nếu tuần nào em cũng trả lời được bốn câu này bằng bằng ch
 
 ---
 
-*Lộ trình từng tuần: `ROADMAP.md` · Điều kiện qua từng cửa: `MILESTONE-GATES.md` · Thí nghiệm: `EXPERIMENTS.md`*
+*Trang tổng quan đề tài: [`Topic_Guides/{p['group']}/{p['code']}.md`](../../Topic_Guides/{p['group']}/{p['code']}.md) · Lộ trình: `ROADMAP.md` · Cửa: `MILESTONE-GATES.md` · Thí nghiệm: `EXPERIMENTS.md`*
 """
 
 
@@ -241,9 +481,9 @@ Chỉ mở khi đề tài có tiềm năng công bố và mentor đồng ý. Xem
 
 def f_gates(p, ladder):
     q = p["mentor_questions"]
-    out = [head("Điều kiện qua từng cửa", p)]
-    out.append("Bảng dưới ghép **yêu cầu chung của chương trình** (G0–G7) với **nội dung riêng của đề tài này**. "
-               "G0–G6 nằm gọn trong Gate 1–6 của khung 15 tuần; G7 là cửa mở rộng.\n")
+    out = [head("Điều kiện qua từng cửa", p),
+           "Bảng dưới ghép **yêu cầu chung của chương trình** (G0–G7) với **nội dung riêng của đề tài này**. "
+           "G0–G6 nằm gọn trong Gate 1–6 của khung 15 tuần; G7 là cửa mở rộng.\n"]
     spec = {
         "G0": ("Phải hiểu", p["g0_core_concepts"] or ", ".join(p["must_understand"])),
         "G2": ("Phải dựng", ", ".join(p["must_build"][:2])),
@@ -432,7 +672,6 @@ Mẫu đầy đủ: `04_Project_Template/PAPER_READINESS_TEMPLATE.md`.
 
 
 def f_registration(p):
-    exps = p["experiments"]
     return head("Nội dung đăng ký đề tài", p) + f"""> Dùng để điền vào biểu mẫu đăng ký của Khoa/Trường. Nội dung sinh từ dữ liệu gốc nên không lệch với danh mục.
 
 ## Tên đề tài
@@ -447,7 +686,7 @@ _Mã trong danh mục: `{p['code']}` — {p['title_vi']}_
 
 - Làm rõ và kiểm chứng câu hỏi nghiên cứu: {p['research_question']}
 {chr(10).join(f"- Xây dựng và triển khai: {b}." for b in p['must_build'])}
-- Thực hiện đánh giá có kiểm soát theo các thí nghiệm trọng tâm: {", ".join(exps[:3])}.
+- Thực hiện đánh giá có kiểm soát theo các thí nghiệm trọng tâm: {", ".join(p['experiments'][:3])}.
 - Đánh giá kết quả bằng chỉ số định lượng, bảo đảm khả năng tái lập và phân tích giới hạn.
 - Phát triển năng lực đọc tài liệu, thiết kế thí nghiệm, kiểm chứng, phân tích và viết báo cáo khoa học.
 
@@ -471,97 +710,40 @@ _Mã trong danh mục: `{p['code']}` — {p['title_vi']}_
 """
 
 
-def main():
-    rp = load("research_packs.json")
-    port = load("project_portfolio.json")
-    mg = load("milestone_gates.json")
-    ladder = mg["research_ladder"]
-    global RULES
-    RULES = rp["rules"]
+# =============================== chỉ mục hồ sơ sâu + bảng trạng thái ===============================
 
-    by_code = {t["code"]: t for t in port["topics"]}
-    by_pack = {p["pack_id"]: p for p in rp["packs"]}
-
-    # lớp phủ ngày của khóa hiện hành, nếu có
-    cohorts = sorted(DATA.glob("cohort_*.json"))
-    cal, deadlines, note = [], {}, cs.frame_note()
-    if cohorts:
-        co = json.loads(cohorts[-1].read_text(encoding="utf-8"))
-        cal = cs.build_calendar(co.get("start_date"), mg["frame"]["duration_weeks"], co.get("breaks"))
-        deadlines = cs.gate_deadlines(mg["gates"], cal)
-        note = cs.frame_note(co, cal)
-
-    OUT.mkdir(parents=True, exist_ok=True)
-    codes = {p["code"] for p in rp["packs"]}
-    stale = sorted(d.name for d in OUT.iterdir() if d.is_dir() and d.name not in codes)
-    if stale:
-        print("  ! thư mục thừa (đề tài đã gỡ khỏi JSON), xóa thủ công:", ", ".join(stale))
-
-    missing = [p["code"] for p in rp["packs"] if p["code"] not in by_code]
-    if missing:
-        print("LỖI: mã không có trong danh mục:", ", ".join(missing))
-        return 1
-
-    for p in rp["packs"]:
-        d = OUT / p["code"]
-        d.mkdir(exist_ok=True)
-        deps = [f"`{by_pack[x]['code']}` ({x})" for x in p["depends_on"] if x in by_pack]
-        deps_txt = ("Cần baseline của " + ", ".join(deps) + " trước khi mở."
-                    if deps else "Không phụ thuộc đề tài nào — có thể mở ngay.")
-        (d / "START-HERE.md").write_text(f_start_here(p, mg["gates"], ladder), encoding="utf-8")
-        (d / "ROADMAP.md").write_text(f_roadmap(p, mg["gates"], deadlines, note), encoding="utf-8")
-        (d / "MILESTONE-GATES.md").write_text(f_gates(p, ladder), encoding="utf-8")
-        (d / "EXPERIMENTS.md").write_text(f_experiments(p), encoding="utf-8")
-        (d / "DELIVERABLES.md").write_text(f_deliverables(p, rp["depth_levels"]), encoding="utf-8")
-        (d / "MENTOR-NOTES.md").write_text(f_mentor(p, deps_txt), encoding="utf-8")
-        (d / "PAPER-READINESS.md").write_text(f_paper(p), encoding="utf-8")
-        (d / "REGISTRATION.md").write_text(f_registration(p), encoding="utf-8")
-
-    (OUT / "README.md").write_text(index_page(rp, by_code, by_pack), encoding="utf-8")
-    (BASE / "03_Operations" / "STATUS_BOARD.md").write_text(status_board(rp, by_pack), encoding="utf-8")
-
-    n = sum(1 for _ in OUT.rglob("*.md"))
-    print(f"XONG — {len(rp['packs'])} gói · {n} file trong 02_Project_Portfolio/Research_Packs/")
-    print("      + 03_Operations/STATUS_BOARD.md")
-    return 0
-
-
-def index_page(rp, by_code, by_pack):
-    rows, secs = [], []
+def packs_index(rp, deep, by_code):
+    by_pack = {p["pack_id"]: p for p in deep}
+    secs = []
     for tr in rp["tracks"]:
-        ps = [p for p in rp["packs"] if p["track"] == tr["track"]]
+        ps = [p for p in deep if p["track"] == tr["track"]]
         if not ps:
             continue
         secs.append(f"\n### Track {tr['track']} — {tr['name']}\n\n_{tr['focus']}_\n")
         secs.append("| Mã đề tài | Tên | Mức vào | Phụ thuộc | Tiềm năng công bố | Hồ sơ |")
         secs.append("|---|---|---|---|---|---|")
         for p in ps:
-            t = by_code[p["code"]]
             dep = ", ".join(by_pack[x]["code"] for x in p["depends_on"] if x in by_pack) or "—"
-            secs.append(f"| `{p['code']}` | {p['title_vi']} | L{t['min_level']} | {dep} | "
+            secs.append(f"| `{p['code']}` | {p['title_vi']} | L{p['min_level']} | {dep} | "
                         f"{p['paper_potential']} | [mở]({p['code']}/START-HERE.md) |")
-    order, waves = [], {}
-    for p in rp["packs"]:
+    waves = {}
+    for p in deep:
         dep = tuple(by_pack[x]["code"] for x in p["depends_on"] if x in by_pack)
-        order.append((p["code"], dep))
         waves.setdefault(dep, []).append(p["code"])
     ready = waves.pop((), [])
     wave_lines = "\n".join(
         f"- **Sau khi {' và '.join('`' + c + '`' for c in dep)} có baseline chạy được:** "
         + ", ".join(f"`{c}`" for c in codes)
         for dep, codes in sorted(waves.items(), key=lambda kv: (len(kv[0]), kv[0])))
-    return f"""# Hồ sơ thực thi chiều sâu — {len(rp['packs'])} đề tài nghiên cứu
+    return f"""# Hồ sơ thực thi chiều sâu — {len(deep)} đề tài nghiên cứu
 
 {SIG}
 
 {BANNER}
-Danh mục đề tài trả lời câu hỏi *"có những đề tài nào"*. Thư mục này trả lời câu tiếp theo:
-*"làm đề tài đó cụ thể ra sao"*. Mỗi đề tài có tám file: phải đọc gì, hiểu gì, dựng gì,
-chạy thí nghiệm nào, nộp bằng chứng gì, điều kiện qua từng cửa, và khi nào mới đủ điều kiện
-nghĩ tới một bài báo.
-
-Đây là **{len(rp['packs'])} đề tài đã được chuẩn bị tới mức thực thi**, chọn từ danh mục
-{len(by_code)} đề tài của chương trình. Các đề tài còn lại vẫn mở, chỉ chưa có lớp hồ sơ này.
+Mọi đề tài trong chương trình đều có một trang hướng dẫn trong
+[`../Topic_Guides/`](../Topic_Guides/README.md). **{len(deep)} đề tài nghiên cứu** dưới đây có thêm
+lớp sâu: lộ trình từng tuần, điều kiện qua từng cửa G0–G7, kế hoạch thí nghiệm, sản phẩm phải nộp,
+ghi chú mentor và nội dung đăng ký — tám file mỗi đề tài.
 
 ## Bốn quy tắc không thương lượng
 
@@ -588,18 +770,18 @@ Không cần đợi đề tài trước xong 100%, nhưng **phải tôn trọng 
 
 ## Cách mentor vận hành nhóm này
 
-Xem `10_Documentation/RESEARCH-TRACKS.md` — họp theo track chứ không họp riêng từng đề tài,
-điều kiện được escalation, và thang chấm PASS/FAIL.
+Xem [`10_Documentation/RESEARCH-TRACKS.md`](../../10_Documentation/RESEARCH-TRACKS.md) — họp theo track
+chứ không họp riêng từng đề tài, điều kiện được escalation, và thang chấm PASS/FAIL.
 
 ## Bảng trạng thái
 
-`03_Operations/STATUS_BOARD.md` — cập nhật sau mỗi buổi review.
+[`03_Operations/STATUS_BOARD.md`](../../03_Operations/STATUS_BOARD.md) — cập nhật sau mỗi buổi review.
 """
 
 
-def status_board(rp, by_pack):
+def status_board(deep):
     rows = [f"| `{p['code']}` | {p['pack_id']} | {p['track']} | — | Kho đề tài | G0 | — | Giao sinh viên |"
-            for p in rp["packs"]]
+            for p in deep]
     return f"""# Bảng trạng thái đề tài nghiên cứu
 
 {SIG}
@@ -623,6 +805,81 @@ xem `10_Documentation/GITHUB-WORKFLOW.md`.
 - **Hoàn thành** — Gate 6 đạt.
 - **Ứng viên công bố** — đã qua G7.
 """
+
+
+# =============================== main ===============================
+
+def main():
+    rp = load("research_packs.json")
+    port = load("project_portfolio.json")
+    mg = load("milestone_gates.json")
+    ladder = mg["research_ladder"]
+
+    by_code = {t["code"]: t for t in port["topics"]}
+    groups = {g["group"]: g for g in rp["groups"]}
+    types = {m["type"]: m for m in rp["maturity"]["levels"]}
+    packs = rp["packs"]
+    deep = [p for p in packs if p["depth"] == "full"]
+
+    missing = [p["code"] for p in packs if p["code"] not in by_code]
+    if missing:
+        print("LỖI: mã không có trong danh mục:", ", ".join(missing))
+        return 1
+
+    cohorts = sorted(DATA.glob("cohort_*.json"))
+    cal, deadlines, note = [], {}, cs.frame_note()
+    if cohorts:
+        co = json.loads(cohorts[-1].read_text(encoding="utf-8"))
+        globals()["COHORT"] = co["cohort_id"]
+        cal = cs.build_calendar(co.get("start_date"), mg["frame"]["duration_weeks"], co.get("breaks"))
+        deadlines = cs.gate_deadlines(mg["gates"], cal)
+        note = cs.frame_note(co, cal)
+
+    # --- 1. trang hướng dẫn cho toàn bộ đề tài ---
+    GUIDES.mkdir(parents=True, exist_ok=True)
+    by_group = {}
+    deep_codes = {p["code"] for p in deep}
+    for p in packs:
+        by_group.setdefault(p["group"], []).append(p)
+    for gid, ps in by_group.items():
+        d = GUIDES / gid
+        d.mkdir(exist_ok=True)
+        for p in ps:
+            (d / f"{p['code']}.md").write_text(
+                guide_page(p, groups[gid], types[p["type"]], rp, p["code"] in deep_codes),
+                encoding="utf-8")
+        (d / "README.md").write_text(group_index(groups[gid], ps, rp), encoding="utf-8")
+    (GUIDES / "README.md").write_text(guides_master(rp, by_group), encoding="utf-8")
+
+    # --- 2. hồ sơ sâu ---
+    PACKS.mkdir(parents=True, exist_ok=True)
+    stale = sorted(x.name for x in PACKS.iterdir() if x.is_dir() and x.name not in deep_codes)
+    if stale:
+        print("  ! thư mục thừa (đề tài đã gỡ khỏi JSON), xóa thủ công:", ", ".join(stale))
+    by_pack = {p["pack_id"]: p for p in deep}
+    for p in deep:
+        d = PACKS / p["code"]
+        d.mkdir(exist_ok=True)
+        deps = [f"`{by_pack[x]['code']}` ({x})" for x in p["depends_on"] if x in by_pack]
+        deps_txt = ("Cần baseline của " + ", ".join(deps) + " trước khi mở."
+                    if deps else "Không phụ thuộc đề tài nào — có thể mở ngay.")
+        (d / "START-HERE.md").write_text(f_start_here(p, rp["rules"]), encoding="utf-8")
+        (d / "ROADMAP.md").write_text(f_roadmap(p, mg["gates"], deadlines, note), encoding="utf-8")
+        (d / "MILESTONE-GATES.md").write_text(f_gates(p, ladder), encoding="utf-8")
+        (d / "EXPERIMENTS.md").write_text(f_experiments(p), encoding="utf-8")
+        (d / "DELIVERABLES.md").write_text(f_deliverables(p, rp["depth_levels"]), encoding="utf-8")
+        (d / "MENTOR-NOTES.md").write_text(f_mentor(p, deps_txt), encoding="utf-8")
+        (d / "PAPER-READINESS.md").write_text(f_paper(p), encoding="utf-8")
+        (d / "REGISTRATION.md").write_text(f_registration(p), encoding="utf-8")
+    (PACKS / "README.md").write_text(packs_index(rp, deep, by_code), encoding="utf-8")
+    (BASE / "03_Operations" / "STATUS_BOARD.md").write_text(status_board(deep), encoding="utf-8")
+
+    ng = sum(1 for _ in GUIDES.rglob("*.md"))
+    npk = sum(1 for _ in PACKS.rglob("*.md"))
+    print(f"XONG — {len(packs)} trang hướng dẫn ({ng} file trong Topic_Guides/, {len(by_group)} nhóm)")
+    print(f"      {len(deep)} hồ sơ sâu ({npk} file trong Research_Packs/)")
+    print("      + 03_Operations/STATUS_BOARD.md")
+    return 0
 
 
 if __name__ == "__main__":

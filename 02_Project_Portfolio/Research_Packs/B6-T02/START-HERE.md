@@ -26,7 +26,7 @@
 - small neural networks
 - quantization/hardware cost
 
-Tài liệu cụ thể xem `09_References/READING-LIST.md`. Sau mỗi tài liệu, trả lời 10 câu trong `READING-QUESTIONS` ở cuối file này.
+Tài liệu cụ thể xem `09_References/READING-LIST.md`. Sau mỗi tài liệu, trả lời 10 câu ở cuối file này.
 
 ## Phải hiểu được (không nhìn tài liệu)
 
@@ -102,4 +102,4 @@ Nếu tuần nào em cũng trả lời được bốn câu này bằng bằng ch
 
 ---
 
-*Lộ trình từng tuần: `ROADMAP.md` · Điều kiện qua từng cửa: `MILESTONE-GATES.md` · Thí nghiệm: `EXPERIMENTS.md`*
+*Trang tổng quan đề tài: [`Topic_Guides/B6/B6-T02.md`](../../Topic_Guides/B6/B6-T02.md) · Lộ trình: `ROADMAP.md` · Cửa: `MILESTONE-GATES.md` · Thí nghiệm: `EXPERIMENTS.md`*

@@ -58,6 +58,27 @@ sau ghi rõ commit hoặc tag của baseline mà nó dùng, trong README và tro
 nếu nhóm B4-T01 và nhóm B5-T02 chạy trên hai bản SC khác nhau thì mọi kết luận so sánh
 giữa hai đề tài đó đều vô hiệu, và cả hai khóa luận đều mất phần đóng góp mạnh nhất.
 
+## 3b. Còn 92 đề tài còn lại thì vận hành thế nào?
+
+Bốn track ở trên là cách tổ chức **13 đề tài nghiên cứu** đi sâu. Toàn bộ chương trình rộng hơn:
+**105 đề tài trong 16 nhóm chuyên môn**, trải bốn mức trưởng thành **P → I → T → R**. Nguyên tắc
+gộp vẫn giống hệt — **review theo nhóm, không theo 105 luồng riêng**:
+
+- Mỗi nhóm (`A0`…`AB`, `B0`…`B6`) có một bộ **nền chung**: phải đọc gì, phải hiểu gì, phải dựng gì,
+  thí nghiệm mặc định và bộ câu hỏi mentor. Khai một lần cho cả nhóm, không lặp cho từng đề tài.
+- Phần **riêng của mỗi đề tài** chỉ là *sản phẩm phải làm ra*. Đó cũng là thứ mentor kiểm ở Gate 2
+  và Gate 6.
+- Kỳ vọng nghiên cứu đi theo **loại**, không theo người: `P` học một kỹ năng, `I` làm theo quy trình
+  kỹ sư, `T` sở hữu một sản phẩm hoàn chỉnh, `R` trả lời một câu hỏi nghiên cứu.
+
+> **Quy tắc chống "paper hóa" giả.** Một project PCB không trở thành nghiên cứu chỉ vì thêm chữ
+> "nghiên cứu" vào tên đề tài. Muốn lên mức `R` phải có biến nghiên cứu, baseline, metric, giả
+> thuyết và thí nghiệm có kiểm soát.
+
+Bản đồ 16 nhóm, năm thang đi từ board thật tới công bố, và trang hướng dẫn của từng đề tài:
+[`02_Project_Portfolio/Topic_Guides/README.md`](../02_Project_Portfolio/Topic_Guides/README.md).
+Bản dành cho sinh viên đọc trước khi chọn: [trang Guide Notes](https://lucero6886.github.io/lucero-mentoring/guide.html).
+
 ## 4. Nhịp làm việc hằng tuần
 
 ### Không tổ chức mười ba buổi họp
@@ -144,3 +165,5 @@ làm là để sinh viên tưởng mình đang làm D3 trong khi mentor đang ch
 | Định nghĩa "xong" | `03_Operations/DEFINITION_OF_DONE.md` |
 | Quy trình làm việc trên GitHub | `10_Documentation/GITHUB-WORKFLOW.md` |
 | Tài liệu nền theo hướng | `09_References/READING-LIST.md` |
+| Trang hướng dẫn từng đề tài (105) | `02_Project_Portfolio/Topic_Guides/README.md` |
+| Đề xuất đổi tên đề tài (chưa áp dụng) | `09_References/TITLE-REVIEW-v2.md` |

@@ -1,12 +1,12 @@
 {
  "meta": {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "updated": "2026-09-02",
   "program": "Engineering & Research Mentoring Program (Lucero)",
   "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
-  "purpose": "Lớp thực thi chiều sâu cho những đề tài đã chọn đi tới mức nghiên cứu. project_portfolio.json trả lời 'có những đề tài nào'; file này trả lời 'làm đề tài đó cụ thể ra sao': phải đọc gì, hiểu gì, dựng gì, chạy thí nghiệm nào, nộp bằng chứng gì và khi nào mới đủ điều kiện viết bài.",
-  "notes": "Mã chuẩn là 'code' (Family-TypeNN) — trùng với project_portfolio.json. 'pack_id' (T01-T13) chỉ là mã đối chiếu với gói gốc Research Program Package, không dùng để đặt tên file hay trích dẫn. Mọi tài liệu trong 02_Project_Portfolio/Research_Packs/ đều do scripts/generate_research_packs.py sinh ra từ file này — không sửa tay. 'title_vi/title_en' lấy nguyên từ project_portfolio.json để không có hai tên cho cùng một mã; 'title_registration_*' là tên đầy đủ dùng khi điền biểu mẫu đăng ký.",
-  "source": "Research_Program_Package_13_Topics v1.0 (hợp nhất vào hệ thống, 09/2026)"
+  "purpose": "Lớp thực thi cho từng đề tài. project_portfolio.json trả lời 'có những đề tài nào'; file này trả lời 'làm đề tài đó cụ thể ra sao'. Từ 1.9.0 phủ đủ 105 đề tài; 13 đề tài có thêm lớp sâu (depth='full') với câu hỏi nghiên cứu, bằng chứng và câu hỏi mentor riêng.",
+  "notes": "Chuẩn hóa theo mức: thuộc tính chung của một NHÓM nằm ở 'groups', của một LOẠI nằm ở 'maturity.levels'; mỗi đề tài chỉ khai phần thật sự riêng của nó. Gói depth='full' được phép ghi đè giá trị của nhóm. 'title_vi/title_en' lấy nguyên từ project_portfolio.json (bản chuẩn duy nhất); 'title_v2_proposed_vi' chỉ là ĐỀ XUẤT chưa áp dụng — xem 09_References/TITLE-REVIEW-v2.md, không dùng để hiển thị hay đăng ký.",
+  "source": "Research_Program_Package_13_Topics v1.0 (lớp sâu) + Research_Program_Package_v2_105_Topics (lớp phủ) — hợp nhất 09/2026"
  },
  "tracks": [
   {
@@ -52,6 +52,682 @@
    "meaning": "Câu hỏi nghiên cứu rõ, đóng góp có bằng chứng, hình/bảng sẵn sàng cho bản thảo."
   }
  ],
+ "maturity": {
+  "levels": [
+   {
+    "type": "P",
+    "name_vi": "Project môn học",
+    "goal": "Học một kỹ năng",
+    "core_evidence": "working artifact + test/measurement",
+    "research_expectation": "novelty không bắt buộc",
+    "role": "Training/engineering evidence. Không mặc định yêu cầu novelty; có thể mở Research Extension nếu measurement/benchmark tạo câu hỏi mới.",
+    "paper_threshold": "Không viết paper chỉ vì product hoạt động. Chỉ nâng cấp khi có một biến nghiên cứu rõ (ví dụ topology/bit-width/pipeline/protocol/measurement condition), baseline, metric và sweep có kiểm soát."
+   },
+   {
+    "type": "I",
+    "name_vi": "Thực tập",
+    "goal": "Làm theo quy trình kỹ sư",
+    "core_evidence": "reproducible workflow + documentation + legacy",
+    "research_expectation": "paper không phải KPI mặc định",
+    "role": "Process/readiness evidence. Mục tiêu chính là kỷ luật kỹ thuật và legacy package; paper chỉ khi có extension độc lập.",
+    "paper_threshold": "Paper không phải KPI chính. Chỉ nâng cấp nếu workflow/method tạo ra câu hỏi về reproducibility, reliability, automation hoặc measurable engineering improvement có novelty/insight."
+   },
+   {
+    "type": "T",
+    "name_vi": "Đồ án tốt nghiệp",
+    "goal": "Sở hữu sản phẩm hoàn chỉnh",
+    "core_evidence": "end-to-end + quantitative evaluation + reproducibility",
+    "research_expectation": "có thể mở research extension",
+    "role": "Complete product + quantitative evaluation. Có thể trở thành paper candidate nếu phần extension tạo insight mới và comparison đủ mạnh.",
+    "paper_threshold": "Phần lõi phải tự đứng vững trước. Paper chỉ mở sau G6 nếu extension có research question, strong baseline, quantitative gain/trade-off, sensitivity/failure analysis và reproducibility."
+   },
+   {
+    "type": "R",
+    "name_vi": "Nghiên cứu khoa học",
+    "goal": "Trả lời research question",
+    "core_evidence": "hypothesis + strong baseline + controlled evidence",
+    "research_expectation": "manuscript-ready nếu G7 PASS",
+    "role": "Research-first. Phải có hypothesis/RQ, strong baseline, controlled experiments, reproducibility; mục tiêu trực tiếp là manuscript-ready evidence.",
+    "paper_threshold": "Paper-ready khi hypothesis được kiểm chứng/bác bỏ bằng controlled evidence; baseline đủ mạnh; có robustness/ablation/failure cases; claim không vượt evidence; package tái lập được."
+   }
+  ],
+  "red_flags": [
+   "demo không có test/measurement",
+   "chỉ screenshot, không raw/config",
+   "so sánh khác constraint",
+   "thay nhiều biến cùng lúc",
+   "paper claim trước khi baseline đúng",
+   "AI code không giải thích được"
+  ],
+  "anti_fake_research_rule": "Một PCB project không trở thành nghiên cứu chỉ vì thêm chữ “nghiên cứu” vào tên. Muốn lên R phải có biến, baseline, metric, hypothesis và experiment có kiểm soát."
+ },
+ "ladders": {
+  "paths": [
+   {
+    "name": "PCB → Digital IC",
+    "path": "`A0-P02/P03` → `A1-P*/A1-I01` → `A1-T01` → `A3-P01/A3-T01` → `A4-T01/T02` → `A4-R01` hoặc `A2-R01`",
+    "logic": "board thật tạo trực giác → RTL tạo IP → FPGA tạo product evidence → ASIC/PPA tạo metric → R tạo research question."
+   },
+   {
+    "name": "PCB + FPGA interface",
+    "path": "`A0-P06` → `A3-P02` → `A3-I01/T01` → `A4-T01/T02` → `AB-*`",
+    "logic": ""
+   },
+   {
+    "name": "PCB → Embedded/IoT → Edge AI",
+    "path": "`A0-P04/P05` → `A6-P*/I01/T01` → `A7-T01/T02` → `A7-R01` → `AB-T05` → `AB-R03`",
+    "logic": ""
+   },
+   {
+    "name": "Digital/FPGA → Polar → Publication",
+    "path": "`A1 + B0` → `B1` → `B2-T01` → `B3/B4` → `B5` → `B6` → `AB-R01/R02`",
+    "logic": ""
+   },
+   {
+    "name": "PhD-aligned adaptive Polar",
+    "path": "`B2-T01` → `B3-T02` → `B4-T01/T02` → `B5-T01/T02/T03` → `B6-T01/T02` → `B6-R01/R02` → `AB-R01/R02`",
+    "logic": ""
+   }
+  ],
+  "publication_gate": [
+   "baseline đúng",
+   "question không tầm thường",
+   "comparison công bằng",
+   "có quantitative evidence",
+   "có robustness/failure analysis",
+   "có reproducibility",
+   "contribution không vượt evidence"
+  ]
+ },
+ "groups": [
+  {
+   "group": "A0",
+   "name_vi": "Điện tử thực hành và PCB",
+   "name_en": "Hands-on Electronics & PCB",
+   "core_reading": [
+    "datasheet và giới hạn tuyệt đối của linh kiện",
+    "schematic capture và nguyên tắc PCB cơ bản",
+    "nguồn, decoupling, ground, connector, polarity",
+    "sử dụng DMM/oscilloscope/logic analyzer và an toàn phòng lab"
+   ],
+   "core_understanding": [
+    "đường đi dòng điện và đường hồi dòng",
+    "khác biệt schematic đúng và board thật chạy ổn",
+    "measurement uncertainty và test point",
+    "debug theo giả thuyết, không thay linh kiện ngẫu nhiên"
+   ],
+   "core_build": [
+    "schematic + BOM",
+    "PCB tự chế tạo/board thật",
+    "test plan + test points",
+    "measurement + failure-fix log"
+   ],
+   "core_experiments": [
+    "continuity/short test trước cấp nguồn",
+    "nominal functional test",
+    "sweep tải/điện áp/tần số hoặc điều kiện phù hợp",
+    "repeat measurement và failure injection đơn giản"
+   ],
+   "mentor_questions": [
+    "Điện/dòng đi theo đường nào trên board?",
+    "Nếu mô phỏng đúng nhưng board sai, em kiểm tra theo thứ tự nào?",
+    "Con số đo này có sai số và giới hạn dụng cụ gì?",
+    "Board này có thể nâng cấp thành một experiment có câu hỏi nghiên cứu nào?"
+   ],
+   "next_path": "A1/A3/A6 → A2/A4/A7 → đề tài R/AB"
+  },
+  {
+   "group": "A1",
+   "name_vi": "Logic số và thiết kế RTL",
+   "name_en": "Digital Logic & RTL Design",
+   "core_reading": [
+    "combinational/sequential logic",
+    "Verilog synthesizable subset",
+    "clock/reset/FSM",
+    "self-checking testbench và waveform reasoning"
+   ],
+   "core_understanding": [
+    "RTL mô tả phần cứng, không phải phần mềm tuần tự",
+    "blocking vs non-blocking",
+    "reset/clock-cycle semantics",
+    "spec→assertion/test→evidence"
+   ],
+   "core_build": [
+    "spec/interface",
+    "RTL",
+    "self-checking testbench",
+    "regression/synthesis evidence"
+   ],
+   "core_experiments": [
+    "directed + random tests",
+    "corner/illegal-state tests",
+    "parameter sweep nếu có",
+    "synthesis resource/timing comparison"
+   ],
+   "mentor_questions": [
+    "Mỗi always block này suy ra phần cứng gì?",
+    "Test nào có thể chứng minh thiết kế sai?",
+    "Interface timing contract là gì?",
+    "Kết quả synthesis có phù hợp kiến trúc em nghĩ không?"
+   ],
+   "next_path": "A2/A3/A5 → A4 → A4-R01/A5-R01/AB"
+  },
+  {
+   "group": "A2",
+   "name_vi": "Số học số và phần cứng DSP",
+   "name_en": "Digital Arithmetic & DSP Hardware",
+   "core_reading": [
+    "fixed-point arithmetic",
+    "overflow/rounding/saturation",
+    "adder/multiplier/MAC/FIR architectures",
+    "pipelining và PPA"
+   ],
+   "core_understanding": [
+    "accuracy vs bit-width",
+    "latency vs throughput",
+    "resource sharing vs parallelism",
+    "Pareto trade-off"
+   ],
+   "core_build": [
+    "golden numerical model",
+    "parameterized RTL",
+    "bit-exact tests",
+    "FPGA/ASIC reports"
+   ],
+   "core_experiments": [
+    "bit-width sweep",
+    "pipeline/architecture sweep",
+    "numerical-error analysis",
+    "resource/Fmax/area/timing/power comparison"
+   ],
+   "mentor_questions": [
+    "Metric accuracy là gì?",
+    "Pipeline tăng register nhưng lợi gì?",
+    "Hai architecture có functional equivalence không?",
+    "Điểm Pareto nào đáng chọn và vì sao?"
+   ],
+   "next_path": "A3/A4 → A2-R01 hoặc AB"
+  },
+  {
+   "group": "A3",
+   "name_vi": "Thiết kế hệ thống trên FPGA",
+   "name_en": "FPGA System Design",
+   "core_reading": [
+    "FPGA synthesis/place-route flow",
+    "clock constraints",
+    "I/O interfacing",
+    "on-board debug"
+   ],
+   "core_understanding": [
+    "Fmax/resource/latency/throughput",
+    "timing constraint và critical path",
+    "simulation vs hardware behavior",
+    "interface synchronization"
+   ],
+   "core_build": [
+    "FPGA project/constraints",
+    "RTL integration",
+    "hardware test harness",
+    "measurement/report"
+   ],
+   "core_experiments": [
+    "resource/Fmax baseline",
+    "clock or pipeline sweep",
+    "peripheral stress test",
+    "hardware/software agreement"
+   ],
+   "mentor_questions": [
+    "Timing closure nghĩa là gì ở thiết kế này?",
+    "Kết quả trên board có bằng chứng gì ngoài demo?",
+    "Bottleneck là logic, memory hay I/O?",
+    "Metric nào đủ để so architecture?"
+   ],
+   "next_path": "A4/A5 → A4-R01/AB"
+  },
+  {
+   "group": "A4",
+   "name_vi": "Thiết kế ASIC và hiện thực vật lý",
+   "name_en": "ASIC Design & Physical Implementation",
+   "core_reading": [
+    "logic synthesis",
+    "STA",
+    "floorplan/place/CTS/route",
+    "DRC/LVS",
+    "PPA và open-source ASIC flow"
+   ],
+   "core_understanding": [
+    "slack/critical path",
+    "utilization/congestion",
+    "logical vs physical correctness",
+    "same RTL + different constraints → different PPA"
+   ],
+   "core_build": [
+    "verified RTL",
+    "flow configs/scripts",
+    "GDSII/physical evidence",
+    "PPA extraction"
+   ],
+   "core_experiments": [
+    "clock-period sweep",
+    "utilization/architecture sweep",
+    "repeatability run",
+    "PPA/DRC/LVS analysis"
+   ],
+   "mentor_questions": [
+    "Constraint nào đang chi phối kết quả?",
+    "DRC pass có nghĩa LVS pass không?",
+    "PPA comparison có cùng điều kiện không?",
+    "Insight nào vượt khỏi việc 'chạy được tool'?"
+   ],
+   "next_path": "A5/AB → A4-R01/AB-R01"
+  },
+  {
+   "group": "A5",
+   "name_vi": "Kiểm chứng, EDA và phát triển tái lập",
+   "name_en": "Verification, EDA & Reproducible Hardware Development",
+   "core_reading": [
+    "verification planning",
+    "regression",
+    "Git/CI",
+    "reproducible environments",
+    "PPA regression"
+   ],
+   "core_understanding": [
+    "repeatability vs reproducibility",
+    "test coverage intent",
+    "version pinning",
+    "failure triage"
+   ],
+   "core_build": [
+    "automation scripts",
+    "CI/regression pipeline",
+    "version manifest",
+    "failure reports"
+   ],
+   "core_experiments": [
+    "clean-clone run",
+    "multi-commit regression",
+    "intentional failure tests",
+    "runtime/reproducibility evaluation"
+   ],
+   "mentor_questions": [
+    "Một người khác có thể tái lập từ zero không?",
+    "Failure nào pipeline bắt được?",
+    "Threshold regression có false alarm không?",
+    "Hạ tầng này tiết kiệm công sức/giảm lỗi bằng số liệu nào?"
+   ],
+   "next_path": "A4/AB → A5-R01"
+  },
+  {
+   "group": "A6",
+   "name_vi": "Hệ nhúng và tích hợp SoC",
+   "name_en": "Embedded Systems & SoC Integration",
+   "core_reading": [
+    "MCU architecture",
+    "UART/I2C/SPI",
+    "interrupt/RTOS",
+    "SoC FPGA memory-mapped I/O",
+    "profiling"
+   ],
+   "core_understanding": [
+    "polling vs interrupt",
+    "deadline/jitter",
+    "HW/SW boundary",
+    "profile before accelerate"
+   ],
+   "core_build": [
+    "firmware/driver",
+    "hardware interface or accelerator where applicable",
+    "system tests",
+    "performance logs"
+   ],
+   "core_experiments": [
+    "latency/jitter",
+    "throughput",
+    "CPU utilization",
+    "hardware acceleration speedup/resource trade-off"
+   ],
+   "mentor_questions": [
+    "Đoạn nào thật sự là bottleneck?",
+    "Tại sao đưa phần này xuống hardware?",
+    "Deadline đo thế nào?",
+    "End-to-end speedup có khớp kernel speedup không?"
+   ],
+   "next_path": "A7/AB-T05 → A6-R01/AB-R02/AB-R03"
+  },
+  {
+   "group": "A7",
+   "name_vi": "Hệ IoT và trí tuệ biên",
+   "name_en": "IoT Systems & Edge Intelligence",
+   "core_reading": [
+    "IoT architecture",
+    "MQTT/BLE/LoRa basics",
+    "energy measurement",
+    "TinyML deployment/quantization"
+   ],
+   "core_understanding": [
+    "uptime/loss/energy per operation",
+    "duty cycle",
+    "accuracy-latency-energy trade-off",
+    "field reliability"
+   ],
+   "core_build": [
+    "real node/system",
+    "logging pipeline",
+    "measurement setup",
+    "reproducible deployment"
+   ],
+   "core_experiments": [
+    "long-run reliability",
+    "range/loss",
+    "energy profile",
+    "model/quantization trade-off"
+   ],
+   "mentor_questions": [
+    "System chạy ổn bao lâu và failure nào xảy ra?",
+    "Energy đo ở đâu và tích phân thế nào?",
+    "Accuracy tăng có đáng energy/latency cost không?",
+    "Lab result có chuyển sang field condition không?"
+   ],
+   "next_path": "AB-T05/AB-T06 → A7-R01/AB-R02/AB-R03"
+  },
+  {
+   "group": "AB",
+   "name_vi": "Vùng giao: IC số × Polar × Edge co-design",
+   "name_en": "Digital IC × Polar / Edge Co-Design",
+   "core_reading": [
+    "cross-platform benchmarking",
+    "FPGA vs ASIC metrics",
+    "energy/latency accounting",
+    "algorithm-hardware co-design",
+    "multi-objective optimization"
+   ],
+   "core_understanding": [
+    "fair cross-platform comparison",
+    "proxy vs measured energy",
+    "algorithmic vs implementation gain",
+    "Pareto dominance"
+   ],
+   "core_build": [
+    "shared golden workload",
+    "FPGA/ASIC/SoC implementations or estimates",
+    "automated metric extraction",
+    "trade-off analysis"
+   ],
+   "core_experiments": [
+    "platform/architecture sweep",
+    "bit-width/pipeline sweep",
+    "BLER/accuracy vs PPA/energy",
+    "multi-objective Pareto"
+   ],
+   "mentor_questions": [
+    "Comparison có cùng workload và precision không?",
+    "Metric nào measured, metric nào proxy?",
+    "Gain tồn tại sau hardware overhead không?",
+    "Điểm Pareto nào có ý nghĩa hệ thống?"
+   ],
+   "next_path": "AB-R01/R02/R03 → manuscript/publication/PhD research line"
+  },
+  {
+   "group": "B0",
+   "name_vi": "Nền Polar và baseline phần mềm",
+   "name_en": "Polar Fundamentals & Software Baseline",
+   "core_reading": [
+    "Polar code construction basics",
+    "BPSK/AWGN",
+    "LLR",
+    "SC decoding",
+    "BER/BLER simulation methodology"
+   ],
+   "core_understanding": [
+    "N/K/R frozen-information bits",
+    "LLR sign/magnitude",
+    "SC dependency",
+    "confidence intervals / sufficient error counts"
+   ],
+   "core_build": [
+    "encoder/channel/decoder golden model",
+    "seeded experiment scripts",
+    "unit/known-vector tests",
+    "BLER/BER plots"
+   ],
+   "core_experiments": [
+    "Eb/N0 sweep",
+    "small-N hand validation",
+    "N/K sensitivity if applicable",
+    "repeatability/seeds"
+   ],
+   "mentor_questions": [
+    "Frozen set đến từ đâu?",
+    "LLR này có đúng convention không?",
+    "Bao nhiêu frame/error đủ để tin BLER?",
+    "Baseline có khớp xu hướng lý thuyết/literature không?"
+   ],
+   "next_path": "B1/B2 → B3/B4/B5"
+  },
+  {
+   "group": "B1",
+   "name_vi": "Khối phần cứng cho Polar",
+   "name_en": "Polar Hardware Building Blocks",
+   "core_reading": [
+    "SC f/g operations",
+    "partial sums",
+    "fixed-point basics",
+    "RTL microarchitecture",
+    "co-verification"
+   ],
+   "core_understanding": [
+    "algorithm operation→hardware cycle",
+    "exact/min-sum differences",
+    "bit growth",
+    "module interface dependencies"
+   ],
+   "core_build": [
+    "reference function",
+    "RTL PE/unit",
+    "self-checking TB",
+    "synthesis/FPGA evidence"
+   ],
+   "core_experiments": [
+    "exhaustive/random vector tests",
+    "bit-width sweep",
+    "exact vs approximation",
+    "resource/timing"
+   ],
+   "mentor_questions": [
+    "PE này thực hiện công thức nào?",
+    "Mismatch do sign/scale hay control?",
+    "Approximation ảnh hưởng BLER thế nào?",
+    "Bit-width nào là đủ?"
+   ],
+   "next_path": "B2 → B3/AB"
+  },
+  {
+   "group": "B2",
+   "name_vi": "Bộ giải mã SC Polar trên phần cứng",
+   "name_en": "SC Polar Decoder Hardware",
+   "core_reading": [
+    "full SC decoding schedule",
+    "memory/partial sums",
+    "controller/datapath",
+    "fixed-point",
+    "FPGA metrics"
+   ],
+   "core_understanding": [
+    "tree traversal/dependencies",
+    "cycle latency",
+    "memory architecture",
+    "software↔RTL bit-exactness"
+   ],
+   "core_build": [
+    "golden model",
+    "fixed-point RTL decoder",
+    "co-verification",
+    "FPGA implementation"
+   ],
+   "core_experiments": [
+    "BLER baseline",
+    "vector co-verification",
+    "resource/Fmax/latency/throughput",
+    "architecture/resource-sharing comparison"
+   ],
+   "mentor_questions": [
+    "Latency đo từ đâu tới đâu?",
+    "Bottleneck controller hay datapath/memory?",
+    "RTL có bit-exact với golden không?",
+    "Architecture này scale theo N ra sao?"
+   ],
+   "next_path": "B3/B4/B5 → B2-R01/AB-R01"
+  },
+  {
+   "group": "B3",
+   "name_vi": "Lượng tử hóa và tối ưu theo phần cứng",
+   "name_en": "Hardware-Aware Quantization & Optimization",
+   "core_reading": [
+    "LLR dynamic range",
+    "quantization",
+    "saturation/clipping",
+    "fixed-point Polar decoding",
+    "hardware cost metrics"
+   ],
+   "core_understanding": [
+    "quantization error propagation",
+    "BLER sensitivity",
+    "integer/fractional allocation",
+    "accuracy-cost Pareto"
+   ],
+   "core_build": [
+    "floating baseline",
+    "quantized model",
+    "parameterized implementation",
+    "hardware cost extraction"
+   ],
+   "core_experiments": [
+    "3/4/5/6+ bit sweep",
+    "clipping/saturation",
+    "BLER vs Eb/N0",
+    "resource/timing/energy proxy"
+   ],
+   "mentor_questions": [
+    "Overflow xảy ra ở đâu?",
+    "BLER loss tại SNR nào quan trọng?",
+    "Precision optimum ổn định theo N/K không?",
+    "Savings có đủ justify degradation không?"
+   ],
+   "next_path": "B4/B5/AB → B3-R01/AB-R01"
+  },
+  {
+   "group": "B4",
+   "name_vi": "SC-Flip và giải mã theo độ tin cậy",
+   "name_en": "SC-Flip & Reliability-Aware Decoding",
+   "core_reading": [
+    "SC error propagation",
+    "SC-Flip",
+    "reliability metrics",
+    "Top-k ranking",
+    "retry complexity"
+   ],
+   "core_understanding": [
+    "first-error phenomenon",
+    "ranking vs classification",
+    "average attempts",
+    "BLER-latency trade-off"
+   ],
+   "core_build": [
+    "SCF baseline",
+    "failure data collector",
+    "candidate ranking",
+    "reproducible evaluation"
+   ],
+   "core_experiments": [
+    "Top-k",
+    "BLER vs SNR",
+    "Tmax/attempts",
+    "metric complexity/ablation"
+   ],
+   "mentor_questions": [
+    "True error label định nghĩa thế nào?",
+    "Ranking tốt hơn có giảm attempts thật không?",
+    "Tmax có diminishing return ở đâu?",
+    "Overhead metric có ăn hết lợi ích không?"
+   ],
+   "next_path": "B5/B6 → B4-R01/B6-R02"
+  },
+  {
+   "group": "B5",
+   "name_vi": "Giải mã Polar thích ứng",
+   "name_en": "Adaptive Polar Decoding",
+   "core_reading": [
+    "adaptive/selective decoding",
+    "classification metrics",
+    "reliability features",
+    "average-case cost",
+    "gating"
+   ],
+   "core_understanding": [
+    "false trigger vs missed hard frame",
+    "activation rate",
+    "operating point",
+    "always-on vs selective"
+   ],
+   "core_build": [
+    "detector/gate",
+    "adaptive framework",
+    "metrics logger",
+    "optional hardware model"
+   ],
+   "core_experiments": [
+    "ROC/PR or trigger trade-off",
+    "BLER vs SNR",
+    "activation/average attempts/latency",
+    "threshold sensitivity/oracle comparison"
+   ],
+   "mentor_questions": [
+    "Feature có sẵn trước lúc ra quyết định không?",
+    "False negative làm hỏng BLER thế nào?",
+    "Savings đến từ đâu?",
+    "Threshold có ổn định khi SNR thay đổi không?"
+   ],
+   "next_path": "B6/AB → B5-R01/B6-R01/AB-R02"
+  },
+  {
+   "group": "B6",
+   "name_vi": "Giải mã Polar hỗ trợ mạng neural",
+   "name_en": "Neural-Assisted Polar Decoding",
+   "core_reading": [
+    "classical ML baselines",
+    "small neural networks",
+    "train/val/test hygiene",
+    "quantization-aware inference",
+    "hardware cost"
+   ],
+   "core_understanding": [
+    "data leakage",
+    "class imbalance",
+    "NN justification",
+    "parameters/MACs/memory vs end-to-end gain"
+   ],
+   "core_build": [
+    "dataset pipeline",
+    "heuristic/classical baseline",
+    "tiny NN",
+    "quantized/hardware-aware evaluation"
+   ],
+   "core_experiments": [
+    "baseline vs NN",
+    "feature/model ablation",
+    "quantization/model-size sweep",
+    "end-to-end BLER/activation/attempts/cost"
+   ],
+   "mentor_questions": [
+    "NN học được gì heuristic không làm được?",
+    "Có leakage không?",
+    "AUC/Top-k gain có biến thành decoder gain không?",
+    "Net saving sau NN overhead là bao nhiêu?"
+   ],
+   "next_path": "AB → B6-R01/B6-R02/AB-R01"
+  }
+ ],
  "rules": [
   "Không có baseline thì không có phương pháp đề xuất.",
   "Không có bằng chứng thì không có kết luận.",
@@ -59,219 +735,154 @@
   "Không so sánh công bằng thì không được tuyên bố trong bài báo."
  ],
  "shared_baseline_rule": "Không nhân bản năm phiên bản SC khác nhau cho năm nhóm. Duy trì một 'golden baseline' dùng chung có tag/version; mọi đề tài phía sau phải ghi rõ commit/tag của baseline mà nó dùng.",
+ "raw_data_rule": [
+  "Không overwrite raw measurement/simulation",
+  "Mỗi run lưu config, seed, git commit, tool version, date",
+  "Figure/table phải được tạo lại từ script",
+  "Ảnh oscilloscope/logic analyzer phải có test condition",
+  "Board revision/BOM/firmware/bitstream phải versioned"
+ ],
  "packs": [
   {
-   "code": "A4-T01",
-   "pack_id": "T01",
-   "track": "A",
-   "track_name": "Thiết kế IC số mã nguồn mở",
-   "title_vi": "Thiết kế một Digital IP từ RTL đến GDSII",
-   "title_en": "Design and Evaluation of a Digital IP from RTL to GDSII",
-   "title_registration_vi": "Thiết kế và đánh giá một IP số từ RTL đến GDSII sử dụng quy trình EDA mã nguồn mở",
-   "title_registration_en": "Design and Evaluation of a Digital IP from RTL to GDSII Using an Open-Source EDA Flow",
-   "research_question": "Các lựa chọn kiến trúc và ràng buộc physical design ảnh hưởng như thế nào đến timing, area, power và khả năng đóng thiết kế của một IP số?",
-   "paper_potential": "Trung bình",
-   "depends_on": [],
-   "must_read": [
-    "RTL design & verification fundamentals",
-    "logic synthesis và standard-cell mapping",
-    "static timing analysis",
-    "floorplan, placement, CTS, routing",
-    "DRC/LVS và sign-off concepts",
-    "PPA và thiết kế experiment sweep"
-   ],
-   "must_understand": [
-    "Khác biệt functional correctness và physical closure",
-    "critical path/slack",
-    "utilization và congestion",
-    "PPA trade-off",
-    "DRC vs LVS",
-    "tại sao cùng RTL nhưng constraint khác tạo kết quả khác"
-   ],
-   "g0_core_concepts": "Khác biệt functional correctness và physical closure, critical path/slack, utilization và congestion, PPA trade-off",
-   "must_build": [
-    "Chọn và viết/chuẩn hóa một IP số tham số hóa",
-    "testbench + regression",
-    "automation scripts cho flow",
-    "script trích xuất PPA/timing"
-   ],
-   "experiments": [
-    "Baseline RTL→GDSII",
-    "clock-period sweep",
-    "core-utilization sweep",
-    "architecture hoặc pipeline comparison",
-    "re-run để kiểm tra reproducibility"
-   ],
-   "evidence": [
-    "waveform/regression pass",
-    "synthesis report",
-    "STA report",
-    "layout/GDS screenshot",
-    "DRC/LVS summary",
-    "CSV PPA sweep + scripts",
-    "Pareto/summary plots"
-   ],
-   "paper_threshold": "Có systematic design-space/PPA study; ít nhất 2 cấu hình/kiến trúc có so sánh công bằng; DRC/LVS sạch; có insight tái lập vượt quá demo flow.",
-   "mentor_questions": [
-    "IP này đủ phức tạp để có research question nhưng vẫn đóng được không?",
-    "Tại sao constraint này làm timing/area thay đổi?",
-    "Nếu layout pass DRC nhưng fail LVS nghĩa là gì?",
-    "Kết quả nào là insight chứ không chỉ tool output?"
-   ],
-   "red_flags": [
-    "Sinh viên chạy proposed trước baseline.",
-    "Chỉ đưa screenshot mà không có raw data/config.",
-    "Metric thay đổi giữa các phương pháp.",
-    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
-    "AI-generated code nhưng sinh viên không giải thích được.",
-    "Không phân biệt implementation result với research contribution."
-   ]
+   "code": "A0-P01",
+   "group": "A0",
+   "type": "P",
+   "min_level": 0,
+   "title_vi": "Thiết kế và tự chế tạo thủ công mạch nguồn DC cơ bản",
+   "title_en": "Design and Manual Fabrication of a Basic DC Power Supply PCB",
+   "title_v2_proposed_vi": "Thiết kế, chế tạo thủ công và đo kiểm mạch nguồn DC trên PCB",
+   "cohort_alias": "",
+   "expected_output": "Schematic; PCB layout; PCB tự chế tạo; board lắp ráp; kết quả đo tải/ripple; debugging log",
+   "depth": "standard"
   },
   {
-   "code": "A5-T01",
-   "pack_id": "T02",
-   "track": "A",
-   "track_name": "Thiết kế IC số mã nguồn mở",
-   "title_vi": "Xây dựng quy trình ASIC tái lập sử dụng LibreLane + Nix",
-   "title_en": "Reproducible ASIC Workflow Using LibreLane and Nix",
-   "title_registration_vi": "Xây dựng và đánh giá quy trình RTL-to-GDSII mã nguồn mở có khả năng tái lập phục vụ đào tạo thiết kế vi mạch số",
-   "title_registration_en": "Development and Evaluation of a Reproducible Open-Source RTL-to-GDSII Flow for Digital IC Design Education",
-   "research_question": "Làm thế nào xây dựng một RTL-to-GDSII environment mà người học khác có thể tái lập kết quả một cách ổn định trên các máy/môi trường khác nhau?",
-   "paper_potential": "Trung bình",
-   "depends_on": [],
-   "must_read": [
-    "reproducible research",
-    "container/Nix/environment management concepts",
-    "open-source RTL-to-GDSII flow",
-    "CI/regression basics",
-    "EDA versioning",
-    "engineering education evaluation basics"
-   ],
-   "must_understand": [
-    "reproducibility vs repeatability",
-    "toolchain pinning",
-    "deterministic và non-deterministic sources",
-    "benchmark design",
-    "clean-room rerun",
-    "tại sao ModifiedAt/version mới không đảm bảo kết quả mới/đúng"
-   ],
-   "g0_core_concepts": "reproducibility vs repeatability, toolchain pinning, deterministic và non-deterministic sources, benchmark design",
-   "must_build": [
-    "bootstrap/setup scripts",
-    "version manifest",
-    "benchmark runner",
-    "result parser",
-    "optional CI workflow"
-   ],
-   "experiments": [
-    "Fresh install test",
-    "multi-machine or multi-environment rerun",
-    "version/config sensitivity",
-    "benchmark suite run",
-    "runtime + PPA consistency"
-   ],
-   "evidence": [
-    "setup time log",
-    "success/failure matrix",
-    "version manifest",
-    "PPA/run-time variance",
-    "clean-clone demonstration",
-    "student reproduction checklist"
-   ],
-   "paper_threshold": "Có protocol tái lập rõ, benchmark đủ đa dạng, thử nghiệm trên nhiều môi trường/người dùng hoặc nhiều clean runs, có định lượng consistency và bài học giáo dục.",
-   "mentor_questions": [
-    "Cái gì đang được 'reproduced': chức năng hay PPA hay cả hai?",
-    "Nguồn biến thiên nào do tool, nguồn nào do environment?",
-    "Một sinh viên mới cần bao nhiêu bước thủ công?",
-    "Đóng góp nghiên cứu/giáo dục nằm ở đâu ngoài việc viết script?"
-   ],
-   "red_flags": [
-    "Sinh viên chạy proposed trước baseline.",
-    "Chỉ đưa screenshot mà không có raw data/config.",
-    "Metric thay đổi giữa các phương pháp.",
-    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
-    "AI-generated code nhưng sinh viên không giải thích được.",
-    "Không phân biệt implementation result với research contribution."
-   ]
+   "code": "A0-P02",
+   "group": "A0",
+   "type": "P",
+   "min_level": 0,
+   "title_vi": "Thiết kế và chế tạo mạch logic tổ hợp trên PCB",
+   "title_en": "Design and Manual PCB Implementation of a Combinational Logic Circuit",
+   "title_v2_proposed_vi": "Thiết kế, chế tạo và đo kiểm mạch logic tổ hợp trên PCB",
+   "cohort_alias": "",
+   "expected_output": "Truth table; schematic; PCB; board thật; measurement; failure-fix evidence",
+   "depth": "standard"
   },
   {
-   "code": "A2-T02",
-   "pack_id": "T03",
-   "track": "B",
-   "track_name": "Kiến trúc phần cứng số",
-   "title_vi": "Thiết kế và tối ưu MAC datapath cho FPGA/ASIC",
-   "title_en": "Design and Optimization of a Fixed-Point MAC Datapath for FPGA/ASIC",
-   "title_registration_vi": "Thiết kế MAC datapath và đánh giá ảnh hưởng của bit-width và pipeline đến độ chính xác và chi phí phần cứng",
-   "title_registration_en": "Hardware-Aware Design of a MAC Datapath: Accuracy–Cost Trade-offs under Bit-Width and Pipeline Scaling",
-   "research_question": "Bit-width và mức pipeline thay đổi numerical accuracy, latency, throughput, area và power của MAC datapath như thế nào?",
-   "paper_potential": "Cao",
-   "depends_on": [],
-   "must_read": [
-    "fixed-point arithmetic",
-    "quantization error",
-    "MAC architecture",
-    "pipelining",
-    "RTL arithmetic",
-    "FPGA/ASIC PPA metrics"
-   ],
-   "must_understand": [
-    "Q-format",
-    "overflow/saturation/rounding",
-    "latency vs throughput",
-    "critical path",
-    "why pipeline may raise registers but improve fmax",
-    "Pareto frontier"
-   ],
-   "g0_core_concepts": "Q-format, overflow/saturation/rounding, latency vs throughput, critical path",
-   "must_build": [
-    "floating-point golden model",
-    "fixed-point model",
-    "parameterized RTL MAC",
-    "self-checking testbench",
-    "sweep scripts"
-   ],
-   "experiments": [
-    "bit-width sweep",
-    "fractional-bit allocation",
-    "pipeline-depth sweep",
-    "rounding/saturation comparison",
-    "FPGA/ASIC resource/timing evaluation"
-   ],
-   "evidence": [
-    "numerical error plots",
-    "RTL-vs-golden equivalence results",
-    "LUT/FF or area reports",
-    "fmax/latency/throughput table",
-    "Pareto plot"
-   ],
-   "paper_threshold": "Có design-space sweep đủ rộng, numerical + hardware metrics, Pareto analysis, ít nhất một insight kiến trúc/quantization có tính tổng quát.",
-   "mentor_questions": [
-    "Accuracy được định nghĩa bằng metric nào?",
-    "Hai cấu hình pipeline có cùng chức năng và precision không?",
-    "Fmax cao hơn có thực sự cải thiện throughput ở interface này?",
-    "Điểm Pareto nào hợp lý và vì sao?"
-   ],
-   "red_flags": [
-    "Sinh viên chạy proposed trước baseline.",
-    "Chỉ đưa screenshot mà không có raw data/config.",
-    "Metric thay đổi giữa các phương pháp.",
-    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
-    "AI-generated code nhưng sinh viên không giải thích được.",
-    "Không phân biệt implementation result với research contribution."
-   ]
+   "code": "A0-P03",
+   "group": "A0",
+   "type": "P",
+   "min_level": 0,
+   "title_vi": "Thiết kế và chế tạo bộ đếm số trên PCB",
+   "title_en": "Design and Manual Implementation of a Digital Counter PCB",
+   "title_v2_proposed_vi": "Thiết kế, chế tạo và kiểm thử bộ đếm số hiển thị trên PCB",
+   "cohort_alias": "",
+   "expected_output": "Schematic; PCB; counter + display hoạt động; test reset/clock; debugging report",
+   "depth": "standard"
+  },
+  {
+   "code": "A0-P04",
+   "group": "A0",
+   "type": "P",
+   "min_level": 0,
+   "title_vi": "Thiết kế board giao tiếp cảm biến",
+   "title_en": "Design and Manual Fabrication of a Sensor Interface Board",
+   "title_v2_proposed_vi": "Thiết kế, chế tạo và đo kiểm board giao tiếp cảm biến",
+   "cohort_alias": "",
+   "expected_output": "Requirement; datasheet note; schematic; PCB; board; measurement",
+   "depth": "standard"
+  },
+  {
+   "code": "A0-P05",
+   "group": "A0",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế embedded controller board cơ bản",
+   "title_en": "Design of a Basic Microcontroller-Based Embedded Board",
+   "title_v2_proposed_vi": "Thiết kế và chế tạo board điều khiển nhúng cơ bản",
+   "cohort_alias": "",
+   "expected_output": "Schematic; PCB; power/reset/clock/I/O; firmware test; board demo",
+   "depth": "standard"
+  },
+  {
+   "code": "A0-P06",
+   "group": "A0",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế PCB mở rộng I/O cho FPGA",
+   "title_en": "Design of a Custom FPGA I/O Expansion Board",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá PCB mở rộng I/O cho hệ thống FPGA",
+   "cohort_alias": "",
+   "expected_output": "PCB extension; interface test; FPGA demo; documentation",
+   "depth": "standard"
+  },
+  {
+   "code": "A0-I01",
+   "group": "A0",
+   "type": "I",
+   "min_level": 1,
+   "title_vi": "Thực tập thiết kế, chế tạo và kiểm thử phần cứng điện tử",
+   "title_en": "Electronic Hardware Design, Fabrication and Testing Internship",
+   "title_v2_proposed_vi": "Thực tập thiết kế–chế tạo–đo kiểm phần cứng điện tử theo quy trình kỹ sư",
+   "cohort_alias": "",
+   "expected_output": "Working board; design files; BOM; measurement; debug log; technical report; legacy package",
+   "depth": "standard"
+  },
+  {
+   "code": "A1-P01",
+   "group": "A1",
+   "type": "P",
+   "min_level": 0,
+   "title_vi": "Thiết kế các mạch logic tổ hợp bằng Verilog",
+   "title_en": "Combinational Logic Design in Verilog",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng các mạch logic tổ hợp bằng Verilog",
+   "cohort_alias": "",
+   "expected_output": "RTL; testbench; waveform; short report",
+   "depth": "standard"
+  },
+  {
+   "code": "A1-P02",
+   "group": "A1",
+   "type": "P",
+   "min_level": 0,
+   "title_vi": "Thiết kế các mạch tuần tự bằng Verilog",
+   "title_en": "Sequential Logic Design in Verilog",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng các mạch tuần tự bằng Verilog",
+   "cohort_alias": "",
+   "expected_output": "RTL; reset tests; waveform; report",
+   "depth": "standard"
+  },
+  {
+   "code": "A1-P03",
+   "group": "A1",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế FSM cho một bộ điều khiển số",
+   "title_en": "FSM Design for a Digital Controller",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng bộ điều khiển số dựa trên FSM",
+   "cohort_alias": "",
+   "expected_output": "Specification; state diagram; RTL; tests; waveform",
+   "depth": "standard"
   },
   {
    "code": "A1-P04",
+   "group": "A1",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế UART transmitter/receiver bằng RTL",
+   "title_en": "RTL Design of a UART Transmitter/Receiver",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng IP UART transmitter/receiver tham số hóa bằng RTL",
+   "cohort_alias": "",
+   "expected_output": "UART RTL; loopback testbench; waveform; README",
+   "depth": "full",
    "pack_id": "T04",
    "track": "B",
    "track_name": "Kiến trúc phần cứng số",
-   "title_vi": "Thiết kế UART transmitter/receiver bằng RTL",
-   "title_en": "RTL Design of a UART Transmitter/Receiver",
    "title_registration_vi": "Thiết kế và đánh giá kiến trúc UART tham số hóa có khả năng tái sử dụng cho hệ thống số trên FPGA",
    "title_registration_en": "Design and Evaluation of a Parameterizable UART IP for FPGA-Based Digital Systems",
    "research_question": "Thiết kế UART tham số hóa có thể duy trì độ tin cậy như thế nào dưới clock mismatch, sampling uncertainty hoặc error injection với chi phí phần cứng thấp?",
    "paper_potential": "Thấp, trừ khi làm thêm khảo sát độ bền",
    "depends_on": [],
+   "g0_core_concepts": "TX/RX timing, why async serial needs sampling strategy, clock mismatch budget, framing/parity errors",
    "must_read": [
     "UART framing",
     "baud-rate generation",
@@ -289,7 +900,6 @@
     "synchronizer role",
     "functional vs robustness testing"
    ],
-   "g0_core_concepts": "TX/RX timing, why async serial needs sampling strategy, clock mismatch budget, framing/parity errors",
    "must_build": [
     "UART TX",
     "UART RX",
@@ -330,17 +940,1078 @@
    ]
   },
   {
+   "code": "A1-P05",
+   "group": "A1",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế synchronous FIFO bằng RTL",
+   "title_en": "RTL Design of a Synchronous FIFO",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng synchronous FIFO tham số hóa bằng RTL",
+   "cohort_alias": "",
+   "expected_output": "FIFO RTL; full/empty/overflow/underflow tests; waveform",
+   "depth": "standard"
+  },
+  {
+   "code": "A1-I01",
+   "group": "A1",
+   "type": "I",
+   "min_level": 1,
+   "title_vi": "Thiết kế và kiểm chứng reusable Digital IP Core",
+   "title_en": "Design and Verification of a Reusable Digital IP Core",
+   "title_v2_proposed_vi": "Thiết kế, kiểm chứng và đóng gói Digital IP Core có khả năng tái sử dụng",
+   "cohort_alias": "",
+   "expected_output": "Specification; reusable RTL; testbench; regression; documentation; repo",
+   "depth": "standard"
+  },
+  {
+   "code": "A1-T01",
+   "group": "A1",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế và kiểm chứng một IP số có khả năng tái sử dụng",
+   "title_en": "Design and Verification of a Reusable Digital IP",
+   "title_v2_proposed_vi": "Thiết kế, kiểm chứng và đánh giá một Digital IP có khả năng tái sử dụng",
+   "cohort_alias": {
+    "HK1_2026_2027": "A4"
+   },
+   "expected_output": "Complete IP; systematic verification; synthesis report; documentation; legacy package",
+   "depth": "standard"
+  },
+  {
+   "code": "A2-P01",
+   "group": "A2",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế và so sánh các kiến trúc bộ cộng số",
+   "title_en": "Design and Comparison of Digital Adder Architectures",
+   "title_v2_proposed_vi": "Thiết kế và so sánh kiến trúc bộ cộng số theo tài nguyên và timing",
+   "cohort_alias": "",
+   "expected_output": "RTL nhiều architecture; functional tests; synthesis comparison",
+   "depth": "standard"
+  },
+  {
+   "code": "A2-P02",
+   "group": "A2",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế multiplier fixed-point",
+   "title_en": "Fixed-Point Multiplier Design",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá bộ nhân fixed-point bằng RTL",
+   "cohort_alias": "",
+   "expected_output": "Reference model; RTL; overflow/truncation tests; synthesis",
+   "depth": "standard"
+  },
+  {
+   "code": "A2-P03",
+   "group": "A2",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế Multiply-Accumulate datapath",
+   "title_en": "Multiply-Accumulate Datapath Design",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá MAC datapath tham số hóa",
+   "cohort_alias": "",
+   "expected_output": "MAC RTL; pipeline tests; resource/timing report",
+   "depth": "standard"
+  },
+  {
+   "code": "A2-P04",
+   "group": "A2",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế bộ lọc FIR bằng RTL",
+   "title_en": "RTL Design of an FIR Filter",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng bộ lọc FIR fixed-point bằng RTL",
+   "cohort_alias": "",
+   "expected_output": "Floating reference; RTL; fixed-point test; waveform",
+   "depth": "standard"
+  },
+  {
+   "code": "A2-I01",
+   "group": "A2",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Thiết kế và triển khai datapath DSP fixed-point trên FPGA",
+   "title_en": "Fixed-Point DSP Datapath Design and FPGA Implementation",
+   "title_v2_proposed_vi": "Thiết kế, triển khai và đánh giá datapath DSP fixed-point trên FPGA",
+   "cohort_alias": "",
+   "expected_output": "Golden model; RTL; FPGA synthesis; resource/Fmax/latency; report",
+   "depth": "standard"
+  },
+  {
+   "code": "A2-T01",
+   "group": "A2",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế bộ lọc FIR fixed-point trên FPGA và khảo sát ASIC",
+   "title_en": "Fixed-Point FIR Filter Design on FPGA with ASIC Implementation Analysis",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá bộ lọc FIR fixed-point trên FPGA hướng tới triển khai ASIC",
+   "cohort_alias": {
+    "HK1_2026_2027": "A3"
+   },
+   "expected_output": "Reference; quantization; RTL; FPGA results; ASIC synthesis/physical evidence; analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "A2-T02",
+   "group": "A2",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế và tối ưu MAC datapath cho FPGA/ASIC",
+   "title_en": "Design and Optimization of a Fixed-Point MAC Datapath for FPGA/ASIC",
+   "title_v2_proposed_vi": "Đồng thiết kế bit-width và pipeline cho MAC datapath trên FPGA/ASIC",
+   "cohort_alias": {
+    "HK1_2026_2027": "A9"
+   },
+   "expected_output": "Multiple configurations; PPA/resource/timing; accuracy; report",
+   "depth": "full",
+   "pack_id": "T03",
+   "track": "B",
+   "track_name": "Kiến trúc phần cứng số",
+   "title_registration_vi": "Thiết kế MAC datapath và đánh giá ảnh hưởng của bit-width và pipeline đến độ chính xác và chi phí phần cứng",
+   "title_registration_en": "Hardware-Aware Design of a MAC Datapath: Accuracy–Cost Trade-offs under Bit-Width and Pipeline Scaling",
+   "research_question": "Bit-width và mức pipeline thay đổi numerical accuracy, latency, throughput, area và power của MAC datapath như thế nào?",
+   "paper_potential": "Cao",
+   "depends_on": [],
+   "g0_core_concepts": "Q-format, overflow/saturation/rounding, latency vs throughput, critical path",
+   "must_read": [
+    "fixed-point arithmetic",
+    "quantization error",
+    "MAC architecture",
+    "pipelining",
+    "RTL arithmetic",
+    "FPGA/ASIC PPA metrics"
+   ],
+   "must_understand": [
+    "Q-format",
+    "overflow/saturation/rounding",
+    "latency vs throughput",
+    "critical path",
+    "why pipeline may raise registers but improve fmax",
+    "Pareto frontier"
+   ],
+   "must_build": [
+    "floating-point golden model",
+    "fixed-point model",
+    "parameterized RTL MAC",
+    "self-checking testbench",
+    "sweep scripts"
+   ],
+   "experiments": [
+    "bit-width sweep",
+    "fractional-bit allocation",
+    "pipeline-depth sweep",
+    "rounding/saturation comparison",
+    "FPGA/ASIC resource/timing evaluation"
+   ],
+   "evidence": [
+    "numerical error plots",
+    "RTL-vs-golden equivalence results",
+    "LUT/FF or area reports",
+    "fmax/latency/throughput table",
+    "Pareto plot"
+   ],
+   "paper_threshold": "Có design-space sweep đủ rộng, numerical + hardware metrics, Pareto analysis, ít nhất một insight kiến trúc/quantization có tính tổng quát.",
+   "mentor_questions": [
+    "Accuracy được định nghĩa bằng metric nào?",
+    "Hai cấu hình pipeline có cùng chức năng và precision không?",
+    "Fmax cao hơn có thực sự cải thiện throughput ở interface này?",
+    "Điểm Pareto nào hợp lý và vì sao?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "A2-T03",
+   "group": "A2",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế và đánh giá PPA của các kiến trúc bộ cộng số học",
+   "title_en": "Design and PPA Evaluation of Digital Adder Architectures",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá PPA của các kiến trúc bộ cộng số học dưới cùng ràng buộc",
+   "cohort_alias": {
+    "HK1_2026_2027": "A8"
+   },
+   "expected_output": "RCA/CLA/carry-select/optional parallel-prefix; equivalence tests; synthesis/STA cùng constraint; PPA analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "A2-R01",
+   "group": "A2",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Hardware design-space exploration cho fixed-point datapath",
+   "title_en": "Hardware Design-Space Exploration for Fixed-Point Datapaths",
+   "title_v2_proposed_vi": "Khảo sát không gian thiết kế hardware-aware cho datapath fixed-point",
+   "cohort_alias": "",
+   "expected_output": "Reproducible sweep; Pareto analysis; research report/paper-ready figures",
+   "depth": "standard"
+  },
+  {
+   "code": "A3-P01",
+   "group": "A3",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Triển khai một Digital IP trên FPGA",
+   "title_en": "FPGA Implementation of a Digital IP",
+   "title_v2_proposed_vi": "Triển khai và đánh giá một Digital IP trên FPGA",
+   "cohort_alias": "",
+   "expected_output": "Bitstream/project; hardware demo; resource/Fmax; README",
+   "depth": "standard"
+  },
+  {
+   "code": "A3-P02",
+   "group": "A3",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "FPGA interfacing với peripheral",
+   "title_en": "FPGA Interfacing with a Peripheral",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng giao tiếp FPGA với ngoại vi",
+   "cohort_alias": "",
+   "expected_output": "Interface RTL; board demo; tests; documentation",
+   "depth": "standard"
+  },
+  {
+   "code": "A3-P03",
+   "group": "A3",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Hệ thống xử lý tín hiệu số trên FPGA",
+   "title_en": "FPGA-Based Digital Signal Processing System",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá pipeline xử lý tín hiệu số trên FPGA",
+   "cohort_alias": "",
+   "expected_output": "Working DSP pipeline; resource/timing; hardware test",
+   "depth": "standard"
+  },
+  {
+   "code": "A3-I01",
+   "group": "A3",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Xây dựng hệ thống FPGA tích hợp nhiều IP",
+   "title_en": "Integration of Multiple IP Cores on FPGA",
+   "title_v2_proposed_vi": "Tích hợp và kiểm chứng hệ thống FPGA đa IP theo quy trình kỹ sư",
+   "cohort_alias": "",
+   "expected_output": "Integrated system; interface tests; demo; documentation",
+   "depth": "standard"
+  },
+  {
+   "code": "A3-T01",
+   "group": "A3",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế hệ thống xử lý dữ liệu số pipelined trên FPGA",
+   "title_en": "Design of a Pipelined Digital Processing System on FPGA",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá hệ thống xử lý dữ liệu số pipelined trên FPGA",
+   "cohort_alias": {
+    "HK1_2026_2027": "A5"
+   },
+   "expected_output": "Architecture; RTL; verification; FPGA; LUT/FF/DSP/Fmax/latency/throughput analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "A3-T02",
+   "group": "A3",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Hardware/software co-verification cho hệ thống FPGA",
+   "title_en": "Hardware/Software Co-Verification for an FPGA System",
+   "title_v2_proposed_vi": "Xây dựng quy trình hardware/software co-verification tái lập cho hệ thống FPGA",
+   "cohort_alias": "",
+   "expected_output": "Golden model; vector generation; RTL/FPGA agreement; automated comparison; report",
+   "depth": "standard"
+  },
+  {
+   "code": "A4-P01",
+   "group": "A4",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Làm quen RTL-to-Gates bằng Yosys",
+   "title_en": "RTL-to-Gates Exploration with Yosys",
+   "title_v2_proposed_vi": "Khảo sát quy trình RTL-to-Gates bằng Yosys",
+   "cohort_alias": "",
+   "expected_output": "RTL; synthesis script; netlist/report; explanation",
+   "depth": "standard"
+  },
+  {
+   "code": "A4-P02",
+   "group": "A4",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Khảo sát ảnh hưởng của RTL coding style tới synthesis",
+   "title_en": "Effect of RTL Coding Style on Synthesis Results",
+   "title_v2_proposed_vi": "Khảo sát ảnh hưởng của RTL coding style đến kết quả synthesis",
+   "cohort_alias": "",
+   "expected_output": "Equivalent RTL variants; synthesis evidence; comparison",
+   "depth": "standard"
+  },
+  {
+   "code": "A4-I01",
+   "group": "A4",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Xây dựng môi trường RTL-to-GDSII mã nguồn mở",
+   "title_en": "Build an Open-Source RTL-to-GDSII Environment",
+   "title_v2_proposed_vi": "Xây dựng và kiểm thử môi trường RTL-to-GDSII mã nguồn mở có khả năng tái lập",
+   "cohort_alias": "",
+   "expected_output": "Reproducible setup; sample designs; documented commands; troubleshooting notes",
+   "depth": "standard"
+  },
+  {
+   "code": "A4-T01",
+   "group": "A4",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế một Digital IP từ RTL đến GDSII",
+   "title_en": "Design and Evaluation of a Digital IP from RTL to GDSII",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá Digital IP từ RTL đến GDSII bằng quy trình EDA mã nguồn mở",
+   "cohort_alias": {
+    "HK1_2026_2027": "A1"
+   },
+   "expected_output": "Spec; RTL; testbench; synthesis; STA; physical implementation; DRC/LVS evidence; GDSII; PPA report",
+   "depth": "full",
+   "pack_id": "T01",
+   "track": "A",
+   "track_name": "Thiết kế IC số mã nguồn mở",
+   "title_registration_vi": "Thiết kế và đánh giá một IP số từ RTL đến GDSII sử dụng quy trình EDA mã nguồn mở",
+   "title_registration_en": "Design and Evaluation of a Digital IP from RTL to GDSII Using an Open-Source EDA Flow",
+   "research_question": "Các lựa chọn kiến trúc và ràng buộc physical design ảnh hưởng như thế nào đến timing, area, power và khả năng đóng thiết kế của một IP số?",
+   "paper_potential": "Trung bình",
+   "depends_on": [],
+   "g0_core_concepts": "Khác biệt functional correctness và physical closure, critical path/slack, utilization và congestion, PPA trade-off",
+   "must_read": [
+    "RTL design & verification fundamentals",
+    "logic synthesis và standard-cell mapping",
+    "static timing analysis",
+    "floorplan, placement, CTS, routing",
+    "DRC/LVS và sign-off concepts",
+    "PPA và thiết kế experiment sweep"
+   ],
+   "must_understand": [
+    "Khác biệt functional correctness và physical closure",
+    "critical path/slack",
+    "utilization và congestion",
+    "PPA trade-off",
+    "DRC vs LVS",
+    "tại sao cùng RTL nhưng constraint khác tạo kết quả khác"
+   ],
+   "must_build": [
+    "Chọn và viết/chuẩn hóa một IP số tham số hóa",
+    "testbench + regression",
+    "automation scripts cho flow",
+    "script trích xuất PPA/timing"
+   ],
+   "experiments": [
+    "Baseline RTL→GDSII",
+    "clock-period sweep",
+    "core-utilization sweep",
+    "architecture hoặc pipeline comparison",
+    "re-run để kiểm tra reproducibility"
+   ],
+   "evidence": [
+    "waveform/regression pass",
+    "synthesis report",
+    "STA report",
+    "layout/GDS screenshot",
+    "DRC/LVS summary",
+    "CSV PPA sweep + scripts",
+    "Pareto/summary plots"
+   ],
+   "paper_threshold": "Có systematic design-space/PPA study; ít nhất 2 cấu hình/kiến trúc có so sánh công bằng; DRC/LVS sạch; có insight tái lập vượt quá demo flow.",
+   "mentor_questions": [
+    "IP này đủ phức tạp để có research question nhưng vẫn đóng được không?",
+    "Tại sao constraint này làm timing/area thay đổi?",
+    "Nếu layout pass DRC nhưng fail LVS nghĩa là gì?",
+    "Kết quả nào là insight chứ không chỉ tool output?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "A4-T02",
+   "group": "A4",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Khảo sát ảnh hưởng kiến trúc RTL đến PPA",
+   "title_en": "RTL Architecture Exploration for PPA",
+   "title_v2_proposed_vi": "Khảo sát ảnh hưởng của kiến trúc RTL đến PPA trong quy trình ASIC mã nguồn mở",
+   "cohort_alias": {
+    "HK1_2026_2027": "A2"
+   },
+   "expected_output": "2+ functionally equivalent architectures; controlled PPA comparison; analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "A4-R01",
+   "group": "A4",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Design-space exploration cho một Digital IP",
+   "title_en": "Design-Space Exploration for a Digital IP",
+   "title_v2_proposed_vi": "Khảo sát không gian thiết kế PPA cho Digital IP bằng quy trình EDA mã nguồn mở",
+   "cohort_alias": "",
+   "expected_output": "Automated experiments; statistical/controlled analysis; research report",
+   "depth": "standard"
+  },
+  {
+   "code": "A5-P01",
+   "group": "A5",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Xây dựng testbench có hệ thống cho một RTL module",
+   "title_en": "Systematic Testbench Development for an RTL Module",
+   "title_v2_proposed_vi": "Xây dựng testbench có hệ thống cho một RTL module",
+   "cohort_alias": "",
+   "expected_output": "Test plan; testbench; pass/fail evidence; bug log",
+   "depth": "standard"
+  },
+  {
+   "code": "A5-P02",
+   "group": "A5",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Regression testing cho Digital IP",
+   "title_en": "Regression Testing for a Digital IP",
+   "title_v2_proposed_vi": "Xây dựng regression testing tái lập cho Digital IP",
+   "cohort_alias": "",
+   "expected_output": "Regression script; test set; summary report; reproducible run",
+   "depth": "standard"
+  },
+  {
+   "code": "A5-I01",
+   "group": "A5",
+   "type": "I",
+   "min_level": 1,
+   "title_vi": "Xây dựng Git workflow cho dự án RTL",
+   "title_en": "Git Workflow for RTL Projects",
+   "title_v2_proposed_vi": "Xây dựng Git workflow cho dự án RTL",
+   "cohort_alias": "",
+   "expected_output": "Repo structure; branches/issues; README; test scripts; contribution guide",
+   "depth": "standard"
+  },
+  {
+   "code": "A5-T01",
+   "group": "A5",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Xây dựng quy trình ASIC tái lập sử dụng LibreLane + Nix",
+   "title_en": "Reproducible ASIC Workflow Using LibreLane and Nix",
+   "title_v2_proposed_vi": "Xây dựng và đánh giá quy trình RTL-to-GDSII tái lập sử dụng LibreLane + Nix",
+   "cohort_alias": {
+    "HK1_2026_2027": "A6"
+   },
+   "expected_output": "Pinned environment; 3 reference designs; repeatability evidence; docs; troubleshooting",
+   "depth": "full",
+   "pack_id": "T02",
+   "track": "A",
+   "track_name": "Thiết kế IC số mã nguồn mở",
+   "title_registration_vi": "Xây dựng và đánh giá quy trình RTL-to-GDSII mã nguồn mở có khả năng tái lập phục vụ đào tạo thiết kế vi mạch số",
+   "title_registration_en": "Development and Evaluation of a Reproducible Open-Source RTL-to-GDSII Flow for Digital IC Design Education",
+   "research_question": "Làm thế nào xây dựng một RTL-to-GDSII environment mà người học khác có thể tái lập kết quả một cách ổn định trên các máy/môi trường khác nhau?",
+   "paper_potential": "Trung bình",
+   "depends_on": [],
+   "g0_core_concepts": "reproducibility vs repeatability, toolchain pinning, deterministic và non-deterministic sources, benchmark design",
+   "must_read": [
+    "reproducible research",
+    "container/Nix/environment management concepts",
+    "open-source RTL-to-GDSII flow",
+    "CI/regression basics",
+    "EDA versioning",
+    "engineering education evaluation basics"
+   ],
+   "must_understand": [
+    "reproducibility vs repeatability",
+    "toolchain pinning",
+    "deterministic và non-deterministic sources",
+    "benchmark design",
+    "clean-room rerun",
+    "tại sao ModifiedAt/version mới không đảm bảo kết quả mới/đúng"
+   ],
+   "must_build": [
+    "bootstrap/setup scripts",
+    "version manifest",
+    "benchmark runner",
+    "result parser",
+    "optional CI workflow"
+   ],
+   "experiments": [
+    "Fresh install test",
+    "multi-machine or multi-environment rerun",
+    "version/config sensitivity",
+    "benchmark suite run",
+    "runtime + PPA consistency"
+   ],
+   "evidence": [
+    "setup time log",
+    "success/failure matrix",
+    "version manifest",
+    "PPA/run-time variance",
+    "clean-clone demonstration",
+    "student reproduction checklist"
+   ],
+   "paper_threshold": "Có protocol tái lập rõ, benchmark đủ đa dạng, thử nghiệm trên nhiều môi trường/người dùng hoặc nhiều clean runs, có định lượng consistency và bài học giáo dục.",
+   "mentor_questions": [
+    "Cái gì đang được 'reproduced': chức năng hay PPA hay cả hai?",
+    "Nguồn biến thiên nào do tool, nguồn nào do environment?",
+    "Một sinh viên mới cần bao nhiêu bước thủ công?",
+    "Đóng góp nghiên cứu/giáo dục nằm ở đâu ngoài việc viết script?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "A5-T02",
+   "group": "A5",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Continuous Integration cho dự án RTL/ASIC",
+   "title_en": "Continuous Integration for RTL/ASIC Projects",
+   "title_v2_proposed_vi": "Xây dựng và đánh giá quy trình Continuous Integration cho dự án RTL/ASIC",
+   "cohort_alias": {
+    "HK1_2026_2027": "A7"
+   },
+   "expected_output": "CI pipeline; lint/sim/regression/synthesis reports; failure examples; docs",
+   "depth": "standard"
+  },
+  {
+   "code": "A5-R01",
+   "group": "A5",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Automated PPA regression cho Digital IC",
+   "title_en": "Automated PPA Regression for Digital IC Development",
+   "title_v2_proposed_vi": "Nghiên cứu automated PPA regression cho Digital IC",
+   "cohort_alias": "",
+   "expected_output": "Dataset of commits/configurations; regression thresholds; analysis; research report",
+   "depth": "standard"
+  },
+  {
+   "code": "A6-P01",
+   "group": "A6",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Lập trình firmware bare-metal điều khiển ngoại vi vi điều khiển",
+   "title_en": "Bare-Metal Peripheral Firmware for a Microcontroller",
+   "title_v2_proposed_vi": "Thiết kế firmware bare-metal và đo kiểm giao tiếp ngoại vi vi điều khiển",
+   "cohort_alias": "",
+   "expected_output": "Driver UART/I2C/SPI tự viết; firmware demo; logic-analyzer measurement; README",
+   "depth": "standard"
+  },
+  {
+   "code": "A6-P02",
+   "group": "A6",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Ứng dụng đa nhiệm thời gian thực với RTOS",
+   "title_en": "Real-Time Multitasking Application with an RTOS",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá ứng dụng đa nhiệm thời gian thực với RTOS",
+   "cohort_alias": "",
+   "expected_output": "FreeRTOS/Zephyr >=3 task; priority/deadline analysis; jitter/latency; super-loop comparison",
+   "depth": "standard"
+  },
+  {
+   "code": "A6-P03",
+   "group": "A6",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Giao tiếp phần cứng-phần mềm trên SoC FPGA",
+   "title_en": "Memory-Mapped Hardware-Software Communication on a SoC FPGA",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng giao tiếp phần cứng–phần mềm trên SoC FPGA",
+   "cohort_alias": "",
+   "expected_output": "Memory-mapped IP; processor-side C driver; bus read/write tests; README",
+   "depth": "standard"
+  },
+  {
+   "code": "A6-P04",
+   "group": "A6",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Dựng Linux nhúng trên SoC FPGA và viết driver đơn giản",
+   "title_en": "Embedded Linux Bring-Up on a SoC FPGA with a Simple Driver",
+   "title_v2_proposed_vi": "Xây dựng Linux nhúng trên SoC FPGA và kiểm chứng driver cho IP tùy biến",
+   "cohort_alias": "",
+   "expected_output": "Bootable Linux image; char/UIO driver to IP; validation log; rebuild guide",
+   "depth": "standard"
+  },
+  {
+   "code": "A6-I01",
+   "group": "A6",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Thực tập phát triển sản phẩm nhúng theo quy trình kỹ sư",
+   "title_en": "Embedded Product Development Internship",
+   "title_v2_proposed_vi": "Thực tập phát triển sản phẩm nhúng theo quy trình kỹ sư",
+   "cohort_alias": "",
+   "expected_output": "Requirements→design→firmware→test→docs; weekly log; disciplined Git repo",
+   "depth": "standard"
+  },
+  {
+   "code": "A6-T01",
+   "group": "A6",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế hệ thống nhúng điều khiển và thu thập dữ liệu hoàn chỉnh",
+   "title_en": "Design of a Complete Embedded Control and Data-Acquisition System",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá hệ thống nhúng điều khiển–thu thập dữ liệu hoàn chỉnh",
+   "cohort_alias": {
+    "HK1_2026_2027": "C1"
+   },
+   "expected_output": "Working embedded system >=2 peripherals; RTOS/clear SW architecture; system tests; performance/reliability; thesis",
+   "depth": "standard"
+  },
+  {
+   "code": "A6-T02",
+   "group": "A6",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Tích hợp bộ tăng tốc phần cứng tùy biến vào SoC FPGA",
+   "title_en": "Integrating a Custom Hardware Accelerator into a SoC FPGA",
+   "title_v2_proposed_vi": "Tích hợp và đánh giá bộ tăng tốc phần cứng tùy biến trên SoC FPGA",
+   "cohort_alias": {
+    "HK1_2026_2027": "C3"
+   },
+   "expected_output": "Profiled software baseline; RTL accelerator; driver/integration; speedup; resource/latency trade-off",
+   "depth": "standard"
+  },
+  {
+   "code": "A6-R01",
+   "group": "A6",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Nghiên cứu phân hoạch phần cứng/phần mềm cho ứng dụng nhúng",
+   "title_en": "Hardware/Software Partitioning Study for an Embedded Application",
+   "title_v2_proposed_vi": "Nghiên cứu phân hoạch phần cứng–phần mềm cho ứng dụng nhúng theo ràng buộc hiệu năng–tài nguyên",
+   "cohort_alias": "",
+   "expected_output": "Research question; partitioning method/criteria; >=2 partitions same benchmark; analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "A7-P01",
+   "group": "A7",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Nút cảm biến IoT truyền dữ liệu qua MQTT",
+   "title_en": "IoT Sensor Node Publishing Data over MQTT",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá nút cảm biến IoT truyền dữ liệu qua MQTT",
+   "cohort_alias": "",
+   "expected_output": "ESP32/STM32 real sensor; MQTT reconnect handling; minimal broker/dashboard; >=48h log; README",
+   "depth": "standard"
+  },
+  {
+   "code": "A7-P02",
+   "group": "A7",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Đo và tối ưu năng lượng cho nút IoT chạy pin",
+   "title_en": "Energy Measurement and Optimization for a Battery-Powered IoT Node",
+   "title_v2_proposed_vi": "Đo kiểm và tối ưu năng lượng cho nút IoT chạy pin",
+   "cohort_alias": "",
+   "expected_output": "Current profiles active/tx/sleep; duty-cycle strategy; battery-life estimate before/after",
+   "depth": "standard"
+  },
+  {
+   "code": "A7-P03",
+   "group": "A7",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Suy luận TinyML trên vi điều khiển",
+   "title_en": "TinyML Inference on a Microcontroller",
+   "title_v2_proposed_vi": "Triển khai và đánh giá suy luận TinyML trên vi điều khiển",
+   "cohort_alias": "",
+   "expected_output": "Small model; INT8 quantization; MCU deployment; accuracy/latency/RAM/Flash; demo",
+   "depth": "standard"
+  },
+  {
+   "code": "A7-P04",
+   "group": "A7",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Đánh giá kết nối không dây tầm ngắn/tầm xa cho IoT",
+   "title_en": "Evaluating Short- and Long-Range Wireless Links for IoT",
+   "title_v2_proposed_vi": "Đánh giá thực nghiệm kết nối không dây cho IoT theo tầm phủ–mất gói–năng lượng",
+   "cohort_alias": "",
+   "expected_output": "BLE/LoRa or approved pair; range/loss/energy-per-packet vs distance; comparative report",
+   "depth": "standard"
+  },
+  {
+   "code": "A7-I01",
+   "group": "A7",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Thực tập xây dựng hệ thống IoT đầu-cuối",
+   "title_en": "End-to-End IoT System Internship",
+   "title_v2_proposed_vi": "Thực tập xây dựng hệ thống IoT đầu-cuối",
+   "cohort_alias": "",
+   "expected_output": "Node→gateway→storage→dashboard >=2 weeks; uptime/loss; incident log; docs",
+   "depth": "standard"
+  },
+  {
+   "code": "A7-T01",
+   "group": "A7",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế và đánh giá hệ thống giám sát IoT đa nút hoàn chỉnh",
+   "title_en": "Design and Evaluation of a Complete Multi-Node IoT Monitoring System",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá hệ thống giám sát IoT đa nút",
+   "cohort_alias": {
+    "HK1_2026_2027": "C2"
+   },
+   "expected_output": ">=3 battery nodes + gateway + dashboard; uptime/loss/battery-life evaluation; thesis; reproducible repo",
+   "depth": "standard"
+  },
+  {
+   "code": "A7-T02",
+   "group": "A7",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Triển khai và tối ưu mô hình AI gọn nhẹ trên thiết bị biên",
+   "title_en": "Deploying and Optimizing a Lightweight AI Model on an Edge Device",
+   "title_v2_proposed_vi": "Triển khai và tối ưu mô hình AI gọn nhẹ trên thiết bị biên theo accuracy–latency–energy",
+   "cohort_alias": {
+    "HK1_2026_2027": "C4"
+   },
+   "expected_output": "Reproducible train→quantize→deploy; float/INT8 accuracy/latency/RAM/Flash/energy comparison",
+   "depth": "standard"
+  },
+  {
+   "code": "A7-R01",
+   "group": "A7",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Nghiên cứu đánh đổi độ chính xác – năng lượng – độ trễ cho suy luận tại biên",
+   "title_en": "Accuracy-Energy-Latency Trade-offs for On-Device Inference",
+   "title_v2_proposed_vi": "Nghiên cứu trade-off độ chính xác–năng lượng–độ trễ cho suy luận tại biên",
+   "cohort_alias": "",
+   "expected_output": "Hypothesis; model×quantization×frequency/voltage experiment matrix; trade-off curves",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-P01",
+   "group": "AB",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Đo chi phí một thuật toán trên ba nền tảng: MCU, FPGA, ASIC ước lượng",
+   "title_en": "Cost of One Algorithm on Three Platforms: MCU, FPGA, and ASIC Estimate",
+   "title_v2_proposed_vi": "Đánh giá chi phí một khối xử lý trên MCU, FPGA và ASIC ước lượng",
+   "cohort_alias": "",
+   "expected_output": "Same processing block on MCU/FPGA/ASIC estimate; cycles/energy/resource/Fmax/area/timing; comparative table",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-T01",
+   "group": "AB",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "ASIC feasibility study cho Polar Processing Element",
+   "title_en": "ASIC Feasibility Study of a Polar Processing Element",
+   "title_v2_proposed_vi": "Đánh giá khả năng triển khai ASIC của Polar Processing Element",
+   "cohort_alias": {
+    "HK1_2026_2027": "B12"
+   },
+   "expected_output": "Verified PE; synthesis; STA; physical implementation; PPA; analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-T02",
+   "group": "AB",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "FPGA-to-ASIC evaluation của Polar Encoder",
+   "title_en": "FPGA-to-ASIC Evaluation of a Polar Encoder",
+   "title_v2_proposed_vi": "Đánh giá FPGA-to-ASIC cho Polar Encoder",
+   "cohort_alias": "",
+   "expected_output": "FPGA metrics + ASIC PPA; methodology comparison; report",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-T03",
+   "group": "AB",
+   "type": "T",
+   "min_level": 4,
+   "title_vi": "FPGA-to-ASIC evaluation của SC Polar Decoder",
+   "title_en": "FPGA-to-ASIC Evaluation of an SC Polar Decoder",
+   "title_v2_proposed_vi": "Đánh giá FPGA-to-ASIC cho SC Polar Decoder",
+   "cohort_alias": "",
+   "expected_output": "Selected decoder/core; FPGA and ASIC evidence; trade-off analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-T04",
+   "group": "AB",
+   "type": "T",
+   "min_level": 4,
+   "title_vi": "PPA optimization cho fixed-point Polar Processing Element",
+   "title_en": "PPA Optimization of a Fixed-Point Polar Processing Element",
+   "title_v2_proposed_vi": "Tối ưu PPA cho fixed-point Polar Processing Element theo bit-width và pipeline",
+   "cohort_alias": "",
+   "expected_output": "Bit-width/pipeline configurations; BLER/numerical impact; ASIC PPA; Pareto analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-T05",
+   "group": "AB",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Tăng tốc phần cứng cho suy luận AI biên trên SoC FPGA",
+   "title_en": "Hardware Acceleration of an Edge-AI Workload on a SoC FPGA",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá bộ tăng tốc phần cứng cho suy luận AI biên trên SoC FPGA",
+   "cohort_alias": {
+    "HK1_2026_2027": "C5"
+   },
+   "expected_output": "CPU-only baseline; RTL accelerator; end-to-end latency/energy/resource; speedup analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-T06",
+   "group": "AB",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Bộ giải mã SC Polar tiết kiệm năng lượng cho liên kết IoT",
+   "title_en": "Energy-Efficient SC Polar Decoder for an IoT Link",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá bộ giải mã SC Polar tiết kiệm năng lượng cho liên kết IoT",
+   "cohort_alias": {
+    "HK1_2026_2027": "C6"
+   },
+   "expected_output": "Fixed-point SC in IoT context; BLER + energy/bit + latency; comparative evaluation",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-R01",
+   "group": "AB",
+   "type": "R",
+   "min_level": 5,
+   "title_vi": "Hardware-aware design-space exploration cho Polar Decoder",
+   "title_en": "Hardware-Aware Design-Space Exploration for Polar Decoding",
+   "title_v2_proposed_vi": "Khảo sát không gian thiết kế hardware-aware đa mục tiêu cho Polar decoder",
+   "cohort_alias": "",
+   "expected_output": "Reproducible multi-objective experiments; BLER-area-latency-throughput-energy; manuscript assets",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-R02",
+   "group": "AB",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Co-design thuật toán – phần cứng cho truyền thông tin cậy ở thiết bị biên",
+   "title_en": "Algorithm-Hardware Co-Design for Reliable Communication at the Edge",
+   "title_v2_proposed_vi": "Đồng thiết kế thuật toán–phần cứng cho truyền thông tin cậy trên thiết bị biên",
+   "cohort_alias": "",
+   "expected_output": "Adaptive Polar vs edge energy budget; experimental framework; >=2 strategies; analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "AB-R03",
+   "group": "AB",
+   "type": "R",
+   "min_level": 5,
+   "title_vi": "Nền tảng biên tích hợp: truyền thông và suy luận chia sẻ tài nguyên phần cứng",
+   "title_en": "Integrated Edge Platform: Communication and Inference Sharing Hardware Resources",
+   "title_v2_proposed_vi": "Nghiên cứu nền tảng biên tích hợp truyền thông và suy luận chia sẻ tài nguyên phần cứng",
+   "cohort_alias": "",
+   "expected_output": "Polar decoder + edge-AI inference on shared SoC/FPGA; resource scheduling and energy-budget feasibility",
+   "depth": "standard"
+  },
+  {
+   "code": "B0-P01",
+   "group": "B0",
+   "type": "P",
+   "min_level": 0,
+   "title_vi": "Mô phỏng Polar Encoder",
+   "title_en": "Simulation of a Polar Encoder",
+   "title_v2_proposed_vi": "Xây dựng và kiểm chứng mô hình Polar Encoder",
+   "cohort_alias": "",
+   "expected_output": "Encoder implementation; known-vector validation; report",
+   "depth": "standard"
+  },
+  {
+   "code": "B0-P02",
+   "group": "B0",
+   "type": "P",
+   "min_level": 0,
+   "title_vi": "Mô phỏng BPSK/AWGN và tính LLR",
+   "title_en": "BPSK/AWGN Simulation and LLR Computation",
+   "title_v2_proposed_vi": "Xây dựng và kiểm chứng mô hình BPSK/AWGN và tính LLR",
+   "cohort_alias": "",
+   "expected_output": "Channel simulation; LLR sanity checks; plots",
+   "depth": "standard"
+  },
+  {
+   "code": "B0-P03",
+   "group": "B0",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Xây dựng SC decoder cơ bản bằng MATLAB/Python",
+   "title_en": "Basic SC Decoder in MATLAB/Python",
+   "title_v2_proposed_vi": "Xây dựng và kiểm chứng bộ giải mã SC Polar bằng MATLAB/Python",
+   "cohort_alias": "",
+   "expected_output": "SC decoder; unit tests; small BER/BLER result",
+   "depth": "standard"
+  },
+  {
+   "code": "B0-I01",
+   "group": "B0",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Xây dựng bộ mô phỏng Polar Code có khả năng tái lập",
+   "title_en": "Reproducible Polar Code Simulation Framework",
+   "title_v2_proposed_vi": "Xây dựng bộ mô phỏng Polar Code có khả năng tái lập cho nghiên cứu",
+   "cohort_alias": "",
+   "expected_output": "Configurable N/K/EbN0; seeded runs; BER/BLER; README; scripts",
+   "depth": "standard"
+  },
+  {
+   "code": "B0-T01",
+   "group": "B0",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Xây dựng và đánh giá hệ thống Polar Code sử dụng SC decoding",
+   "title_en": "Software Modeling and Performance Evaluation of Polar Codes with SC Decoding",
+   "title_v2_proposed_vi": "Xây dựng và đánh giá hệ thống Polar Code sử dụng SC decoding trên kênh AWGN",
+   "cohort_alias": {
+    "HK1_2026_2027": "B1"
+   },
+   "expected_output": "Full encode-channel-decode chain; validation; BER/BLER sweeps; complexity discussion; legacy package",
+   "depth": "standard"
+  },
+  {
+   "code": "B1-P01",
+   "group": "B1",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế Polar Encoder RTL",
+   "title_en": "RTL Design of a Polar Encoder",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng Polar Encoder bằng RTL",
+   "cohort_alias": "",
+   "expected_output": "RTL encoder; golden vectors; testbench; synthesis",
+   "depth": "standard"
+  },
+  {
+   "code": "B1-P02",
+   "group": "B1",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế f Processing Element",
+   "title_en": "RTL Design of the Polar f Processing Element",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng f Processing Element cho Polar decoder",
+   "cohort_alias": "",
+   "expected_output": "Reference f; RTL; exhaustive/random tests; synthesis",
+   "depth": "standard"
+  },
+  {
+   "code": "B1-P03",
+   "group": "B1",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Thiết kế g Processing Element",
+   "title_en": "RTL Design of the Polar g Processing Element",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng g Processing Element cho Polar decoder",
+   "cohort_alias": "",
+   "expected_output": "Reference g; RTL; tests; synthesis",
+   "depth": "standard"
+  },
+  {
+   "code": "B1-P04",
+   "group": "B1",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Thiết kế Partial-Sum Unit",
+   "title_en": "RTL Design of a Partial-Sum Unit",
+   "title_v2_proposed_vi": "Thiết kế và kiểm chứng Partial-Sum Unit cho Polar decoder",
+   "cohort_alias": "",
+   "expected_output": "Architecture; RTL; tests; synthesis",
+   "depth": "standard"
+  },
+  {
+   "code": "B1-I01",
+   "group": "B1",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Thiết kế và kiểm chứng f/g Processing Elements trên FPGA",
+   "title_en": "Design and Verification of Polar f/g Processing Elements on FPGA",
+   "title_v2_proposed_vi": "Thiết kế, đồng kiểm chứng và đánh giá f/g Processing Elements trên FPGA",
+   "cohort_alias": "",
+   "expected_output": "Golden co-verification; FPGA synthesis; resource/Fmax; report",
+   "depth": "standard"
+  },
+  {
+   "code": "B1-T01",
+   "group": "B1",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế Polar Encoder trên FPGA",
+   "title_en": "FPGA Design and Verification of a Polar Encoder",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá Polar Encoder trên FPGA",
+   "cohort_alias": {
+    "HK1_2026_2027": "B2"
+   },
+   "expected_output": "Architecture; RTL; verification; FPGA; resource/Fmax/latency/throughput",
+   "depth": "standard"
+  },
+  {
+   "code": "B1-T02",
+   "group": "B1",
+   "type": "T",
+   "min_level": 2,
+   "title_vi": "Thiết kế và đánh giá f/g Processing Elements cho Polar Decoder",
+   "title_en": "Design and Evaluation of Processing Elements for Polar Decoders",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá fixed-point f/g Processing Elements cho Polar decoder",
+   "cohort_alias": {
+    "HK1_2026_2027": "B5"
+   },
+   "expected_output": "Exact/min-sum/reference; fixed-point RTL; timing/area/resource; BLER impact via model",
+   "depth": "standard"
+  },
+  {
+   "code": "B2-I01",
+   "group": "B2",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Xây dựng kiến trúc SC decoder theo từng module",
+   "title_en": "Modular Construction of an SC Polar Decoder Architecture",
+   "title_v2_proposed_vi": "Xây dựng và kiểm chứng kiến trúc SC decoder theo module",
+   "cohort_alias": "",
+   "expected_output": "Module interfaces; f/g/partial-sum/control integration tests; documentation",
+   "depth": "standard"
+  },
+  {
    "code": "B2-T01",
+   "group": "B2",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Thiết kế bộ giải mã SC Polar trên FPGA",
+   "title_en": "FPGA Architecture and Implementation of an SC Polar Decoder",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá bộ giải mã SC Polar trên FPGA",
+   "cohort_alias": {
+    "HK1_2026_2027": "B3"
+   },
+   "expected_output": "Golden model; fixed-point; RTL decoder; co-verification; FPGA; BER/BLER + resource/Fmax/latency/throughput",
+   "depth": "full",
    "pack_id": "T05",
    "track": "C",
    "track_name": "Kiến trúc bộ giải mã Polar",
-   "title_vi": "Thiết kế bộ giải mã SC Polar trên FPGA",
-   "title_en": "FPGA Architecture and Implementation of an SC Polar Decoder",
    "title_registration_vi": "Thiết kế và đánh giá kiến trúc bộ giải mã Polar Successive Cancellation trên FPGA",
    "title_registration_en": "Design and FPGA Evaluation of a Successive-Cancellation Polar Decoder Architecture",
    "research_question": "Một kiến trúc SC Polar decoder có thể được ánh xạ lên FPGA với correctness, latency, throughput và resource cost như thế nào?",
    "paper_potential": "Trung bình",
    "depends_on": [],
+   "g0_core_concepts": "N,K,R, frozen vs information bits, LLR sign/magnitude, SC traversal dependencies",
    "must_read": [
     "Polar codes fundamentals",
     "channel polarization/frozen bits",
@@ -358,7 +2029,6 @@
     "BER vs BLER",
     "algorithm latency vs cycle latency"
    ],
-   "g0_core_concepts": "N,K,R, frozen vs information bits, LLR sign/magnitude, SC traversal dependencies",
    "must_build": [
     "Python/MATLAB encoder+channel+SC golden model",
     "RTL f/g/partial-sum/control modules",
@@ -396,12 +2066,81 @@
    ]
   },
   {
+   "code": "B2-T02",
+   "group": "B2",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Software-RTL co-verification cho SC Polar decoder",
+   "title_en": "Software-RTL Co-Verification for an SC Polar Decoder",
+   "title_v2_proposed_vi": "Xây dựng quy trình software–RTL co-verification tái lập cho SC Polar decoder",
+   "cohort_alias": "",
+   "expected_output": "Automated vector generation; RTL comparison; regression; mismatch diagnosis; report",
+   "depth": "standard"
+  },
+  {
+   "code": "B2-R01",
+   "group": "B2",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Architecture optimization cho SC decoder",
+   "title_en": "Architecture Optimization for an SC Polar Decoder",
+   "title_v2_proposed_vi": "Nghiên cứu tối ưu kiến trúc SC Polar decoder theo trade-off tài nguyên–độ trễ",
+   "cohort_alias": "",
+   "expected_output": "2+ architectures or parallelism/resource-sharing configurations; controlled evaluation",
+   "depth": "standard"
+  },
+  {
+   "code": "B3-P01",
+   "group": "B3",
+   "type": "P",
+   "min_level": 1,
+   "title_vi": "Khảo sát quantization của LLR",
+   "title_en": "LLR Quantization Study for Polar Decoding",
+   "title_v2_proposed_vi": "Khảo sát ảnh hưởng của lượng tử hóa LLR đến SC Polar decoding",
+   "cohort_alias": "",
+   "expected_output": "Floating vs 3/4/5/6-bit results; plots; explanation",
+   "depth": "standard"
+  },
+  {
+   "code": "B3-I01",
+   "group": "B3",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Fixed-point implementation của Polar processing elements",
+   "title_en": "Fixed-Point Implementation of Polar Processing Elements",
+   "title_v2_proposed_vi": "Triển khai fixed-point và đánh giá Polar processing elements",
+   "cohort_alias": "",
+   "expected_output": "Fixed-point reference; RTL/synthesizable model; error tests; resource",
+   "depth": "standard"
+  },
+  {
+   "code": "B3-T01",
+   "group": "B3",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Phân tích lượng tử hóa LLR cho hardware-efficient Polar decoding",
+   "title_en": "Fixed-Point LLR Quantization Analysis for Hardware-Efficient Polar Decoding",
+   "title_v2_proposed_vi": "Phân tích ảnh hưởng lượng tử hóa LLR đến hiệu năng và chi phí phần cứng của Polar decoding",
+   "cohort_alias": {
+    "HK1_2026_2027": "B4"
+   },
+   "expected_output": "BLER/BER vs bit-width; complexity/hardware proxy; controlled analysis; thesis",
+   "depth": "standard"
+  },
+  {
    "code": "B3-T02",
+   "group": "B3",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Tối ưu fixed-point cho SC Polar decoder",
+   "title_en": "Fixed-Point Optimization of an SC Polar Decoder",
+   "title_v2_proposed_vi": "Tối ưu fixed-point cho SC Polar decoder theo BLER–resource–timing",
+   "cohort_alias": "",
+   "expected_output": "LLR/intermediate widths; saturation/clipping; BLER; resource/timing estimates",
+   "depth": "full",
    "pack_id": "T06",
    "track": "C",
    "track_name": "Kiến trúc bộ giải mã Polar",
-   "title_vi": "Tối ưu fixed-point cho SC Polar decoder",
-   "title_en": "Fixed-Point Optimization of an SC Polar Decoder",
    "title_registration_vi": "Tối ưu biểu diễn fixed-point cho bộ giải mã Polar Successive Cancellation theo ràng buộc phần cứng",
    "title_registration_en": "Hardware-Aware Fixed-Point Optimization of Successive-Cancellation Polar Decoders",
    "research_question": "Có thể giảm precision của LLR/processing trong SC decoder tới mức nào mà BLER degradation nhỏ trong khi hardware cost giảm đáng kể?",
@@ -409,6 +2148,7 @@
    "depends_on": [
     "T05"
    ],
+   "g0_core_concepts": "where quantization error enters SC, integer/fractional allocation, saturation vs wrap-around, BLER sensitivity to precision",
    "must_read": [
     "SC baseline",
     "LLR dynamic range",
@@ -424,7 +2164,6 @@
     "BLER sensitivity to precision",
     "fair floating/fixed comparison"
    ],
-   "g0_core_concepts": "where quantization error enters SC, integer/fractional allocation, saturation vs wrap-around, BLER sensitivity to precision",
    "must_build": [
     "floating SC reference",
     "quantized SC model",
@@ -463,12 +2202,69 @@
    ]
   },
   {
+   "code": "B3-R01",
+   "group": "B3",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Adaptive-precision Polar decoding",
+   "title_en": "Adaptive-Precision Polar Decoding",
+   "title_v2_proposed_vi": "Nghiên cứu adaptive-precision Polar decoding dưới ràng buộc phần cứng",
+   "cohort_alias": "",
+   "expected_output": "Baseline fixed precision; adaptation rule; BLER/average-cost analysis; reproducible experiments",
+   "depth": "standard"
+  },
+  {
+   "code": "B4-P01",
+   "group": "B4",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Phân tích các lỗi SC decoding",
+   "title_en": "Failure Analysis of SC Polar Decoding",
+   "title_v2_proposed_vi": "Phân tích cơ chế và vị trí lỗi trong SC Polar decoding",
+   "cohort_alias": "",
+   "expected_output": "Failure cases; reliability traces; categorized analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "B4-P02",
+   "group": "B4",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Reliability ranking dựa trên trị tuyệt đối LLR",
+   "title_en": "Reliability Ranking Based on LLR Magnitude",
+   "title_v2_proposed_vi": "Khảo sát xếp hạng ứng viên SC-Flip dựa trên độ lớn LLR",
+   "cohort_alias": "",
+   "expected_output": "Candidate ranking; Top-k metrics; plots",
+   "depth": "standard"
+  },
+  {
+   "code": "B4-I01",
+   "group": "B4",
+   "type": "I",
+   "min_level": 2,
+   "title_vi": "Xây dựng SC-Flip software decoder",
+   "title_en": "Software Implementation of an SC-Flip Polar Decoder",
+   "title_v2_proposed_vi": "Xây dựng và kiểm chứng SC-Flip Polar decoder có khả năng tái lập",
+   "cohort_alias": "",
+   "expected_output": "SCF code; validation; BLER/attempts; reproducible scripts",
+   "depth": "standard"
+  },
+  {
    "code": "B4-T01",
+   "group": "B4",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Thiết kế và đánh giá SC-Flip Polar decoder",
+   "title_en": "Design and Performance Evaluation of SC-Flip Polar Decoding",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá SC-Flip Polar decoder theo BLER–attempts–latency",
+   "cohort_alias": {
+    "HK1_2026_2027": "B6"
+   },
+   "expected_output": "SC vs SCF; BLER; attempts; latency/complexity proxy; analysis",
+   "depth": "full",
    "pack_id": "T07",
    "track": "C",
    "track_name": "Kiến trúc bộ giải mã Polar",
-   "title_vi": "Thiết kế và đánh giá SC-Flip Polar decoder",
-   "title_en": "Design and Performance Evaluation of SC-Flip Polar Decoding",
    "title_registration_vi": "Thiết kế và đánh giá bộ giải mã Polar SC-Flip hướng đến triển khai phần cứng",
    "title_registration_en": "Design and Hardware-Oriented Evaluation of an SC-Flip Polar Decoder",
    "research_question": "SC-Flip cải thiện BLER của SC với trade-off average/worst-case latency và complexity như thế nào khi hướng tới phần cứng?",
@@ -476,6 +2272,7 @@
    "depends_on": [
     "T06"
    ],
+   "g0_core_concepts": "why flipping may recover a frame, true first error vs propagated errors, retry mechanism, Tmax",
    "must_read": [
     "SC decoding",
     "first-error phenomenon",
@@ -492,7 +2289,6 @@
     "average attempts",
     "hardware reuse opportunities"
    ],
-   "g0_core_concepts": "why flipping may recover a frame, true first error vs propagated errors, retry mechanism, Tmax",
    "must_build": [
     "SCF software baseline",
     "candidate selector",
@@ -531,11 +2327,20 @@
   },
   {
    "code": "B4-T02",
+   "group": "B4",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Reliability-based candidate ranking cho SC-Flip",
+   "title_en": "Reliability-Based Candidate Ranking for SC-Flip Polar Decoding",
+   "title_v2_proposed_vi": "Nghiên cứu xếp hạng ứng viên dựa trên độ tin cậy cho SC-Flip Polar decoder",
+   "cohort_alias": {
+    "HK1_2026_2027": "B8"
+   },
+   "expected_output": "Top-1/Top-k ranking; BLER; attempts; baselines; thesis",
+   "depth": "full",
    "pack_id": "T08",
    "track": "C",
    "track_name": "Kiến trúc bộ giải mã Polar",
-   "title_vi": "Reliability-based candidate ranking cho SC-Flip",
-   "title_en": "Reliability-Based Candidate Ranking for SC-Flip Polar Decoding",
    "title_registration_vi": "Nghiên cứu phương pháp xếp hạng ứng viên dựa trên độ tin cậy cho bộ giải mã Polar SC-Flip",
    "title_registration_en": "Reliability-Based Candidate Ranking for SC-Flip Polar Decoding",
    "research_question": "Có thể dùng thông tin độ tin cậy tốt hơn |LLR| đơn thuần để tăng xác suất đưa true error vào top-k candidate và giảm số lần SC-Flip retry hay không?",
@@ -543,6 +2348,7 @@
    "depends_on": [
     "T07"
    ],
+   "g0_core_concepts": "ranking vs classification, candidate-hit rate, top-k accuracy, why low |LLR| may not equal true first error",
    "must_read": [
     "SCF candidate metrics",
     "LLR reliability",
@@ -558,7 +2364,6 @@
     "why low |LLR| may not equal true first error",
     "metric cost"
    ],
-   "g0_core_concepts": "ranking vs classification, candidate-hit rate, top-k accuracy, why low |LLR| may not equal true first error",
    "must_build": [
     "failed-frame data collector",
     "candidate feature extractor",
@@ -597,12 +2402,57 @@
    ]
   },
   {
+   "code": "B4-R01",
+   "group": "B4",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Improved reliability metric cho SCF",
+   "title_en": "Improved Reliability Metrics for SC-Flip Decoding",
+   "title_v2_proposed_vi": "Nghiên cứu thước đo độ tin cậy cải tiến cho SC-Flip Polar decoding",
+   "cohort_alias": "",
+   "expected_output": "New/combined metric; ablation; statistical evaluation; paper-ready figures",
+   "depth": "standard"
+  },
+  {
+   "code": "B5-P01",
+   "group": "B5",
+   "type": "P",
+   "min_level": 2,
+   "title_vi": "Thiết kế unreliable-frame detector dựa trên threshold",
+   "title_en": "Threshold-Based Unreliable-Frame Detection",
+   "title_v2_proposed_vi": "Thiết kế và đánh giá bộ phát hiện frame không tin cậy dựa trên threshold",
+   "cohort_alias": "",
+   "expected_output": "Detector; ROC/trigger or classification metrics; plots",
+   "depth": "standard"
+  },
+  {
+   "code": "B5-I01",
+   "group": "B5",
+   "type": "I",
+   "min_level": 3,
+   "title_vi": "Xây dựng adaptive SC/SCF simulation framework",
+   "title_en": "Adaptive SC/SCF Simulation Framework",
+   "title_v2_proposed_vi": "Xây dựng framework mô phỏng adaptive SC/SCF có khả năng tái lập",
+   "cohort_alias": "",
+   "expected_output": "Reliable/unreliable branch framework; seeded experiments; activation statistics; docs",
+   "depth": "standard"
+  },
+  {
    "code": "B5-T01",
+   "group": "B5",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Phát hiện frame không tin cậy cho adaptive Polar decoding",
+   "title_en": "Unreliable-Frame Detection for Adaptive Polar Decoding",
+   "title_v2_proposed_vi": "Phát hiện frame không tin cậy cho giải mã Polar thích ứng dựa trên đặc trưng độ tin cậy",
+   "cohort_alias": {
+    "HK1_2026_2027": "B7"
+   },
+   "expected_output": "Feature study; threshold/logistic baseline; detection/false trigger/missed trigger/activation/BLER",
+   "depth": "full",
    "pack_id": "T09",
    "track": "D",
    "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
-   "title_vi": "Phát hiện frame không tin cậy cho adaptive Polar decoding",
-   "title_en": "Unreliable-Frame Detection for Adaptive Polar Decoding",
    "title_registration_vi": "Phát hiện frame không tin cậy cho giải mã Polar thích ứng dựa trên đặc trưng độ tin cậy",
    "title_registration_en": "Reliability-Based Unreliable-Frame Detection for Adaptive Polar Decoding",
    "research_question": "Có thể nhận biết sớm frame SC có nguy cơ sai bằng một detector độ phức tạp thấp để tránh kích hoạt enhanced decoding trên mọi frame hay không?",
@@ -610,6 +2460,7 @@
    "depends_on": [
     "T08"
    ],
+   "g0_core_concepts": "frame label definition, false positive vs false negative, class imbalance, AUC vs operating point",
    "must_read": [
     "SC reliability outputs",
     "binary classification metrics",
@@ -626,7 +2477,6 @@
     "activation rate",
     "why detector accuracy alone is insufficient"
    ],
-   "g0_core_concepts": "frame label definition, false positive vs false negative, class imbalance, AUC vs operating point",
    "must_build": [
     "dataset generator from SC",
     "feature extractor",
@@ -666,11 +2516,20 @@
   },
   {
    "code": "B5-T02",
+   "group": "B5",
+   "type": "T",
+   "min_level": 3,
+   "title_vi": "Adaptive decoder chỉ kích hoạt enhanced processing trên frame khó",
+   "title_en": "Adaptive Polar Decoding with Selective Enhanced Processing",
+   "title_v2_proposed_vi": "Thiết kế bộ giải mã Polar thích ứng với xử lý tăng cường có chọn lọc",
+   "cohort_alias": {
+    "HK1_2026_2027": "B9"
+   },
+   "expected_output": "End-to-end adaptive framework; BLER; activation rate; avg attempts/latency/complexity",
+   "depth": "full",
    "pack_id": "T10",
    "track": "D",
    "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
-   "title_vi": "Adaptive decoder chỉ kích hoạt enhanced processing trên frame khó",
-   "title_en": "Adaptive Polar Decoding with Selective Enhanced Processing",
    "title_registration_vi": "Thiết kế bộ giải mã Polar thích ứng dựa trên độ tin cậy với cơ chế xử lý tăng cường có chọn lọc",
    "title_registration_en": "Reliability-Gated Adaptive Polar Decoding with Selective Enhanced Processing",
    "research_question": "Selective enhanced processing có thể đạt BLER gần always-on enhanced decoder nhưng giảm average latency/operations/energy trên các frame dễ hay không?",
@@ -678,6 +2537,7 @@
    "depends_on": [
     "T09"
    ],
+   "g0_core_concepts": "easy vs hard frame, gate operating point, always-on vs selective baseline, average vs tail latency",
    "must_read": [
     "SC/SCF baseline",
     "reliability gating",
@@ -694,7 +2554,6 @@
     "activation cost",
     "quality–cost trade-off"
    ],
-   "g0_core_concepts": "easy vs hard frame, gate operating point, always-on vs selective baseline, average vs tail latency",
    "must_build": [
     "SC baseline",
     "reliability gate",
@@ -735,11 +2594,20 @@
   },
   {
    "code": "B5-T03",
+   "group": "B5",
+   "type": "T",
+   "min_level": 4,
+   "title_vi": "Đồng thiết kế thuật toán - phần cứng cho bộ giải mã Polar thích ứng",
+   "title_en": "Algorithm-Hardware Co-Design of an Adaptive Polar Decoder",
+   "title_v2_proposed_vi": "Đồng thiết kế thuật toán–phần cứng cho bộ giải mã Polar thích ứng",
+   "cohort_alias": {
+    "HK1_2026_2027": "B11"
+   },
+   "expected_output": "Algorithm baseline; operation/memory model; fixed-point; RTL critical blocks; reliability-cost Pareto",
+   "depth": "full",
    "pack_id": "T11",
    "track": "D",
    "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
-   "title_vi": "Đồng thiết kế thuật toán - phần cứng cho bộ giải mã Polar thích ứng",
-   "title_en": "Algorithm-Hardware Co-Design of an Adaptive Polar Decoder",
    "title_registration_vi": "Đồng thiết kế thuật toán–phần cứng cho bộ giải mã Polar thích ứng trên FPGA",
    "title_registration_en": "Algorithm–Hardware Co-Design of an Adaptive Polar Decoder on FPGA",
    "research_question": "Làm thế nào ánh xạ adaptive Polar decoding thành kiến trúc phần cứng để lợi thế average-case của thuật toán vẫn tồn tại sau fixed-point, control, memory và interface overhead?",
@@ -748,6 +2616,7 @@
     "T10",
     "T06"
    ],
+   "g0_core_concepts": "algorithmic operation vs hardware cycle, resource sharing vs parallelism, buffer/memory bottlenecks, average/worst latency",
    "must_read": [
     "T05–T10 foundations",
     "algorithm–hardware co-design",
@@ -765,7 +2634,6 @@
     "energy/frame",
     "control overhead"
    ],
-   "g0_core_concepts": "algorithmic operation vs hardware cycle, resource sharing vs parallelism, buffer/memory bottlenecks, average/worst latency",
    "must_build": [
     "fixed-point adaptive model",
     "module partition",
@@ -808,12 +2676,43 @@
    ]
   },
   {
+   "code": "B5-R01",
+   "group": "B5",
+   "type": "R",
+   "min_level": 4,
+   "title_vi": "Adaptive Polar decoding dưới ràng buộc hardware",
+   "title_en": "Hardware-Constrained Adaptive Polar Decoding",
+   "title_v2_proposed_vi": "Nghiên cứu adaptive Polar decoding dưới ràng buộc độ trễ–tài nguyên–năng lượng",
+   "cohort_alias": "",
+   "expected_output": "Research hypothesis; reproducible baselines; latency/resource/energy proxy; paper-ready analysis",
+   "depth": "standard"
+  },
+  {
+   "code": "B6-I01",
+   "group": "B6",
+   "type": "I",
+   "min_level": 3,
+   "title_vi": "Lightweight ML classifier cho unreliable-frame detection",
+   "title_en": "Lightweight ML Classifier for Unreliable-Frame Detection",
+   "title_v2_proposed_vi": "Xây dựng lightweight ML baseline cho phát hiện frame không tin cậy",
+   "cohort_alias": "",
+   "expected_output": "Train/val/test split; logistic/simple ML/MLP comparisons; reproducible model; metrics",
+   "depth": "standard"
+  },
+  {
    "code": "B6-T01",
+   "group": "B6",
+   "type": "T",
+   "min_level": 4,
+   "title_vi": "Lightweight neural-assisted unreliable-frame detector",
+   "title_en": "Lightweight Neural-Assisted Unreliable-Frame Detector",
+   "title_v2_proposed_vi": "Thiết kế bộ phát hiện frame không tin cậy hỗ trợ mạng neural nhẹ cho adaptive Polar decoding",
+   "cohort_alias": "",
+   "expected_output": "Heuristic + classical ML + lightweight NN; BLER/activation/model size/inference cost",
+   "depth": "full",
    "pack_id": "T12",
    "track": "D",
    "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
-   "title_vi": "Lightweight neural-assisted unreliable-frame detector",
-   "title_en": "Lightweight Neural-Assisted Unreliable-Frame Detector",
    "title_registration_vi": "Thiết kế bộ phát hiện frame không tin cậy hỗ trợ mạng neural nhẹ cho giải mã Polar thích ứng",
    "title_registration_en": "Lightweight Neural-Assisted Unreliable-Frame Detection for Adaptive Polar Decoding",
    "research_question": "Một neural classifier rất nhỏ có thể cải thiện unreliable-frame detection đủ nhiều so với detector heuristic/statistical để justify phần cứng bổ sung hay không?",
@@ -821,6 +2720,7 @@
    "depends_on": [
     "T09"
    ],
+   "g0_core_concepts": "why neural model is justified only after simple baseline, train/val/test split, data leakage, class imbalance",
    "must_read": [
     "T09 detector",
     "basic classification",
@@ -838,7 +2738,6 @@
     "calibration/operating point",
     "MAC/parameter cost"
    ],
-   "g0_core_concepts": "why neural model is justified only after simple baseline, train/val/test split, data leakage, class imbalance",
    "must_build": [
     "dataset pipeline",
     "threshold baseline",
@@ -881,11 +2780,20 @@
   },
   {
    "code": "B6-T02",
+   "group": "B6",
+   "type": "T",
+   "min_level": 4,
+   "title_vi": "Neural-assisted candidate ranking cho SC-Flip Polar decoder",
+   "title_en": "Lightweight Neural-Assisted Candidate Ranking for SC-Flip Polar Decoding",
+   "title_v2_proposed_vi": "Xếp hạng ứng viên hỗ trợ mạng neural nhẹ cho SC-Flip Polar decoder",
+   "cohort_alias": {
+    "HK1_2026_2027": "B10"
+   },
+   "expected_output": "SC/SCF baselines; Top-k; BLER; attempts; model parameters/ops; thesis",
+   "depth": "full",
    "pack_id": "T13",
    "track": "D",
    "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
-   "title_vi": "Neural-assisted candidate ranking cho SC-Flip Polar decoder",
-   "title_en": "Lightweight Neural-Assisted Candidate Ranking for SC-Flip Polar Decoding",
    "title_registration_vi": "Xếp hạng ứng viên hỗ trợ mạng neural nhẹ cho bộ giải mã Polar SC-Flip",
    "title_registration_en": "Lightweight Neural-Assisted Candidate Ranking for SC-Flip Polar Decoding",
    "research_question": "Một learned lightweight ranking function có thể đưa true error lên top-k tốt hơn heuristic reliability và giảm average SC-Flip retries với overhead chấp nhận được hay không?",
@@ -893,6 +2801,7 @@
    "depends_on": [
     "T08"
    ],
+   "g0_core_concepts": "label definition for candidate ranking, first-error vs propagated error, top-k metric, dataset leakage",
    "must_read": [
     "T07–T08 SCF",
     "ranking/classification basics",
@@ -909,7 +2818,6 @@
     "end-to-end ranking utility",
     "overhead vs saved retries"
    ],
-   "g0_core_concepts": "label definition for candidate ranking, first-error vs propagated error, top-k metric, dataset leakage",
    "must_build": [
     "failed-frame candidate dataset",
     "|LLR| baseline",
@@ -950,6 +2858,30 @@
     "AI-generated code nhưng sinh viên không giải thích được.",
     "Không phân biệt implementation result với research contribution."
    ]
+  },
+  {
+   "code": "B6-R01",
+   "group": "B6",
+   "type": "R",
+   "min_level": 5,
+   "title_vi": "Hardware-aware neural-assisted adaptive Polar decoder",
+   "title_en": "Hardware-Aware Neural-Assisted Adaptive Polar Decoder",
+   "title_v2_proposed_vi": "Nghiên cứu hardware-aware neural-assisted adaptive Polar decoder",
+   "cohort_alias": "",
+   "expected_output": "Research-grade ablation; BLER; activation; latency/ops/memory/resource/energy proxy; reproducibility",
+   "depth": "standard"
+  },
+  {
+   "code": "B6-R02",
+   "group": "B6",
+   "type": "R",
+   "min_level": 5,
+   "title_vi": "Algorithm-hardware co-design của neural-assisted Polar decoder",
+   "title_en": "Algorithm-Hardware Co-Design of a Neural-Assisted Polar Decoder",
+   "title_v2_proposed_vi": "Đồng thiết kế thuật toán–phần cứng cho neural-assisted Polar decoder",
+   "cohort_alias": "",
+   "expected_output": "Joint algorithm/hardware design space; hardware-aware model selection; implementation evidence",
+   "depth": "standard"
   }
  ]
 }
