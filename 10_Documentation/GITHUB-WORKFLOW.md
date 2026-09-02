@@ -201,12 +201,40 @@ và giải quyết được việc bàn giao khi có người rời đi. Chưa c
 
 ---
 
+## 10b. Cấu hình GitHub Pages — phải là `main` / `/docs`
+
+Trang web của chương trình gồm **hai trang**, cả hai nằm trong `docs/`:
+
+| Đường dẫn | Trang |
+|---|---|
+| `/` | Danh mục đề tài có lọc và tìm kiếm (`docs/index.html`) |
+| `/guide.html` | Hướng dẫn chọn đề tài cho sinh viên (`docs/guide.html`) |
+
+Muốn hai đường dẫn đó đúng thì **Settings → Pages → Build and deployment** phải đặt
+**Branch: `main`, Folder: `/docs`**.
+
+> **Đặt nhầm thành `/ (root)` thì hỏng thế nào.** Pages sẽ chạy Jekyll trên cả kho và
+> dựng `README.md` thành trang chủ; hai trang thật bị đẩy xuống `/docs/index.html` và
+> `/docs/guide.html`, nên **mọi link tuyệt đối trong README đều 404**. Triệu chứng đặc
+> trưng: mở `https://lucero6886.github.io/lucero-mentoring/` thấy đúng nội dung README
+> chứ không phải bảng danh mục có ô tìm kiếm.
+
+**Cách kiểm tra trong 5 giây.** Mở `https://lucero6886.github.io/lucero-mentoring/docs/guide.html`:
+
+- **404** → cấu hình đúng (`/docs`).
+- **Mở được** → cấu hình đang là `/ (root)`, phải sửa lại.
+
+Sau khi đổi, Pages dựng lại khoảng 1–2 phút. Nếu trình duyệt vẫn hiện trang cũ thì tải lại
+bỏ qua cache (Ctrl+F5) — đây là nguyên nhân giả thường gặp nhất sau khi sửa đúng.
+
+---
+
 ## 11. Lộ trình triển khai — ba giai đoạn
 
 **Giai đoạn 1 — Bây giờ (trước khi phát danh mục)**
 
 - [x] Đẩy repo công khai `lucero-mentoring` lên GitHub
-- [ ] Bật GitHub Pages (Settings → Pages → `main` / `/docs`) → có link danh mục gửi sinh viên
+- [ ] Bật GitHub Pages đúng **`main` / `/docs`** (xem §10b — đặt nhầm `/ (root)` làm hỏng mọi link tuyệt đối)
 - [ ] Bật Discussions và tạo 4 mục ở §8
 - [ ] Gửi cho sinh viên **một** link duy nhất: trang danh mục. Mọi thứ khác dẫn từ đó
 

@@ -457,6 +457,32 @@ script</td>
 </tbody>
 </table></div>
 <hr />
+<h2 id="cấu-hình-github-pages">10b. Cấu hình GitHub Pages — phải là <code>main</code> / <code>/docs</code></h2>
+<p>Trang web của chương trình gồm <strong>hai trang</strong>, cả hai nằm trong <code>docs/</code>:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Đường dẫn</th><th>Trang</th></tr></thead>
+<tbody>
+<tr><td><code>/</code></td><td>Danh mục đề tài có lọc và tìm kiếm (<code>docs/index.html</code>)</td></tr>
+<tr><td><code>/guide.html</code></td><td>Hướng dẫn chọn đề tài cho sinh viên (<code>docs/guide.html</code>)</td></tr>
+</tbody>
+</table></div>
+<p>Muốn hai đường dẫn đó đúng thì <strong>Settings → Pages → Build and deployment</strong> phải đặt
+<strong>Branch: <code>main</code>, Folder: <code>/docs</code></strong>.</p>
+<blockquote>
+<p><strong>Đặt nhầm thành <code>/ (root)</code> thì hỏng thế nào.</strong> Pages sẽ chạy Jekyll trên cả kho và
+dựng <code>README.md</code> thành trang chủ; hai trang thật bị đẩy xuống <code>/docs/index.html</code> và
+<code>/docs/guide.html</code>, nên <strong>mọi link tuyệt đối trong README đều 404</strong>. Triệu chứng
+đặc trưng: mở trang chủ thấy đúng nội dung README chứ không phải bảng danh mục có ô tìm kiếm.</p>
+</blockquote>
+<p><strong>Cách kiểm tra trong 5 giây.</strong> Mở
+<code>https://lucero6886.github.io/lucero-mentoring/docs/guide.html</code>:</p>
+<ul>
+<li><strong>404</strong> → cấu hình đúng (<code>/docs</code>).</li>
+<li><strong>Mở được</strong> → cấu hình đang là <code>/ (root)</code>, phải sửa lại.</li>
+</ul>
+<p>Sau khi đổi, Pages dựng lại khoảng 1–2 phút. Nếu trình duyệt vẫn hiện trang cũ thì tải lại bỏ qua
+cache (Ctrl+F5) — đây là nguyên nhân giả thường gặp nhất sau khi đã sửa đúng.</p>
+<hr />
 <h2 id="lộ-trình-triển-khai-ba-giai-đoạn">11. Lộ trình triển khai — ba
 giai đoạn</h2>
 <p><strong>Giai đoạn 1 — Bây giờ (trước khi phát danh mục)</strong></p>
