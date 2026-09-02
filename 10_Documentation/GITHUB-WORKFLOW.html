@@ -482,6 +482,20 @@ dựng <code>README.md</code> thành trang chủ; hai trang thật bị đẩy x
 </ul>
 <p>Sau khi đổi, Pages dựng lại khoảng 1–2 phút. Nếu trình duyệt vẫn hiện trang cũ thì tải lại bỏ qua
 cache (Ctrl+F5) — đây là nguyên nhân giả thường gặp nhất sau khi đã sửa đúng.</p>
+<h3 id="hai-file-chuyển-hướng">Hai file chuyển hướng ở thư mục gốc</h3>
+<p>Kho có sẵn <code>index.html</code> và <code>guide.html</code> <strong>ở thư mục gốc</strong>. Chúng
+<strong>không chứa nội dung</strong> — chỉ chuyển hướng sang <code>docs/index.html</code> và
+<code>docs/guide.html</code>, và tồn tại để hai địa chỉ đã công bố cho sinh viên luôn đúng
+<strong>ở cả hai cấu hình</strong>:</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Pages publish từ</th><th>Điều gì xảy ra</th></tr></thead>
+<tbody>
+<tr><td><code>/docs</code> (đúng)</td><td>Hai file gốc <strong>không được phục vụ</strong>; <code>/</code> và <code>/guide.html</code> là trang thật. Chúng nằm im, vô hại.</td></tr>
+<tr><td><code>/ (root)</code></td><td>Hai file gốc nhận <code>/</code> và <code>/guide.html</code> rồi đẩy sang <code>docs/…</code>. Link vẫn chạy.</td></tr>
+</tbody>
+</table></div>
+<p>Đừng viết nội dung vào hai file này và đừng xóa chúng — chúng là lưới an toàn cho cấu hình Pages,
+thứ nằm ngoài kho nên không kiểm soát được bằng script.</p>
 <hr />
 <h2 id="lộ-trình-triển-khai-ba-giai-đoạn">11. Lộ trình triển khai — ba
 giai đoạn</h2>

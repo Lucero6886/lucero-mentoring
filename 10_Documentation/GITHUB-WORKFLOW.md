@@ -227,6 +227,20 @@ Muốn hai đường dẫn đó đúng thì **Settings → Pages → Build and d
 Sau khi đổi, Pages dựng lại khoảng 1–2 phút. Nếu trình duyệt vẫn hiện trang cũ thì tải lại
 bỏ qua cache (Ctrl+F5) — đây là nguyên nhân giả thường gặp nhất sau khi sửa đúng.
 
+### Hai file chuyển hướng ở thư mục gốc
+
+Kho có sẵn `index.html` và `guide.html` **ở thư mục gốc**. Chúng **không chứa nội dung** —
+chỉ chuyển hướng sang `docs/index.html` và `docs/guide.html`, và tồn tại để hai địa chỉ đã
+công bố cho sinh viên luôn đúng **ở cả hai cấu hình**:
+
+| Pages publish từ | Điều gì xảy ra |
+|---|---|
+| `/docs` (đúng) | Hai file gốc **không được phục vụ**; `/` và `/guide.html` là trang thật. Chúng nằm im, vô hại. |
+| `/ (root)` | Hai file gốc nhận `/` và `/guide.html` rồi đẩy sang `docs/…`. Link vẫn chạy. |
+
+Đừng viết nội dung vào hai file này và đừng xóa chúng — chúng là lưới an toàn cho cấu hình
+Pages, thứ nằm ngoài kho nên không kiểm soát được bằng script.
+
 ---
 
 ## 11. Lộ trình triển khai — ba giai đoạn
