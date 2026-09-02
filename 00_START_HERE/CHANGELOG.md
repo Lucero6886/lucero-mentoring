@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.8.0 — Lớp thực thi chiều sâu cho 13 đề tài nghiên cứu · 2026-09-02
+
+Chủ dự án đưa vào gói `Research_Program_Package_13_Topics v1.0` — 13 đề tài nghiên cứu đã được soạn tới mức thực thi — và yêu cầu hợp nhất vào hệ thống. Gói này lấp đúng khoảng trống lớn nhất còn lại: danh mục nói **có đề tài gì**, nhưng chưa nói **làm đề tài đó cụ thể ra sao**.
+
+**Ba xung đột phải xử lý trước khi hợp nhất — và cách xử lý:**
+
+1. **Hai hệ mã.** Gói dùng `T01`–`T13`, hệ thống dùng mã chuẩn `Family-TypeNN`. Đổi mã chuẩn là điều bất biến số một của kho, nên **mã chuẩn giữ nguyên**; `pack_id` chỉ còn là mã đối chiếu. Gói tự khai alias cho 10 đề tài; 3 đề tài còn thiếu được đối chiếu và khớp 1-1 với danh mục: `T01`→`A4-T01`, `T02`→`A5-T01`, `T03`→`A2-T02`. Validator nay bắt lỗi nếu tên trong hồ sơ lệch tên trong danh mục.
+2. **16 tuần đối 15 tuần.** Gói có `ROADMAP-16-WEEKS` cố định; hệ thống vừa chuyển sang khung **tương đối 15 tuần** ở v1.6.0. Giữ khung 15 tuần và **nén lộ trình 17 dòng của gói xuống 15 tuần** mà không bỏ mốc nào — tuần 0 (onboarding) gộp vào tuần 1, phần paper readiness và bàn giao tách ra thành cửa mở rộng sau tuần 15. Lộ trình nay sinh từ khung nên đúng cho mọi khóa.
+3. **Hai bộ luật song song.** Gói mang theo MENTOR-GUIDE, STUDENT-RESEARCH-GUIDE, AI-USE-AND-RESEARCH-ETHICS, REPRODUCIBILITY-GUIDE, WEEKLY-REPORT-TEMPLATE, EXPERIMENT-LOG-TEMPLATE — **trùng nội dung** với `10_Documentation/` và `01_Governance/` sẵn có. Nhập nguyên si sẽ tạo hai bộ quy tắc cạnh tranh, đúng thứ hệ thống này sinh ra để chống. **Không nhập các file trùng**; chỉ lấy phần thật sự bổ sung.
+
+**Nguồn chuẩn mới — `06_Data/research_packs.json`:** 13 gói, mỗi gói khai câu hỏi nghiên cứu, phải-đọc, phải-hiểu, phải-dựng, thí nghiệm, bằng chứng, ngưỡng công bố, 4 câu hỏi mentor trọng tâm, cảnh báo sớm và phụ thuộc. Kèm 4 track, 4 mức chiều sâu **D0–D3**, 4 quy tắc không thương lượng và quy tắc golden baseline dùng chung.
+
+**Thang gate nghiên cứu G0–G7** vào `milestone_gates.json` dưới khối `research_ladder`. Đây **không phải hệ gate thứ hai**: G0–G6 ánh xạ vào Gate 1–6 hiện có (Gate 1 gồm G0+G1), riêng **G7 — Paper Readiness** là cửa mở rộng nằm ngoài khung 15 tuần, chỉ mở khi có bằng chứng đủ mạnh. Mỗi gate hiện có thêm trường `research_gates` trỏ ngược lại.
+
+**Script mới `scripts/generate_research_packs.py`** sinh 105 file trong `02_Project_Portfolio/Research_Packs/` — mỗi đề tài 8 file (START-HERE, ROADMAP, MILESTONE-GATES, EXPERIMENTS, DELIVERABLES, MENTOR-NOTES, PAPER-READINESS, REGISTRATION) — cộng trang chỉ mục có sơ đồ phụ thuộc, thứ tự kích hoạt theo đợt, và `03_Operations/STATUS_BOARD.md`. Lộ trình gắn hạn ngày tự động khi khóa có công bố `start_date`.
+
+**Tài liệu vận hành bổ sung (không trùng cái đã có):** `10_Documentation/RESEARCH-TRACKS.md` (4 track, sơ đồ phụ thuộc, buổi mentor 3 giờ chia theo track, điều kiện escalation, quy tắc office hour, khi nào dừng/đổi hướng) · `03_Operations/PASS_FAIL_RUBRIC.md` (thang 2/1/0 và 5 mục trọng yếu — một mục bị 0 là cửa không đạt dù tổng điểm cao) · `03_Operations/MENTOR_WEEKLY_CHECKLIST.md` · `03_Operations/DEFINITION_OF_DONE.md` · 5 biểu mẫu mới trong `04_Project_Template/` (literature matrix, paper readiness, teaching transfer, mentor lessons learned, chuẩn tái lập repository).
+
+**Validator** thêm ba nhóm kiểm tra: `research_ladder` phải đủ G0–G7 và chỉ trỏ tới gate có thật · mỗi gói phải đủ 18 trường, mã phải tồn tại trong danh mục, tên phải khớp danh mục, đúng 4 câu hỏi mentor · phụ thuộc giữa các gói không được tạo vòng. **PASS — 105 đề tài · 13 gói nghiên cứu.**
+
+**Ghi chú tên đề tài:** gói mang tên dài kiểu hồ sơ đăng ký, danh mục dùng tên ngắn. Thay vì chọn một, giữ cả hai với vai trò rõ ràng: `title_vi/title_en` lấy nguyên từ danh mục (bản chuẩn), `title_registration_vi/en` là tên đầy đủ dùng khi điền biểu mẫu. Không có hai tên cùng vai trò cho một mã.
+
 ## v1.7.0 — Làm rõ quan hệ kho đề tài ↔ đề tài mở từng khóa · 2026-08-27
 
 Chủ dự án phát hiện một khoảng trống thật trong tài liệu: danh mục ghi kho có **34 đề tài T** nhưng chỉ **21** được mở, mà không chỗ nào giải thích 13 đề tài còn lại là gì. Người đọc chỉ có thể đoán — đúng loại mập mờ hệ thống này sinh ra để chống.

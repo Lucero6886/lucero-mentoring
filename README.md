@@ -6,7 +6,7 @@ trong lĩnh vực **thiết kế vi mạch số (Digital IC/FPGA/ASIC) · hệ n
 **Tác giả & mentor:** ThS. Đinh Văn Nam (Mr. Lucero Dinh)
 Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 
-`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `phiên bản 1.7.0`
+`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `13 hồ sơ nghiên cứu chiều sâu` · `phiên bản 1.8.0`
 
 > **📚 Danh mục đề tài — bản web tra cứu nhanh (lọc theo nhóm, mức độ, loại hoạt động):**
 > **https://lucero6886.github.io/lucero-mentoring/**
@@ -27,6 +27,7 @@ Mỗi học kỳ mở một đợt (cohort) lấy đề tài từ kho chung này
 | **Danh mục đồ án tốt nghiệp kỳ hiện tại** (bản in được) | [`Danh_muc_de_tai_DATN_HK1_2026_2027.pdf`](Danh_muc_de_tai_DATN_HK1_2026_2027.pdf) |
 | **Nên đọc gì trước khi bắt đầu** — tài liệu nền tảng theo từng hướng | [`09_References/READING-LIST.md`](09_References/READING-LIST.md) |
 | **Toàn bộ catalog theo loại** (P / I / T / R) | [`02_Project_Portfolio/`](https://github.com/Lucero6886/lucero-mentoring/tree/main/02_Project_Portfolio) — 5 file Word tải về |
+| **13 đề tài đã chuẩn bị tới mức thực thi** — đọc gì, dựng gì, chạy thí nghiệm nào, nộp bằng chứng gì | [`02_Project_Portfolio/Research_Packs/`](02_Project_Portfolio/Research_Packs/README.md) |
 
 ### Bước 2 · Hiểu chương trình chạy thế nào trước khi chọn
 
@@ -96,12 +97,40 @@ lịch từng tuần và hạn từng gate được suy ra tự động bằng [
 
 ---
 
+## 🔬 Đi sâu tới mức nghiên cứu — 13 hồ sơ thực thi
+
+Danh mục trả lời câu *"có những đề tài nào"*. Với 13 đề tài đã được chuẩn bị kỹ nhất, có thêm một
+lớp trả lời câu tiếp theo: **"làm đề tài đó cụ thể ra sao"** — phải đọc gì trước khi gõ dòng code
+đầu tiên, phải hiểu gì mà không nhìn tài liệu, dựng cái gì, chạy thí nghiệm nào, nộp bằng chứng gì,
+và khi nào mới đủ điều kiện nghĩ tới một bài báo.
+
+**→ [`02_Project_Portfolio/Research_Packs/`](02_Project_Portfolio/Research_Packs/README.md)** — mỗi đề tài 8 file.
+
+| Track | Hướng | Đề tài |
+|---|---|---|
+| **A** | Thiết kế IC số mã nguồn mở | `A4-T01` · `A5-T01` |
+| **B** | Kiến trúc phần cứng số | `A2-T02` · `A1-P04` |
+| **C** | Kiến trúc bộ giải mã Polar | `B2-T01` · `B3-T02` · `B4-T01` · `B4-T02` |
+| **D** | Giải mã Polar thích ứng / hỗ trợ neural | `B5-T01` · `B5-T02` · `B5-T03` · `B6-T01` · `B6-T02` |
+
+Bốn quy tắc chi phối cả lớp này:
+**không baseline thì không có phương pháp đề xuất · không bằng chứng thì không có kết luận ·
+không tái lập được thì chưa hoàn thành ở mức nghiên cứu · không so sánh công bằng thì không được
+tuyên bố trong bài báo.**
+
+Cách mentor vận hành 13 đề tài cùng lúc — họp theo track, điều kiện escalation, thứ tự kích hoạt,
+quy tắc baseline dùng chung: [`10_Documentation/RESEARCH-TRACKS.md`](10_Documentation/RESEARCH-TRACKS.md).
+
+---
+
 ## 👩‍🏫 Nếu bạn là mentor / giảng viên
 
 | Việc | Mở |
 |---|---|
 | Hiểu toàn hệ thống trong 10 phút | [`implementation-notes.md`](implementation-notes.md) — mục ★ đầu tài liệu |
 | Thao tác hằng tuần: nhận sinh viên, chạy gate, xử lý chậm tiến độ | [`10_Documentation/MENTOR-GUIDE.md`](10_Documentation/MENTOR-GUIDE.md) |
+| **Vận hành nhóm nghiên cứu theo track** — họp gộp, phụ thuộc đề tài, thứ tự kích hoạt | [`10_Documentation/RESEARCH-TRACKS.md`](10_Documentation/RESEARCH-TRACKS.md) |
+| Checklist review tuần · thang chấm PASS/FAIL · định nghĩa "xong" | [`03_Operations/MENTOR_WEEKLY_CHECKLIST.md`](03_Operations/MENTOR_WEEKLY_CHECKLIST.md) · [`PASS_FAIL_RUBRIC.md`](03_Operations/PASS_FAIL_RUBRIC.md) · [`DEFINITION_OF_DONE.md`](03_Operations/DEFINITION_OF_DONE.md) |
 | **Vận hành trên GitHub**: cái gì công khai/riêng tư, nhịp tuần, gate review, phân quyền | [`10_Documentation/GITHUB-WORKFLOW.md`](10_Documentation/GITHUB-WORKFLOW.md) |
 | Sửa đề tài / thang điểm / lịch rồi sinh lại tài liệu | [`10_Documentation/WORKFLOW.md`](10_Documentation/WORKFLOW.md) |
 | Tra nhanh toàn bộ | [`10_Documentation/USER-GUIDE.md`](10_Documentation/USER-GUIDE.md) |
@@ -116,12 +145,13 @@ lịch từng tuần và hạn từng gate được suy ra tự động bằng [
 ## 🗂 Cấu trúc kho tài liệu
 
 ```
-06_Data/              ← NGUỒN CHUẨN: 105 đề tài, thang đánh giá, 6 gate, dữ liệu từng đợt (JSON)
+06_Data/              ← NGUỒN CHUẨN: 105 đề tài, thang đánh giá, 6 gate + thang G0–G7,
+                        13 hồ sơ nghiên cứu, dữ liệu từng đợt (JSON)
 scripts/              ← Sinh mọi tài liệu từ nguồn chuẩn + kiểm tra tính nhất quán
-02_Project_Portfolio/ ← Catalog theo loại hoạt động (sinh tự động)
+02_Project_Portfolio/ ← Catalog theo loại hoạt động + Research_Packs/ (sinh tự động)
 01_Governance/        ← Chính sách: sổ tay, thỏa thuận làm việc, quy tắc dùng AI
 03_Operations/        ← Quy trình vận hành + workbook theo dõi
-04_Project_Template/  ← 15 biểu mẫu hồ sơ dự án của từng sinh viên
+04_Project_Template/  ← 20 biểu mẫu hồ sơ dự án của từng sinh viên
 09_References/        ← Tài liệu nền tảng nên đọc, phân theo hướng nghiên cứu
 10_Documentation/     ← Hướng dẫn theo vai trò (sinh viên / mentor / vận hành / GitHub)
 docs/                 ← Trang web danh mục (GitHub Pages)
@@ -138,6 +168,7 @@ python3 scripts/generate_catalogs.py --docx --pdf  # sinh catalog + danh mục +
 python3 scripts/generate_site.py                   # sinh docs/index.html
 python3 scripts/generate_ban_do.py                 # sinh Ban_do_de_tai.md/.html
 python3 scripts/export_governance_md.py            # sinh bản .md đọc-trên-web từ .docx chính sách
+python3 scripts/generate_research_packs.py         # sinh 13 hồ sơ nghiên cứu + bảng trạng thái
 ```
 
 ---

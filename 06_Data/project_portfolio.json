@@ -2151,8 +2151,8 @@
   }
  ],
  "meta": {
-  "version": "1.7.0",
-  "updated": "2026-08-23",
+  "version": "1.8.0",
+  "updated": "2026-09-02",
   "program": "Engineering & Research Mentoring Program (Lucero)",
   "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
   "prereq_codes_convention": "Mỗi phần tử là mã chính xác (vd 'A5-T02') hoặc pattern family-type 'A1-P*' nghĩa là hoàn thành ít nhất một đề tài P của family A1 hoặc năng lực tương đương có evidence.",

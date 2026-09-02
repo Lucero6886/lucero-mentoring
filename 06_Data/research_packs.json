@@ -1,0 +1,955 @@
+{
+ "meta": {
+  "version": "1.8.0",
+  "updated": "2026-09-02",
+  "program": "Engineering & Research Mentoring Program (Lucero)",
+  "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
+  "purpose": "Lớp thực thi chiều sâu cho những đề tài đã chọn đi tới mức nghiên cứu. project_portfolio.json trả lời 'có những đề tài nào'; file này trả lời 'làm đề tài đó cụ thể ra sao': phải đọc gì, hiểu gì, dựng gì, chạy thí nghiệm nào, nộp bằng chứng gì và khi nào mới đủ điều kiện viết bài.",
+  "notes": "Mã chuẩn là 'code' (Family-TypeNN) — trùng với project_portfolio.json. 'pack_id' (T01-T13) chỉ là mã đối chiếu với gói gốc Research Program Package, không dùng để đặt tên file hay trích dẫn. Mọi tài liệu trong 02_Project_Portfolio/Research_Packs/ đều do scripts/generate_research_packs.py sinh ra từ file này — không sửa tay. 'title_vi/title_en' lấy nguyên từ project_portfolio.json để không có hai tên cho cùng một mã; 'title_registration_*' là tên đầy đủ dùng khi điền biểu mẫu đăng ký.",
+  "source": "Research_Program_Package_13_Topics v1.0 (hợp nhất vào hệ thống, 09/2026)"
+ },
+ "tracks": [
+  {
+   "track": "A",
+   "name": "Thiết kế IC số mã nguồn mở",
+   "focus": "Năng lực RTL→GDSII bằng công cụ mã nguồn mở; nền dùng lại cho mọi đề tài ASIC phía sau."
+  },
+  {
+   "track": "B",
+   "name": "Kiến trúc phần cứng số",
+   "focus": "Datapath, fixed-point, pipeline, PPA và IP tái sử dụng — nền kỹ thuật cho trục C và D."
+  },
+  {
+   "track": "C",
+   "name": "Kiến trúc bộ giải mã Polar",
+   "focus": "Từ SC baseline tới SC-Flip: đúng trước, nhanh sau; mọi cải tiến phải đo được trên cùng một baseline."
+  },
+  {
+   "track": "D",
+   "name": "Giải mã Polar thích ứng / hỗ trợ neural",
+   "focus": "Chỉ tiêu tốn tài nguyên cho frame khó; vùng có tiềm năng công bố cao nhất và cũng rủi ro nhất."
+  }
+ ],
+ "depth_levels": [
+  {
+   "level": "D0",
+   "name": "Readiness",
+   "meaning": "Hiểu vấn đề, công cụ, baseline và metric."
+  },
+  {
+   "level": "D1",
+   "name": "Engineering",
+   "meaning": "Cài đặt đúng và được kiểm chứng."
+  },
+  {
+   "level": "D2",
+   "name": "Research",
+   "meaning": "Thí nghiệm có kiểm soát, baseline công bằng, bằng chứng tái lập."
+  },
+  {
+   "level": "D3",
+   "name": "Publication",
+   "meaning": "Câu hỏi nghiên cứu rõ, đóng góp có bằng chứng, hình/bảng sẵn sàng cho bản thảo."
+  }
+ ],
+ "rules": [
+  "Không có baseline thì không có phương pháp đề xuất.",
+  "Không có bằng chứng thì không có kết luận.",
+  "Không tái lập được thì đề tài chưa hoàn thành ở mức nghiên cứu.",
+  "Không so sánh công bằng thì không được tuyên bố trong bài báo."
+ ],
+ "shared_baseline_rule": "Không nhân bản năm phiên bản SC khác nhau cho năm nhóm. Duy trì một 'golden baseline' dùng chung có tag/version; mọi đề tài phía sau phải ghi rõ commit/tag của baseline mà nó dùng.",
+ "packs": [
+  {
+   "code": "A4-T01",
+   "pack_id": "T01",
+   "track": "A",
+   "track_name": "Thiết kế IC số mã nguồn mở",
+   "title_vi": "Thiết kế một Digital IP từ RTL đến GDSII",
+   "title_en": "Design and Evaluation of a Digital IP from RTL to GDSII",
+   "title_registration_vi": "Thiết kế và đánh giá một IP số từ RTL đến GDSII sử dụng quy trình EDA mã nguồn mở",
+   "title_registration_en": "Design and Evaluation of a Digital IP from RTL to GDSII Using an Open-Source EDA Flow",
+   "research_question": "Các lựa chọn kiến trúc và ràng buộc physical design ảnh hưởng như thế nào đến timing, area, power và khả năng đóng thiết kế của một IP số?",
+   "paper_potential": "Trung bình",
+   "depends_on": [],
+   "must_read": [
+    "RTL design & verification fundamentals",
+    "logic synthesis và standard-cell mapping",
+    "static timing analysis",
+    "floorplan, placement, CTS, routing",
+    "DRC/LVS và sign-off concepts",
+    "PPA và thiết kế experiment sweep"
+   ],
+   "must_understand": [
+    "Khác biệt functional correctness và physical closure",
+    "critical path/slack",
+    "utilization và congestion",
+    "PPA trade-off",
+    "DRC vs LVS",
+    "tại sao cùng RTL nhưng constraint khác tạo kết quả khác"
+   ],
+   "g0_core_concepts": "Khác biệt functional correctness và physical closure, critical path/slack, utilization và congestion, PPA trade-off",
+   "must_build": [
+    "Chọn và viết/chuẩn hóa một IP số tham số hóa",
+    "testbench + regression",
+    "automation scripts cho flow",
+    "script trích xuất PPA/timing"
+   ],
+   "experiments": [
+    "Baseline RTL→GDSII",
+    "clock-period sweep",
+    "core-utilization sweep",
+    "architecture hoặc pipeline comparison",
+    "re-run để kiểm tra reproducibility"
+   ],
+   "evidence": [
+    "waveform/regression pass",
+    "synthesis report",
+    "STA report",
+    "layout/GDS screenshot",
+    "DRC/LVS summary",
+    "CSV PPA sweep + scripts",
+    "Pareto/summary plots"
+   ],
+   "paper_threshold": "Có systematic design-space/PPA study; ít nhất 2 cấu hình/kiến trúc có so sánh công bằng; DRC/LVS sạch; có insight tái lập vượt quá demo flow.",
+   "mentor_questions": [
+    "IP này đủ phức tạp để có research question nhưng vẫn đóng được không?",
+    "Tại sao constraint này làm timing/area thay đổi?",
+    "Nếu layout pass DRC nhưng fail LVS nghĩa là gì?",
+    "Kết quả nào là insight chứ không chỉ tool output?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "A5-T01",
+   "pack_id": "T02",
+   "track": "A",
+   "track_name": "Thiết kế IC số mã nguồn mở",
+   "title_vi": "Xây dựng quy trình ASIC tái lập sử dụng LibreLane + Nix",
+   "title_en": "Reproducible ASIC Workflow Using LibreLane and Nix",
+   "title_registration_vi": "Xây dựng và đánh giá quy trình RTL-to-GDSII mã nguồn mở có khả năng tái lập phục vụ đào tạo thiết kế vi mạch số",
+   "title_registration_en": "Development and Evaluation of a Reproducible Open-Source RTL-to-GDSII Flow for Digital IC Design Education",
+   "research_question": "Làm thế nào xây dựng một RTL-to-GDSII environment mà người học khác có thể tái lập kết quả một cách ổn định trên các máy/môi trường khác nhau?",
+   "paper_potential": "Trung bình",
+   "depends_on": [],
+   "must_read": [
+    "reproducible research",
+    "container/Nix/environment management concepts",
+    "open-source RTL-to-GDSII flow",
+    "CI/regression basics",
+    "EDA versioning",
+    "engineering education evaluation basics"
+   ],
+   "must_understand": [
+    "reproducibility vs repeatability",
+    "toolchain pinning",
+    "deterministic và non-deterministic sources",
+    "benchmark design",
+    "clean-room rerun",
+    "tại sao ModifiedAt/version mới không đảm bảo kết quả mới/đúng"
+   ],
+   "g0_core_concepts": "reproducibility vs repeatability, toolchain pinning, deterministic và non-deterministic sources, benchmark design",
+   "must_build": [
+    "bootstrap/setup scripts",
+    "version manifest",
+    "benchmark runner",
+    "result parser",
+    "optional CI workflow"
+   ],
+   "experiments": [
+    "Fresh install test",
+    "multi-machine or multi-environment rerun",
+    "version/config sensitivity",
+    "benchmark suite run",
+    "runtime + PPA consistency"
+   ],
+   "evidence": [
+    "setup time log",
+    "success/failure matrix",
+    "version manifest",
+    "PPA/run-time variance",
+    "clean-clone demonstration",
+    "student reproduction checklist"
+   ],
+   "paper_threshold": "Có protocol tái lập rõ, benchmark đủ đa dạng, thử nghiệm trên nhiều môi trường/người dùng hoặc nhiều clean runs, có định lượng consistency và bài học giáo dục.",
+   "mentor_questions": [
+    "Cái gì đang được 'reproduced': chức năng hay PPA hay cả hai?",
+    "Nguồn biến thiên nào do tool, nguồn nào do environment?",
+    "Một sinh viên mới cần bao nhiêu bước thủ công?",
+    "Đóng góp nghiên cứu/giáo dục nằm ở đâu ngoài việc viết script?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "A2-T02",
+   "pack_id": "T03",
+   "track": "B",
+   "track_name": "Kiến trúc phần cứng số",
+   "title_vi": "Thiết kế và tối ưu MAC datapath cho FPGA/ASIC",
+   "title_en": "Design and Optimization of a Fixed-Point MAC Datapath for FPGA/ASIC",
+   "title_registration_vi": "Thiết kế MAC datapath và đánh giá ảnh hưởng của bit-width và pipeline đến độ chính xác và chi phí phần cứng",
+   "title_registration_en": "Hardware-Aware Design of a MAC Datapath: Accuracy–Cost Trade-offs under Bit-Width and Pipeline Scaling",
+   "research_question": "Bit-width và mức pipeline thay đổi numerical accuracy, latency, throughput, area và power của MAC datapath như thế nào?",
+   "paper_potential": "Cao",
+   "depends_on": [],
+   "must_read": [
+    "fixed-point arithmetic",
+    "quantization error",
+    "MAC architecture",
+    "pipelining",
+    "RTL arithmetic",
+    "FPGA/ASIC PPA metrics"
+   ],
+   "must_understand": [
+    "Q-format",
+    "overflow/saturation/rounding",
+    "latency vs throughput",
+    "critical path",
+    "why pipeline may raise registers but improve fmax",
+    "Pareto frontier"
+   ],
+   "g0_core_concepts": "Q-format, overflow/saturation/rounding, latency vs throughput, critical path",
+   "must_build": [
+    "floating-point golden model",
+    "fixed-point model",
+    "parameterized RTL MAC",
+    "self-checking testbench",
+    "sweep scripts"
+   ],
+   "experiments": [
+    "bit-width sweep",
+    "fractional-bit allocation",
+    "pipeline-depth sweep",
+    "rounding/saturation comparison",
+    "FPGA/ASIC resource/timing evaluation"
+   ],
+   "evidence": [
+    "numerical error plots",
+    "RTL-vs-golden equivalence results",
+    "LUT/FF or area reports",
+    "fmax/latency/throughput table",
+    "Pareto plot"
+   ],
+   "paper_threshold": "Có design-space sweep đủ rộng, numerical + hardware metrics, Pareto analysis, ít nhất một insight kiến trúc/quantization có tính tổng quát.",
+   "mentor_questions": [
+    "Accuracy được định nghĩa bằng metric nào?",
+    "Hai cấu hình pipeline có cùng chức năng và precision không?",
+    "Fmax cao hơn có thực sự cải thiện throughput ở interface này?",
+    "Điểm Pareto nào hợp lý và vì sao?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "A1-P04",
+   "pack_id": "T04",
+   "track": "B",
+   "track_name": "Kiến trúc phần cứng số",
+   "title_vi": "Thiết kế UART transmitter/receiver bằng RTL",
+   "title_en": "RTL Design of a UART Transmitter/Receiver",
+   "title_registration_vi": "Thiết kế và đánh giá kiến trúc UART tham số hóa có khả năng tái sử dụng cho hệ thống số trên FPGA",
+   "title_registration_en": "Design and Evaluation of a Parameterizable UART IP for FPGA-Based Digital Systems",
+   "research_question": "Thiết kế UART tham số hóa có thể duy trì độ tin cậy như thế nào dưới clock mismatch, sampling uncertainty hoặc error injection với chi phí phần cứng thấp?",
+   "paper_potential": "Thấp, trừ khi làm thêm khảo sát độ bền",
+   "depends_on": [],
+   "must_read": [
+    "UART framing",
+    "baud-rate generation",
+    "FSM",
+    "synchronizers/metastability concepts",
+    "oversampling",
+    "error detection",
+    "FPGA verification"
+   ],
+   "must_understand": [
+    "TX/RX timing",
+    "why async serial needs sampling strategy",
+    "clock mismatch budget",
+    "framing/parity errors",
+    "synchronizer role",
+    "functional vs robustness testing"
+   ],
+   "g0_core_concepts": "TX/RX timing, why async serial needs sampling strategy, clock mismatch budget, framing/parity errors",
+   "must_build": [
+    "UART TX",
+    "UART RX",
+    "baud generator",
+    "optional oversampling receiver",
+    "error detector",
+    "self-checking TB + FPGA demo"
+   ],
+   "experiments": [
+    "nominal loopback",
+    "baud mismatch sweep",
+    "sampling offset sweep",
+    "error/noise injection",
+    "oversampling-factor comparison",
+    "resource/timing evaluation"
+   ],
+   "evidence": [
+    "waveforms",
+    "pass/fail robustness boundary",
+    "BER/framing-error plots",
+    "resource report",
+    "FPGA demonstration"
+   ],
+   "paper_threshold": "Chỉ mở paper nếu có robustness study có hệ thống, comparison với kiến trúc/sampling baseline, quantitative boundary và insight; nếu không thì giữ ở training/engineering output.",
+   "mentor_questions": [
+    "Tại sao UART vẫn nhận được khi hai clock không giống hệt nhau?",
+    "Oversampling cải thiện gì và tốn gì?",
+    "Noise model có thực tế không?",
+    "Kết quả có vượt mức project thông thường để thành research chưa?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "B2-T01",
+   "pack_id": "T05",
+   "track": "C",
+   "track_name": "Kiến trúc bộ giải mã Polar",
+   "title_vi": "Thiết kế bộ giải mã SC Polar trên FPGA",
+   "title_en": "FPGA Architecture and Implementation of an SC Polar Decoder",
+   "title_registration_vi": "Thiết kế và đánh giá kiến trúc bộ giải mã Polar Successive Cancellation trên FPGA",
+   "title_registration_en": "Design and FPGA Evaluation of a Successive-Cancellation Polar Decoder Architecture",
+   "research_question": "Một kiến trúc SC Polar decoder có thể được ánh xạ lên FPGA với correctness, latency, throughput và resource cost như thế nào?",
+   "paper_potential": "Trung bình",
+   "depends_on": [],
+   "must_read": [
+    "Polar codes fundamentals",
+    "channel polarization/frozen bits",
+    "BPSK AWGN and LLR",
+    "SC decoding tree",
+    "f/g operations",
+    "partial sums",
+    "FPGA architecture/verification"
+   ],
+   "must_understand": [
+    "N,K,R",
+    "frozen vs information bits",
+    "LLR sign/magnitude",
+    "SC traversal dependencies",
+    "BER vs BLER",
+    "algorithm latency vs cycle latency"
+   ],
+   "g0_core_concepts": "N,K,R, frozen vs information bits, LLR sign/magnitude, SC traversal dependencies",
+   "must_build": [
+    "Python/MATLAB encoder+channel+SC golden model",
+    "RTL f/g/partial-sum/control modules",
+    "testbench co-verification",
+    "FPGA synthesis scripts"
+   ],
+   "experiments": [
+    "software BLER baseline",
+    "small-N hand check",
+    "Python/MATLAB↔RTL vector test",
+    "N/K or SNR sweeps",
+    "FPGA synthesis and timing"
+   ],
+   "evidence": [
+    "BLER/BER curves",
+    "known-vector tests",
+    "RTL waveforms",
+    "bit-exact co-verification logs",
+    "LUT/FF/BRAM/fmax/latency/throughput table"
+   ],
+   "paper_threshold": "Baseline architecture validated; FPGA metrics đầy đủ; chỉ paper nếu có architectural choice/optimization/comparison tạo insight ngoài việc implement SC.",
+   "mentor_questions": [
+    "Tại sao bit này frozen?",
+    "LLR âm/dương và độ lớn nói gì?",
+    "Latency được đo từ cycle nào tới cycle nào?",
+    "RTL và software mismatch ở f/g hay partial sum?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "B3-T02",
+   "pack_id": "T06",
+   "track": "C",
+   "track_name": "Kiến trúc bộ giải mã Polar",
+   "title_vi": "Tối ưu fixed-point cho SC Polar decoder",
+   "title_en": "Fixed-Point Optimization of an SC Polar Decoder",
+   "title_registration_vi": "Tối ưu biểu diễn fixed-point cho bộ giải mã Polar Successive Cancellation theo ràng buộc phần cứng",
+   "title_registration_en": "Hardware-Aware Fixed-Point Optimization of Successive-Cancellation Polar Decoders",
+   "research_question": "Có thể giảm precision của LLR/processing trong SC decoder tới mức nào mà BLER degradation nhỏ trong khi hardware cost giảm đáng kể?",
+   "paper_potential": "Cao",
+   "depends_on": [
+    "T05"
+   ],
+   "must_read": [
+    "SC baseline",
+    "LLR dynamic range",
+    "fixed-point quantization",
+    "saturation/rounding",
+    "quantized decoders",
+    "FPGA PPA"
+   ],
+   "must_understand": [
+    "where quantization error enters SC",
+    "integer/fractional allocation",
+    "saturation vs wrap-around",
+    "BLER sensitivity to precision",
+    "fair floating/fixed comparison"
+   ],
+   "g0_core_concepts": "where quantization error enters SC, integer/fractional allocation, saturation vs wrap-around, BLER sensitivity to precision",
+   "must_build": [
+    "floating SC reference",
+    "quantized SC model",
+    "parameterized fixed-point RTL",
+    "bit-exact co-verification",
+    "sweep scripts"
+   ],
+   "experiments": [
+    "total-bit sweep",
+    "fractional/integer split sweep",
+    "rounding/saturation study",
+    "BLER vs Eb/N0",
+    "resource/fmax/power vs precision"
+   ],
+   "evidence": [
+    "floating vs fixed BLER curves",
+    "quantization error diagnostics",
+    "bit-exact logs",
+    "hardware cost table",
+    "accuracy–cost Pareto plot"
+   ],
+   "paper_threshold": "Có quantization design-space study, statistically reliable BLER, hardware evaluation và một precision strategy/Pareto point có lý do rõ.",
+   "mentor_questions": [
+    "Vì sao chọn range này?",
+    "BLER loss được đo tại những SNR nào?",
+    "Có overflow âm thầm không?",
+    "Bit-width tối ưu có ổn định theo N/K/SNR không?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "B4-T01",
+   "pack_id": "T07",
+   "track": "C",
+   "track_name": "Kiến trúc bộ giải mã Polar",
+   "title_vi": "Thiết kế và đánh giá SC-Flip Polar decoder",
+   "title_en": "Design and Performance Evaluation of SC-Flip Polar Decoding",
+   "title_registration_vi": "Thiết kế và đánh giá bộ giải mã Polar SC-Flip hướng đến triển khai phần cứng",
+   "title_registration_en": "Design and Hardware-Oriented Evaluation of an SC-Flip Polar Decoder",
+   "research_question": "SC-Flip cải thiện BLER của SC với trade-off average/worst-case latency và complexity như thế nào khi hướng tới phần cứng?",
+   "paper_potential": "Trung bình – cao",
+   "depends_on": [
+    "T06"
+   ],
+   "must_read": [
+    "SC decoding",
+    "first-error phenomenon",
+    "SC-Flip literature",
+    "CRC/check mechanism if used",
+    "candidate selection",
+    "average vs worst-case latency"
+   ],
+   "must_understand": [
+    "why flipping may recover a frame",
+    "true first error vs propagated errors",
+    "retry mechanism",
+    "Tmax",
+    "average attempts",
+    "hardware reuse opportunities"
+   ],
+   "g0_core_concepts": "why flipping may recover a frame, true first error vs propagated errors, retry mechanism, Tmax",
+   "must_build": [
+    "SCF software baseline",
+    "candidate selector",
+    "retry controller model",
+    "optional RTL controller integration"
+   ],
+   "experiments": [
+    "BLER vs SNR",
+    "Tmax sweep",
+    "average attempts vs SNR",
+    "latency distribution",
+    "comparison SC/SCF/strong baseline where feasible"
+   ],
+   "evidence": [
+    "BLER curves",
+    "attempt histogram",
+    "average/worst latency table",
+    "candidate-hit diagnostics",
+    "complexity accounting"
+   ],
+   "paper_threshold": "Có strong baseline, BLER–latency/complexity trade-off rõ, không chỉ reproduce algorithm; tốt hơn nếu có hardware-oriented modification/analysis.",
+   "mentor_questions": [
+    "SCF sửa first error hay mọi error?",
+    "Average complexity có ý nghĩa gì so với worst case?",
+    "Tmax tăng đem lại diminishing returns khi nào?",
+    "SCF có lợi phần cứng hơn SCL ở giả định nào?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "B4-T02",
+   "pack_id": "T08",
+   "track": "C",
+   "track_name": "Kiến trúc bộ giải mã Polar",
+   "title_vi": "Reliability-based candidate ranking cho SC-Flip",
+   "title_en": "Reliability-Based Candidate Ranking for SC-Flip Polar Decoding",
+   "title_registration_vi": "Nghiên cứu phương pháp xếp hạng ứng viên dựa trên độ tin cậy cho bộ giải mã Polar SC-Flip",
+   "title_registration_en": "Reliability-Based Candidate Ranking for SC-Flip Polar Decoding",
+   "research_question": "Có thể dùng thông tin độ tin cậy tốt hơn |LLR| đơn thuần để tăng xác suất đưa true error vào top-k candidate và giảm số lần SC-Flip retry hay không?",
+   "paper_potential": "Cao",
+   "depends_on": [
+    "T07"
+   ],
+   "must_read": [
+    "SCF candidate metrics",
+    "LLR reliability",
+    "error propagation",
+    "ranking metrics",
+    "top-k evaluation",
+    "complexity-aware algorithm design"
+   ],
+   "must_understand": [
+    "ranking vs classification",
+    "candidate-hit rate",
+    "top-k accuracy",
+    "why low |LLR| may not equal true first error",
+    "metric cost"
+   ],
+   "g0_core_concepts": "ranking vs classification, candidate-hit rate, top-k accuracy, why low |LLR| may not equal true first error",
+   "must_build": [
+    "failed-frame data collector",
+    "candidate feature extractor",
+    "baseline |LLR| ranking",
+    "proposed handcrafted metric",
+    "SCF integration"
+   ],
+   "experiments": [
+    "Top-1/3/5 hit rate",
+    "BLER vs SNR",
+    "average attempts",
+    "metric complexity",
+    "sensitivity to candidate pool/Tmax"
+   ],
+   "evidence": [
+    "ranking accuracy table",
+    "BLER curves",
+    "attempt reduction",
+    "failure examples",
+    "operation-count/hardware-cost estimate"
+   ],
+   "paper_threshold": "Có ranking improvement ổn định, end-to-end SCF benefit, complexity analysis và ablation/interpretation rõ.",
+   "mentor_questions": [
+    "Metric mới dùng thông tin nào mà |LLR| không có?",
+    "Improvement có còn khi candidate pool thay đổi?",
+    "Ranking tốt hơn có thực sự cải thiện BLER/latency?",
+    "Overhead của metric có ăn hết lợi ích không?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "B5-T01",
+   "pack_id": "T09",
+   "track": "D",
+   "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
+   "title_vi": "Phát hiện frame không tin cậy cho adaptive Polar decoding",
+   "title_en": "Unreliable-Frame Detection for Adaptive Polar Decoding",
+   "title_registration_vi": "Phát hiện frame không tin cậy cho giải mã Polar thích ứng dựa trên đặc trưng độ tin cậy",
+   "title_registration_en": "Reliability-Based Unreliable-Frame Detection for Adaptive Polar Decoding",
+   "research_question": "Có thể nhận biết sớm frame SC có nguy cơ sai bằng một detector độ phức tạp thấp để tránh kích hoạt enhanced decoding trên mọi frame hay không?",
+   "paper_potential": "Cao",
+   "depends_on": [
+    "T08"
+   ],
+   "must_read": [
+    "SC reliability outputs",
+    "binary classification metrics",
+    "ROC/PR curves",
+    "threshold detector",
+    "feature engineering",
+    "selective/adaptive decoding concepts"
+   ],
+   "must_understand": [
+    "frame label definition",
+    "false positive vs false negative",
+    "class imbalance",
+    "AUC vs operating point",
+    "activation rate",
+    "why detector accuracy alone is insufficient"
+   ],
+   "g0_core_concepts": "frame label definition, false positive vs false negative, class imbalance, AUC vs operating point",
+   "must_build": [
+    "dataset generator from SC",
+    "feature extractor",
+    "threshold/rule baseline",
+    "evaluation pipeline",
+    "optional simple statistical classifier"
+   ],
+   "experiments": [
+    "feature distribution correct vs error frames",
+    "ROC/PR",
+    "threshold sweep",
+    "activation rate vs miss rate",
+    "end-to-end BLER when coupled to oracle/enhanced path"
+   ],
+   "evidence": [
+    "dataset manifest",
+    "feature histograms",
+    "ROC/PR plots",
+    "confusion matrix",
+    "activation/BLER trade-off"
+   ],
+   "paper_threshold": "Detector phải tạo end-to-end benefit: giảm activation/average cost trong khi BLER gần target; có baseline, sensitivity và no-leakage validation.",
+   "mentor_questions": [
+    "Label có leakage không?",
+    "Feature này có sẵn trước khi quyết định activate không?",
+    "False negative gây hậu quả gì?",
+    "Operating point nào tối ưu cho decoder chứ không chỉ classifier?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "B5-T02",
+   "pack_id": "T10",
+   "track": "D",
+   "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
+   "title_vi": "Adaptive decoder chỉ kích hoạt enhanced processing trên frame khó",
+   "title_en": "Adaptive Polar Decoding with Selective Enhanced Processing",
+   "title_registration_vi": "Thiết kế bộ giải mã Polar thích ứng dựa trên độ tin cậy với cơ chế xử lý tăng cường có chọn lọc",
+   "title_registration_en": "Reliability-Gated Adaptive Polar Decoding with Selective Enhanced Processing",
+   "research_question": "Selective enhanced processing có thể đạt BLER gần always-on enhanced decoder nhưng giảm average latency/operations/energy trên các frame dễ hay không?",
+   "paper_potential": "Rất cao",
+   "depends_on": [
+    "T09"
+   ],
+   "must_read": [
+    "SC/SCF baseline",
+    "reliability gating",
+    "selective computation",
+    "average-case complexity",
+    "latency/energy accounting",
+    "adaptive system evaluation"
+   ],
+   "must_understand": [
+    "easy vs hard frame",
+    "gate operating point",
+    "always-on vs selective baseline",
+    "average vs tail latency",
+    "activation cost",
+    "quality–cost trade-off"
+   ],
+   "g0_core_concepts": "easy vs hard frame, gate operating point, always-on vs selective baseline, average vs tail latency",
+   "must_build": [
+    "SC baseline",
+    "reliability gate",
+    "enhanced decoder interface",
+    "adaptive controller",
+    "metrics logger"
+   ],
+   "experiments": [
+    "BLER vs SNR",
+    "activation rate vs SNR",
+    "average operations/latency",
+    "threshold sensitivity",
+    "oracle gate upper bound",
+    "always-on enhanced comparison"
+   ],
+   "evidence": [
+    "BLER plot",
+    "activation plot",
+    "average-cost table",
+    "threshold Pareto curve",
+    "failure/missed-hard-frame analysis"
+   ],
+   "paper_threshold": "Có clear adaptive gain: gần performance của enhanced baseline với giảm average cost đáng kể; có oracle/strong baselines và sensitivity.",
+   "mentor_questions": [
+    "Gate biết gì tại thời điểm quyết định?",
+    "Savings đến từ đâu?",
+    "BLER gap với always-on là bao nhiêu?",
+    "Nếu SNR thay đổi, threshold có còn hợp lý?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "B5-T03",
+   "pack_id": "T11",
+   "track": "D",
+   "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
+   "title_vi": "Đồng thiết kế thuật toán - phần cứng cho bộ giải mã Polar thích ứng",
+   "title_en": "Algorithm-Hardware Co-Design of an Adaptive Polar Decoder",
+   "title_registration_vi": "Đồng thiết kế thuật toán–phần cứng cho bộ giải mã Polar thích ứng trên FPGA",
+   "title_registration_en": "Algorithm–Hardware Co-Design of an Adaptive Polar Decoder on FPGA",
+   "research_question": "Làm thế nào ánh xạ adaptive Polar decoding thành kiến trúc phần cứng để lợi thế average-case của thuật toán vẫn tồn tại sau fixed-point, control, memory và interface overhead?",
+   "paper_potential": "Rất cao",
+   "depends_on": [
+    "T10",
+    "T06"
+   ],
+   "must_read": [
+    "T05–T10 foundations",
+    "algorithm–hardware co-design",
+    "fixed-point",
+    "resource sharing",
+    "FSM/control",
+    "memory architecture",
+    "FPGA timing/power"
+   ],
+   "must_understand": [
+    "algorithmic operation vs hardware cycle",
+    "resource sharing vs parallelism",
+    "buffer/memory bottlenecks",
+    "average/worst latency",
+    "energy/frame",
+    "control overhead"
+   ],
+   "g0_core_concepts": "algorithmic operation vs hardware cycle, resource sharing vs parallelism, buffer/memory bottlenecks, average/worst latency",
+   "must_build": [
+    "fixed-point adaptive model",
+    "module partition",
+    "SC datapath",
+    "reliability unit",
+    "controller",
+    "enhanced-processing interface",
+    "RTL TB + FPGA build"
+   ],
+   "experiments": [
+    "bit-exact verification",
+    "resource-sharing alternatives",
+    "fmax/latency/throughput",
+    "activation-dependent average latency",
+    "power/energy estimate",
+    "ASIC-feasibility synthesis if available"
+   ],
+   "evidence": [
+    "architecture diagram",
+    "bit-exact logs",
+    "resource/timing reports",
+    "average/worst latency",
+    "power/energy table",
+    "comparison with non-adaptive hardware baseline"
+   ],
+   "paper_threshold": "FPGA implementation validated; algorithmic gain survives hardware overhead; có architecture comparison và average/worst-case metrics; paper-ready khi co-design tạo insight rõ.",
+   "mentor_questions": [
+    "Algorithm saving nào biến mất khi đưa lên hardware?",
+    "Control/memory overhead là bao nhiêu?",
+    "Average-case metric đo trên distribution nào?",
+    "Kiến trúc có scale với N không?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "B6-T01",
+   "pack_id": "T12",
+   "track": "D",
+   "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
+   "title_vi": "Lightweight neural-assisted unreliable-frame detector",
+   "title_en": "Lightweight Neural-Assisted Unreliable-Frame Detector",
+   "title_registration_vi": "Thiết kế bộ phát hiện frame không tin cậy hỗ trợ mạng neural nhẹ cho giải mã Polar thích ứng",
+   "title_registration_en": "Lightweight Neural-Assisted Unreliable-Frame Detection for Adaptive Polar Decoding",
+   "research_question": "Một neural classifier rất nhỏ có thể cải thiện unreliable-frame detection đủ nhiều so với detector heuristic/statistical để justify phần cứng bổ sung hay không?",
+   "paper_potential": "Rất cao",
+   "depends_on": [
+    "T09"
+   ],
+   "must_read": [
+    "T09 detector",
+    "basic classification",
+    "logistic regression",
+    "small MLP",
+    "feature normalization",
+    "quantization-aware inference",
+    "hardware cost of neural inference"
+   ],
+   "must_understand": [
+    "why neural model is justified only after simple baseline",
+    "train/val/test split",
+    "data leakage",
+    "class imbalance",
+    "calibration/operating point",
+    "MAC/parameter cost"
+   ],
+   "g0_core_concepts": "why neural model is justified only after simple baseline, train/val/test split, data leakage, class imbalance",
+   "must_build": [
+    "dataset pipeline",
+    "threshold baseline",
+    "logistic/simple ML baseline",
+    "tiny MLP",
+    "quantized inference model",
+    "hardware-cost estimator"
+   ],
+   "experiments": [
+    "threshold vs logistic vs tiny MLP",
+    "feature ablation",
+    "model-size sweep",
+    "quantization sweep",
+    "ROC/PR",
+    "end-to-end activation/BLER/average-cost"
+   ],
+   "evidence": [
+    "split manifest",
+    "learning curves",
+    "ROC/PR",
+    "ablation table",
+    "parameter/MAC/memory table",
+    "end-to-end adaptive-decoder benefit"
+   ],
+   "paper_threshold": "NN phải vượt simple baselines có ý nghĩa ở end-to-end decoder metric sau khi tính overhead; có ablation, quantization và complexity analysis.",
+   "mentor_questions": [
+    "NN học được gì mà feature threshold không làm được?",
+    "Có leakage giữa train/test theo frame/SNR không?",
+    "AUC tăng có chuyển thành decoder gain không?",
+    "Quantization có làm mất lợi thế không?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  },
+  {
+   "code": "B6-T02",
+   "pack_id": "T13",
+   "track": "D",
+   "track_name": "Giải mã Polar thích ứng / hỗ trợ neural",
+   "title_vi": "Neural-assisted candidate ranking cho SC-Flip Polar decoder",
+   "title_en": "Lightweight Neural-Assisted Candidate Ranking for SC-Flip Polar Decoding",
+   "title_registration_vi": "Xếp hạng ứng viên hỗ trợ mạng neural nhẹ cho bộ giải mã Polar SC-Flip",
+   "title_registration_en": "Lightweight Neural-Assisted Candidate Ranking for SC-Flip Polar Decoding",
+   "research_question": "Một learned lightweight ranking function có thể đưa true error lên top-k tốt hơn heuristic reliability và giảm average SC-Flip retries với overhead chấp nhận được hay không?",
+   "paper_potential": "Rất cao, kèm rủi ro cao",
+   "depends_on": [
+    "T08"
+   ],
+   "must_read": [
+    "T07–T08 SCF",
+    "ranking/classification basics",
+    "learning-to-rank intuition",
+    "feature engineering",
+    "small neural networks",
+    "quantization/hardware cost"
+   ],
+   "must_understand": [
+    "label definition for candidate ranking",
+    "first-error vs propagated error",
+    "top-k metric",
+    "dataset leakage",
+    "end-to-end ranking utility",
+    "overhead vs saved retries"
+   ],
+   "g0_core_concepts": "label definition for candidate ranking, first-error vs propagated error, top-k metric, dataset leakage",
+   "must_build": [
+    "failed-frame candidate dataset",
+    "|LLR| baseline",
+    "handcrafted reliability baseline",
+    "simple learned baseline",
+    "tiny NN ranker",
+    "SCF integration"
+   ],
+   "experiments": [
+    "Top-1/3/5",
+    "BLER",
+    "average attempts",
+    "model-size sweep",
+    "feature ablation",
+    "quantization",
+    "operation/latency cost"
+   ],
+   "evidence": [
+    "ranking table",
+    "BLER curve",
+    "attempt histogram",
+    "ablation",
+    "model complexity",
+    "hardware-aware net saving estimate"
+   ],
+   "paper_threshold": "NN ranking phải cải thiện top-k và end-to-end SCF cost/performance ổn định; có strong heuristic baseline, ablation, quantization và net-complexity analysis.",
+   "mentor_questions": [
+    "Label nào thực sự cần rank?",
+    "Ranking accuracy tăng có giảm retries không?",
+    "NN có thắng handcrafted metric ở nhiều SNR/N không?",
+    "Net cost sau NN overhead là bao nhiêu?"
+   ],
+   "red_flags": [
+    "Sinh viên chạy proposed trước baseline.",
+    "Chỉ đưa screenshot mà không có raw data/config.",
+    "Metric thay đổi giữa các phương pháp.",
+    "Kết luận dựa vào 1 run/1 SNR/1 seed khi bài toán cần thống kê.",
+    "AI-generated code nhưng sinh viên không giải thích được.",
+    "Không phân biệt implementation result với research contribution."
+   ]
+  }
+ ]
+}

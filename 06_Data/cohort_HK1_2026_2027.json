@@ -1,7 +1,7 @@
 {
  "meta": {
-  "version": "1.7.0",
-  "updated": "2026-08-23",
+  "version": "1.8.0",
+  "updated": "2026-09-02",
   "program": "Engineering & Research Mentoring Program (Lucero)",
   "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
   "notes": "Dữ liệu riêng của một khóa. Chỉ khai start_date (có thể để trống nếu chưa công bố); lịch từng tuần, ngày kết thúc và hạn từng gate đều suy ra từ khung tuần tương đối trong milestone_gates.json bằng scripts/cohort_schedule.py."

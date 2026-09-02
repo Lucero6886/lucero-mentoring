@@ -30,6 +30,7 @@ def load(name):
 pf = load("project_portfolio.json")
 rr = load("readiness_rubrics.json")
 mg = load("milestone_gates.json")
+rp = load("research_packs.json")
 cohorts = sorted(DATA.glob("cohort_*.json"))
 
 CODE_RE = re.compile(r"^(A[0-7]|B[0-6]|AB)-([PITR])(\d{2})$")
@@ -139,6 +140,74 @@ if mg:
             if not (g.get(k) or "").strip(): err(f"milestone_gates: Gate {g.get('gate')} thiếu {k}")
     if prev_end != 15: warn(f"milestone_gates: tổng tuần = {prev_end} (kỳ vọng 15)")
 
+    rl = mg.get("research_ladder") or {}
+    lg = rl.get("gates", [])
+    if [g.get("id") for g in lg] != [f"G{i}" for i in range(8)]:
+        err("milestone_gates.research_ladder: phải có đúng G0..G7 theo thứ tự")
+    gate_ids = {g.get("gate") for g in gs}
+    for g in lg:
+        m = g.get("maps_to_gate")
+        if isinstance(m, int) and m not in gate_ids:
+            err(f"research_ladder {g.get('id')}: maps_to_gate={m} không có trong Gate 1..6")
+        if not g.get("pass_criteria"):
+            err(f"research_ladder {g.get('id')}: thiếu pass_criteria")
+        if not (g.get("fail_rule") or "").strip():
+            err(f"research_ladder {g.get('id')}: thiếu fail_rule")
+    for g in gs:
+        for gid in g.get("research_gates", []):
+            if gid not in {x.get("id") for x in lg}:
+                err(f"milestone_gates: Gate {g.get('gate')} trỏ tới {gid} không có trong research_ladder")
+
+if rp and pf:
+    by_code = {t["code"]: t for t in pf.get("topics", [])}
+    packs = rp.get("packs", [])
+    ids, pcodes = [], []
+    REQ = ["code", "pack_id", "track", "title_vi", "title_en", "title_registration_vi",
+           "title_registration_en", "research_question", "paper_potential", "depends_on",
+           "must_read", "must_understand", "must_build", "experiments", "evidence",
+           "paper_threshold", "mentor_questions", "red_flags"]
+    tracks = {t.get("track") for t in rp.get("tracks", [])}
+    for p in packs:
+        c = p.get("code", "?")
+        pcodes.append(c); ids.append(p.get("pack_id"))
+        for k in REQ:
+            if k not in p:
+                err(f"research_packs {c}: thiếu trường '{k}'")
+            elif k != "depends_on" and not p[k]:
+                err(f"research_packs {c}: trường '{k}' rỗng")
+        if c not in by_code:
+            err(f"research_packs {c}: mã không có trong project_portfolio.json")
+        else:
+            for k in ("title_vi", "title_en"):
+                if p.get(k) != by_code[c].get(k):
+                    err(f"research_packs {c}: {k} lệch danh mục — phải lấy nguyên từ project_portfolio.json")
+        if p.get("track") not in tracks:
+            err(f"research_packs {c}: track '{p.get('track')}' không khai báo trong 'tracks'")
+        if len(p.get("mentor_questions") or []) != 4:
+            err(f"research_packs {c}: mentor_questions phải có đúng 4 câu (lộ trình dùng ở tuần 1, 3, 8, 12)")
+    for x in (ids, pcodes):
+        dup = {v for v in x if x.count(v) > 1}
+        if dup: err(f"research_packs: trùng lặp {sorted(dup)}")
+    idset = set(ids)
+    for p in packs:
+        for d in p.get("depends_on", []):
+            if d not in idset:
+                err(f"research_packs {p.get('code')}: depends_on trỏ pack_id không tồn tại: {d}")
+    # phát hiện phụ thuộc vòng
+    dep = {p["pack_id"]: list(p.get("depends_on", [])) for p in packs if p.get("pack_id")}
+    seen_, stack_ = set(), set()
+    def walk(n):
+        if n in stack_: err(f"research_packs: phụ thuộc vòng tại {n}"); return
+        if n in seen_: return
+        stack_.add(n)
+        for m in dep.get(n, []): walk(m)
+        stack_.discard(n); seen_.add(n)
+    for n in dep: walk(n)
+    if not (rp.get("depth_levels") and len(rp["depth_levels"]) == 4):
+        err("research_packs: depth_levels phải có đúng 4 mức D0..D3")
+    if len(rp.get("rules", [])) < 4:
+        err("research_packs: thiếu bộ 4 quy tắc không thương lượng")
+
 for cpath in cohorts:
     co = json.loads(cpath.read_text(encoding="utf-8"))
     name = cpath.name
@@ -204,5 +273,6 @@ else:
 if warnings:
     print(f"{len(warnings)} cảnh báo:")
     for w in warnings: print("  !", w)
-print(f"Đã kiểm: {len(pf['topics']) if pf else 0} topics · rubrics · gates · {len(cohorts)} cohort file(s).")
+print(f"Đã kiểm: {len(pf['topics']) if pf else 0} topics · rubrics · gates · "
+      f"{len(rp['packs']) if rp else 0} research pack(s) · {len(cohorts)} cohort file(s).")
 sys.exit(1 if errors else 0)

@@ -17,7 +17,7 @@ Không bao giờ sửa tay file sinh tự động — nó bị ghi đè ở lầ
 | Rubric TR/WR/RR + ngưỡng | `06_Data/readiness_rubrics.json` |
 | Gate 1–6 + hard rule | `06_Data/milestone_gates.json` |
 | Lịch tuần, deadline gate, đề tài mở, career guide | `06_Data/cohort_<id>.json` |
-| Triết lý, chính sách, quy trình | `01_Governance/*.docx` + `03_Operations/SOP.docx` |
+| Triết lý, chính sách, quy trình | `01_Governance/*.docx` + `03_Operations/Mentoring_Operating_Procedure_SOP.docx` |
 
 Mọi thứ khác — 5 catalog, danh mục cohort, phiếu, trang web, sheet Portfolio — là **view sinh ra**.
 
