@@ -30,14 +30,15 @@ Phiên bản hệ thống **1.10.0** · cập nhật **04/09/2026**
 
 ### 1.1 Vấn đề
 
-Một mentor có thể hướng dẫn tốt hai sinh viên. Với mười lăm, ba thứ vỡ cùng lúc:
+Hướng dẫn một vài sinh viên thì mentor nhớ hết trong đầu: em nào đang mắc ở đâu, tuần trước hứa gì.
+Khi số sinh viên tăng lên, cách làm đó sập — và sập theo ba hướng cùng lúc, cả ba đều khó thấy sớm:
 
 1. **Không nhìn thấy tiến độ thật.** Sinh viên báo "em đang làm" suốt sáu tuần, tới tuần mười hai
    mới lộ ra là chưa có gì chạy được. Lúc đó cứu không kịp.
 2. **Chuẩn trôi theo người.** Em chăm thì được thông cảm, em ít gặp thì bị đánh giá thấp — trong khi
    cái đáng đo là **bằng chứng**, không phải nỗ lực hay tần suất xuất hiện.
 3. **Mỗi khóa bắt đầu lại từ số không.** Đề tài, kinh nghiệm, môi trường, lỗi đã gặp — tất cả tan
-   theo sinh viên tốt nghiệp. Khóa sau tốn lại đúng số tuần đó cho đúng những lỗi đó.
+   theo sinh viên tốt nghiệp. Khóa sau mất lại đúng ngần ấy thời gian cho đúng những lỗi ấy.
 
 ### 1.2 Ý tưởng
 
@@ -46,7 +47,7 @@ Hệ thống này chỉ có **một ý tưởng**, ba lớp còn lại đều l�
 > **Thay "mentor theo dõi từng người" bằng "mọi người đi qua cùng một khuôn, và khuôn đó
 > đòi bằng chứng ở những điểm cố định."**
 
-Khi khuôn đủ rõ, mentor không cần nhớ mười lăm câu chuyện — chỉ cần hỏi *"tuần này em ở cửa nào,
+Khi khuôn đủ rõ, mentor không phải nhớ câu chuyện riêng của từng em — chỉ cần hỏi *"tuần này em ở cửa nào,
 bằng chứng đâu"*. Khi bằng chứng là thứ được chấm, sự chăm chỉ không còn thay thế được kết quả, và
 sinh viên biết trước mình bị đánh giá bằng gì. Khi khuôn dùng chung cho nhiều khóa, thứ để lại
 được cho khóa sau là **tài sản**, không phải kỷ niệm.
@@ -59,7 +60,7 @@ sinh viên biết trước mình bị đánh giá bằng gì. Khi khuôn dùng c
 | **Thực thi** | *Làm đề tài đó cụ thể ra sao?* | `06_Data/research_packs.json` → `Topic_Guides/` (105 trang), `Research_Packs/` (13 hồ sơ sâu) |
 | **Vận hành** | *Mentor và sinh viên làm gì mỗi tuần?* | `06_Data/milestone_gates.json` + `03_Operations/` + `01_Governance/` |
 
-Ba lớp này **không trùng nhau và không mâu thuẫn được**, vì cả ba đều sinh ra từ cùng một tập
+Ba lớp này **không trùng nhau, và không thể mâu thuẫn với nhau**, vì cả ba đều sinh ra từ cùng một tập
 dữ liệu nguồn — xem §3.
 
 ### 1.4 Hệ thống này **không** phải cái gì
@@ -150,7 +151,7 @@ Hai module dùng chung, không sinh gì cả:
 
 Khi hai tài liệu mâu thuẫn, thứ tự ưu tiên là:
 
-1. **`06_Data/*.json`** — dữ liệu đề tài, thang đánh giá, cửa, khóa. Thắng tuyệt đối.
+1. **`06_Data/*.json`** — dữ liệu đề tài, thang đánh giá, cửa, khóa. Ưu tiên tuyệt đối.
 2. **`.docx` trong `01_Governance/` và `03_Operations/`** — chính sách và quy trình. Bản `.md` cạnh
    chúng là bản sinh, không phải bản gốc.
 3. **`10_Documentation/*.md`** — hướng dẫn theo vai trò. Diễn giải, không định nghĩa.
@@ -228,7 +229,7 @@ Gate 6 ⊃ {G6} · **G7 nằm ngoài 15 tuần**.
 | **WR** — working readiness | 5 phẩm chất, tổng /20 | Quyết định nhịp gặp và mức giám sát |
 | **RR** — research readiness | 5 tiêu chí, chấm 0–4 | Quyết định có mở phần mở rộng nghiên cứu không |
 
-Kèm `mentor_decision_options` — các phương án mentor được chọn khi một thang chưa đạt ngưỡng.
+Kèm `mentor_decision_options` — các phương án mentor có thể chọn khi một thang chưa đạt ngưỡng.
 
 ### 4.5 `cohort_<mã>.json` — lớp phủ của một khóa
 
@@ -330,7 +331,8 @@ khóa; ngày dương lịch chỉ là lớp phủ suy ra từ `start_date`.
 | **5** Analysis & Draft | 12–13 | Phân tích có nguyên nhân + bản thảo đầy đủ | Không dùng viết lách che lỗ hổng |
 | **6** Reproducibility & Defense | 14–15 | Người khác chạy lại được; slide, demo, gói bàn giao | Chỉ xác nhận hoàn thành khi đủ ba trục |
 
-**Ba trục đánh giá, thiếu một trục là chưa xong:** technical completion · reproducibility · ownership.
+**Ba trục đánh giá, thiếu một trục là chưa xong:** phần lõi chạy đúng · người khác chạy lại được ·
+sinh viên giải thích được sản phẩm của mình.
 **Không có trục "chăm chỉ".**
 
 ### 6.2 G0–G7 — cửa đó đòi hỏi gì
@@ -341,14 +343,15 @@ Sáu cửa ở trên là *hành chính*. Thang G mô tả *nội dung*:
 `G3` cài đặt phương pháp đề xuất → `G4` thí nghiệm có kiểm soát → `G5` bằng chứng và phân tích →
 `G6` khả năng tái lập → **`G7` sẵn sàng viết bài (ngoài khung 15 tuần)**.
 
-G7 chỉ mở khi Gate 1–6 đã đạt **và** mentor thấy bằng chứng đủ mạnh. Đây là chỗ chặn "paper hóa" giả.
+G7 chỉ mở khi Gate 1–6 đã đạt **và** mentor thấy bằng chứng đủ mạnh. Đây là chỗ chặn việc gắn nhãn
+nghiên cứu cho một sản phẩm chưa phải là nghiên cứu.
 
 ### 6.3 P → I → T → R: kỳ vọng đi theo loại đề tài
 
 | Loại | Mục tiêu | Bằng chứng lõi | Kỳ vọng nghiên cứu |
 |---|---|---|---|
-| **P** | Học một kỹ năng | sản phẩm chạy được + đo kiểm | novelty không bắt buộc |
-| **I** | Làm theo quy trình kỹ sư | quy trình tái lập + tài liệu + gói bàn giao | bài báo không phải KPI mặc định |
+| **P** | Học một kỹ năng | sản phẩm chạy được + đo kiểm | không đòi hỏi cái mới |
+| **I** | Làm theo quy trình kỹ sư | quy trình tái lập + tài liệu + gói bàn giao | bài báo không phải mục tiêu mặc định |
 | **T** | Sở hữu một sản phẩm hoàn chỉnh | đầu-cuối + đánh giá định lượng + tái lập | có thể mở phần mở rộng nghiên cứu |
 | **R** | Trả lời một câu hỏi nghiên cứu | giả thuyết + baseline mạnh + bằng chứng có kiểm soát | sẵn sàng bản thảo nếu G7 đạt |
 
@@ -506,7 +509,7 @@ chạy lại chuỗi §5.1. Thứ **không** tái tạo được: `01_Governance
 
 ## 9. Chín điều bất biến
 
-Đây là những ràng buộc đã được trả giá để học. Đừng thương lượng lại chúng nếu chưa đọc lý do.
+Chín điều dưới đây đều đã phải trả giá mới rút ra được. Đừng bỏ điều nào khi chưa đọc lý do đằng sau nó.
 
 1. **`06_Data/*.json` là nguồn chuẩn duy nhất.** Mọi thứ khác là bản sinh.
 2. **Không bao giờ đổi mã chuẩn của một đề tài đã phát hành.**
@@ -523,7 +526,7 @@ chạy lại chuỗi §5.1. Thứ **không** tái tạo được: `01_Governance
 
 ## 10. Hạn chế đã biết
 
-Ghi ra để không ai tưởng là lỗi mới phát hiện:
+Liệt kê sẵn để lần sau không ai tưởng đây là lỗi vừa phát sinh:
 
 - **Nhãn phiên bản trong `.docx` là chữ soạn tay trong Word.** Nay có `sync_docx_version.py` đồng bộ
   tự động, nhưng nó vẫn là một bước phải nhớ chạy, không phải một ràng buộc do máy áp đặt.

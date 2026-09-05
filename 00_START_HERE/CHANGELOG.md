@@ -20,6 +20,8 @@ Yêu cầu của chủ dự án: *"rà soát cập nhật toàn bộ dự án v�
 
 **Đã kiểm:** validator PASS 105 đề tài · 105 gói · nhãn phiên bản đồng bộ ở 10 nơi · 0 link markdown hỏng trên 290 tài liệu · sinh lại hai lần không lệch một byte · trang HTML dựng và chụp lại để soi bố cục · PDF danh mục dựng lại ở 1.10.0.
 
+**Sửa lối viết sau khi chủ dự án đọc bản đầu.** Câu mở đầu §1.1 viết theo lối tiếng Anh — *"Một mentor có thể hướng dẫn tốt hai sinh viên. Với mười lăm, ba thứ vỡ cùng lúc"* — bỏ mất danh từ nên tiếng Việt thành cụt, lại còn dựng hai con số không có căn cứ. Viết lại không dùng số bịa, và rà tiếp cả tài liệu: 11 chỗ dịch sát tiếng Anh được sửa (*"Thắng tuyệt đối"*, *"không mâu thuẫn được"*, *"novelty không bắt buộc"*, *"KPI mặc định"*, *"chỗ chặn paper hóa giả"*, ba trục đánh giá còn để nguyên tiếng Anh…), cộng một tham chiếu treo (*"đúng số tuần đó"* trong khi phía trước không nêu số tuần nào).
+
 ## v1.9.0 — Lớp thực thi phủ đủ 105 đề tài · trang hướng dẫn chọn đề tài · 2026-09-02
 
 Chủ dự án đưa vào gói `Research_Program_Package_v2_105_Topics` (863 file, phủ đủ 105 đề tài theo đúng mã chuẩn của hệ thống) cùng một trang `guidenotes.html` dành cho sinh viên. Lần này **không có xung đột mã**: gói v2 được dựng từ chính `Ban_do_de_tai.md` v1.7.0 và tự khai rằng `project_portfolio.json` là nguồn chuẩn.
