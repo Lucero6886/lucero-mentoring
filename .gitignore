@@ -31,3 +31,7 @@ __pycache__/
 
 # Bản clone của chính repo này nếu lỡ tải về bên trong dự án — không bao giờ commit
 /lucero-mentoring/
+
+# Bản xem trước do app tự lưu khi Claude gửi file vào cuộc trò chuyện.
+# Chúng là bản sao của file đã có sẵn trong dự án — không được để lọt vào kho.
+/Claude outputs/
