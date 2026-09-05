@@ -6,7 +6,7 @@ trong lĩnh vực **thiết kế vi mạch số (Digital IC/FPGA/ASIC) · hệ n
 **Tác giả & mentor:** ThS. Đinh Văn Nam (Mr. Lucero Dinh)
 Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 
-`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `105 trang hướng dẫn` · `13 hồ sơ nghiên cứu chiều sâu` · `phiên bản 1.9.0`
+`105 đề tài` · `16 nhóm chuyên môn` · `4 loại hoạt động P/I/T/R` · `105 trang hướng dẫn` · `13 hồ sơ nghiên cứu chiều sâu` · `phiên bản 1.10.0`
 
 > **🧭 Chưa biết bắt đầu từ đâu? Đọc trang này trước:**
 > **https://lucero6886.github.io/lucero-mentoring/guide.html**

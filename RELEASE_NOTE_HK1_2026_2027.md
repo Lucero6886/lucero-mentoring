@@ -1,4 +1,4 @@
-# THÔNG BÁO PHÁT HÀNH — Danh mục đề tài DATN (bản 23/08/2026 · hệ thống v1.6.0)
+# THÔNG BÁO PHÁT HÀNH — Danh mục đề tài DATN (bản 04/09/2026 · hệ thống v1.10.0)
 
 **Đồ án tốt nghiệp HK1 2026-2027 · Nhóm A (Digital IC/FPGA/ASIC) · Nhóm B (Polar Code)**
 
@@ -10,7 +10,7 @@ Giảng viên hướng dẫn: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Đi
 Gửi các bạn sinh viên,
 
 Danh mục đề tài và phiếu đăng ký DATN phát hành kèm thông báo này là **bản chính thức duy nhất**
-(header tài liệu ghi "Phiên bản 1.6.0 · 2026-08-23"). Bản này **thay thế mọi bản** các bạn có thể đã nhận trước đó.
+(header tài liệu ghi "Phiên bản 1.10.0 · 2026-09-04"). Bản này **thay thế mọi bản** các bạn có thể đã nhận trước đó.
 Ba điều cần biết:
 
 **1. Mã đề tài chuẩn.** Mỗi đề tài có **mã chuẩn** dạng `Family-TypeNN` (ví dụ `A4-T01`) dùng thống nhất

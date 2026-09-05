@@ -338,6 +338,38 @@ for cpath in cohorts:
         if g.get("week_end", 0) > (dw or 0):
             err(f"{name}: Gate {g.get('gate')} kết ở tuần {g.get('week_end')} — vượt quá {dw} tuần của khóa")
 
+# ---- nhãn phiên bản: một con số, khai ở nhiều nơi thì phải trùng nhau ----
+vpath = BASE / "VERSION"
+if not vpath.is_file():
+    err("Thiếu file VERSION ở gốc repo.")
+else:
+    VER = vpath.read_text(encoding="utf-8").strip()
+    if not re.fullmatch(r"\d+\.\d+\.\d+", VER):
+        err(f"VERSION '{VER}' không đúng dạng X.Y.Z")
+    for nm, doc in (("project_portfolio.json", pf), ("readiness_rubrics.json", rr),
+                    ("milestone_gates.json", mg), ("research_packs.json", rp)):
+        if doc and (doc.get("meta", {}).get("version") != VER):
+            err(f"{nm}: meta.version = {doc.get('meta', {}).get('version')!r} ≠ VERSION {VER!r}")
+    for co_path in cohorts:
+        co_meta = json.loads(co_path.read_text(encoding="utf-8")).get("meta", {})
+        if co_meta.get("version") and co_meta["version"] != VER:
+            err(f"{co_path.name}: meta.version = {co_meta['version']!r} ≠ VERSION {VER!r}")
+    # tài liệu viết tay có in nhãn phiên bản ở phần đầu
+    for rel, hint in (("implementation-notes.md", "Phiên bản hệ thống"),
+                      ("00_START_HERE/README.md", "Phiên bản hệ thống"),
+                      ("README.md", "phiên bản"),
+                      ("CITATION.cff", "version:")):
+        f = BASE / rel
+        if not f.is_file():
+            warn(f"{rel}: không tìm thấy (bỏ qua kiểm nhãn phiên bản)")
+            continue
+        head = f.read_text(encoding="utf-8", errors="replace")[:1200]
+        found = re.findall(r"\b\d+\.\d+\.\d+\b", head)
+        if not found:
+            warn(f"{rel}: không thấy nhãn phiên bản ở phần đầu (mong đợi cạnh '{hint}')")
+        elif VER not in found:
+            err(f"{rel}: phần đầu ghi phiên bản {', '.join(sorted(set(found)))} ≠ VERSION {VER}")
+
 print("=" * 56)
 if errors:
     print(f"VALIDATION FAIL — {len(errors)} lỗi:")

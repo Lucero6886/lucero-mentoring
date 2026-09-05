@@ -98,4 +98,4 @@ Nếu tuần nào em cũng trả lời được bốn câu này bằng bằng ch
 
 ---
 
-*Trang tổng quan đề tài: [`Topic_Guides/B5/B5-T01.md`](../../Topic_Guides/B5/B5-T01.md) · Lộ trình: `ROADMAP.md` · Cửa: `MILESTONE-GATES.md` · Thí nghiệm: `EXPERIMENTS.md`*
+*Trang tổng quan đề tài: [`02_Project_Portfolio/Topic_Guides/B5/B5-T01.md`](../../Topic_Guides/B5/B5-T01.md) · Lộ trình: `ROADMAP.md` · Cửa: `MILESTONE-GATES.md` · Thí nghiệm: `EXPERIMENTS.md`*

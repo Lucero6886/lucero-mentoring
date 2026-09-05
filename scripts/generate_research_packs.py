@@ -85,7 +85,8 @@ def guide_page(p, g, lv, rp, deep_exists):
         f"đều đi qua. Phần riêng của đề tài này nằm ở mục *Sản phẩm phải làm ra*.\n")
     deep = (f"\n## Hồ sơ thực thi chi tiết\n\nĐề tài này có **hồ sơ sâu** gồm lộ trình 15 tuần, "
             f"điều kiện qua từng cửa, kế hoạch thí nghiệm và phiếu đăng ký:\n"
-            f"**→ [`Research_Packs/{p['code']}/START-HERE.md`](../../Research_Packs/{p['code']}/START-HERE.md)**\n"
+            f"**→ [`02_Project_Portfolio/Research_Packs/{p['code']}/START-HERE.md`]"
+            f"(../../Research_Packs/{p['code']}/START-HERE.md)**\n"
             if deep_exists else "")
     rq = (f"\n**Câu hỏi nghiên cứu:** {p['research_question']}\n" if p.get("research_question") else "")
     return f"""# {p['code']} — {p['title_vi']}
@@ -446,7 +447,7 @@ Nếu tuần nào em cũng trả lời được bốn câu này bằng bằng ch
 
 ---
 
-*Trang tổng quan đề tài: [`Topic_Guides/{p['group']}/{p['code']}.md`](../../Topic_Guides/{p['group']}/{p['code']}.md) · Lộ trình: `ROADMAP.md` · Cửa: `MILESTONE-GATES.md` · Thí nghiệm: `EXPERIMENTS.md`*
+*Trang tổng quan đề tài: [`02_Project_Portfolio/Topic_Guides/{p['group']}/{p['code']}.md`](../../Topic_Guides/{p['group']}/{p['code']}.md) · Lộ trình: `ROADMAP.md` · Cửa: `MILESTONE-GATES.md` · Thí nghiệm: `EXPERIMENTS.md`*
 """
 
 

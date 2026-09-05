@@ -27,7 +27,7 @@ Mọi thứ khác — 5 catalog, danh mục cohort, phiếu, trang web, sheet Po
 cd "EEE Projects"
 
 python3 scripts/validate_portfolio.py              # 1. BẮT BUỘC PASS trước khi đi tiếp
-python3 scripts/generate_catalogs.py --docx --pdf  # 2. sinh 7 view + PDF danh mục
+python3 scripts/generate_catalogs.py --docx --pdf  # 2. sinh danh mục, phiếu và PDF
 python3 scripts/generate_site.py                   # 3. sinh docs/index.html (khi sửa dữ liệu đề tài)
 python3 scripts/build_release.py                   # 5. đóng gói dist/ + ZIP (khi phát hành mốc)
 ```

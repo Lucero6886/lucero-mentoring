@@ -17,8 +17,8 @@ authors:
     alias: "Lucero Dinh"
     email: "nam.dinhvan@phenikaa-uni.edu.vn"
     affiliation: "Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa"
-version: "1.9.0"
-date-released: "2026-09-02"
+version: "1.10.0"
+date-released: "2026-09-04"
 license:
   - CC-BY-NC-SA-4.0
   - MIT

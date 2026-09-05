@@ -43,7 +43,7 @@ tốt (ai cũng biết mình được đánh giá bằng gì); công việc đan
 | Danh mục, phiếu **trống**, bản đồ đề tài, trang web catalog | Đây là thứ sinh viên cần để chọn |
 | `01_Governance/` — sổ tay, thỏa thuận, quy tắc AI | Luật chơi phải minh bạch trước khi ai đó tham gia |
 | `10_Documentation/` — hướng dẫn theo vai trò | Ai cũng biết mình phải làm gì |
-| `04_Project_Template/` — 15 biểu mẫu **trống** | Sinh viên copy về repo riêng để dùng |
+| `04_Project_Template/` — 20 biểu mẫu **trống** | Sinh viên copy về repo riêng để dùng |
 | `scripts/` + `tests/` | Chứng minh danh mục sinh tự động, không phải gõ tay |
 
 **Không bao giờ có trên repo:** phiếu đã điền · họ tên kèm mã số sinh viên · điểm, kết quả đánh giá năng lực ·

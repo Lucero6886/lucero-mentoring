@@ -1,7 +1,7 @@
 {
  "meta": {
-  "version": "1.9.0",
-  "updated": "2026-09-02",
+  "version": "1.10.0",
+  "updated": "2026-09-04",
   "program": "Engineering & Research Mentoring Program (Lucero)",
   "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
   "purpose": "Lớp thực thi cho từng đề tài. project_portfolio.json trả lời 'có những đề tài nào'; file này trả lời 'làm đề tài đó cụ thể ra sao'. Từ 1.9.0 phủ đủ 105 đề tài; 13 đề tài có thêm lớp sâu (depth='full') với câu hỏi nghiên cứu, bằng chứng và câu hỏi mentor riêng.",

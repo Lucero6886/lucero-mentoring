@@ -10,7 +10,7 @@
 
 **Đồ án tốt nghiệp - 15 tuần dự kiến 07/09/2026 đến 19/12/2026**
 
-Engineering & Research Mentoring Program | Version 1.6.0 | 23/08/2026
+Engineering & Research Mentoring Program | Version 1.10.0 | 04/09/2026
 
 > 
 | **Tài liệu này dùng cho cohort HK1 2026-2027. Các deadline hành chính chính thức phải luôn đối chiếu thông báo của Nhà trường/Khoa.** |

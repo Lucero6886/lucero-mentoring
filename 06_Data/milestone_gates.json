@@ -1,7 +1,7 @@
 {
  "meta": {
-  "version": "1.9.0",
-  "updated": "2026-09-02",
+  "version": "1.10.0",
+  "updated": "2026-09-04",
   "program": "Engineering & Research Mentoring Program (Lucero)",
   "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
   "notes": "Nguồn chuẩn Gate 1-6. Khung tiến độ là TƯƠNG ĐỐI: mọi mốc tính theo số tuần kể từ ngày sinh viên chính thức nhận đề tài, dùng chung cho mọi khóa. Ngày cụ thể của một khóa được suy ra từ start_date trong cohort_*.json bằng scripts/cohort_schedule.py — không lưu ngày ở file này. Từ 1.8.0 có thêm 'research_ladder' G0–G7: không phải hệ gate thứ hai, mà là mô tả chi tiết hơn cái mà từng gate đòi hỏi khi đề tài đi tới mức nghiên cứu."

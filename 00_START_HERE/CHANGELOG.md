@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.10.0 — Viết lại tài liệu hệ thống · đóng ba lớp lỗi lệch nhãn · 2026-09-04
+
+Yêu cầu của chủ dự án: *"rà soát cập nhật toàn bộ dự án và file implementation-notes để mentor nắm bắt toàn bộ dự án từ bản chất đến triển khai"*. Rà soát bằng máy trước khi viết, và chính cuộc rà soát đó lộ ra ba nguồn lệch mà mắt người khó thấy.
+
+**Ba lớp lỗi được đóng bằng máy, không bằng lời nhắc:**
+
+1. **Nhãn phiên bản trong sáu file `.docx` chính sách** vẫn ghi `Version 1.6.0` trong khi hệ thống đã ở 1.9.0 — chữ soạn tay trong Word, nằm ngoài tầm với của mọi script. Đây là lần thứ hai lỗi này xảy ra (lần đầu ở v1.4.0). Thêm **`scripts/sync_docx_version.py`** đọc `VERSION` và `meta.updated` rồi viết lại đúng cụm nhãn trong `.docx`; chạy trước `export_governance_md.py`.
+2. **`implementation-notes.html` là bản soạn tay song song với `.md`** và đã lệch: bản HTML còn ghi 1.4.0 khi bản Markdown đã ở 1.5.1. Thêm **`scripts/generate_notes.py`** — từ nay `.md` là bản gốc, `.html` là bản sinh, dùng chung phong cách với hai trang trong `docs/` qua `site_style.py`.
+3. **`FILE_MANIFEST.md` viết tay** liệt kê file đã xóa và bỏ sót cả lớp `Topic_Guides/` lẫn `Research_Packs/`. Thêm **`scripts/generate_manifest.py`** sinh bản đồ file từ chính cây thư mục; phần viết tay chỉ còn *mục đích* của mỗi thư mục.
+
+**Validator nay kiểm cả nhãn phiên bản.** So `VERSION` với `meta.version` của năm file dữ liệu và với phần đầu của `README.md`, `00_START_HERE/README.md`, `implementation-notes.md`, `CITATION.cff`. Đã chạy negative test: đổi `VERSION` thành 9.9.9 → 9 lỗi; sửa nhãn trong README → bắt đúng dòng. Lớp lỗi "một con số khai ở nhiều nơi rồi lệch nhau" từ nay là lỗi validator, không còn là việc phải nhớ.
+
+**`implementation-notes.md` viết lại từ đầu** — từ 94 KB xuống 20 KB, và đọc được. Bản cũ trộn lẫn trạng thái hiện tại với toàn bộ lịch sử: sổ rủi ro của mọi phiên bản, mười mục UNRESOLVED trong đó bảy đã đóng, changelog trùng với `CHANGELOG.md`, và một mục "việc cần làm NGAY trong cửa sổ 23/08 → 07/09" đã hết hạn. Bản mới chỉ mô tả **trạng thái hiện tại**, theo mạch *bản chất → từ điển → kiến trúc → mô hình dữ liệu → chuỗi sinh → vận hành → triển khai → công thức từng việc → bất biến → hạn chế*, mở đầu bằng bảng "anh đang cần gì thì đọc mục nào". Lịch sử để nguyên ở `CHANGELOG.md` — đúng chỗ của nó.
+
+**Dọn tài liệu điều hướng:** `AUDIT_REPORT.md` và `FINAL_SYSTEM_AUDIT.md` là hai bản kiểm điểm tại thời điểm 23/08, để ở gốc kho thì dễ bị đọc như tình trạng hiện tại — chuyển vào `99_Archive/` kèm ngày. `00_START_HERE/README.md` viết lại theo bảng "vào đâu trước". Sửa vài số đếm ghi cứng đã sai: "7 view" (nay nhiều hơn), "15 biểu mẫu" (nay 20). `RELEASE_NOTE` đồng bộ nhãn ở cả `.md` lẫn `.docx`.
+
+**Nhãn đường dẫn trong hai lớp tài liệu** ghi đủ từ gốc kho (`02_Project_Portfolio/Topic_Guides/...`) thay vì đường dẫn cụt, để người đọc trên GitHub biết file nằm ở đâu.
+
+**Đã kiểm:** validator PASS 105 đề tài · 105 gói · nhãn phiên bản đồng bộ ở 10 nơi · 0 link markdown hỏng trên 290 tài liệu · sinh lại hai lần không lệch một byte · trang HTML dựng và chụp lại để soi bố cục · PDF danh mục dựng lại ở 1.10.0.
+
 ## v1.9.0 — Lớp thực thi phủ đủ 105 đề tài · trang hướng dẫn chọn đề tài · 2026-09-02
 
 Chủ dự án đưa vào gói `Research_Program_Package_v2_105_Topics` (863 file, phủ đủ 105 đề tài theo đúng mã chuẩn của hệ thống) cùng một trang `guidenotes.html` dành cho sinh viên. Lần này **không có xung đột mã**: gói v2 được dựng từ chính `Ban_do_de_tai.md` v1.7.0 và tự khai rằng `project_portfolio.json` là nguồn chuẩn.

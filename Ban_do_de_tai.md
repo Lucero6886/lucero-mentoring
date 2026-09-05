@@ -1,6 +1,6 @@
 # Bản đồ 105 đề tài & cách sử dụng hệ thống
 
-**Engineering & Research Mentoring Program (Lucero)** · Phiên bản hệ thống 1.9.0 · 2026-09-02
+**Engineering & Research Mentoring Program (Lucero)** · Phiên bản hệ thống 1.10.0 · 2026-09-04
 Tác giả & mentor: ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
 Bản web (mở từ điện thoại, chia sẻ được): https://claude.ai/code/artifact/68a2de47-bc1e-41cc-b588-cd34ffd90c90
 
@@ -374,4 +374,4 @@ Nhìn xa hơn một học kỳ, trục B chính là **một chương trình nghi
 | Hiểu kiến trúc & quyết định thiết kế của hệ thống | `implementation-notes.md` / `.html` |
 | Triết lý giáo dục gốc | `01_Governance/Master_Mentoring_Handbook.docx` |
 
-*Tài liệu sinh từ nguồn chuẩn v1.9.0 (2026-09-02) — dữ liệu đổi thì chạy lại `python3 scripts/generate_ban_do.py`.*
+*Tài liệu sinh từ nguồn chuẩn v1.10.0 (2026-09-04) — dữ liệu đổi thì chạy lại `python3 scripts/generate_ban_do.py`.*
