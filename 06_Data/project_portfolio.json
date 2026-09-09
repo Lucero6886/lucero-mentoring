@@ -537,7 +537,7 @@
    "code": "A2-R01",
    "family": "A2",
    "type": "R",
-   "title_vi": "Hardware design-space exploration cho fixed-point datapath",
+   "title_vi": "Khảo sát không gian thiết kế phần cứng cho datapath fixed-point",
    "title_en": "Hardware Design-Space Exploration for Fixed-Point Datapaths",
    "min_level": 4,
    "prerequisites": "A2-T-level baseline; scripting; controlled experiments.",
@@ -549,7 +549,8 @@
     "A2-T*"
    ],
    "career_relevance": "DSP hardware / datapath design; nền số học cho FPGA-ASIC.",
-   "tools": "Verilog/SystemVerilog; Python/MATLAB; FPGA toolchain; Yosys/ASIC flow khi mở rộng."
+   "tools": "Verilog/SystemVerilog; Python/MATLAB; FPGA toolchain; Yosys/ASIC flow khi mở rộng.",
+   "title_prev_vi": "Hardware design-space exploration cho fixed-point datapath"
   },
   {
    "code": "A3-P01",
@@ -573,7 +574,7 @@
    "code": "A3-P02",
    "family": "A3",
    "type": "P",
-   "title_vi": "FPGA interfacing với peripheral",
+   "title_vi": "Thiết kế giao tiếp giữa FPGA và thiết bị ngoại vi",
    "title_en": "FPGA Interfacing with a Peripheral",
    "min_level": 1,
    "prerequisites": "RTL; basic protocol.",
@@ -585,7 +586,8 @@
     "A1-P*"
    ],
    "career_relevance": "FPGA system engineer.",
-   "tools": "FPGA vendor tools; Verilog/SystemVerilog; ModelSim/Questa/Icarus/Verilator tùy nền tảng; logic analyzer khi có."
+   "tools": "FPGA vendor tools; Verilog/SystemVerilog; ModelSim/Questa/Icarus/Verilator tùy nền tảng; logic analyzer khi có.",
+   "title_prev_vi": "FPGA interfacing với peripheral"
   },
   {
    "code": "A3-P03",
@@ -650,7 +652,7 @@
    "code": "A3-T02",
    "family": "A3",
    "type": "T",
-   "title_vi": "Hardware/software co-verification cho hệ thống FPGA",
+   "title_vi": "Xây dựng quy trình đồng kiểm chứng phần cứng–phần mềm cho hệ thống FPGA",
    "title_en": "Hardware/Software Co-Verification for an FPGA System",
    "min_level": 2,
    "prerequisites": "Python/MATLAB + RTL + FPGA.",
@@ -663,7 +665,8 @@
    ],
    "career_relevance": "FPGA system engineer.",
    "tools": "FPGA vendor tools; Verilog/SystemVerilog; ModelSim/Questa/Icarus/Verilator tùy nền tảng; logic analyzer khi có.",
-   "mvt": "Golden model + sinh vector tự động + so khớp RTL/FPGA tự động trên tối thiểu một IP, kèm báo cáo mismatch tái lập được."
+   "mvt": "Golden model + sinh vector tự động + so khớp RTL/FPGA tự động trên tối thiểu một IP, kèm báo cáo mismatch tái lập được.",
+   "title_prev_vi": "Hardware/software co-verification cho hệ thống FPGA"
   },
   {
    "code": "A4-P01",
@@ -765,7 +768,7 @@
    "code": "A4-R01",
    "family": "A4",
    "type": "R",
-   "title_vi": "Design-space exploration cho một Digital IP",
+   "title_vi": "Khảo sát không gian thiết kế PPA cho một Digital IP",
    "title_en": "Design-Space Exploration for a Digital IP",
    "min_level": 4,
    "prerequisites": "Reproducible ASIC flow + scripting + research readiness.",
@@ -777,7 +780,8 @@
     "A4-T01"
    ],
    "career_relevance": "ASIC physical design; RTL-to-GDSII engineer.",
-   "tools": "WSL/Linux; Yosys; LibreLane/OpenROAD; KLayout; PDK phù hợp (ví dụ Sky130 khi dùng open-source flow)."
+   "tools": "WSL/Linux; Yosys; LibreLane/OpenROAD; KLayout; PDK phù hợp (ví dụ Sky130 khi dùng open-source flow).",
+   "title_prev_vi": "Design-space exploration cho một Digital IP"
   },
   {
    "code": "A5-P01",
@@ -799,7 +803,7 @@
    "code": "A5-P02",
    "family": "A5",
    "type": "P",
-   "title_vi": "Regression testing cho Digital IP",
+   "title_vi": "Xây dựng bộ kiểm thử hồi quy cho Digital IP",
    "title_en": "Regression Testing for a Digital IP",
    "min_level": 2,
    "prerequisites": "A5-P01 + scripting.",
@@ -811,7 +815,8 @@
     "A5-P01"
    ],
    "career_relevance": "Verification/EDA infrastructure; DevOps cho phần cứng.",
-   "tools": "Git/GitHub; shell/Python; Icarus/Verilator; Yosys; LibreLane/Nix; CI phù hợp."
+   "tools": "Git/GitHub; shell/Python; Icarus/Verilator; Yosys; LibreLane/Nix; CI phù hợp.",
+   "title_prev_vi": "Regression testing cho Digital IP"
   },
   {
    "code": "A5-I01",
@@ -856,7 +861,7 @@
    "code": "A5-T02",
    "family": "A5",
    "type": "T",
-   "title_vi": "Continuous Integration cho dự án RTL/ASIC",
+   "title_vi": "Xây dựng quy trình tích hợp liên tục (CI) cho dự án RTL/ASIC",
    "title_en": "Continuous Integration for RTL/ASIC Projects",
    "min_level": 3,
    "prerequisites": "Git/GitHub; scripting; simulation; synthesis basics.",
@@ -873,13 +878,14 @@
     "HK1_2026_2027": "A7"
    },
    "checkpoints_15w": "W2: CI spec. W5: simulation CI. W8: synthesis/report CI. W11: regression case. W15: documented workflow.",
-   "mvt": "CI-enabled repository; Automated test pipeline; Artifacts/reports; Regression demonstration; Developer guide."
+   "mvt": "CI-enabled repository; Automated test pipeline; Artifacts/reports; Regression demonstration; Developer guide.",
+   "title_prev_vi": "Continuous Integration cho dự án RTL/ASIC"
   },
   {
    "code": "A5-R01",
    "family": "A5",
    "type": "R",
-   "title_vi": "Automated PPA regression cho Digital IC",
+   "title_vi": "Nghiên cứu tự động hóa kiểm thử hồi quy PPA cho Digital IC",
    "title_en": "Automated PPA Regression for Digital IC Development",
    "min_level": 4,
    "prerequisites": "A5-T02 + stable ASIC flow.",
@@ -891,7 +897,8 @@
     "A5-T02"
    ],
    "career_relevance": "Verification/EDA infrastructure; DevOps cho phần cứng.",
-   "tools": "Git/GitHub; shell/Python; Icarus/Verilator; Yosys; LibreLane/Nix; CI phù hợp."
+   "tools": "Git/GitHub; shell/Python; Icarus/Verilator; Yosys; LibreLane/Nix; CI phù hợp.",
+   "title_prev_vi": "Automated PPA regression cho Digital IC"
   },
   {
    "code": "A6-P01",
@@ -1477,7 +1484,7 @@
    "code": "B2-T02",
    "family": "B2",
    "type": "T",
-   "title_vi": "Software-RTL co-verification cho SC Polar decoder",
+   "title_vi": "Xây dựng quy trình đồng kiểm chứng phần mềm–RTL cho bộ giải mã SC Polar",
    "title_en": "Software-RTL Co-Verification for an SC Polar Decoder",
    "min_level": 3,
    "prerequisites": "SC model + RTL modules + scripting.",
@@ -1490,13 +1497,14 @@
    ],
    "career_relevance": "Decoder hardware architecture trên FPGA.",
    "tools": "Python/MATLAB; Verilog/SystemVerilog; simulator; FPGA tools; Git.",
-   "mvt": "Khung co-verification tự động SC software ↔ RTL với regression cho tối thiểu các module f/g/partial-sum và một cấu hình decoder nhỏ."
+   "mvt": "Khung co-verification tự động SC software ↔ RTL với regression cho tối thiểu các module f/g/partial-sum và một cấu hình decoder nhỏ.",
+   "title_prev_vi": "Software-RTL co-verification cho SC Polar decoder"
   },
   {
    "code": "B2-R01",
    "family": "B2",
    "type": "R",
-   "title_vi": "Architecture optimization cho SC decoder",
+   "title_vi": "Nghiên cứu tối ưu kiến trúc bộ giải mã SC Polar",
    "title_en": "Architecture Optimization for an SC Polar Decoder",
    "min_level": 4,
    "prerequisites": "Stable B2-T01-like baseline.",
@@ -1508,7 +1516,8 @@
     "B2-T01"
    ],
    "career_relevance": "Decoder hardware architecture trên FPGA.",
-   "tools": "Python/MATLAB; Verilog/SystemVerilog; simulator; FPGA tools; Git."
+   "tools": "Python/MATLAB; Verilog/SystemVerilog; simulator; FPGA tools; Git.",
+   "title_prev_vi": "Architecture optimization cho SC decoder"
   },
   {
    "code": "B3-P01",
@@ -1532,7 +1541,7 @@
    "code": "B3-I01",
    "family": "B3",
    "type": "I",
-   "title_vi": "Fixed-point implementation của Polar processing elements",
+   "title_vi": "Triển khai fixed-point cho các khối xử lý của bộ giải mã Polar",
    "title_en": "Fixed-Point Implementation of Polar Processing Elements",
    "min_level": 2,
    "prerequisites": "B1 + numerical analysis.",
@@ -1544,7 +1553,8 @@
     "B1-P*"
    ],
    "career_relevance": "Hardware-aware algorithm engineering; fixed-point optimization.",
-   "tools": "Python/MATLAB; RTL/FPGA tools khi cần; scripts sweep và plotting."
+   "tools": "Python/MATLAB; RTL/FPGA tools khi cần; scripts sweep và plotting.",
+   "title_prev_vi": "Fixed-point implementation của Polar processing elements"
   },
   {
    "code": "B3-T01",
@@ -1628,7 +1638,7 @@
    "code": "B4-P02",
    "family": "B4",
    "type": "P",
-   "title_vi": "Reliability ranking dựa trên trị tuyệt đối LLR",
+   "title_vi": "Xếp hạng độ tin cậy dựa trên trị tuyệt đối LLR",
    "title_en": "Reliability Ranking Based on LLR Magnitude",
    "min_level": 2,
    "prerequisites": "SC baseline + basic statistics.",
@@ -1640,7 +1650,8 @@
     "B0-P03"
    ],
    "career_relevance": "Nghiên cứu thuật toán decoding (SC-Flip/reliability).",
-   "tools": "Python/MATLAB; Git; plotting; RTL/FPGA tùy scope."
+   "tools": "Python/MATLAB; Git; plotting; RTL/FPGA tùy scope.",
+   "title_prev_vi": "Reliability ranking dựa trên trị tuyệt đối LLR"
   },
   {
    "code": "B4-I01",
@@ -1687,7 +1698,7 @@
    "code": "B4-T02",
    "family": "B4",
    "type": "T",
-   "title_vi": "Reliability-based candidate ranking cho SC-Flip",
+   "title_vi": "Xếp hạng ứng viên theo độ tin cậy cho bộ giải mã SC-Flip",
    "title_en": "Reliability-Based Candidate Ranking for SC-Flip Polar Decoding",
    "min_level": 3,
    "prerequisites": "Stable SCF framework.",
@@ -1704,13 +1715,14 @@
     "HK1_2026_2027": "B8"
    },
    "checkpoints_15w": "W2: error definition. W5: baseline ranking. W8: alternative metric. W11: SCF integration. W15: final comparison.",
-   "mvt": "Ranking dataset; Baseline + proposed/simple metrics; Top-k results; BLER vs attempts; Complexity discussion."
+   "mvt": "Ranking dataset; Baseline + proposed/simple metrics; Top-k results; BLER vs attempts; Complexity discussion.",
+   "title_prev_vi": "Reliability-based candidate ranking cho SC-Flip"
   },
   {
    "code": "B4-R01",
    "family": "B4",
    "type": "R",
-   "title_vi": "Improved reliability metric cho SCF",
+   "title_vi": "Nghiên cứu thước đo độ tin cậy cải tiến cho giải mã SC-Flip",
    "title_en": "Improved Reliability Metrics for SC-Flip Decoding",
    "min_level": 4,
    "prerequisites": "B4-T-level baseline + literature skill.",
@@ -1722,7 +1734,8 @@
     "B4-T*"
    ],
    "career_relevance": "Nghiên cứu thuật toán decoding (SC-Flip/reliability).",
-   "tools": "Python/MATLAB; Git; plotting; RTL/FPGA tùy scope."
+   "tools": "Python/MATLAB; Git; plotting; RTL/FPGA tùy scope.",
+   "title_prev_vi": "Improved reliability metric cho SCF"
   },
   {
    "code": "B5-P01",
@@ -1851,7 +1864,7 @@
    "code": "B6-I01",
    "family": "B6",
    "type": "I",
-   "title_vi": "Lightweight ML classifier cho unreliable-frame detection",
+   "title_vi": "Xây dựng bộ phân loại học máy gọn nhẹ để phát hiện frame không tin cậy",
    "title_en": "Lightweight ML Classifier for Unreliable-Frame Detection",
    "min_level": 3,
    "prerequisites": "B5 threshold baseline + ML basics.",
@@ -1863,13 +1876,14 @@
     "B5-P01"
    ],
    "career_relevance": "ML-assisted communications; hardware-aware ML.",
-   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp."
+   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp.",
+   "title_prev_vi": "Lightweight ML classifier cho unreliable-frame detection"
   },
   {
    "code": "B6-T01",
    "family": "B6",
    "type": "T",
-   "title_vi": "Lightweight neural-assisted unreliable-frame detector",
+   "title_vi": "Thiết kế bộ phát hiện frame không tin cậy có mạng neural gọn nhẹ hỗ trợ",
    "title_en": "Lightweight Neural-Assisted Unreliable-Frame Detector",
    "min_level": 4,
    "prerequisites": "B5-T-level baseline + ML + data hygiene.",
@@ -1882,13 +1896,14 @@
    ],
    "career_relevance": "ML-assisted communications; hardware-aware ML.",
    "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp.",
-   "mvt": "Detector heuristic + classical ML baseline hoàn chỉnh, so sánh công bằng trên cùng dữ liệu/seed; NN nhẹ chỉ thêm sau khi baseline chốt."
+   "mvt": "Detector heuristic + classical ML baseline hoàn chỉnh, so sánh công bằng trên cùng dữ liệu/seed; NN nhẹ chỉ thêm sau khi baseline chốt.",
+   "title_prev_vi": "Lightweight neural-assisted unreliable-frame detector"
   },
   {
    "code": "B6-T02",
    "family": "B6",
    "type": "T",
-   "title_vi": "Neural-assisted candidate ranking cho SC-Flip Polar decoder",
+   "title_vi": "Xếp hạng ứng viên có mạng neural hỗ trợ cho bộ giải mã Polar SC-Flip",
    "title_en": "Lightweight Neural-Assisted Candidate Ranking for SC-Flip Polar Decoding",
    "min_level": 4,
    "prerequisites": "B4 stable + ML basics + research readiness.",
@@ -1905,13 +1920,14 @@
     "HK1_2026_2027": "B10"
    },
    "checkpoints_15w": "W2: SCF fixed. W5: dataset + heuristic. W8: model. W11: robust evaluation. W15: hardware-aware comparison.",
-   "mvt": "Reproducible dataset split; Heuristic baseline; Lightweight model; Top-k/BLER/complexity comparison; Hardware-feasibility note."
+   "mvt": "Reproducible dataset split; Heuristic baseline; Lightweight model; Top-k/BLER/complexity comparison; Hardware-feasibility note.",
+   "title_prev_vi": "Neural-assisted candidate ranking cho SC-Flip Polar decoder"
   },
   {
    "code": "B6-R01",
    "family": "B6",
    "type": "R",
-   "title_vi": "Hardware-aware neural-assisted adaptive Polar decoder",
+   "title_vi": "Nghiên cứu bộ giải mã Polar thích ứng có mạng neural hỗ trợ theo ràng buộc phần cứng",
    "title_en": "Hardware-Aware Neural-Assisted Adaptive Polar Decoder",
    "min_level": 5,
    "prerequisites": "B5/B6 baseline; strong research ownership; hardware awareness.",
@@ -1923,13 +1939,14 @@
     "B5-T02"
    ],
    "career_relevance": "ML-assisted communications; hardware-aware ML.",
-   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp."
+   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp.",
+   "title_prev_vi": "Hardware-aware neural-assisted adaptive Polar decoder"
   },
   {
    "code": "B6-R02",
    "family": "B6",
    "type": "R",
-   "title_vi": "Algorithm-hardware co-design của neural-assisted Polar decoder",
+   "title_vi": "Đồng thiết kế thuật toán–phần cứng cho bộ giải mã Polar có mạng neural hỗ trợ",
    "title_en": "Algorithm-Hardware Co-Design of a Neural-Assisted Polar Decoder",
    "min_level": 5,
    "prerequisites": "B6-R01-like maturity + RTL/FPGA capability.",
@@ -1941,7 +1958,8 @@
     "B6-R01"
    ],
    "career_relevance": "ML-assisted communications; hardware-aware ML.",
-   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp."
+   "tools": "Python; PyTorch/TensorFlow tương đương; baseline scripts; hardware-cost estimation/FPGA tools khi phù hợp.",
+   "title_prev_vi": "Algorithm-hardware co-design của neural-assisted Polar decoder"
   },
   {
    "code": "AB-P01",
@@ -1966,7 +1984,7 @@
    "code": "AB-T01",
    "family": "AB",
    "type": "T",
-   "title_vi": "ASIC feasibility study cho Polar Processing Element",
+   "title_vi": "Đánh giá khả năng triển khai ASIC cho khối xử lý Polar",
    "title_en": "ASIC Feasibility Study of a Polar Processing Element",
    "min_level": 3,
    "prerequisites": "B1 PE + A4 flow.",
@@ -1985,13 +2003,14 @@
     "HK1_2026_2027": "B12"
    },
    "checkpoints_15w": "W2: target block freeze. W5: verified RTL. W8: synthesis/STA. W11: physical flow. W15: PPA + feasibility report.",
-   "mvt": "Verified Polar RTL block; Synthesis/STA reports; Physical layout/GDSII nếu đạt; PPA analysis; ASIC feasibility conclusion."
+   "mvt": "Verified Polar RTL block; Synthesis/STA reports; Physical layout/GDSII nếu đạt; PPA analysis; ASIC feasibility conclusion.",
+   "title_prev_vi": "ASIC feasibility study cho Polar Processing Element"
   },
   {
    "code": "AB-T02",
    "family": "AB",
    "type": "T",
-   "title_vi": "FPGA-to-ASIC evaluation của Polar Encoder",
+   "title_vi": "Đánh giá chuyển từ FPGA sang ASIC cho bộ mã hóa Polar",
    "title_en": "FPGA-to-ASIC Evaluation of a Polar Encoder",
    "min_level": 3,
    "prerequisites": "B1-T01 + A4 basics.",
@@ -2005,13 +2024,14 @@
    ],
    "career_relevance": "Algorithm-hardware co-design; Digital IC x communications research.",
    "tools": "Python/MATLAB; RTL; FPGA; Yosys; LibreLane/OpenROAD; KLayout.",
-   "mvt": "Encoder đã verify + số liệu FPGA + ASIC synthesis/STA cho một cấu hình; bảng so sánh phương pháp đo hai flow."
+   "mvt": "Encoder đã verify + số liệu FPGA + ASIC synthesis/STA cho một cấu hình; bảng so sánh phương pháp đo hai flow.",
+   "title_prev_vi": "FPGA-to-ASIC evaluation của Polar Encoder"
   },
   {
    "code": "AB-T03",
    "family": "AB",
    "type": "T",
-   "title_vi": "FPGA-to-ASIC evaluation của SC Polar Decoder",
+   "title_vi": "Đánh giá chuyển từ FPGA sang ASIC cho bộ giải mã SC Polar",
    "title_en": "FPGA-to-ASIC Evaluation of an SC Polar Decoder",
    "min_level": 4,
    "prerequisites": "B2-T01 + A4; scope control essential.",
@@ -2025,13 +2045,14 @@
    ],
    "career_relevance": "Algorithm-hardware co-design; Digital IC x communications research.",
    "tools": "Python/MATLAB; RTL; FPGA; Yosys; LibreLane/OpenROAD; KLayout.",
-   "mvt": "Một decoder/core subsystem (cho phép N thu gọn) qua cả FPGA và ASIC flow với evidence PPA hai phía."
+   "mvt": "Một decoder/core subsystem (cho phép N thu gọn) qua cả FPGA và ASIC flow với evidence PPA hai phía.",
+   "title_prev_vi": "FPGA-to-ASIC evaluation của SC Polar Decoder"
   },
   {
    "code": "AB-T04",
    "family": "AB",
    "type": "T",
-   "title_vi": "PPA optimization cho fixed-point Polar Processing Element",
+   "title_vi": "Tối ưu PPA cho khối xử lý Polar fixed-point",
    "title_en": "PPA Optimization of a Fixed-Point Polar Processing Element",
    "min_level": 4,
    "prerequisites": "B3 + A4.",
@@ -2045,13 +2066,14 @@
    ],
    "career_relevance": "Algorithm-hardware co-design; Digital IC x communications research.",
    "tools": "Python/MATLAB; RTL; FPGA; Yosys; LibreLane/OpenROAD; KLayout.",
-   "mvt": "Tối thiểu 2 cấu hình bit-width/pipeline của PE qua ASIC flow, kèm bảng PPA và phân tích tác động số học."
+   "mvt": "Tối thiểu 2 cấu hình bit-width/pipeline của PE qua ASIC flow, kèm bảng PPA và phân tích tác động số học.",
+   "title_prev_vi": "PPA optimization cho fixed-point Polar Processing Element"
   },
   {
    "code": "AB-R01",
    "family": "AB",
    "type": "R",
-   "title_vi": "Hardware-aware design-space exploration cho Polar Decoder",
+   "title_vi": "Khảo sát không gian thiết kế theo ràng buộc phần cứng cho bộ giải mã Polar",
    "title_en": "Hardware-Aware Design-Space Exploration for Polar Decoding",
    "min_level": 5,
    "prerequisites": "Strong B + A4/A5; research ownership.",
@@ -2063,7 +2085,8 @@
     "AB-T*"
    ],
    "career_relevance": "Algorithm-hardware co-design; Digital IC x communications research.",
-   "tools": "Python/MATLAB; RTL; FPGA; Yosys; LibreLane/OpenROAD; KLayout."
+   "tools": "Python/MATLAB; RTL; FPGA; Yosys; LibreLane/OpenROAD; KLayout.",
+   "title_prev_vi": "Hardware-aware design-space exploration cho Polar Decoder"
   },
   {
    "code": "AB-T05",
@@ -2151,8 +2174,8 @@
   }
  ],
  "meta": {
-  "version": "1.10.0",
-  "updated": "2026-09-04",
+  "version": "1.11.0",
+  "updated": "2026-09-09",
   "program": "Engineering & Research Mentoring Program (Lucero)",
   "author": "ThS. Đinh Văn Nam (Mr. Lucero Dinh) — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa",
   "prereq_codes_convention": "Mỗi phần tử là mã chính xác (vd 'A5-T02') hoặc pattern family-type 'A1-P*' nghĩa là hoàn thành ít nhất một đề tài P của family A1 hoặc năng lực tương đương có evidence.",

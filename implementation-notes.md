@@ -1,7 +1,7 @@
 # Tài liệu hệ thống — Engineering & Research Mentoring Program (Lucero)
 
 **ThS. Đinh Văn Nam (Mr. Lucero Dinh)** — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
-Phiên bản hệ thống **1.10.0** · cập nhật **04/09/2026**
+Phiên bản hệ thống **1.11.0** · cập nhật **09/09/2026**
 
 > Đây là tài liệu dành cho **người vận hành**: mentor, giảng viên đồng hướng dẫn, và bất kỳ ai
 > (kể cả một phiên AI về sau) phải sửa hệ thống này mà không được làm hỏng nó. Nó đi từ **bản chất**

@@ -1,7 +1,7 @@
 # Engineering & Research Mentoring Program (Lucero)
 
 **ThS. Đinh Văn Nam (Mr. Lucero Dinh)** — Khoa Điện–Điện tử, Trường Kỹ thuật, Đại học Phenikaa
-Phiên bản hệ thống **1.10.0** · cập nhật **04/09/2026**
+Phiên bản hệ thống **1.11.0** · cập nhật **09/09/2026**
 
 Bộ hồ sơ vận hành mentoring cho bốn mức tham gia — **P** project môn học · **I** thực tập ·
 **T** đồ án tốt nghiệp · **R** nghiên cứu khoa học — trên **105 đề tài** thuộc **16 nhóm chuyên môn**.

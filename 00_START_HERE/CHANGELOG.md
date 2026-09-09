@@ -1,5 +1,23 @@
 # Changelog
 
+## v1.11.0 — Sửa 23 tên đề tài lẫn lộn Việt–Anh · 2026-09-09
+
+Chủ dự án đọc danh mục và hỏi vì sao `B6-T02` lại là *"Neural-assisted candidate ranking cho SC-Flip Polar decoder"* — cụm danh từ chính hoàn toàn tiếng Anh, chỉ mỗi chữ "cho" là tiếng Việt. Không phải tên tiếng Việt, cũng chẳng phải tên tiếng Anh.
+
+Rà cả 105 tên thì thấy **23 đề tài cùng lỗi**, tập trung ở `B4`, `B6` và `AB`. Ba trường hợp nặng nhất không có lấy một chữ tiếng Việt: `B6-T01` *"Lightweight neural-assisted unreliable-frame detector"*, `B6-R01` *"Hardware-aware neural-assisted adaptive Polar decoder"*, và `AB-T01`. Nguyên nhân: khi dựng danh mục, tên các đề tài nâng cao được lấy gần như nguyên văn từ thuật ngữ tiếng Anh rồi chỉ chèn một giới từ tiếng Việt vào giữa.
+
+**Cách sửa:** giữ nguyên thuật ngữ đã quen dùng trong ngành (FPGA, ASIC, RTL, PPA, LLR, SC-Flip, Polar, fixed-point, Digital IP, CI), chỉ dựng lại **khung câu** bằng tiếng Việt — mở đầu bằng một động từ chỉ việc phải làm: *Thiết kế · Xây dựng · Nghiên cứu · Khảo sát · Tối ưu · Đánh giá · Triển khai · Đồng thiết kế · Xếp hạng*. Ví dụ `B6-T02` → **"Xếp hạng ứng viên có mạng neural hỗ trợ cho bộ giải mã Polar SC-Flip"**.
+
+**Mã đề tài không đổi** — bất biến số 2 — nên phiếu đăng ký và mọi tham chiếu đang lưu hành vẫn dùng được. Tên cũ được giữ lại ở trường mới `title_prev_vi` của 23 đề tài để tra ngược khi sinh viên cầm bản in cũ.
+
+**Không dùng bộ tên v2** trong `09_References/TITLE-REVIEW-v2.md` để thay thế: nó vẫn để nguyên tiếng Anh ở vài chỗ (`A5-R01` v2 là *"Nghiên cứu automated PPA regression cho Digital IC"*, `B6-R01` v2 là *"Nghiên cứu hardware-aware neural-assisted adaptive Polar decoder"*). Bảng 23 tên là viết mới, chủ dự án duyệt trước khi áp dụng.
+
+Năm tên khác bị phép soát đánh dấu nhưng kiểm tay thì đúng, giữ nguyên: `A6-P03`, `A7-P01`, `A7-P03`, `AB-R02`, `AB-R03`.
+
+**Ghi chú vận hành:** mount ổ đĩa của máy chủ dự án hỏng giữa chừng nên đợt này chỉ **nguồn chuẩn** được ghi về máy (5 file `06_Data/*.json`, `VERSION`, và các tài liệu viết tay có in nhãn phiên bản). Toàn bộ **bản sinh** — danh mục, phiếu, PDF, hai trang web, 105 trang hướng dẫn, 13 hồ sơ sâu, 6 bản `.md` chính sách, bản đồ file — được dựng lại bằng chuỗi lệnh §5.1 chạy ngay trên máy. Đây đúng là tình huống kiến trúc "một nguồn chuẩn, mọi thứ khác sinh lại được" sinh ra để xử lý: mất bản sinh không mất gì cả.
+
+**Đã kiểm:** validator PASS 105 đề tài · 105 gói · nhãn phiên bản đồng bộ · danh mục, phiếu, PDF 17 trang, hai trang web và 105 trang hướng dẫn đều sinh lại ở 1.11.0.
+
 ## v1.10.0 — Viết lại tài liệu hệ thống · đóng ba lớp lỗi lệch nhãn · 2026-09-04
 
 Yêu cầu của chủ dự án: *"rà soát cập nhật toàn bộ dự án và file implementation-notes để mentor nắm bắt toàn bộ dự án từ bản chất đến triển khai"*. Rà soát bằng máy trước khi viết, và chính cuộc rà soát đó lộ ra ba nguồn lệch mà mắt người khó thấy.
