@@ -18,6 +18,10 @@ Năm tên khác bị phép soát đánh dấu nhưng kiểm tay thì đúng, gi�
 
 **Đã kiểm:** validator PASS 105 đề tài · 105 gói · nhãn phiên bản đồng bộ · danh mục, phiếu, PDF 17 trang, hai trang web và 105 trang hướng dẫn đều sinh lại ở 1.11.0.
 
+**Thêm `10_Documentation/SETUP-GUIDE.md` — hướng dẫn sinh viên dựng môi trường.** Trước đây chương trình nói rõ sinh viên phải nộp bằng chứng gì, nhưng không nói *dựng cái bàn làm việc* thế nào; mỗi khóa lại mất một hai tuần đầu cho việc cài đặt, và mentor trả lời đi trả lời lại cùng những câu hỏi. Tài liệu chia hai lớp: **phần chung** ai cũng làm (WSL2, hai thế giới file của WSL và quy tắc đặt repo theo nhánh, Git/GitHub bằng SSH, `venv` và `requirements.txt`, cấu trúc repo, kỷ luật thí nghiệm với một script mẫu có seed và siêu dữ liệu) cộng **bốn phần nhánh** (PCB/KiCad · RTL→FPGA→ASIC · ESP8266/IoT · mô phỏng Polar), rồi bảng sự cố thường gặp và checklist nghiệm thu.
+
+Viết theo đúng thiết bị lab đang có — **Quartus và board Intel/Altera** (không có Xilinx nên không viết Vivado), **ESP8266**, máy đo và làm PCB — nên mọi lệnh đều là thứ sinh viên chạm được. Có ghi thẳng một giới hạn thật để tránh vỡ kế hoạch giữa kỳ: **ESP8266 không đủ RAM và không có FPU cho TensorFlow Lite Micro**, nên đề tài TinyML (`A7-P03`, `A7-T02`) phải đổi sang ESP32 hoặc thu hẹp phạm vi — bàn ngay tuần 1, đừng để tới tuần 8.
+
 ## v1.10.0 — Viết lại tài liệu hệ thống · đóng ba lớp lỗi lệch nhãn · 2026-09-04
 
 Yêu cầu của chủ dự án: *"rà soát cập nhật toàn bộ dự án và file implementation-notes để mentor nắm bắt toàn bộ dự án từ bản chất đến triển khai"*. Rà soát bằng máy trước khi viết, và chính cuộc rà soát đó lộ ra ba nguồn lệch mà mắt người khó thấy.

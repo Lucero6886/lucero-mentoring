@@ -15,6 +15,7 @@ khung tiến độ tính theo **số tuần kể từ ngày sinh viên nhận đ
 |---|---|
 | **Mentor lần đầu đọc hệ thống** | [`implementation-notes.md`](../implementation-notes.md) — từ bản chất tới triển khai |
 | **Sinh viên chọn đề tài** | [trang Guide Notes](https://lucero6886.github.io/lucero-mentoring/guide.html) |
+| **Sinh viên dựng môi trường tuần 1** | [`10_Documentation/SETUP-GUIDE.md`](../10_Documentation/SETUP-GUIDE.md) |
 | **Xem có những đề tài gì** | [trang danh mục](https://lucero6886.github.io/lucero-mentoring/) · [`Ban_do_de_tai.md`](../Ban_do_de_tai.md) |
 | **Làm một đề tài cụ thể** | [`02_Project_Portfolio/Topic_Guides/`](../02_Project_Portfolio/Topic_Guides/README.md) |
 | **Chính sách gốc** | [`01_Governance/Master_Mentoring_Handbook.md`](../01_Governance/Master_Mentoring_Handbook.md) |

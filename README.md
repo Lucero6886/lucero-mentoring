@@ -27,6 +27,7 @@ Mỗi học kỳ mở một đợt (cohort) lấy đề tài từ kho chung này
 | Cách xem | Mở |
 |---|---|
 | **Bắt đầu ở đây nếu chưa biết chọn gì** | [Trang hướng dẫn chọn đề tài](https://lucero6886.github.io/lucero-mentoring/guide.html) |
+| **Dựng môi trường làm việc** — WSL2, Git, Python, và bộ công cụ từng nhánh | [`10_Documentation/SETUP-GUIDE.md`](10_Documentation/SETUP-GUIDE.md) |
 | **Nhanh nhất** — lọc, tìm kiếm trên web | [Trang danh mục](https://lucero6886.github.io/lucero-mentoring/) |
 | **Hiểu bản chất từng nhóm đề tài** — mỗi nhóm dạy gì, mỗi đề tài làm ra sản phẩm gì | [`Ban_do_de_tai.md`](Ban_do_de_tai.md) |
 | **Danh mục đồ án tốt nghiệp kỳ hiện tại** (bản in được) | [`Danh_muc_de_tai_DATN_HK1_2026_2027.pdf`](Danh_muc_de_tai_DATN_HK1_2026_2027.pdf) |
