@@ -21,6 +21,7 @@ Tài liệu chia hai lớp. **Ai cũng phải làm Phần A.** Sau đó chỉ l�
 | **A · Nền chung** | **Mọi sinh viên, không trừ ai** | 3–5 giờ |
 | **B · Điện tử thực hành và PCB** | nhánh `A0` | +3 giờ |
 | **C · RTL → FPGA → ASIC** | nhánh `A1`–`A5` | +4 giờ |
+| ↳ *C7 · board AMD/Xilinx và Vivado* | *chỉ khi board không phải Altera* | *+3 giờ* |
 | **D · Nhúng và IoT với ESP8266** | nhánh `A6`, `A7` | +3 giờ |
 | **E · Mô phỏng Polar** | nhánh `B0`–`B6` | +2 giờ |
 | **F · Sự cố thường gặp** | tra khi kẹt | — |
@@ -34,6 +35,9 @@ Xem [trang hướng dẫn chọn đề tài](https://lucero6886.github.io/lucero
 - Dòng bắt đầu bằng `$` là lệnh gõ trong **terminal Ubuntu (WSL)**.
 - Dòng bắt đầu bằng `PS>` là lệnh gõ trong **PowerShell của Windows**.
 - Khối *"Phải thấy gì"* là kết quả đúng. Không thấy đúng thì **dừng lại**, đừng đi tiếp.
+- Mục nào mở đầu bằng khung **⚠ CHƯA ĐƯỢC KIỂM CHỨNG** thì viết từ tài liệu chính thức của hãng
+  nhưng **chưa chạy thử trên thiết bị thật của lab** — đọc như bản đồ, không như lời cam kết. Mọi
+  mục còn lại đã gõ thật và thấy kết quả thật. Hiện chỉ §C7 (Vivado) mang khung này.
 
 ---
 
@@ -72,7 +76,8 @@ Cả ba **chạy lại được nhiều lần** và có chế độ `--dry-run` 
 > hỏng không biết bắt đầu từ đâu.
 
 **Bốn việc script không làm được**, phải tự làm theo tài liệu: bật ảo hóa trong BIOS · dán khóa SSH
-lên GitHub · cài Quartus (chọn đúng device của board) · cài driver CH340/CP2102 cho ESP8266.
+lên GitHub · cài Quartus (chọn đúng device của board — hoặc Vivado nếu board là AMD/Xilinx, §C7) ·
+cài driver CH340/CP2102 cho ESP8266.
 
 ### Tự động hóa khác tái lập
 
@@ -195,7 +200,7 @@ WSL có **hai hệ thống file riêng biệt**, và để nhầm chỗ sẽ là
 | Nhánh đề tài | Đặt repo ở đâu | Vì sao |
 |---|---|---|
 | `A1`, `A2`, `A5`, `B0`–`B6` | **WSL**: `~/projects/<tên-repo>` | mô phỏng và build chạy hoàn toàn trong Linux |
-| `A3`, `A4` (dùng Quartus) | **Windows**: `C:\Users\<tên>\projects\<tên-repo>` | Quartus là phần mềm Windows, hay lỗi với đường dẫn `\\wsl` |
+| `A3`, `A4` (dùng Quartus **hoặc Vivado**) | **Windows**: `C:\Users\<tên>\projects\<tên-repo>` | cả hai đều là phần mềm Windows, hay lỗi với đường dẫn `\\wsl` |
 | `A0` (KiCad), `A6`, `A7` (ESP8266) | **Windows** | KiCad và việc nạp qua USB đều nằm ở Windows |
 
 Nếu repo ở Windows mà cần chạy công cụ Linux, truy cập qua `/mnt/c/Users/<tên>/projects/...` —
@@ -618,6 +623,17 @@ nạp lên board chạy bằng **Quartus trên Windows**.
 Làm theo thứ tự §C1 → §C6. Riêng **§C6 (Nix + LibreLane)** chỉ cần cho đề tài `A4` và `A5`; nó là
 phần nặng nhất, cần nửa buổi, mạng tốt và 30 GB trống — đừng bắt đầu khi chỉ còn một tiếng rảnh.
 
+**Board của em thuộc hãng nào — tra một lần rồi quên đi:**
+
+| Board trong tay | Làm mục nào | Trạng thái |
+|---|---|---|
+| **Intel/Altera** (DE10-Lite, DE2, DE1-SoC…) — thiết bị của lab, mặc định của chương trình | §C3 → §C4, dùng **Quartus** | đã kiểm trên board thật |
+| **AMD/Xilinx** (Basys 3, Nexys, Arty, Zybo…) | **§C7** thay cho §C3–§C4, dùng **Vivado** | ⚠ chưa kiểm trên board thật |
+
+§C1, §C2, §C5 và §C6 **không phụ thuộc hãng** — ai cũng làm, board nào cũng dùng được. Chỉ ba việc
+khác nhau giữa hai hãng: cài công cụ, cú pháp file gán chân, và chỗ bấm để nạp xuống board. Bảng
+đối chiếu đầy đủ ở §C7.2.
+
 ## C1. Bộ công cụ mô phỏng trong WSL
 
 ```bash
@@ -704,6 +720,9 @@ trái vào vùng sóng để xem.
 ## C3. Quartus và board Intel/Altera
 
 Lab dùng board Intel/Altera nên phần mềm là **Quartus Prime Lite Edition** — miễn phí, không cần license.
+
+> Board của em là **AMD/Xilinx**? Bỏ qua §C3 và §C4, làm **§C7** thay thế. Đừng cài cả hai bộ công
+> cụ: mỗi bộ chiếm hàng chục GB và em chỉ dùng một.
 
 **Cài trên Windows** (không cài trong WSL):
 
@@ -935,6 +954,312 @@ Chi tiết: [`04_Project_Template/REPRODUCIBILITY_STANDARD.md`](../04_Project_Te
 | `A5-T02` · `A5-R01` | tự động hóa dòng chảy này trong CI |
 
 Tài liệu nền nên đọc: [`09_References/READING-LIST.md`](../09_References/READING-LIST.md) §2.
+
+---
+
+## C7. Đường thay thế: board AMD/Xilinx và Vivado
+
+> **⚠ MỤC NÀY CHƯA ĐƯỢC KIỂM CHỨNG TRÊN BOARD THẬT**
+>
+> Khác với §C1–§C6: ở đó mọi lệnh đã gõ thật trên máy thật và thấy kết quả thật. Mục này viết từ
+> **tài liệu chính thức của AMD** (UG973 bản 2026.1, trang tải về và trang giấy phép), vì lab hiện
+> **không có board Xilinx nào** để chạy thử.
+>
+> **Nghĩa là gì với em:** coi mục này là **bản đồ**, không phải lời cam kết. Tên menu, đường dẫn và
+> con số có thể lệch theo phiên bản. Gặp chỗ lệch thì ghi lại **nguyên văn** rồi mở Issue — em đang
+> là người kiểm chứng đầu tiên, và chính việc đó được tính là bằng chứng tuần 1.
+>
+> **Bảng nghiệm thu** — ai chạy được thì điền vào đây, rồi xóa khung cảnh báo này:
+>
+> | Phần | Ai kiểm | Board · chip | Bản Vivado | Ngày | Kết quả |
+> |---|---|---|---|---|---|
+> | C7.3–C7.5 cài đặt và driver | *(trống)* | | | | |
+> | C7.6 board file | *(trống)* | | | | |
+> | C7.7 nạp được lên board | *(trống)* | | | | |
+> | C7.7 **RTL và mô phỏng** | tác giả tài liệu | — | iverilog 12.0 | 2026-09-11 | **đạt** — đếm đúng, reset đúng |
+>
+> Dòng cuối nói đúng phạm vi đã kiểm: **thiết kế `led_counter` ở §C7.7 đã mô phỏng thật và chạy
+> đúng**, nên nếu board không sáng đèn thì lỗi nằm ở `.xdc`, ở cực tính nút, hoặc ở bước nạp —
+> không phải ở RTL. Phần chưa kiểm là **các bước trong Vivado và việc nạp xuống board**.
+
+### C7.1 Khi nào đọc mục này, khi nào bỏ qua
+
+**Bỏ qua nếu board trong lab là Intel/Altera** — tức là phần lớn sinh viên của chương trình này.
+Khung chương trình và toàn bộ đề tài `A3`, `A4` đang chạy trên kit Altera, nên đường chuẩn của em là
+**§C3 → §C4** với Quartus. Đọc mục này chỉ làm em phải chọn một thứ không liên quan.
+
+**Đọc mục này nếu** em cầm board Xilinx (Basys 3, Nexys, Arty, Zybo, PYNQ… đều là chip AMD/Xilinx),
+hoặc em làm ở một lab khác dùng Xilinx, hoặc em cộng tác với nhóm ngoài trường đang dùng Vivado.
+
+**Thứ không đổi theo hãng** — và đây là phần chiếm gần hết thời gian đề tài: viết RTL, viết testbench
+tự kiểm, đọc dạng sóng, đặt ràng buộc thời gian, đọc báo cáo timing, ghi số liệu để so sánh. §C1,
+§C2, §C5, §C6 dùng được nguyên vẹn cho cả hai hãng. Chỉ **ba việc** là khác: cài công cụ, cú pháp
+file gán chân, và chỗ bấm để nạp xuống board.
+
+> **Đừng học hai hãng cùng lúc trong một học kỳ.** Chọn một, làm cho tới, rồi đọc bảng đối chiếu
+> §C7.2 khi cần đọc tài liệu của hãng kia. Mentor đánh giá em bằng chất lượng thiết kế, không bằng
+> số phần mềm em cài được.
+
+### C7.2 Bảng đối chiếu Quartus ↔ Vivado
+
+Bảng này là phần có giá trị nhất của cả mục. Học một hãng rồi tra bảng là đọc được tutorial, luận
+văn và báo cáo của hãng kia.
+
+| Việc | Quartus (Intel/Altera) | Vivado (AMD/Xilinx) |
+|---|---|---|
+| Bản miễn phí | **Quartus Prime Lite** — không cần giấy phép | **Vivado Design Edition** + giấy phép **Basic** — $0, nhưng **phải tự sinh giấy phép và gia hạn hằng năm** |
+| Tạo dự án | *File → New Project Wizard* | *Create Project* |
+| Chọn chip | chọn *device family* rồi mã chip | chọn tab *Parts* (mã chip) hoặc *Boards* (cần board file, §C7.6) |
+| Gán chân | *Assignments → Pin Planner*, lưu vào **`.qsf`** | viết file ràng buộc **`.xdc`**: `set_property PACKAGE_PIN`, `IOSTANDARD` |
+| Khai báo xung nhịp | SDC `create_clock` | `.xdc`: `create_clock` — **không khai thì không có timing để đọc** |
+| Biên dịch | *Start Compilation* (Analysis & Synthesis → Fitter → Assembler) | *Run Synthesis* → *Run Implementation* → *Generate Bitstream* (**ba bước rời**) |
+| File nạp tạm | **`.sof`** | **`.bit`** |
+| File nạp vào flash | `.pof` | `.mcs` |
+| Nạp xuống board | *Tools → Programmer*, cáp **USB-Blaster** | *Open Hardware Manager*, cáp **Digilent USB-JTAG** hoặc **Platform Cable USB** |
+| Báo cáo tài nguyên | *Fitter → Resource Usage Summary* | *Project Summary → Utilization*, hoặc `report_utilization` |
+| Báo cáo thời gian | *Timing Analyzer → Fmax Summary / Setup Summary* | `report_timing_summary` → đọc **WNS** và **TNS** |
+| Công suất | *Power Analyzer* | `report_power` |
+| Chạy bằng dòng lệnh | `quartus_sh -t script.tcl` | `vivado -mode batch -source script.tcl` |
+| Ngôn ngữ script | Tcl | Tcl |
+
+**Một khác biệt phải hiểu, không chỉ tra bảng:** Quartus báo thẳng **Fmax**; Vivado **không** báo
+Fmax. Vivado báo **WNS** (worst negative slack) tại đúng tần số em đã khai trong `.xdc`. Muốn có
+Fmax từ Vivado thì tự suy:
+
+```text
+f_max = 1 / (T - WNS)        với T là chu kỳ em đã khai trong create_clock
+```
+
+Ví dụ khai `create_clock -period 10.000` (100 MHz) mà `WNS = +2.0 ns` thì
+`f_max ≈ 1/(10 − 2) = 125 MHz`. **WNS âm nghĩa là mạch không chạy đúng ở tần số đã khai** — đúng
+như cảnh báo slack ở §C4, chỉ khác tên gọi.
+
+### C7.3 Chọn đúng bản và giấy phép — chỗ mọi tutorial trên mạng đang sai
+
+Phần này **đã đổi ở bản 2026.1** và phần lớn video, blog, tài liệu môn học trên mạng vẫn viết theo
+cách cũ. Đọc kỹ ba dòng dưới đây trước khi tin một hướng dẫn nào khác:
+
+| | Trước 2026.1 | Từ 2026.1 |
+|---|---|---|
+| Tên bản dùng được miễn phí | *Vivado ML Standard Edition* | **Vivado Design Edition** |
+| Giấy phép | không cần | cần giấy phép **Basic** — **$0**, tự sinh trên trang AMD |
+| Phải làm gì thêm | — | **gia hạn hằng năm**, nếu không thì công cụ hết hạn giữa học kỳ |
+
+Giấy phép **Basic** phủ đúng những chip sinh viên hay dùng: **Spartan-7, Artix-7, Kintex-7,
+Virtex-7, Zynq-7000**, cộng **Artix UltraScale+**, **Spartan UltraScale+** và một phần Kintex
+UltraScale/UltraScale+ (chỉ vài mã như XCKU025, XCKU035, XCKU3P, XCKU5P) cùng một số mã Zynq
+UltraScale+ MPSoC. **Không** phủ Virtex UltraScale/UltraScale+, Zynq UltraScale+ RFSoC và toàn bộ
+dòng **Versal** — những dòng này cần bản trả tiền.
+
+> **Việc phải làm ngay tuần 1, không để tới tuần 8:** tra mã chip in trên board rồi đối chiếu bảng
+> trên. Nếu chip của em nằm ngoài Basic thì **đề tài phải đổi board hoặc đổi phạm vi** — giống hệt
+> chuyện ESP8266 không chạy được TensorFlow Lite Micro ở §D3. Phát hiện muộn là vỡ kế hoạch.
+
+**Board cũ dùng chip Spartan-3 hoặc Spartan-6:** Vivado **không hỗ trợ**; những dòng đó thuộc công
+cụ ISE 14.7 đã ngừng phát triển từ lâu. **Đừng mở đề tài mới trên board như vậy** — không có bản
+ISE nào chạy ổn trên Windows 11, và không ai còn vá lỗi cho nó.
+
+### C7.4 Cài Vivado trên Windows
+
+Cài **trên Windows, không cài trong WSL** — đúng như Quartus, và có lý do ở §C7.5.
+
+1. **Tạo tài khoản AMD.** Mọi file tải về đều qua `account.amd.com`, không có đường tải ẩn danh.
+2. **Tải đúng file.** Ở trang *Adaptive SoCs & FPGA Design Tools Downloads* chọn
+   **AMD Unified Installer for FPGAs & Adaptive SoCs**, bản **Windows Self Extracting Web
+   Installer** — khoảng **286 MB**.
+
+   > **Bẫy tốn cả ngày:** trên cùng trang có *Single File Download (SFD)* nặng **98 GB**. Đó là bản
+   > chứa mọi thứ cho mọi dòng chip, dành cho máy không có mạng. Tải nhầm file này là mất một ngày
+   > và gần trăm GB ổ cứng. Bản web installer chỉ tải đúng phần em tick.
+
+3. **Trong trình cài, bỏ tick mọi dòng chip trừ dòng của board em.** Đây là lựa chọn quyết định
+   dung lượng cài: tick cả họ chip thì phần cài phình lên hàng trăm GB, chỉ tick `Artix-7` (hoặc
+   đúng họ chip của board) thì nhỏ hơn nhiều lần. Trình cài hiện luôn con số dung lượng khi em
+   tick/bỏ tick — **đọc con số đó trước khi bấm tiếp**.
+4. **Chừa ổ đĩa.** Để sẵn vài chục GB trống, và **đừng cài vào ổ mạng hay ổ USB**.
+5. **Sinh giấy phép Basic** theo §C7.3. Mở *Help → Manage License* trong Vivado để kiểm hạn.
+6. **Cài driver cáp nạp** — §C7.5. Tài liệu AMD **không** nói driver được cài tự động, nên coi đây
+   là một bước riêng phải làm.
+
+**Máy chỉ để nạp board** (máy lab dùng chung, máy demo): không cần cài cả Vivado. AMD có
+**Vivado Lab Solutions** — bản gọn chỉ để nạp và debug, bản Windows khoảng **835 MB**. Nếu lab có
+mười máy thì đây là cách đúng: một máy cài đủ để tổng hợp, chín máy còn lại chỉ cần Lab Solutions.
+
+**Máy chạy Linux thật** (không phải WSL): Vivado 2026.1 hỗ trợ chính thức **Ubuntu 22.04.x và
+24.04.x (64-bit, bản tiếng Anh)**, RHEL/Rocky/AlmaLinux 8.10 và 9.x/10.x, SUSE 15 SP4/SP6/SP7.
+Ubuntu bản khác (23.10, 25.04…) không nằm trong danh sách — chạy có thể được nhưng không ai bảo đảm.
+
+### C7.5 Driver cáp nạp — và vì sao không cài Vivado trong WSL
+
+**Trên Windows**, mở *Command Prompt* hoặc PowerShell **quyền Administrator**:
+
+```powershell
+PS> cd "<thư-mục-cài-Vivado>\data\xicom\cable_drivers\nt64"
+PS> .\install_drivers_wrapper.bat <thư-mục-ghi-log>
+```
+
+**Trên Linux thật**, chạy với quyền root:
+
+```bash
+$ cd <thư-mục-cài-Vivado>/data/xicom/cable_drivers/lin64/install_script/install_drivers/
+$ sudo ./install_drivers
+```
+
+**Phải thấy gì:** cắm board, mở Vivado → *Open Hardware Manager* → *Open target* → *Auto Connect*
+thì hiện ra đúng mã chip của board. Không hiện thì xem §F5b.
+
+**Vì sao không cài Vivado trong WSL** — ba lý do, cái thứ ba là cái chặn hẳn:
+
+1. Danh sách hệ điều hành được hỗ trợ của AMD (UG973 2026.1) **không có WSL**. Lỗi gặp trong WSL
+   thì không có ai để hỏi.
+2. Giao diện Vivado nặng; chạy qua lớp đồ họa của WSL thêm một nguồn lỗi không cần thiết.
+3. **Cổng USB của board không tự nhìn thấy được từ WSL.** Muốn nạp board từ trong WSL phải dựng
+   thêm cầu USB (`usbipd-win`) và gắn/ngắt thiết bị mỗi lần — thêm một lớp hỏng hóc, để đổi lấy
+   đúng số không lợi ích. Cùng một lý do đã khiến §D1 bảo nạp ESP8266 hoàn toàn ở phía Windows.
+
+Kết luận giống Quartus: **mô phỏng trong WSL, tổng hợp và nạp board ở Windows.** Chọn chỗ đặt repo
+theo bảng ở §A1 — dùng Vivado thì xếp chung hàng với `A3`, `A4`: repo để ở Windows.
+
+### C7.6 Board file cho board hãng thứ ba
+
+Chọn chip theo **mã chip** thì luôn chạy. Chọn theo **tên board** thì tiện hơn (Vivado biết sẵn
+xung nhịp, DDR, chân cắm) nhưng cần *board file* của board đó.
+
+Board của hãng thứ ba (Digilent, Trenz, Opal Kelly…) **không có sẵn** trong Vivado. AMD lấy chúng
+từ GitHub — kho `Xilinx/XilinxBoardStore` — thông qua **Vivado Store** trong menu *Tools*. Nếu board
+của em không có trong Store thì hãng làm board thường phát hành board file riêng, chép tay vào:
+
+```text
+<thư-mục-cài-Vivado>\data\boards\board_files\<tên-board>\
+```
+
+Khởi động lại Vivado rồi mở lại tab *Boards* thì board mới hiện ra.
+
+> **Không có board file thì vẫn làm được đề tài.** Chọn đúng **mã chip**, rồi tự viết `.xdc`. Làm
+> cách này em buộc phải hiểu từng chân mình gán — mentor coi đó là điểm cộng, không phải thiệt thòi.
+
+### C7.7 Bài lab 2X — nạp lên board Xilinx
+
+Đây là bản song song của §C4. Thiết kế dùng một bộ đếm có xung nhịp, để báo cáo timing có nội dung
+thật (mạch thuần tổ hợp như `mux2` ở §C2 thì không có timing để đọc).
+
+Tạo `rtl/led_counter.v`:
+
+```verilog
+module led_counter #(parameter W = 30) (
+    input  wire clk,
+    input  wire rst_n,
+    output wire [3:0] led
+);
+    reg [W-1:0] cnt;
+    always @(posedge clk) begin
+        if (!rst_n) cnt <= {W{1'b0}};
+        else        cnt <= cnt + 1'b1;
+    end
+    assign led = cnt[W-1 -: 4];
+endmodule
+```
+
+**Mô phỏng trước, luôn luôn.** Viết testbench tự kiểm như §C2 — đặt `W = 4` để chạy nhanh, kiểm
+rằng `cnt` đếm lên đúng và `rst_n = 0` đưa về 0. Chưa mô phỏng đúng thì đừng mở Vivado.
+
+**Tự tính nhịp đèn, đừng chép con số.** Bit thứ `k` của bộ đếm đảo trạng thái sau mỗi `2^k` chu kỳ,
+nên đèn thấp nhất trong bốn đèn (bit `W−4`) đổi sau mỗi `2^(W−4) / f` giây. Với `W = 30` và xung
+nhịp 100 MHz: `2^26 / 10^8 ≈ 0,67 s` — vừa đủ để mắt thấy. Board có xung nhịp khác (ví dụ 12 MHz
+hoặc 125 MHz) thì **tính lại và sửa `W`**, đừng giữ nguyên rồi thắc mắc vì sao đèn đứng im hoặc
+nhòe thành sáng liên tục.
+
+> **Cực tính nút bấm trên board Xilinx thường ngược với tên `rst_n`.** Nút trên Basys 3, Nexys, Arty
+> đa số là **active-high** — nhấn thì chân lên `1`. Tên `rst_n` lại hàm ý active-low. Tra master XDC
+> hoặc user manual của board, rồi **đổi cực tính trong RTL cho khớp** (hoặc đổi tên cổng thành
+> `rst`). Để lệch thì mạch sẽ reset suốt khi không nhấn, và bỏ reset khi nhấn — đèn đứng im, rất
+> khó đoán nguyên nhân.
+
+Tạo `constraints/top.xdc`:
+
+```tcl
+# ─── xung nhịp ─────────────────────────────────────────────────────────────
+# Sửa -period cho khớp xung nhịp thật trên board: 10.000 ns = 100 MHz.
+create_clock -period 10.000 -name sys_clk [get_ports clk]
+
+# ─── gán chân ──────────────────────────────────────────────────────────────
+# LẤY TÊN CHÂN TỪ MASTER XDC CỦA BOARD, ĐỪNG ĐOÁN (xem khung cảnh báo dưới).
+set_property -dict {PACKAGE_PIN <chân-clk>   IOSTANDARD LVCMOS33} [get_ports clk]
+set_property -dict {PACKAGE_PIN <chân-nút>   IOSTANDARD LVCMOS33} [get_ports rst_n]
+set_property -dict {PACKAGE_PIN <chân-led0>  IOSTANDARD LVCMOS33} [get_ports {led[0]}]
+set_property -dict {PACKAGE_PIN <chân-led1>  IOSTANDARD LVCMOS33} [get_ports {led[1]}]
+set_property -dict {PACKAGE_PIN <chân-led2>  IOSTANDARD LVCMOS33} [get_ports {led[2]}]
+set_property -dict {PACKAGE_PIN <chân-led3>  IOSTANDARD LVCMOS33} [get_ports {led[3]}]
+```
+
+> **Tuyệt đối không đoán tên chân.** Mỗi board có một file **master XDC** do hãng làm board công bố,
+> liệt kê đúng tên chân của từng LED, từng switch, từng header. Mở file đó, chép đúng dòng mình cần,
+> bỏ dấu `#` ở đầu. Gán sai chân có thể **làm hỏng board** — ví dụ đặt một chân chỉ dùng để vào làm
+> chân ra. Cảnh báo này giống §C4 và cũng nghiêm khắc như vậy.
+
+Các bước trong Vivado:
+
+1. *Create Project* → dạng *RTL Project*, **bỏ tick** *Do not specify sources at this time*.
+2. Thêm `rtl/led_counter.v`; thêm `constraints/top.xdc` ở ô *Add Constraints*.
+3. Chọn chip: tab *Parts* nhập đúng mã chip in trên board, hoặc tab *Boards* nếu đã có board file.
+4. *Run Synthesis* → xong thì *Run Implementation* → xong thì *Generate Bitstream*.
+5. *Open Hardware Manager* → *Open target* → *Auto Connect* → *Program device* → chọn file `.bit`.
+
+**Phải thấy gì:** bốn đèn LED đếm nhị phân, đèn thấp nhất đổi khoảng mỗi 0,7 giây với `W = 30` ở
+100 MHz. Nhấn nút reset thì về 0.
+
+> **`.bit` là nạp tạm.** Rút điện là mất. Muốn board tự chạy sau khi cắm lại điện thì tạo `.mcs` và
+> nạp vào flash cấu hình — đúng như `.pof` bên Quartus. Khi demo cho hội đồng, hỏi trước xem có
+> được cắm máy tính vào board hay không; nếu không thì phải nạp flash.
+
+### C7.8 Ba con số phải ghi lại — bằng chứng Gate 3
+
+Giống §C4, chỉ khác chỗ lấy số:
+
+| Số liệu | Lấy ở đâu trong Vivado |
+|---|---|
+| Tài nguyên (LUT, FF, BRAM, DSP) | *Project Summary → Utilization*, hoặc lệnh `report_utilization` |
+| Timing: **WNS** và **TNS** | `report_timing_summary` — **sau Implementation**, không phải sau Synthesis |
+| Công suất ước lượng | `report_power` |
+
+Ghi kèm **bốn thứ**, nếu không thì con số vô giá trị khi so sánh: mã chip đầy đủ (kèm speed grade,
+ví dụ `-1` khác `-2` là khác hẳn), bản Vivado, chu kỳ đã khai trong `create_clock`, và chiến lược
+tổng hợp/implementation đang dùng. Đây đúng là kỷ luật siêu dữ liệu ở §A5, áp vào công cụ FPGA.
+
+> **Hai bẫy làm sai báo cáo, cả hai đều im lặng:**
+>
+> 1. **Đọc báo cáo sau *Synthesis* rồi tưởng là kết quả cuối.** Số sau Synthesis chưa đặt chỗ, chưa
+>    định tuyến — nó sẽ đổi sau Implementation. Chỉ số sau **Implementation** mới đem báo cáo được.
+> 2. **Quên `create_clock`.** Lúc đó `report_timing_summary` trống trơn và trông như *"không vi
+>    phạm gì cả"*. Không phải — nghĩa là **chưa hề có ràng buộc nào để kiểm**. Luôn mở báo cáo,
+>    xác nhận thấy đúng tên xung nhịp mình đã khai.
+
+### C7.9 Đường chạy bằng script — để so sánh được
+
+Bấm chuột không tái lập được, và đề tài so sánh PPA (`A4-T02`, `A4-R01`) thì **tái lập là điều kiện
+để kết quả có nghĩa**. Vivado nhận trọn dòng chảy bằng Tcl:
+
+```bash
+$ vivado -mode batch -source build.tcl
+```
+
+Trong `build.tcl`: `read_verilog`, `read_xdc`, `synth_design -top ... -part ...`, `opt_design`,
+`place_design`, `route_design`, `report_utilization -file ...`,
+`report_timing_summary -file ...`, `write_bitstream`. Commit `build.tcl` cùng repo, và ghi lại
+**bản Vivado** đã dùng — đổi bản là đổi kết quả, giống hệt lý lẽ dùng Nix ở §C6.
+
+### C7.10 Muốn gỡ khung "chưa kiểm chứng" ở đầu mục này
+
+Ai chạy được mục này trên board thật thì gửi lại bốn thứ sau, mở một Issue là đủ:
+
+1. Mã chip và tên board, bản Vivado (ví dụ `2026.1.1`).
+2. Ảnh chụp *Project Summary* thấy Utilization, và `report_timing_summary` thấy WNS.
+3. Ảnh chụp board đang chạy bài lab §C7.7.
+4. **Danh sách mọi chỗ tài liệu này ghi sai** — tên menu, đường dẫn, con số. Phần này quan trọng
+   nhất: nó là thứ làm mục này dùng được cho người sau.
+
+Nhận đủ thì điền bảng nghiệm thu ở đầu mục, ghi tên người kiểm, rồi xóa khung cảnh báo. Từ đó §C7
+đứng ngang hàng §C3–§C4.
 
 ---
 
@@ -1222,10 +1547,27 @@ Nếu vẫn lỗi, kiểm xem đang dùng đúng Python nào:
 | Nạp xong Serial Monitor toàn ký tự rác | Sai tốc độ — đặt `monitor_speed = 115200` cho khớp `Serial.begin(115200)` |
 | Board khởi động lại liên tục | Nguồn USB yếu — dùng cổng USB khác hoặc cấp nguồn ngoài 5V |
 
-## F5. Quartus không thấy USB-Blaster
+## F5. Không nạp được xuống board FPGA
+
+### F5a · Quartus không thấy USB-Blaster
 
 Device Manager → thiết bị có dấu chấm than → *Update driver* → *Browse my computer* → trỏ tới
 `C:\intelFPGA_lite\<phiên-bản>\quartus\drivers\usb-blaster`. Cắm thẳng vào máy, không qua hub USB.
+
+### F5b · Vivado *Hardware Manager* không thấy board (§C7)
+
+Kiểm theo đúng thứ tự này, đừng nhảy bước:
+
+1. **Driver cáp đã cài chưa?** Trình cài Vivado **không** cài driver cáp giúp em — phải chạy tay,
+   xem §C7.5. Đây là nguyên nhân phổ biến nhất.
+2. **Cáp và nguồn.** Cắm thẳng vào máy, không qua hub. Dùng cáp có dây dữ liệu (cáp chỉ để sạc thì
+   không được). Board có công tắc nguồn hoặc jumper chọn nguồn thì kiểm lại.
+3. **Đúng cổng USB trên board.** Nhiều board có hai cổng micro-USB: một để nạp JTAG, một chỉ để
+   UART. Tra user manual.
+4. **Đang ở trong WSL?** Thì không thấy được — cổng USB không tự nhìn thấy từ WSL. Chuyển sang chạy
+   Vivado trên Windows, xem §C7.5.
+5. **Giấy phép Basic hết hạn?** *Help → Manage License*. Giấy phép Basic phải **gia hạn hằng năm**
+   (§C7.3); hết hạn thì công cụ báo lỗi ở những chỗ trông chẳng liên quan gì tới giấy phép.
 
 ## F6. Build trong WSL chậm bất thường
 
@@ -1382,6 +1724,10 @@ Mang checklist này tới buổi gặp mentor. Mentor sẽ yêu cầu **chạy t
 - [ ] `A0` — KiCad mở được, dự án trống có ERC và DRC 0 lỗi; biết chụp ảnh đo kèm điều kiện đo.
 - [ ] `A1`–`A3` — chạy `iverilog` + `vvp` ra `TAT CA TRUONG HOP DUNG`; mở được `.vcd`;
       Quartus tổng hợp xong và Programmer thấy USB-Blaster.
+- [ ] `A1`–`A3` **nếu dùng board AMD/Xilinx** (§C7) — thay hai điều kiện Quartus bằng: Vivado mở
+      được và *Help → Manage License* thấy giấy phép Basic còn hạn · *Run Implementation* xong ·
+      `report_timing_summary` thấy **đúng tên xung nhịp đã khai** và WNS không âm ·
+      *Hardware Manager* nhận đúng mã chip.
 - [ ] `A4`, `A5` — thêm: `nix --version` chạy được · `nix-shell` trong thư mục `librelane` vào được
       môi trường · **`librelane --smoke-test` kết thúc không lỗi** (chụp màn hình đưa vào báo cáo tuần 1).
 - [ ] `A6`, `A7` — nạp được chương trình nháy đèn; Serial Monitor in `heap`; `mosquitto_sub`

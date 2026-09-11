@@ -73,6 +73,8 @@ Bốn việc dưới đây không tự động hóa được, và tài liệu gh
 1. **Bật ảo hóa trong BIOS** — nằm ngoài hệ điều hành.
 2. **Dán khóa SSH lên GitHub** — cần tài khoản của chính em. Script tạo khóa và in ra sẵn để chép.
 3. **Quartus Prime Lite** — trình cài đồ họa, phải tick đúng dòng device của board trong lab.
+   Board AMD/Xilinx thì thay bằng **Vivado**, xem [`SETUP-GUIDE.md`](../../10_Documentation/SETUP-GUIDE.md) §C7
+   (mục đó **chưa được kiểm chứng trên board thật** — lab chưa có board Xilinx).
 4. **Driver CH340/CP2102** — phụ thuộc chip thật trên board ESP8266 đang cầm.
 
 ## Khi script báo lỗi

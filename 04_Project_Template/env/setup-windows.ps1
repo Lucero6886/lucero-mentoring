@@ -15,6 +15,7 @@
 #
 # KHÔNG tự cài được (phải làm tay, script sẽ nhắc ở cuối):
 #   · Quartus Prime Lite  — trình cài đồ họa, phải chọn đúng dòng device của board
+#                           (board AMD/Xilinx thì là Vivado — xem SETUP-GUIDE §C7)
 #   · Driver CH340/CP2102 — theo đúng chip trên board ESP8266
 #   · Bật ảo hóa trong BIOS — không phần mềm nào làm thay được
 # ---------------------------------------------------------------------------
@@ -122,6 +123,8 @@ Write-Host ""
 Write-Host "  1. QUARTUS PRIME LITE (nhanh A3, A4)" -ForegroundColor Yellow
 Write-Host "     Tai ban Lite tu trang Intel. Khi cai PHAI tick dung dong device cua board:"
 Write-Host "     MAX 10 cho DE10-Lite, Cyclone IV/V cho DE2/DE1-SoC. Nho cai ca USB-Blaster driver."
+Write-Host "     Board AMD/Xilinx: cai VIVADO thay Quartus - xem SETUP-GUIDE muc C7." -ForegroundColor DarkGray
+Write-Host "     Chi cai MOT bo cong cu, moi bo chiem hang chuc GB." -ForegroundColor DarkGray
 Write-Host ""
 Write-Host "  2. DRIVER USB-UART (nhanh A6, A7)" -ForegroundColor Yellow
 Write-Host "     NodeMCU/Wemos thuong dung chip CH340, doi khi CP2102. Cai driver theo dung chip,"

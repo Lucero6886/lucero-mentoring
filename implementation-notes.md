@@ -310,8 +310,41 @@ Mọi file dưới đây bị **ghi đè** ở lần sinh sau. Muốn đổi n�
 | `03_Operations/STATUS_BOARD.md` | `research_packs.json` |
 | 6 bản `.md` cạnh các `.docx` chính sách | chính các `.docx` đó |
 | `implementation-notes.html` | **chính file `.md` này** |
+| `10_Documentation/SETUP-GUIDE.html` | `10_Documentation/SETUP-GUIDE.md` |
+| `10_Documentation/GITHUB-WORKFLOW.html` | `10_Documentation/GITHUB-WORKFLOW.md` |
 
-Mỗi file sinh ra đều mang một dòng cảnh báo ở đầu. Nếu anh thấy dòng đó, đừng sửa file đó.
+Mỗi file sinh ra đều mang một dòng cảnh báo ở đầu (ba trang HTML mang dòng đó ở chân trang). Nếu
+anh thấy dòng đó, đừng sửa file đó.
+
+**Ba trang HTML trên do cùng một script sinh ra.** `generate_notes.py` giữ danh sách tài liệu ở biến
+`DOCS`: thêm một tài liệu Markdown viết tay cần bản web thì thêm một dòng vào đó, không phải viết
+script mới — và nhớ ghi file `.html` mới vào **cả** bảng trên lẫn `CLAUDE.md` §3. Quy tắc đằng sau:
+**mỗi bản `.md` viết tay được phép có nhiều nhất một bản `.html`, và bản đó phải do máy sinh.** Một
+bản HTML soạn tay song song là mầm của đúng lớp lỗi đã xảy ra hai lần — `implementation-notes.html`
+đứng ở 1.4.0 khi bản `.md` đã ở 1.5.1, và `GITHUB-WORKFLOW.html` soạn tay nằm ngoài mọi script cho
+tới v1.11.0.
+
+### 5.4 Tài liệu viết tay — nhãn trạng thái kiểm chứng
+
+Bản sinh có validator bảo vệ: sai nguồn thì máy chặn. **Tài liệu hướng dẫn thao tác thì không** —
+không script nào kiểm được rằng một lệnh cài đặt có thật sự chạy trên máy sinh viên hay không. Chỗ
+hổng này đã lộ ba lần trong một tuần khi dựng `10_Documentation/SETUP-GUIDE.md`: lệnh đúng theo tài
+liệu hãng nhưng sai trên máy thật (`wsl` chưa có sẵn · `.\setup-windows.ps1` chạy từ sai thư mục ·
+thiếu `cd` trước khi gọi script).
+
+Vì vậy mọi mục hướng dẫn thao tác mang một trong hai trạng thái, và **trạng thái phải ghi ra giấy**:
+
+| Trạng thái | Nghĩa | Hình thức trong tài liệu |
+|---|---|---|
+| **Đã kiểm** | đã gõ thật trên thiết bị của lab và thấy kết quả thật | mặc định, không cần nhãn |
+| **Chưa kiểm** | viết từ tài liệu chính thức của hãng, chưa chạy trên thiết bị thật | khung mở đầu **⚠ CHƯA ĐƯỢC KIỂM CHỨNG** + **bảng nghiệm thu** còn trống + một mục con nói rõ phải gửi gì để gỡ nhãn |
+
+Hiện chỉ `SETUP-GUIDE.md` §C7 (Vivado/Xilinx) mang nhãn "chưa kiểm" — lab không có board Xilinx.
+Quy tắc đi kèm: **không gộp nội dung chưa kiểm vào giữa nội dung đã kiểm.** Đường Xilinx là một mục
+thay thế trọn gói (§C7) chứ không phải những câu "nếu dùng Vivado thì…" rải khắp §C3–§C4; như vậy
+người đọc chỉ gặp phần chưa kiểm khi chính họ cần nó, và một mục được gỡ nhãn mà không phải rà lại
+cả chương. Nhãn này cũng biến món nợ thành việc có người nhận: người đầu tiên chạy được sẽ điền bảng
+nghiệm thu, và **danh sách chỗ tài liệu ghi sai** là sản phẩm chính mà họ nộp lại.
 
 ---
 
@@ -538,6 +571,9 @@ Liệt kê sẵn để lần sau không ai tưởng đây là lỗi vừa phát 
   không phải thiếu sót: lớp sâu chỉ đáng làm cho đề tài thật sự đi tới mức nghiên cứu.
 - **Cấu hình GitHub Pages nằm ngoài kho.** Không script nào bảo đảm được nó; hai file chuyển hướng
   ở gốc là lưới an toàn, không phải lời giải.
+- **`SETUP-GUIDE.md` §C7 (Vivado/Xilinx) chưa chạy trên board thật** — lab không có board Xilinx.
+  Mục này viết từ tài liệu chính thức của AMD và mang nhãn trạng thái theo §5.4. Không phải thiếu
+  sót cần sửa bằng cách viết thêm, mà là việc chờ một người có board đứng ra kiểm.
 
 ---
 
