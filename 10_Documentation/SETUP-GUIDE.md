@@ -37,6 +37,63 @@ Xem [trang hướng dẫn chọn đề tài](https://lucero6886.github.io/lucero
 
 ---
 
+# Phần A0 · Đường tắt: chạy script
+
+Ba script trong [`04_Project_Template/env/`](../04_Project_Template/env/README.md) làm hộ phần lớn
+những gì Phần A và các phần nhánh mô tả:
+
+**Phía Windows** — PowerShell 64-bit, quyền Administrator:
+
+```powershell
+PS> cd "C:\...\EEE Projects\04_Project_Template\env"
+PS> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+PS> .\setup-windows.ps1 -DryRun
+PS> .\setup-windows.ps1
+```
+
+> **Phải `cd` trước.** Bấm *Run as administrator* thì PowerShell luôn mở ở `C:\Windows\System32`,
+> không phải thư mục dự án — nên `.\setup-windows.ps1` sẽ báo *"is not recognized"*.
+> Đường dẫn có khoảng trắng thì **bắt buộc để trong dấu nháy kép**. Xem §F9.
+
+**Phía WSL** — terminal Ubuntu:
+
+```bash
+$ cd ~/projects/<repo>/04_Project_Template/env   # hoặc nơi em để bộ script
+$ bash bootstrap.sh --dry-run        # xem trước
+$ bash bootstrap.sh --rtl            # hoặc --asic / --polar / --all
+$ bash doctor.sh --all               # nghiệm thu — chụp màn hình nộp tuần 1
+```
+
+Cả ba **chạy lại được nhiều lần** và có chế độ `--dry-run` để xem trước.
+
+> **Nhưng vẫn phải đọc tài liệu này.** Script biết *gõ lệnh gì*, tài liệu nói *vì sao*. Mentor sẽ
+> hỏi vì sao repo phải để trong `~/projects` chứ không phải `/mnt/c`, vì sao phải có `venv`, vì sao
+> ba dòng trong lệnh cài Nix lại quyết định vài giờ hay vài ngày. Chạy script mà không đọc thì lúc
+> hỏng không biết bắt đầu từ đâu.
+
+**Bốn việc script không làm được**, phải tự làm theo tài liệu: bật ảo hóa trong BIOS · dán khóa SSH
+lên GitHub · cài Quartus (chọn đúng device của board) · cài driver CH340/CP2102 cho ESP8266.
+
+### Tự động hóa khác tái lập
+
+| | Công cụ | Bảo đảm |
+|---|---|---|
+| **Tự động hóa** | `bootstrap.sh` | đỡ gõ tay. **Không** bảo đảm hai máy giống nhau |
+| **Tái lập** | `flake.nix` trong repo đề tài | máy nào cũng ra **đúng cùng** phiên bản, hôm nay và sáu tháng sau |
+
+`apt install iverilog` hôm nay và sáu tháng sau cho hai phiên bản khác nhau — không script nào cứu
+được. Chỉ `flake.nix` kèm `flake.lock` **đã commit** mới cứu được. Bộ khởi tạo repo có sẵn một
+`flake.nix`; vào môi trường bằng:
+
+```bash
+$ cd ~/projects/<repo-của-em>
+$ nix develop
+```
+
+> Với đề tài `A4` và `A5`, đây **là nội dung đề tài** chứ không phải tiểu tiết — xem §C6.
+
+---
+
 # Phần A · Nền chung
 
 Bốn thứ em dựng ở đây dùng cho mọi đề tài, mọi nhánh: **một máy Linux để chạy công cụ**,
@@ -555,8 +612,11 @@ Repo đặt ở `C:\Users\<tên>\projects\datn-a0-p01\`, thư mục `pcb/` chứ
 
 # Phần C · RTL → FPGA → ASIC (nhánh `A1`–`A5`)
 
-Nhánh này có **hai môi trường song song**: mô phỏng và tổng hợp mã nguồn mở chạy **trong WSL**;
+Nhánh này có **hai môi trường song song**: mô phỏng và dòng chảy ASIC mã nguồn mở chạy **trong WSL**;
 nạp lên board chạy bằng **Quartus trên Windows**.
+
+Làm theo thứ tự §C1 → §C6. Riêng **§C6 (Nix + LibreLane)** chỉ cần cho đề tài `A4` và `A5`; nó là
+phần nặng nhất, cần nửa buổi, mạng tốt và 30 GB trống — đừng bắt đầu khi chỉ còn một tiếng rảnh.
 
 ## C1. Bộ công cụ mô phỏng trong WSL
 
@@ -679,18 +739,9 @@ Lab dùng board Intel/Altera nên phần mềm là **Quartus Prime Lite Edition*
 > **Slack âm nghĩa là mạch không chạy đúng ở tần số đó**, dù board vẫn nhấp nháy đèn. Đừng báo
 > cáo Fmax mà bỏ qua slack.
 
-## C5. Dòng chảy ASIC mã nguồn mở (nhánh `A4`, `A5`)
+## C5. Yosys — tổng hợp RTL thành cổng logic
 
-Phần này chỉ chạy trong WSL. Cách cài ổn định nhất là dùng **Docker**, tránh vật lộn với phụ thuộc.
-
-```bash
-$ sudo apt install -y docker.io
-$ sudo usermod -aG docker $USER
-```
-
-Đóng và mở lại terminal Ubuntu để nhóm `docker` có hiệu lực.
-
-Thử Yosys — công cụ tổng hợp RTL:
+Trước khi đụng tới dòng chảy đầy đủ, chạy thử bước tổng hợp cho quen.
 
 ```bash
 $ sudo apt install -y yosys
@@ -698,7 +749,7 @@ $ yosys -V
 Yosys 0.33 ...
 ```
 
-Tổng hợp thử module ở §C2:
+Tổng hợp module ở §C2:
 
 ```bash
 $ yosys -p "read_verilog rtl/mux2.v; synth; stat"
@@ -706,10 +757,184 @@ $ yosys -p "read_verilog rtl/mux2.v; synth; stat"
 
 **Phải thấy gì:** một bảng `=== mux2 ===` liệt kê số cell sau tổng hợp.
 
-Dòng chảy đầy đủ RTL → GDSII dùng **OpenROAD** hoặc **LibreLane** với thư viện **SkyWater SKY130**.
-Đây là phần nặng nhất của nhánh này; làm theo hướng dẫn *getting started* chính thức của công cụ và
-**chạy được ví dụ mẫu của họ trước** khi đụng tới đề tài của mình. Tài liệu nền:
-[`09_References/READING-LIST.md`](../09_References/READING-LIST.md) §2.
+> Bản Yosys từ `apt` chỉ để học và thử. Dòng chảy thật ở §C6 dùng bản Yosys **do Nix quản lý**,
+> khóa đúng phiên bản — hai bản có thể cho kết quả khác nhau, và đó chính là vấn đề mà §C6 giải quyết.
+
+---
+
+## C6. Dòng chảy ASIC mã nguồn mở: WSL → Nix → LibreLane (nhánh `A4`, `A5`)
+
+Đây là phần nặng nhất của cả tài liệu. Dành **nửa buổi**, mạng tốt, và ít nhất **30 GB trống**.
+
+### Vì sao là Nix, không phải apt hay Docker
+
+Dòng chảy RTL → GDSII cần khoảng ba mươi công cụ ăn khớp nhau: Yosys, OpenROAD, Magic, KLayout,
+netgen, cùng thư viện SKY130. Cài bằng `apt` thì mỗi máy ra một tổ hợp phiên bản khác nhau, và
+**cùng một file RTL cho ra GDSII khác nhau** — lúc đó không ai nói được kết quả nào đúng.
+
+**Nix khóa chặt phiên bản của từng công cụ trong một biểu thức duy nhất.** Máy em, máy bạn cùng
+nhóm và máy mentor chạy ra **đúng cùng một kết quả**, hôm nay và sáu tháng sau.
+
+> Với đề tài `A5-T01` — *"Xây dựng quy trình ASIC tái lập sử dụng LibreLane + Nix"* — thì Nix
+> **không phải bước cài đặt, nó là nội dung đề tài**. Em phải hiểu và giải thích được nó, không
+> chỉ gõ theo.
+
+### Bước 1 — kiểm ba điều kiện của WSL
+
+**a. systemd phải bật.** Nix cài ở chế độ nhiều người dùng, cần systemd.
+
+```bash
+$ systemctl is-system-running
+running
+```
+
+Báo `System has not been booted with systemd as init system` thì tạo file cấu hình:
+
+```bash
+$ sudo nano /etc/wsl.conf
+```
+
+Dán vào:
+
+```ini
+[boot]
+systemd=true
+```
+
+Lưu (`Ctrl+O`, `Enter`, `Ctrl+X`), rồi **từ PowerShell của Windows**:
+
+```powershell
+PS> wsl --shutdown
+```
+
+Mở lại Ubuntu và kiểm lại. WSL2 cài từ giữa 2023 trở đi đã bật sẵn systemd.
+
+**b. Đủ RAM và dung lượng.** Nix store cho LibreLane chiếm khoảng **10–20 GB**. Tạo hoặc sửa file
+`C:\Users\<tên>\.wslconfig` **phía Windows**:
+
+```ini
+[wsl2]
+memory=8GB
+processors=4
+swap=8GB
+```
+
+Rồi `wsl --shutdown` để áp dụng.
+
+> **Ổ ảo của WSL chỉ phình ra, không tự co lại.** Xóa file trong WSL không trả lại dung lượng cho
+> ổ C:. Xem §F8 nếu cần thu hồi.
+
+**c. Có `curl`.**
+
+```bash
+$ sudo apt update && sudo apt install -y curl
+```
+
+### Bước 2 — cài Nix kèm bộ nhớ đệm nhị phân
+
+Chép **nguyên khối** lệnh dưới đây, kể cả các dòng trong dấu nháy:
+
+```bash
+$ curl --proto '=https' --tlsv1.2 -fsSL https://artifacts.nixos.org/nix-installer | sh -s -- install --no-confirm --extra-conf "
+    extra-substituters = https://nix-cache.fossi-foundation.org
+    extra-trusted-public-keys = nix-cache.fossi-foundation.org:3+K59iFwXqKsL7BNu6Guy0v+uTlwsxYQxjspXzqLYQs=
+    extra-experimental-features = nix-command flakes
+"
+```
+
+**Ba dòng trong dấu nháy quan trọng đến mức nào:**
+
+| Dòng | Làm gì | Bỏ đi thì sao |
+|---|---|---|
+| `extra-substituters` | trỏ tới kho bản dựng sẵn của FOSSi Foundation | Nix phải **tự biên dịch OpenROAD từ mã nguồn** — nhiều giờ tới cả ngày |
+| `extra-trusted-public-keys` | khóa xác thực kho đó | Nix không tin kho, bỏ qua, lại quay về tự biên dịch |
+| `extra-experimental-features` | bật `nix-command` và `flakes` | LibreLane không chạy được |
+
+Cài xong, **đóng hẳn cửa sổ Ubuntu và mở lại** — biến môi trường của Nix chỉ có ở phiên mới.
+
+**Phải thấy gì**
+
+```bash
+$ nix --version
+nix (Nix) 2.28.3          # số có thể khác
+```
+
+### Bước 3 — lấy LibreLane và vào môi trường
+
+```bash
+$ cd ~/projects
+$ git clone https://github.com/librelane/librelane
+$ cd librelane
+$ nix-shell
+```
+
+**Lần chạy `nix-shell` đầu tiên tải về vài GB — mất 20–40 phút với mạng tốt.** Đừng đóng cửa sổ.
+Nếu thấy dòng `building '/nix/store/...'` chạy liên tục hàng chục phút thì bộ nhớ đệm **không** ăn:
+dừng lại, xem §F8a.
+
+**Phải thấy gì:** dấu nhắc đổi thành
+
+```text
+[nix-shell:~/projects/librelane]$
+```
+
+### Bước 4 — chạy phép thử toàn dòng chảy
+
+```bash
+[nix-shell:~/projects/librelane]$ librelane --smoke-test
+```
+
+Lệnh này chạy **một thiết kế nhỏ đi hết chặng RTL → GDSII** bằng chính bộ công cụ vừa cài, dùng
+PDK SKY130 mã nguồn mở. Mất vài phút.
+
+**Phải thấy gì:** kết thúc bằng thông báo thành công, không có `ERROR`.
+
+> Chạy được lệnh này là **bằng chứng môi trường ASIC đã sẵn sàng**. Chụp màn hình và đưa vào báo
+> cáo tuần 1 — mentor sẽ hỏi đúng cái này.
+
+### Bước 5 — chạy một thiết kế và xem layout
+
+Thiết kế mô tả bằng một file `config.json` trỏ tới mã RTL và các tham số. Chạy:
+
+```bash
+[nix-shell:~]$ librelane ~/my_designs/pm32/config.json
+```
+
+Xem kết quả bằng KLayout:
+
+```bash
+[nix-shell:~]$ librelane --last-run --flow openinklayout ~/my_designs/pm32/config.json
+```
+
+Hoặc bằng giao diện của OpenROAD:
+
+```bash
+[nix-shell:~]$ librelane --last-run --flow openinopenroad ~/my_designs/pm32/config.json
+```
+
+Làm theo *Newcomers' Tutorial* trong tài liệu chính thức để dựng `config.json` đầu tiên.
+**Chạy được ví dụ của họ trước**, rồi mới thay bằng RTL của mình.
+
+### Bước 6 — ghi lại để tái lập
+
+Ba thứ phải ghi vào repo, nếu không thì toàn bộ công sức dùng Nix trở nên vô nghĩa:
+
+1. **Commit của LibreLane** đang dùng — `git -C ~/projects/librelane rev-parse --short HEAD`.
+2. **`config.json`** của thiết kế, đặt trong `configs/` và commit.
+3. **Báo cáo diện tích, timing, DRC** từ thư mục `runs/` — chép phần tóm tắt vào `results/`.
+
+Chi tiết: [`04_Project_Template/REPRODUCIBILITY_STANDARD.md`](../04_Project_Template/REPRODUCIBILITY_STANDARD.md).
+
+### Đường này phục vụ đề tài nào
+
+| Mã | Vai trò của §C6 |
+|---|---|
+| `A4-I01` · `A4-T01` | dựng môi trường rồi đưa một IP số đi hết RTL → GDSII |
+| `A4-T02` · `A4-R01` | so sánh PPA giữa các kiến trúc RTL — cần môi trường **cố định** mới so được |
+| `A5-T01` | chính Nix và tính tái lập **là đề tài** |
+| `A5-T02` · `A5-R01` | tự động hóa dòng chảy này trong CI |
+
+Tài liệu nền nên đọc: [`09_References/READING-LIST.md`](../09_References/READING-LIST.md) §2.
 
 ---
 
@@ -1025,6 +1250,117 @@ PS> wsl --shutdown
 
 Vẫn không được thì mở file `.vcd` bằng **Surfer** hoặc GTKWave bản Windows.
 
+## F8. Nix và LibreLane
+
+### F8a · `nix-shell` biên dịch hàng giờ thay vì tải về
+
+Bộ nhớ đệm nhị phân không ăn — gần như chắc chắn là lệnh cài Nix ở §C6 bước 2 bị thiếu phần
+`--extra-conf`. Kiểm:
+
+```bash
+$ grep -E "substituters|trusted-public-keys" /etc/nix/nix.conf
+```
+
+Phải thấy `nix-cache.fossi-foundation.org` ở cả hai dòng. Không thấy thì thêm tay vào
+`/etc/nix/nix.conf`:
+
+```ini
+extra-substituters = https://nix-cache.fossi-foundation.org
+extra-trusted-public-keys = nix-cache.fossi-foundation.org:3+K59iFwXqKsL7BNu6Guy0v+uTlwsxYQxjspXzqLYQs=
+extra-experimental-features = nix-command flakes
+```
+
+Rồi khởi động lại dịch vụ và mở terminal mới:
+
+```bash
+$ sudo systemctl restart nix-daemon
+```
+
+### F8b · `nix: command not found` ngay sau khi cài
+
+Biến môi trường của Nix chỉ nạp ở phiên đăng nhập mới. **Đóng hẳn cửa sổ Ubuntu rồi mở lại.**
+Vẫn không được thì nạp tay:
+
+```bash
+$ . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+```
+
+### F8c · Cài Nix báo lỗi liên quan systemd
+
+WSL chưa bật systemd. Quay lại §C6 bước 1a: tạo `/etc/wsl.conf` với `[boot] systemd=true`,
+rồi `wsl --shutdown` từ PowerShell.
+
+### F8d · Hết dung lượng ổ C:
+
+Nix store lớn dần, và **ổ ảo của WSL không tự co lại** khi xóa file. Dọn rác của Nix trước:
+
+```bash
+$ nix-collect-garbage -d
+```
+
+Rồi thu hồi dung lượng cho Windows — **tắt WSL trước**, chạy trong PowerShell quyền admin:
+
+```powershell
+PS> wsl --shutdown
+PS> diskpart
+DISKPART> select vdisk file="C:\Users\<tên>\AppData\Local\Packages\<gói-Ubuntu>\LocalState\ext4.vhdx"
+DISKPART> compact vdisk
+DISKPART> exit
+```
+
+Tìm đúng đường dẫn `ext4.vhdx` bằng cách mở thư mục `%LOCALAPPDATA%\Packages` và tìm thư mục
+có chữ `Ubuntu`.
+
+## F9. Không chạy được script
+
+Ba lỗi dưới đây **đều là một nguyên nhân**: đang đứng sai thư mục, hoặc chưa cho phép chạy script.
+
+### F9a · `.\setup-windows.ps1 : The term ... is not recognized`
+
+PowerShell đang ở thư mục khác. Bấm *Run as administrator* luôn mở ở `C:\Windows\System32`.
+
+```powershell
+PS> pwd                      # đang ở đâu?
+PS> cd "C:\...\EEE Projects\04_Project_Template\env"
+PS> dir *.ps1                # phải thấy setup-windows.ps1
+PS> .\setup-windows.ps1 -DryRun
+```
+
+**Lấy đường dẫn cho chắc:** mở Explorer tới thư mục `env`, giữ `Shift` + chuột phải vào thư mục →
+*Copy as path* → dán vào sau `cd` (đã sẵn dấu nháy kép).
+
+> Đường dẫn có khoảng trắng — như `EEE Projects` — **bắt buộc để trong dấu nháy kép**. Thiếu nháy
+> thì PowerShell hiểu thành hai tham số rời và báo lỗi khác hẳn.
+
+### F9b · `... cannot be loaded because running scripts is disabled on this system`
+
+Windows chặn chạy script theo mặc định. Mở khóa **chỉ cho cửa sổ hiện tại**, không đổi thiết lập máy:
+
+```powershell
+PS> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+```
+
+Đóng cửa sổ là thiết lập này mất — đúng ý đồ, an toàn hơn đổi vĩnh viễn.
+
+### F9c · `bash: bootstrap.sh: No such file or directory`
+
+Trong WSL cũng cùng một lỗi: sai thư mục.
+
+```bash
+$ pwd                        # đang ở đâu?
+$ ls *.sh                    # có thấy bootstrap.sh không?
+$ cd <đường-dẫn-tới-thư-mục-env>
+$ bash bootstrap.sh --dry-run
+```
+
+Bộ script nằm trong repo chương trình ở Windows thì vào từ WSL qua `/mnt/c/...`:
+
+```bash
+$ cd "/mnt/c/Users/<tên>/Downloads/EEE Projects/04_Project_Template/env"
+```
+
+Chạy script từ đó được, nhưng **đừng để repo đề tài ở đó** — xem bảng ở §A1.
+
 ---
 
 # Phần G · Checklist nghiệm thu môi trường
@@ -1044,8 +1380,10 @@ Mang checklist này tới buổi gặp mentor. Mentor sẽ yêu cầu **chạy t
 **Theo nhánh**
 
 - [ ] `A0` — KiCad mở được, dự án trống có ERC và DRC 0 lỗi; biết chụp ảnh đo kèm điều kiện đo.
-- [ ] `A1`–`A5` — chạy `iverilog` + `vvp` ra `TAT CA TRUONG HOP DUNG`; mở được `.vcd`;
+- [ ] `A1`–`A3` — chạy `iverilog` + `vvp` ra `TAT CA TRUONG HOP DUNG`; mở được `.vcd`;
       Quartus tổng hợp xong và Programmer thấy USB-Blaster.
+- [ ] `A4`, `A5` — thêm: `nix --version` chạy được · `nix-shell` trong thư mục `librelane` vào được
+      môi trường · **`librelane --smoke-test` kết thúc không lỗi** (chụp màn hình đưa vào báo cáo tuần 1).
 - [ ] `A6`, `A7` — nạp được chương trình nháy đèn; Serial Monitor in `heap`; `mosquitto_sub`
       nhận được bản tin từ board.
 - [ ] `B0`–`B6` — kênh không nhiễu ra BLER = 0; kiểm tay `N=4` khớp; vẽ được một đường BLER

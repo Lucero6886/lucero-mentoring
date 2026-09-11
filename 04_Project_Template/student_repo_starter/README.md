@@ -45,3 +45,21 @@ git push
 | `template/.github/ISSUE_TEMPLATE/gate-review.yml` | Mẫu Issue gate review (mentor mở ở mỗi trạm) |
 
 Cách vận hành đầy đủ: [`../../10_Documentation/GITHUB-WORKFLOW.md`](../../10_Documentation/GITHUB-WORKFLOW.md).
+
+---
+
+## `flake.nix` — môi trường tái lập được
+
+Bộ khởi tạo có sẵn `template/flake.nix`. Nó ghim đúng phiên bản từng công cụ, nên ai clone repo
+cũng nhận **đúng cùng một môi trường** — trên máy em, máy bạn cùng nhóm, máy mentor:
+
+```bash
+nix develop
+```
+
+**Bắt buộc commit `flake.lock`** (tự sinh ở lần chạy đầu). Thiếu file đó thì `flake.nix` chỉ là một
+danh sách tên công cụ, không ghim gì cả — và mất luôn tính tái lập mà Gate 6 đòi hỏi.
+
+Nâng phiên bản về sau: `nix flake update`, rồi commit lại `flake.lock` **kèm lý do nâng**.
+
+Chi tiết: [`10_Documentation/SETUP-GUIDE.md`](../../10_Documentation/SETUP-GUIDE.md) §A0 và §C6.
